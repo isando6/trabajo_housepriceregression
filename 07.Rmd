@@ -1,11 +1,9 @@
-# Objetivo 4
+# Comparación de la relación `Lot_Size`-`House_Price` según la calidad del vecindario
 
+Para saber si la calidad del vecindario cambia la forma en que el tamaño del terreno se relaciona con el precio de la vivienda, hay que separar las observaciones según ese entorno y preguntarse, grupo por grupo, si la relación se sostiene o no. 
 
-
-
-
-
-datos <- read.csv("C:/Users/nunez/Downloads/house_price_regression_dataset.csv") %>%
+```{r}
+df <- df %>%
   mutate(
     Calidad_Grupo = case_when(
       Neighborhood_Quality <= 3 ~ "Baja",
@@ -15,39 +13,38 @@ datos <- read.csv("C:/Users/nunez/Downloads/house_price_regression_dataset.csv")
     Calidad_Grupo = factor(Calidad_Grupo, levels = c("Baja", "Media", "Alta"))
   )
 
-table(datos$Calidad_Grupo)
+table(df$Calidad_Grupo)
+```
 
-baja  <- datos %>% filter(Calidad_Grupo == "Baja")
-media <- datos %>% filter(Calidad_Grupo == "Media")
-alta  <- datos %>% filter(Calidad_Grupo == "Alta")
+El grupo de calidad media concentra a más de la mitad de las viviendas (411), mientras que Baja (281) y Alta (308) quedan más equilibrados entre sí, una consecuencia esperable de agrupar una escala de 1 a 10 en solo tres bloques desiguales (1-3, 4-7, 8-10).
 
-# --- Grupo Baja ---
+```{r}
+baja  <- df %>% filter(Calidad_Grupo == "Baja")
+media <- df %>% filter(Calidad_Grupo == "Media")
+alta  <- df %>% filter(Calidad_Grupo == "Alta")
+```
+
+Con los tres grupos ya separados, empecemos por el extremo inferior de la escala y vayamos subiendo.
+
+## Grupo: Baja calidad
+
+```{r}
 baja %>%
   ggplot(aes(x = Lot_Size, y = House_Price)) +
-  geom_point() +
-  facet_grid(. ~ 'Baja calidad de vecindario') +
+  geom_point(color = "#7fa8b5", alpha = 0.5) +
+  labs(title = "Baja calidad de vecindario: Lot_Size vs House_Price",
+       x = "Tamaño del terreno (acres)", y = "Precio de venta (USD)") +
   theme_bw()
+```
 
+
+```{r}
 with(baja, cor(Lot_Size, House_Price))
+```
 
-# --- Grupo Media ---
-media %>%
-  ggplot(aes(x = Lot_Size, y = House_Price)) +
-  geom_point() +
-  facet_grid(. ~ 'Media calidad de vecindario') +
-  theme_bw()
+De las 281 viviendas en vecindarios de baja calidad, la nube de puntos cubre todo el rango de precios (desde poco más de USD 110.000 hasta cerca de USD 1.1 millones) para cualquier tamaño de terreno, sin ninguna inclinación perceptible.
 
-with(media, cor(Lot_Size, House_Price))
-
-# --- Grupo Alta ---
-alta %>%
-  ggplot(aes(x = Lot_Size, y = House_Price)) +
-  geom_point() +
-  facet_grid(. ~ 'Alta calidad de vecindario') +
-  theme_bw()
-
-
-# --- Grupo Baja ---
+```{r}
 X <- baja$Lot_Size
 Y <- baja$House_Price
 n_baja <- length(X)
@@ -59,8 +56,45 @@ Sxy_baja <- sum((X - x_bar) * (Y - y_bar))
 beta1_baja <- Sxy_baja / Sxx_baja
 beta0_baja <- y_bar - beta1_baja * x_bar
 beta0_baja; beta1_baja
+```
 
-# --- Grupo Media ---
+```{r}
+modelo_baja <- lm(House_Price ~ Lot_Size, data = baja)
+summary(modelo_baja)
+```
+
+El cálculo manual (β̂₁ = 5.519, β̂₀ = 608.681) coincide exactamente con lo que entrega lm(), confirmando que la fórmula de mínimos cuadrados y la función de R llegan al mismo resultado. El error estándar de β̂₁ (11.687) es más de dos veces mayor que el propio coeficiente — una primera señal de que esta pendiente no se va a sostener frente a la prueba de hipótesis.
+
+```{r}
+confint(modelo_baja)
+```
+
+```{r}
+anova(modelo_baja)
+```
+
+El intervalo de confianza al 95% para β₁ es (−17.486, 28.524) — contiene el cero, y la prueba de hipótesis no se rechaza (t = 0.472; p = 0.637). La tabla ANOVA llega a la misma conclusión desde otro ángulo (F = 0.223; p = 0.637). En el grupo de vecindarios de baja calidad, no hay evidencia de que el tamaño del terreno tenga ningún efecto sobre el precio.
+
+Con la baja calidad ya resuelta —sin relación alguna—, la pregunta natural es si subir un escalón en la escala cambia algo.
+
+## Grupo: Media calidad
+
+```{r}
+media %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point(color = "#8fa8a0", alpha = 0.5) +
+  labs(title = "Media calidad de vecindario: Lot_Size vs House_Price",
+       x = "Tamaño del terreno (acres)", y = "Precio de venta (USD)") +
+  theme_bw()
+```
+
+```{r}
+with(media, cor(Lot_Size, House_Price))
+```
+
+En este grupo, el más numeroso de los tres (411 viviendas), sí empieza a insinuarse a simple vista una leve tendencia ascendente en la nube de puntos, aunque con mucha dispersión alrededor de ella. La correlación (r = 0.208) es siete veces más alta que la del grupo de baja calidad, aunque sigue siendo una asociación débil.
+
+```{r}
 X <- media$Lot_Size
 Y <- media$House_Price
 n_media <- length(X)
@@ -72,8 +106,40 @@ Sxy_media <- sum((X - x_bar) * (Y - y_bar))
 beta1_media <- Sxy_media / Sxx_media
 beta0_media <- y_bar - beta1_media * x_bar
 beta0_media; beta1_media
+```
 
-# --- Grupo Alta ---
+```{r}
+modelo_media <- lm(House_Price ~ Lot_Size, data = media)
+summary(modelo_media)
+```
+
+De nuevo, el cálculo manual (β̂₁ = 42.688, β̂₀ = 494.803) coincide con lm(). A diferencia del grupo anterior, acá el error estándar (9.917) es notablemente menor que el propio coeficiente — la pendiente empieza a verse "grande" en relación con su margen de error, anticipando que sí va a resultar significativa.
+
+```{r}
+confint(modelo_media)
+anova(modelo_media)
+```
+
+El intervalo de confianza al 95% para β₁ (23.193 a 62.184) ya no incluye el cero, y la prueba de hipótesis se rechaza con claridad (t = 4.30; p < 0.0001; confirmado por la tabla ANOVA con F = 18.53, misma p). En el grupo de calidad media, por cada acre adicional de terreno, el precio aumenta en promedio USD 42.688 — un contraste total frente a la ausencia de efecto del grupo anterior.
+
+## Grupo: Alta calidad
+
+```{r}
+alta %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point(color = "#8fa8a0", alpha = 0.5) +
+  labs(title = "Alta calidad de vecindario: Lot_Size vs House_Price",
+       x = "Tamaño del terreno (acres)", y = "Precio de venta (USD)") +
+  theme_bw()
+```
+
+```{r}
+with(alta, cor(Lot_Size, House_Price))
+```
+
+El patrón visual en este grupo (308 viviendas) es prácticamente indistinguible del de calidad media: una leve inclinación ascendente rodeada de bastante dispersión. La correlación (r = 0.223) es, de hecho, la más alta de los tres grupos, aunque por un margen muy estrecho frente a la de calidad media.
+
+```{r}
 X <- alta$Lot_Size
 Y <- alta$House_Price
 n_alta <- length(X)
@@ -85,36 +151,42 @@ Sxy_alta <- sum((X - x_bar) * (Y - y_bar))
 beta1_alta <- Sxy_alta / Sxx_alta
 beta0_alta <- y_bar - beta1_alta * x_bar
 beta0_alta; beta1_alta
-with(alta, cor(Lot_Size, House_Price))
+```
 
-#Rectificandoon la funcion
-modelo_baja  <- lm(House_Price ~ Lot_Size, data = baja)
-modelo_media <- lm(House_Price ~ Lot_Size, data = media)
-modelo_alta  <- lm(House_Price ~ Lot_Size, data = alta)
-
-summary(modelo_baja)
-summary(modelo_media)
+```{r}
+modelo_alta <- lm(House_Price ~ Lot_Size, data = alta)
 summary(modelo_alta)
+```
 
-# Intervalos de confianza del 95% para β1 en cada grupo
-confint.default(modelo_baja)
-confint.default(modelo_media)
-confint.default(modelo_alta)
+El cálculo manual (β̂₁ = 41.090, β̂₀ = 503.107) vuelve a coincidir con lm(). Tanto la magnitud de la pendiente como su error estándar (10.273) son muy similares a los del grupo de calidad media, lo que ya anticipa un resultado de significancia comparable.
 
-#Anova
-anova(modelo_baja)
-anova(modelo_media)
+```{r}
+confint(modelo_alta)
+```
+
+```{r}
 anova(modelo_alta)
+```
 
+El intervalo de confianza (20.875 a 61.305) tampoco incluye el cero, y la prueba de hipótesis se rechaza (t = 4.00; p < 0.001; ANOVA: F = 16.00, misma p). En el grupo de calidad alta, por cada acre adicional de terreno, el precio aumenta en promedio USD 41.090, una magnitud casi idéntica a la del grupo de calidad media, y no es la pendiente más alta de los tres como anticiparía la teoría.
+
+Con los tres grupos resueltos por separado, es momento de ponerlos uno al lado del otro y ver qué tan distinto es realmente el panorama entre ellos.
+
+## Comparación entre los tres grupos
+
+```{r}
 comparacion <- tibble(
   Grupo = c("Baja", "Media", "Alta"),
   n = c(nrow(baja), nrow(media), nrow(alta)),
   r = c(0.0283, 0.2082, 0.2229),
   beta1_hat = c(coef(modelo_baja)[2], coef(modelo_media)[2], coef(modelo_alta)[2]),
-  IC_95 = c("(-17386.5 ; 28424.7)", "(23250.5 ; 62126.3)", "(20954.9 ; 61224.9)"),
+  IC_95 = c("(-17486.3 ; 28524.5)", "(23192.8 ; 62184.0)", "(20875.0 ; 61304.9)"),
   p_valor = c(0.637, 2.1e-05, 7.96e-05),
   R2 = c(0.0008, 0.0433, 0.0497),
   Significativo = c("No", "Sí", "Sí")
 )
 
 comparacion
+```
+
+Primero, se ve un quiebre bien marcado entre el grupo de baja calidad y los otros dos: en Baja, la pendiente ni siquiera se distingue de cero (p= 0.637); en Media y Alta, la pendiente sí es significativa, con p-valores muy por debajo de 0.001 en ambos casos. Segundo, entre Media y Alta se podría decir que se repite el mismo comportamiento: pendientes de magnitud parecida (USD 42.688 y USD 41.090 por acre), intervalos de confianza que se solapan casi por completo, y R² igual de bajos (4.3% y 5.0%). No hay indicio de que la relación se vuelva más fuerte a medida que sube la calidad del vecindario.

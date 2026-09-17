@@ -74,6 +74,7 @@ En `Garage_Size`, la barra de 2 vehículos se ubica ligeramente por encima de la
 
 En el caso de `Neighborhood_Quality`, las categorías 1 a 9 se mantienen dentro de un rango estrecho, pero la categoría 10 (calidad más alta) sobresale, siendo la barra más alta de las diez.
 
+ 
 
 ## Variables continuas
 
@@ -146,6 +147,7 @@ Se aprecia una caja simétrica, con la mediana (2.862 pies cuadrados) supuerpues
 ```{r p2}
 p2
 ```
+
 El comportamiento de `Lot_Size` es un calco del de `Square_Footage` en su propia escala. Se ve una caja simétrica centrada en 2.81 acres, con la media y la mediana coincidiendo casi exactamente, y bigotes que se extienden hasta el mínimo (0.51) y el máximo (4.99) reales del conjunto de datos. No hay ningún punto marcado como atípico.
 
 

@@ -5,7 +5,7 @@ Tras haber caracterizado el comportamiento univariado de las variables, correspo
 ## Variables continuas vs. `House_Price`
 
 
-### `Lot_Size` vs `House_Price` 
+## `Lot_Size` vs `House_Price` 
 
 ```{r 04-1}
 df %>%
@@ -23,11 +23,11 @@ La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del g
 ```{r}
 cor.test(df$Lot_Size, df$House_Price)
 ```
- 
- ---
+
+La prueba de hipótesis (H₀: ρ = 0 vs. H₁: ρ ≠ 0) confirma que esa asociación, aunque invisible a simple vista, es estadísticamente real: t = 5.13, df = 998, p = 3.408e-07. Al ser p < 0.05, se rechaza H₀; no es producto del azar de esta muestra en particular, aunque su magnitud (r = 0.160) sigue siendo débil.
 
 
-### `Square_Footage` vs `House_Price`
+## `Square_Footage` vs `House_Price`
 
 ```{r 04-2}
 df %>%
@@ -37,17 +37,16 @@ df %>%
   theme_bw() +
   facet_grid(. ~ 'Dispersión: Square_Footage vs House_Price')
 ```
+
 La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), grafican una relación evidente al ojo. 
 
 ```{r}
 cor.test(df$Square_Footage, df$House_Price)
 ```
 
----
+La prueba de hipótesis respalda con contundencia lo que ya mostraba el gráfico: t = 237.39, df = 998, p < 2.2e-16. Se rechaza H₀ sin ninguna ambigüedad. Con r = 0.991, `Square_Footage` es, por mucho, el predictor con mayor asociación lineal con el precio.
 
-
-
-### `Year_Built` vs `House_Price` 
+## `Year_Built` vs `House_Price` 
 
 ```{r 04-3}
 df %>%
@@ -63,12 +62,12 @@ La nube de puntos cubre todo el rango vertical de precios de forma pareja para c
 cor.test(df$Year_Built, df$House_Price)
 ```
 
----
+La prueba de hipótesis confirma la ausencia de patrón visto en el gráfico: t = 1.64, df = 998, p = 0.1005. Al ser p > 0.05, no se rechaza H₀. Con esta muestra, no hay evidencia suficiente de que el año de construcción esté correlacionado con el precio de venta.
 
 
 ## Variables discretas y categóricas vs. `House_Price`
 
-### `Num_Bedrooms` vs `House_Price` 
+## `Num_Bedrooms` vs `House_Price` 
 
 ```{r 04-4}
 df %>%
@@ -98,11 +97,10 @@ df %>%
   theme_minimal()
 ```
 
+Las cinco cajas del diagrama se solapan ampliamente, con las líneas de mediana prácticamente a la misma altura entre sí. No se observa ningún grupo cuya caja quede claramente por encima o por debajo de las demás, lo que confirma visualmente que el número de habitaciones por sí solo no distingue el precio de venta.
 
 
-
-
-###`Num_Bathrooms` vs `House_Price` 
+##`Num_Bathrooms` vs `House_Price` 
 
 ```{r 04-6}
 df %>%
@@ -121,6 +119,7 @@ df %>%
     curtosis  = kurtosis(House_Price, na.rm = TRUE))
 ```
 
+El precio promedio es prácticamente idéntico entre los tres niveles (entre USD 615.078 y USD 625.152, una diferencia menor al 2%), con desviaciones estándar casi calcadas entre sí (USD 252.316 a USD 255.213). De las cuatro variables discretas, esta es la que muestra la asociación más débil con el precio a nivel de estadísticos descriptivos.
 
 
 ```{r 04-7}
@@ -132,8 +131,10 @@ df %>%
   theme_minimal()
 ```
 
+Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas analizadas en este capítulo.
 
-### `Garage_Size` vs `House_Price` 
+
+## `Garage_Size` vs `House_Price` 
 
 ```{r 04-8}
 df %>%
@@ -153,6 +154,8 @@ df %>%
   )
 ```
 
+Acá sí se insinúa una tendencia leve: el precio promedio aumenta de forma progresiva con la capacidad del garaje, de USD 606.032 (sin garaje) a USD 611.343 (1 vehículo) y USD 638.232 (2 vehículos). Es la única de las cuatro variables discretas donde las medias muestran un orden consistente, aunque la diferencia entre el primer y el último grupo sigue siendo modesta (~5%) y las desviaciones estándar (USD 248.183 a USD 256.592) son, de nuevo, muy similares entre grupos.
+
 
 
 ```{r 04-9}
@@ -164,9 +167,9 @@ df %>%
   theme_minimal()
 ```
 
+El diagrama de caja deja ver un leve corrimiento hacia arriba de la caja correspondiente a 2 vehículos frente a las otras dos, coherente con la tendencia ya señalada en la tabla, aunque el solapamiento entre las tres cajas sigue siendo considerable.
 
-
-### `Neighborhood_Quality` vs. `House_Price`
+## `Neighborhood_Quality` vs. `House_Price`
 
 ```{r 04-10}
 df %>%
@@ -186,6 +189,7 @@ df %>%
   )
 ```
 
+A pesar de tener diez niveles, el precio promedio se mantiene en un rango relativamente estrecho (entre USD 593.804 en el nivel 6 y USD 648.856 en el nivel 7), sin que los niveles de mayor calidad (8, 9, 10) muestren sistemáticamente precios más altos que los de menor calidad (1, 2, 3): el nivel 10, de hecho, tiene el segundo promedio más bajo de toda la escala (USD 607.767).
 
 
 ```{r 04-11}
@@ -197,4 +201,4 @@ df %>%
   theme_minimal()
 ```
 
-
+Esta ausencia de un patrón claro es visible también en el diagrama. Las diez cajas se ubican a alturas muy similares, sin una progresión ascendente de izquierda a derecha, y es consistente con lo que se retoma con mayor rigor estadístico (ANOVA y Kruskal-Wallis) en el capítulo de comparación por calidad del vecindario.

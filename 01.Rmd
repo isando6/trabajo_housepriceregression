@@ -11,6 +11,7 @@ Pendiente por hacer cuando ya tenga todas las librerias que necesitaba
 ```{r librerias}
 library(Amelia)
 library(tidyverse)
+library(dplyr)
 library(moments)
 library(patchwork)
 library(GGally)
@@ -23,6 +24,7 @@ Se procede a cargar el conjunto de datos, correspondiente a información de vivi
 
 ```{r carga}
 data <- read_csv("C:/Users/Isabella Sandoval/Downloads/dataset_trabajocorte2/house_price_regression_dataset.csv")
+df <- data
 ```
 
 ## Visualización del conjunto de datos y su estructura
@@ -79,6 +81,3 @@ range(df$Square_Footage)
 ```
 
 Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. `Neighborhood_Quality` cubre la escala completa del 1 al 10; `Year_Built` va desde 1950 a 2022; `Lot-Size` entre 0.5 y 5 acres, y `Square_Footage` entre 503 y 4.999 pies cuadrados. 
-
-
-

@@ -1,4 +1,4 @@
-# Evaluación de rendimientos decrecientes y umbrales de superficie
+# Evaluación de rendimientos decrecientes y umbrales de superficie 
 
 En el apartado de _Análisis Exploratorio Bivariado_, se encontró que el tamaño del terreno tiene que ver, de una forma modesta, con el precio de venta (r = 0.160). Saber que hay una relación no es lo mismo que saber cómo es esa relación a lo largo de todo el rango de terrenos. Teniendo en cuenta que la pregunta de investigación apunta a algo más específico (¿el precio sube al mismo ritmo sin importar qué tan grande sea el terreno, o llega un punto en el que cada acre adicional empieza a "rendir menos"?), un solo coeficiente de correlación no puede responderla, porque resume toda la relación en un número y asume, de entrada, que es una línea recta.
 
@@ -16,9 +16,10 @@ df %>%
   theme_bw()
 
 ```
+
 La curva no muestra desaceleración; al contrario, en el tramo final, correspondiente a los terrenos de mayor tamaño, la curva se empina. Una señal, todavía informal, de que la hipótesis de "rendimientos decrecientes" no encaja con lo que muestran estos datos.
 
-# Prueba formal de la curvatura
+## Prueba formal de la curvatura
 
 Una curva puede "verse" torcida a simple vista solo por la variabilidad propia de los datos y no significar nada en la estadística. Para no quedarse con una impresión visual, se compara un modelo de regresión lineal simple contra uno que incluye un término cuadrático, y se usa ANOVA para decidir si esa curvatura adicional realmente mejora el ajuste o si es una complicación innecesaria.
 
@@ -75,6 +76,6 @@ diff(quintiles$House_Price_medio) / diff(quintiles$Lot_Size_medio)
 
 ```
 
-Las pendientes entre quintiles consecutivos son 39.530, 25.403, −34.466 y 134.384 dólares por acre. No decrecen de forma progresiva, tres de cuatro son positivas y la última es la más grande. Recordando el coeficiente de determinación de 0.026 en el modelo lineal global, el vaivén es lo que se esperaría de una relación débil y ruidosa, no de un fenómeno económico con una forma definida.
+Las pendientes entre quintiles consecutivos son 39.530, 25.403, -34.466 y 134.384 dólares por acre. No decrecen de forma progresiva, tres de cuatro son positivas y la última es la más grande. Recordando el coeficiente de determinación de 0.026 en el modelo lineal global, el vaivén es lo que se esperaría de una relación débil y ruidosa, no de un fenómeno económico con una forma definida.
 
 Los tres análisis apuntan en la misma dirección. No hay evidencia de que el incremento  del precio de venta se desacelere a medida que aumente el tamaño del terreno. Es digno de mencionar que hay una leve aceleración en el extremo superior del rango. Bien sí la relación entre `Lot_Size` y `House_Price` existe, es modesta y bastante pareja a lo largo de todo el rango de tamaños de terreno.

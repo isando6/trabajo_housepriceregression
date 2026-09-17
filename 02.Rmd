@@ -39,6 +39,7 @@ df %>%
        x = "Precio de venta (USD)", y = "Densidad") +
   theme_minimal()
 ```
+
 El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el _Resumen de estadísticos descriptivos_ (1.90).
 
 ## Evaluación de Dispersión y Detección de valores atípicos 

@@ -26,7 +26,6 @@ El mercado inmobiliario, donde el precio de cada propiedad es el resultado de la
 
 Analizar la relación entre el tamaño del terreno y el precio de la venta de viviendas residenciales, identificando el punto a partir del cual se observa una desaceleración en el incremento del precio según el nivel de calidad del vecindario, mediante un Análisis Exploratorio de Datos.
 
-
 **Objetivos específicos**:
 
 1. Describir la distribución estadística de las variables Lot_Size y House_Price, identificando su comportamiento central, dispersión y presencia de valores atípicos.
@@ -36,7 +35,6 @@ Analizar la relación entre el tamaño del terreno y el precio de la venta de vi
 3. Identificar el umbral aproximado de superficie a partir del cual el incremento en el precio de venta comienza a desacelerarse, utilizando técnicas de suavizamiento de la curva de relación (LOWESS).
 
 4. Comparar el comportamiento de relación entre Lot_Size y House_Price en grupos vecindarios de distinta calidad, evaluando si el punto de desaceleración varía según el nivel del entorno.
-
 
 ## Marco teórico
 

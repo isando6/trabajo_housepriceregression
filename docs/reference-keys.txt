@@ -40,12 +40,9 @@ evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie
 la-curva-suavizada
 prueba-formal-de-la-curvatura
 quintiles
-objetivo-4
-grupo-baja
-grupo-media
-grupo-alta
-grupo-baja-1
-grupo-media-1
-grupo-alta-1
-intervalos-de-confianza-del-95-para-β1-en-cada-grupo
+comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario
+grupo-baja-calidad
+grupo-media-calidad
+grupo-alta-calidad
+comparación-entre-los-tres-grupos
 referencias
