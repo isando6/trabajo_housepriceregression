@@ -197,15 +197,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
 <li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="objetivo-4.html"><a href="objetivo-4.html"><i class="fa fa-check"></i><b>8</b> Objetivo 4</a></li>
-<li class="chapter" data-level="9" data-path="grupo-baja.html"><a href="grupo-baja.html"><i class="fa fa-check"></i><b>9</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="10" data-path="grupo-media.html"><a href="grupo-media.html"><i class="fa fa-check"></i><b>10</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="11" data-path="grupo-alta.html"><a href="grupo-alta.html"><i class="fa fa-check"></i><b>11</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="12" data-path="grupo-baja-1.html"><a href="grupo-baja-1.html"><i class="fa fa-check"></i><b>12</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="13" data-path="grupo-media-1.html"><a href="grupo-media-1.html"><i class="fa fa-check"></i><b>13</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="14" data-path="grupo-alta-1.html"><a href="grupo-alta-1.html"><i class="fa fa-check"></i><b>14</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="15" data-path="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><a href="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><i class="fa fa-check"></i><b>15</b> Intervalos de confianza del 95% para β1 en cada grupo</a></li>
-<li class="chapter" data-level="16" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>16</b> Referencias</a></li>
+<li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad"><i class="fa fa-check"></i><b>8.1</b> Grupo: Baja calidad</a></li>
+<li class="chapter" data-level="8.2" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad"><i class="fa fa-check"></i><b>8.2</b> Grupo: Media calidad</a></li>
+<li class="chapter" data-level="8.3" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad"><i class="fa fa-check"></i><b>8.3</b> Grupo: Alta calidad</a></li>
+<li class="chapter" data-level="8.4" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos"><i class="fa fa-check"></i><b>8.4</b> Comparación entre los tres grupos</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -238,37 +237,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.1</span> Variables discretas<a href="análisis-de-las-variables-características-independientes.html#variables-discretas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-de-las-variables-características-independientes.html#cb41-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bedrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb41-2"><a href="análisis-de-las-variables-características-independientes.html#cb41-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##   Num_Bedrooms   n Porcentaje
-## 1            1 201       20.1
-## 2            2 215       21.5
-## 3            3 182       18.2
-## 4            4 197       19.7
-## 5            5 205       20.5</code></pre>
+<pre><code>## # A tibble: 5 × 3
+##   Num_Bedrooms     n Porcentaje
+##          &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1            1   201       20.1
+## 2            2   215       21.5
+## 3            3   182       18.2
+## 4            4   197       19.7
+## 5            5   205       20.5</code></pre>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análisis-de-las-variables-características-independientes.html#cb43-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bathrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb43-2"><a href="análisis-de-las-variables-características-independientes.html#cb43-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##   Num_Bathrooms   n Porcentaje
-## 1             1 350       35.0
-## 2             2 327       32.7
-## 3             3 323       32.3</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   Num_Bathrooms     n Porcentaje
+##           &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1             1   350       35  
+## 2             2   327       32.7
+## 3             3   323       32.3</code></pre>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-de-las-variables-características-independientes.html#cb45-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Garage_Size, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb45-2"><a href="análisis-de-las-variables-características-independientes.html#cb45-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##   Garage_Size   n Porcentaje
-## 1           0 321       32.1
-## 2           1 336       33.6
-## 3           2 343       34.3</code></pre>
+<pre><code>## # A tibble: 3 × 3
+##   Garage_Size     n Porcentaje
+##         &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+## 1           0   321       32.1
+## 2           1   336       33.6
+## 3           2   343       34.3</code></pre>
 <div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análisis-de-las-variables-características-independientes.html#cb47-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Neighborhood_Quality, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb47-2"><a href="análisis-de-las-variables-características-independientes.html#cb47-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
-<pre><code>##    Neighborhood_Quality   n Porcentaje
-## 1                     1  91        9.1
-## 2                     2 105       10.5
-## 3                     3  85        8.5
-## 4                     4  99        9.9
-## 5                     5 109       10.9
-## 6                     6 101       10.1
-## 7                     7 102       10.2
-## 8                     8  97        9.7
-## 9                     9  88        8.8
-## 10                   10 123       12.3</code></pre>
+<pre><code>## # A tibble: 10 × 3
+##    Neighborhood_Quality     n Porcentaje
+##                   &lt;dbl&gt; &lt;int&gt;      &lt;dbl&gt;
+##  1                    1    91        9.1
+##  2                    2   105       10.5
+##  3                    3    85        8.5
+##  4                    4    99        9.9
+##  5                    5   109       10.9
+##  6                    6   101       10.1
+##  7                    7   102       10.2
+##  8                    8    97        9.7
+##  9                    9    88        8.8
+## 10                   10   123       12.3</code></pre>
 <p>Las cuatro variables discretas muestran una distribución de frecuencias equilibrada entre sus categorías:</p>
 <p>En <code>Num_Bedrooms</code>, los cinco niveles (1 a 5 habitaciones) se reparten entre el 18.2% y el 21.5% de las viviendas cada uno.</p>
 <p>En <code>Neighborhood_Quality</code>, con diez niveles, mantiene una distribución pareja entre el 8.5% y el 12.3% por categoría, sin concentración en los extremos de la escala (baja o alta calidad) ni en el centro.</p>
@@ -364,8 +371,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="bookdown-demo_files/figure-html/p1-1.png" alt="" width="672" /></p>
 <p>Se aprecia una caja simétrica, con la mediana (2.862 pies cuadrados) supuerpuesta con respecto al centro de la caja. Además, los bigotes se extienden hasta los valores extremos reales de la variable (503 y 4.999 pies cuadrados), sin que se recorten antes de llegar a ellos; ningún valor cae fuera del límite de 1.5 veces el rango intercuartílico, y los datos se reparten hasta los extremos sin concentrarse cerca de la mediana.</p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="análisis-de-las-variables-características-independientes.html#cb54-1" tabindex="-1"></a>p2</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/p2-1.png" alt="" width="672" />
-El comportamiento de <code>Lot_Size</code> es un calco del de <code>Square_Footage</code> en su propia escala. Se ve una caja simétrica centrada en 2.81 acres, con la media y la mediana coincidiendo casi exactamente, y bigotes que se extienden hasta el mínimo (0.51) y el máximo (4.99) reales del conjunto de datos. No hay ningún punto marcado como atípico.</p>
+<p><img src="bookdown-demo_files/figure-html/p2-1.png" alt="" width="672" /></p>
+<p>El comportamiento de <code>Lot_Size</code> es un calco del de <code>Square_Footage</code> en su propia escala. Se ve una caja simétrica centrada en 2.81 acres, con la media y la mediana coincidiendo casi exactamente, y bigotes que se extienden hasta el mínimo (0.51) y el máximo (4.99) reales del conjunto de datos. No hay ningún punto marcado como atípico.</p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="análisis-de-las-variables-características-independientes.html#cb55-1" tabindex="-1"></a>p3</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/p3-1.png" alt="" width="672" /></p>
 <p>La caja es simétrica alrededor de 1986, con la media y la mediana (1986) superpuestas. Los bigotes llegan hasta 1950 y 2022, sin ningún punto marcado por fuera de ese rango.</p>
@@ -432,20 +439,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

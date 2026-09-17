@@ -197,15 +197,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
 <li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="objetivo-4.html"><a href="objetivo-4.html"><i class="fa fa-check"></i><b>8</b> Objetivo 4</a></li>
-<li class="chapter" data-level="9" data-path="grupo-baja.html"><a href="grupo-baja.html"><i class="fa fa-check"></i><b>9</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="10" data-path="grupo-media.html"><a href="grupo-media.html"><i class="fa fa-check"></i><b>10</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="11" data-path="grupo-alta.html"><a href="grupo-alta.html"><i class="fa fa-check"></i><b>11</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="12" data-path="grupo-baja-1.html"><a href="grupo-baja-1.html"><i class="fa fa-check"></i><b>12</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="13" data-path="grupo-media-1.html"><a href="grupo-media-1.html"><i class="fa fa-check"></i><b>13</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="14" data-path="grupo-alta-1.html"><a href="grupo-alta-1.html"><i class="fa fa-check"></i><b>14</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="15" data-path="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><a href="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><i class="fa fa-check"></i><b>15</b> Intervalos de confianza del 95% para β1 en cada grupo</a></li>
-<li class="chapter" data-level="16" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>16</b> Referencias</a></li>
+<li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad"><i class="fa fa-check"></i><b>8.1</b> Grupo: Baja calidad</a></li>
+<li class="chapter" data-level="8.2" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad"><i class="fa fa-check"></i><b>8.2</b> Grupo: Media calidad</a></li>
+<li class="chapter" data-level="8.3" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad"><i class="fa fa-check"></i><b>8.3</b> Grupo: Alta calidad</a></li>
+<li class="chapter" data-level="8.4" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos"><i class="fa fa-check"></i><b>8.4</b> Comparación entre los tres grupos</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -246,8 +245,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb37-12"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-12" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price),</span>
 <span id="cb37-13"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-13" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price)</span>
 <span id="cb37-14"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-14" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>##      n  media  mediana       sd    RIC       Q1       Q3   minimo  maximo   asimetria curtosis
-## 1 1000 618861 628267.3 253568.1 425493 401648.2 827141.3 111626.9 1108237 -0.06385917 1.908073</code></pre>
+<pre><code>## # A tibble: 1 × 11
+##       n   media mediana      sd     RIC      Q1      Q3  minimo   maximo asimetria curtosis
+##   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1  1000 618861. 628267. 253568. 425493. 401648. 827141. 111627. 1108237.   -0.0639     1.91</code></pre>
 <p>Tal y como se mencionó en un principio, el dataset contiene 1.000 observaciones, y dichas están completas para la variable <code>House_Price</code>. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267 (mediana); la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con la asimetría, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.</p>
 </div>
 <div id="distribución-de-frecuencias-y-densidad" class="section level2 hasAnchor" number="3.2">
@@ -261,8 +262,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb39-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del precio de venta&quot;</span>,</span>
 <span id="cb39-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
 <span id="cb39-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/histograma%20House_Price-1.png" alt="" width="672" />
-El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el <em>Resumen de estadísticos descriptivos</em> (1.90).</p>
+<p><img src="bookdown-demo_files/figure-html/histograma%20House_Price-1.png" alt="" width="672" /></p>
+<p>El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el <em>Resumen de estadísticos descriptivos</em> (1.90).</p>
 </div>
 <div id="evaluación-de-dispersión-y-detección-de-valores-atípicos" class="section level2 hasAnchor" number="3.3">
 <h2><span class="header-section-number">3.3</span> Evaluación de Dispersión y Detección de valores atípicos<a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -340,20 +341,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

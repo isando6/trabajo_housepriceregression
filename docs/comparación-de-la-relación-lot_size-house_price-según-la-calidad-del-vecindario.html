@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 8 Comparación de la relación Lot_Size-House_Price según la calidad del vecindario | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <meta name="description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 8 Comparación de la relación Lot_Size-House_Price según la calidad del vecindario | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 8 Comparación de la relación Lot_Size-House_Price según la calidad del vecindario | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  
+  <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
+  
+
+<meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
+
+
+<meta name="date" content="2026-09-17" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"/>
+<link rel="next" href="referencias.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas"><i class="fa fa-check"></i><b>2.1</b> Instalación de librerías</a></li>
+<li class="chapter" data-level="2.2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#carga-del-conjunto-de-datos-house_price_regression_dataset"><i class="fa fa-check"></i><b>2.2</b> Carga del conjunto de datos <code>house_price_regression_dataset</code></a></li>
+<li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
+<li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
+<li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
+<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.2</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.3</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.4</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.5</b> Variables discretas y categóricas vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.6" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.6</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.7" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.7</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.8" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.8</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
+<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
+<li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
+<li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad"><i class="fa fa-check"></i><b>8.1</b> Grupo: Baja calidad</a></li>
+<li class="chapter" data-level="8.2" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad"><i class="fa fa-check"></i><b>8.2</b> Grupo: Media calidad</a></li>
+<li class="chapter" data-level="8.3" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad"><i class="fa fa-check"></i><b>8.3</b> Grupo: Alta calidad</a></li>
+<li class="chapter" data-level="8.4" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos"><i class="fa fa-check"></i><b>8.4</b> Comparación entre los tres grupos</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number"> 8</span> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-de-la-relaci%C3%B3n-lot_size-house_price-seg%C3%BAn-la-calidad-del-vecindario" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Para saber si la calidad del vecindario cambia la forma en que el tamaño del terreno se relaciona con el precio de la vivienda, hay que separar las observaciones según ese entorno y preguntarse, grupo por grupo, si la relación se sostiene o no.</p>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb119-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb119-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-3" tabindex="-1"></a>    <span class="at">Calidad_Grupo =</span> <span class="fu">case_when</span>(</span>
+<span id="cb119-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-4" tabindex="-1"></a>      Neighborhood_Quality <span class="sc">&lt;=</span> <span class="dv">3</span> <span class="sc">~</span> <span class="st">&quot;Baja&quot;</span>,</span>
+<span id="cb119-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-5" tabindex="-1"></a>      Neighborhood_Quality <span class="sc">&lt;=</span> <span class="dv">7</span> <span class="sc">~</span> <span class="st">&quot;Media&quot;</span>,</span>
+<span id="cb119-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-6" tabindex="-1"></a>      Neighborhood_Quality <span class="sc">&gt;=</span> <span class="dv">8</span> <span class="sc">~</span> <span class="st">&quot;Alta&quot;</span></span>
+<span id="cb119-7"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-7" tabindex="-1"></a>    ),</span>
+<span id="cb119-8"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-8" tabindex="-1"></a>    <span class="at">Calidad_Grupo =</span> <span class="fu">factor</span>(Calidad_Grupo, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Media&quot;</span>, <span class="st">&quot;Alta&quot;</span>))</span>
+<span id="cb119-9"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-9" tabindex="-1"></a>  )</span>
+<span id="cb119-10"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-10" tabindex="-1"></a></span>
+<span id="cb119-11"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb119-11" tabindex="-1"></a><span class="fu">table</span>(df<span class="sc">$</span>Calidad_Grupo)</span></code></pre></div>
+<pre><code>## 
+##  Baja Media  Alta 
+##   281   411   308</code></pre>
+<p>El grupo de calidad media concentra a más de la mitad de las viviendas (411), mientras que Baja (281) y Alta (308) quedan más equilibrados entre sí, una consecuencia esperable de agrupar una escala de 1 a 10 en solo tres bloques desiguales (1-3, 4-7, 8-10).</p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb121-1" tabindex="-1"></a>baja  <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Calidad_Grupo <span class="sc">==</span> <span class="st">&quot;Baja&quot;</span>)</span>
+<span id="cb121-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb121-2" tabindex="-1"></a>media <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Calidad_Grupo <span class="sc">==</span> <span class="st">&quot;Media&quot;</span>)</span>
+<span id="cb121-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb121-3" tabindex="-1"></a>alta  <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Calidad_Grupo <span class="sc">==</span> <span class="st">&quot;Alta&quot;</span>)</span></code></pre></div>
+<p>Con los tres grupos ya separados, empecemos por el extremo inferior de la escala y vayamos subiendo.</p>
+<div id="grupo-baja-calidad" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> Grupo: Baja calidad<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-1" tabindex="-1"></a>baja <span class="sc">%&gt;%</span></span>
+<span id="cb122-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb122-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#7fa8b5&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb122-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Baja calidad de vecindario: Lot_Size vs House_Price&quot;</span>,</span>
+<span id="cb122-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb122-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb122-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-22-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb123-1" tabindex="-1"></a><span class="fu">with</span>(baja, <span class="fu">cor</span>(Lot_Size, House_Price))</span></code></pre></div>
+<pre><code>## [1] 0.02826173</code></pre>
+<p>De las 281 viviendas en vecindarios de baja calidad, la nube de puntos cubre todo el rango de precios (desde poco más de USD 110.000 hasta cerca de USD 1.1 millones) para cualquier tamaño de terreno, sin ninguna inclinación perceptible.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> baja<span class="sc">$</span>Lot_Size</span>
+<span id="cb125-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-2" tabindex="-1"></a>Y <span class="ot">&lt;-</span> baja<span class="sc">$</span>House_Price</span>
+<span id="cb125-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-3" tabindex="-1"></a>n_baja <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
+<span id="cb125-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-4" tabindex="-1"></a></span>
+<span id="cb125-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-5" tabindex="-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(X); y_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(Y)</span>
+<span id="cb125-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-6" tabindex="-1"></a>Sxx_baja <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb125-7"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-7" tabindex="-1"></a>Sxy_baja <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar) <span class="sc">*</span> (Y <span class="sc">-</span> y_bar))</span>
+<span id="cb125-8"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-8" tabindex="-1"></a></span>
+<span id="cb125-9"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-9" tabindex="-1"></a>beta1_baja <span class="ot">&lt;-</span> Sxy_baja <span class="sc">/</span> Sxx_baja</span>
+<span id="cb125-10"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-10" tabindex="-1"></a>beta0_baja <span class="ot">&lt;-</span> y_bar <span class="sc">-</span> beta1_baja <span class="sc">*</span> x_bar</span>
+<span id="cb125-11"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb125-11" tabindex="-1"></a>beta0_baja; beta1_baja</span></code></pre></div>
+<pre><code>## [1] 608681.5</code></pre>
+<pre><code>## [1] 5519.097</code></pre>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb128-1" tabindex="-1"></a>modelo_baja <span class="ot">&lt;-</span> <span class="fu">lm</span>(House_Price <span class="sc">~</span> Lot_Size, <span class="at">data =</span> baja)</span>
+<span id="cb128-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb128-2" tabindex="-1"></a><span class="fu">summary</span>(modelo_baja)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = House_Price ~ Lot_Size, data = baja)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -505623 -226020   22571  203828  476189 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   608682      34546  17.620   &lt;2e-16 ***
+## Lot_Size        5519      11687   0.472    0.637    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 255100 on 279 degrees of freedom
+## Multiple R-squared:  0.0007987,  Adjusted R-squared:  -0.002783 
+## F-statistic: 0.223 on 1 and 279 DF,  p-value: 0.6371</code></pre>
+<p>El cálculo manual (β̂₁ = 5.519, β̂₀ = 608.681) coincide exactamente con lo que entrega lm(), confirmando que la fórmula de mínimos cuadrados y la función de R llegan al mismo resultado. El error estándar de β̂₁ (11.687) es más de dos veces mayor que el propio coeficiente — una primera señal de que esta pendiente no se va a sostener frente a la prueba de hipótesis.</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb130-1" tabindex="-1"></a><span class="fu">confint</span>(modelo_baja)</span></code></pre></div>
+<pre><code>##                2.5 %    97.5 %
+## (Intercept) 540678.0 676685.01
+## Lot_Size    -17486.3  28524.49</code></pre>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb132-1" tabindex="-1"></a><span class="fu">anova</span>(modelo_baja)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: House_Price
+##            Df     Sum Sq    Mean Sq F value Pr(&gt;F)
+## Lot_Size    1 1.4516e+10 1.4516e+10   0.223 0.6371
+## Residuals 279 1.8160e+13 6.5088e+10</code></pre>
+<p>El intervalo de confianza al 95% para β₁ es (−17.486, 28.524) — contiene el cero, y la prueba de hipótesis no se rechaza (t = 0.472; p = 0.637). La tabla ANOVA llega a la misma conclusión desde otro ángulo (F = 0.223; p = 0.637). En el grupo de vecindarios de baja calidad, no hay evidencia de que el tamaño del terreno tenga ningún efecto sobre el precio.</p>
+<p>Con la baja calidad ya resuelta —sin relación alguna—, la pregunta natural es si subir un escalón en la escala cambia algo.</p>
+</div>
+<div id="grupo-media-calidad" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> Grupo: Media calidad<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-1" tabindex="-1"></a>media <span class="sc">%&gt;%</span></span>
+<span id="cb134-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb134-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb134-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Media calidad de vecindario: Lot_Size vs House_Price&quot;</span>,</span>
+<span id="cb134-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb134-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb134-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-28-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb135-1" tabindex="-1"></a><span class="fu">with</span>(media, <span class="fu">cor</span>(Lot_Size, House_Price))</span></code></pre></div>
+<pre><code>## [1] 0.2081741</code></pre>
+<p>En este grupo, el más numeroso de los tres (411 viviendas), sí empieza a insinuarse a simple vista una leve tendencia ascendente en la nube de puntos, aunque con mucha dispersión alrededor de ella. La correlación (r = 0.208) es siete veces más alta que la del grupo de baja calidad, aunque sigue siendo una asociación débil.</p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> media<span class="sc">$</span>Lot_Size</span>
+<span id="cb137-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-2" tabindex="-1"></a>Y <span class="ot">&lt;-</span> media<span class="sc">$</span>House_Price</span>
+<span id="cb137-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-3" tabindex="-1"></a>n_media <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
+<span id="cb137-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-4" tabindex="-1"></a></span>
+<span id="cb137-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-5" tabindex="-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(X); y_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(Y)</span>
+<span id="cb137-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-6" tabindex="-1"></a>Sxx_media <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb137-7"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-7" tabindex="-1"></a>Sxy_media <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar) <span class="sc">*</span> (Y <span class="sc">-</span> y_bar))</span>
+<span id="cb137-8"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-8" tabindex="-1"></a></span>
+<span id="cb137-9"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-9" tabindex="-1"></a>beta1_media <span class="ot">&lt;-</span> Sxy_media <span class="sc">/</span> Sxx_media</span>
+<span id="cb137-10"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-10" tabindex="-1"></a>beta0_media <span class="ot">&lt;-</span> y_bar <span class="sc">-</span> beta1_media <span class="sc">*</span> x_bar</span>
+<span id="cb137-11"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb137-11" tabindex="-1"></a>beta0_media; beta1_media</span></code></pre></div>
+<pre><code>## [1] 494802.9</code></pre>
+<pre><code>## [1] 42688.43</code></pre>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb140-1" tabindex="-1"></a>modelo_media <span class="ot">&lt;-</span> <span class="fu">lm</span>(House_Price <span class="sc">~</span> Lot_Size, <span class="at">data =</span> media)</span>
+<span id="cb140-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb140-2" tabindex="-1"></a><span class="fu">summary</span>(modelo_media)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = House_Price ~ Lot_Size, data = media)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -462170 -229268   -4540  214133  513149 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   494803      30927  15.999  &lt; 2e-16 ***
+## Lot_Size       42688       9918   4.304  2.1e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 253800 on 409 degrees of freedom
+## Multiple R-squared:  0.04334,    Adjusted R-squared:  0.041 
+## F-statistic: 18.53 on 1 and 409 DF,  p-value: 2.098e-05</code></pre>
+<p>De nuevo, el cálculo manual (β̂₁ = 42.688, β̂₀ = 494.803) coincide con lm(). A diferencia del grupo anterior, acá el error estándar (9.917) es notablemente menor que el propio coeficiente — la pendiente empieza a verse “grande” en relación con su margen de error, anticipando que sí va a resultar significativa.</p>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb142-1" tabindex="-1"></a><span class="fu">confint</span>(modelo_media)</span></code></pre></div>
+<pre><code>##                 2.5 %    97.5 %
+## (Intercept) 434006.50 555599.34
+## Lot_Size     23192.83  62184.03</code></pre>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb144-1" tabindex="-1"></a><span class="fu">anova</span>(modelo_media)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: House_Price
+##            Df     Sum Sq    Mean Sq F value    Pr(&gt;F)    
+## Lot_Size    1 1.1932e+12 1.1932e+12  18.527 2.098e-05 ***
+## Residuals 409 2.6340e+13 6.4401e+10                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>El intervalo de confianza al 95% para β₁ (23.193 a 62.184) ya no incluye el cero, y la prueba de hipótesis se rechaza con claridad (t = 4.30; p &lt; 0.0001; confirmado por la tabla ANOVA con F = 18.53, misma p). En el grupo de calidad media, por cada acre adicional de terreno, el precio aumenta en promedio USD 42.688 — un contraste total frente a la ausencia de efecto del grupo anterior.</p>
+</div>
+<div id="grupo-alta-calidad" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Grupo: Alta calidad<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-1" tabindex="-1"></a>alta <span class="sc">%&gt;%</span></span>
+<span id="cb146-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb146-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb146-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Alta calidad de vecindario: Lot_Size vs House_Price&quot;</span>,</span>
+<span id="cb146-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb146-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb146-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-33-1.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb147-1" tabindex="-1"></a><span class="fu">with</span>(alta, <span class="fu">cor</span>(Lot_Size, House_Price))</span></code></pre></div>
+<pre><code>## [1] 0.2228976</code></pre>
+<p>El patrón visual en este grupo (308 viviendas) es prácticamente indistinguible del de calidad media: una leve inclinación ascendente rodeada de bastante dispersión. La correlación (r = 0.223) es, de hecho, la más alta de los tres grupos, aunque por un margen muy estrecho frente a la de calidad media.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-1" tabindex="-1"></a>X <span class="ot">&lt;-</span> alta<span class="sc">$</span>Lot_Size</span>
+<span id="cb149-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-2" tabindex="-1"></a>Y <span class="ot">&lt;-</span> alta<span class="sc">$</span>House_Price</span>
+<span id="cb149-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-3" tabindex="-1"></a>n_alta <span class="ot">&lt;-</span> <span class="fu">length</span>(X)</span>
+<span id="cb149-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-4" tabindex="-1"></a></span>
+<span id="cb149-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-5" tabindex="-1"></a>x_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(X); y_bar <span class="ot">&lt;-</span> <span class="fu">mean</span>(Y)</span>
+<span id="cb149-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-6" tabindex="-1"></a>Sxx_alta <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb149-7"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-7" tabindex="-1"></a>Sxy_alta <span class="ot">&lt;-</span> <span class="fu">sum</span>((X <span class="sc">-</span> x_bar) <span class="sc">*</span> (Y <span class="sc">-</span> y_bar))</span>
+<span id="cb149-8"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-8" tabindex="-1"></a></span>
+<span id="cb149-9"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-9" tabindex="-1"></a>beta1_alta <span class="ot">&lt;-</span> Sxy_alta <span class="sc">/</span> Sxx_alta</span>
+<span id="cb149-10"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-10" tabindex="-1"></a>beta0_alta <span class="ot">&lt;-</span> y_bar <span class="sc">-</span> beta1_alta <span class="sc">*</span> x_bar</span>
+<span id="cb149-11"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb149-11" tabindex="-1"></a>beta0_alta; beta1_alta</span></code></pre></div>
+<pre><code>## [1] 503107.1</code></pre>
+<pre><code>## [1] 41089.92</code></pre>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb152-1" tabindex="-1"></a>modelo_alta <span class="ot">&lt;-</span> <span class="fu">lm</span>(House_Price <span class="sc">~</span> Lot_Size, <span class="at">data =</span> alta)</span>
+<span id="cb152-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb152-2" tabindex="-1"></a><span class="fu">summary</span>(modelo_alta)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = House_Price ~ Lot_Size, data = alta)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -557292 -200686   18510  179362  490586 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   503107      31785   15.83  &lt; 2e-16 ***
+## Lot_Size       41090      10273    4.00 7.96e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 239800 on 306 degrees of freedom
+## Multiple R-squared:  0.04968,    Adjusted R-squared:  0.04658 
+## F-statistic:    16 on 1 and 306 DF,  p-value: 7.957e-05</code></pre>
+<p>El cálculo manual (β̂₁ = 41.090, β̂₀ = 503.107) vuelve a coincidir con lm(). Tanto la magnitud de la pendiente como su error estándar (10.273) son muy similares a los del grupo de calidad media, lo que ya anticipa un resultado de significancia comparable.</p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb154-1" tabindex="-1"></a><span class="fu">confint</span>(modelo_alta)</span></code></pre></div>
+<pre><code>##                 2.5 %    97.5 %
+## (Intercept) 440562.44 565651.79
+## Lot_Size     20874.97  61304.87</code></pre>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb156-1" tabindex="-1"></a><span class="fu">anova</span>(modelo_alta)</span></code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: House_Price
+##            Df     Sum Sq    Mean Sq F value    Pr(&gt;F)    
+## Lot_Size    1 9.1999e+11 9.1999e+11  15.998 7.957e-05 ***
+## Residuals 306 1.7597e+13 5.7507e+10                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p>El intervalo de confianza (20.875 a 61.305) tampoco incluye el cero, y la prueba de hipótesis se rechaza (t = 4.00; p &lt; 0.001; ANOVA: F = 16.00, misma p). En el grupo de calidad alta, por cada acre adicional de terreno, el precio aumenta en promedio USD 41.090, una magnitud casi idéntica a la del grupo de calidad media, y no es la pendiente más alta de los tres como anticiparía la teoría.</p>
+<p>Con los tres grupos resueltos por separado, es momento de ponerlos uno al lado del otro y ver qué tan distinto es realmente el panorama entre ellos.</p>
+</div>
+<div id="comparación-entre-los-tres-grupos" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Comparación entre los tres grupos<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-1" tabindex="-1"></a>comparacion <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb158-2"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-2" tabindex="-1"></a>  <span class="at">Grupo =</span> <span class="fu">c</span>(<span class="st">&quot;Baja&quot;</span>, <span class="st">&quot;Media&quot;</span>, <span class="st">&quot;Alta&quot;</span>),</span>
+<span id="cb158-3"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-3" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">c</span>(<span class="fu">nrow</span>(baja), <span class="fu">nrow</span>(media), <span class="fu">nrow</span>(alta)),</span>
+<span id="cb158-4"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-4" tabindex="-1"></a>  <span class="at">r =</span> <span class="fu">c</span>(<span class="fl">0.0283</span>, <span class="fl">0.2082</span>, <span class="fl">0.2229</span>),</span>
+<span id="cb158-5"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-5" tabindex="-1"></a>  <span class="at">beta1_hat =</span> <span class="fu">c</span>(<span class="fu">coef</span>(modelo_baja)[<span class="dv">2</span>], <span class="fu">coef</span>(modelo_media)[<span class="dv">2</span>], <span class="fu">coef</span>(modelo_alta)[<span class="dv">2</span>]),</span>
+<span id="cb158-6"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-6" tabindex="-1"></a>  <span class="at">IC_95 =</span> <span class="fu">c</span>(<span class="st">&quot;(-17486.3 ; 28524.5)&quot;</span>, <span class="st">&quot;(23192.8 ; 62184.0)&quot;</span>, <span class="st">&quot;(20875.0 ; 61304.9)&quot;</span>),</span>
+<span id="cb158-7"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-7" tabindex="-1"></a>  <span class="at">p_valor =</span> <span class="fu">c</span>(<span class="fl">0.637</span>, <span class="fl">2.1e-05</span>, <span class="fl">7.96e-05</span>),</span>
+<span id="cb158-8"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-8" tabindex="-1"></a>  <span class="at">R2 =</span> <span class="fu">c</span>(<span class="fl">0.0008</span>, <span class="fl">0.0433</span>, <span class="fl">0.0497</span>),</span>
+<span id="cb158-9"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-9" tabindex="-1"></a>  <span class="at">Significativo =</span> <span class="fu">c</span>(<span class="st">&quot;No&quot;</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;Sí&quot;</span>)</span>
+<span id="cb158-10"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-10" tabindex="-1"></a>)</span>
+<span id="cb158-11"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-11" tabindex="-1"></a></span>
+<span id="cb158-12"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#cb158-12" tabindex="-1"></a>comparacion</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 8
+##   Grupo     n      r beta1_hat IC_95                  p_valor     R2 Significativo
+##   &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;                    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;        
+## 1 Baja    281 0.0283     5519. (-17486.3 ; 28524.5) 0.637     0.0008 No           
+## 2 Media   411 0.208     42688. (23192.8 ; 62184.0)  0.000021  0.0433 Sí           
+## 3 Alta    308 0.223     41090. (20875.0 ; 61304.9)  0.0000796 0.0497 Sí</code></pre>
+<p>Primero, se ve un quiebre bien marcado entre el grupo de baja calidad y los otros dos: en Baja, la pendiente ni siquiera se distingue de cero (p= 0.637); en Media y Alta, la pendiente sí es significativa, con p-valores muy por debajo de 0.001 en ambos casos. Segundo, entre Media y Alta se podría decir que se repite el mismo comportamiento: pendientes de magnitud parecida (USD 42.688 y USD 41.090 por acre), intervalos de confianza que se solapan casi por completo, y R² igual de bajos (4.3% y 5.0%). No hay indicio de que la relación se vuelva más fuerte a medida que sube la calidad del vecindario.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="referencias.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/07.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

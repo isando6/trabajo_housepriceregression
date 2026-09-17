@@ -197,15 +197,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
 <li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="objetivo-4.html"><a href="objetivo-4.html"><i class="fa fa-check"></i><b>8</b> Objetivo 4</a></li>
-<li class="chapter" data-level="9" data-path="grupo-baja.html"><a href="grupo-baja.html"><i class="fa fa-check"></i><b>9</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="10" data-path="grupo-media.html"><a href="grupo-media.html"><i class="fa fa-check"></i><b>10</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="11" data-path="grupo-alta.html"><a href="grupo-alta.html"><i class="fa fa-check"></i><b>11</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="12" data-path="grupo-baja-1.html"><a href="grupo-baja-1.html"><i class="fa fa-check"></i><b>12</b> — Grupo Baja —</a></li>
-<li class="chapter" data-level="13" data-path="grupo-media-1.html"><a href="grupo-media-1.html"><i class="fa fa-check"></i><b>13</b> — Grupo Media —</a></li>
-<li class="chapter" data-level="14" data-path="grupo-alta-1.html"><a href="grupo-alta-1.html"><i class="fa fa-check"></i><b>14</b> — Grupo Alta —</a></li>
-<li class="chapter" data-level="15" data-path="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><a href="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><i class="fa fa-check"></i><b>15</b> Intervalos de confianza del 95% para β1 en cada grupo</a></li>
-<li class="chapter" data-level="16" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>16</b> Referencias</a></li>
+<li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad"><i class="fa fa-check"></i><b>8.1</b> Grupo: Baja calidad</a></li>
+<li class="chapter" data-level="8.2" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad"><i class="fa fa-check"></i><b>8.2</b> Grupo: Media calidad</a></li>
+<li class="chapter" data-level="8.3" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad"><i class="fa fa-check"></i><b>8.3</b> Grupo: Alta calidad</a></li>
+<li class="chapter" data-level="8.4" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos"><i class="fa fa-check"></i><b>8.4</b> Comparación entre los tres grupos</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>9</b> Referencias</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -271,52 +270,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="correlación-entre-variables-independientes.html#cb86-1" tabindex="-1"></a><span class="fu">ggpairs</span>(df[predictoras]) <span class="sc">+</span></span>
 <span id="cb86-2"><a href="correlación-entre-variables-independientes.html#cb86-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">8</span>)</span></code></pre></div>
 <pre><code>## plot: [1, 1] [=&gt;-----------------------------------------------------------------------------] 2% est: 0s
-## plot: [1, 2] [==&gt;----------------------------------------------------------------------------] 4% est:11s
-## plot: [1, 3] [====&gt;--------------------------------------------------------------------------] 6% est:11s
-## plot: [1, 4] [=====&gt;-------------------------------------------------------------------------] 8% est:11s
-## plot: [1, 5] [=======&gt;-----------------------------------------------------------------------] 10% est:12s
-## plot: [1, 6] [=========&gt;---------------------------------------------------------------------] 12% est:12s
-## plot: [1, 7] [==========&gt;--------------------------------------------------------------------] 14% est:12s
-## plot: [2, 1] [============&gt;------------------------------------------------------------------] 16% est:12s
-## plot: [2, 2] [==============&gt;----------------------------------------------------------------] 18% est:11s
-## plot: [2, 3] [===============&gt;---------------------------------------------------------------] 20% est:11s
-## plot: [2, 4] [=================&gt;-------------------------------------------------------------] 22% est:12s
-## plot: [2, 5] [==================&gt;------------------------------------------------------------] 24% est:12s
-## plot: [2, 6] [====================&gt;----------------------------------------------------------] 27% est:12s
-## plot: [2, 7] [======================&gt;--------------------------------------------------------] 29% est:11s
-## plot: [3, 1] [=======================&gt;-------------------------------------------------------] 31% est:11s
-## plot: [3, 2] [=========================&gt;-----------------------------------------------------] 33% est:11s
-## plot: [3, 3] [==========================&gt;----------------------------------------------------] 35% est:11s
-## plot: [3, 4] [============================&gt;--------------------------------------------------] 37% est:10s
-## plot: [3, 5] [==============================&gt;------------------------------------------------] 39% est:10s
-## plot: [3, 6] [===============================&gt;-----------------------------------------------] 41% est:10s
-## plot: [3, 7] [=================================&gt;---------------------------------------------] 43% est: 9s
-## plot: [4, 1] [==================================&gt;--------------------------------------------] 45% est: 9s
-## plot: [4, 2] [====================================&gt;------------------------------------------] 47% est: 8s
-## plot: [4, 3] [======================================&gt;----------------------------------------] 49% est: 8s
-## plot: [4, 4] [=======================================&gt;---------------------------------------] 51% est: 8s
-## plot: [4, 5] [=========================================&gt;-------------------------------------] 53% est: 7s
-## plot: [4, 6] [===========================================&gt;-----------------------------------] 55% est: 7s
-## plot: [4, 7] [============================================&gt;----------------------------------] 57% est: 7s
-## plot: [5, 1] [==============================================&gt;--------------------------------] 59% est: 6s
-## plot: [5, 2] [===============================================&gt;-------------------------------] 61% est: 6s
-## plot: [5, 3] [=================================================&gt;-----------------------------] 63% est: 6s
-## plot: [5, 4] [===================================================&gt;---------------------------] 65% est: 5s
-## plot: [5, 5] [====================================================&gt;--------------------------] 67% est: 5s
-## plot: [5, 6] [======================================================&gt;------------------------] 69% est: 4s
-## plot: [5, 7] [=======================================================&gt;-----------------------] 71% est: 4s
-## plot: [6, 1] [=========================================================&gt;---------------------] 73% est: 4s
-## plot: [6, 2] [===========================================================&gt;-------------------] 76% est: 4s
-## plot: [6, 3] [============================================================&gt;------------------] 78% est: 3s
-## plot: [6, 4] [==============================================================&gt;----------------] 80% est: 3s
-## plot: [6, 5] [===============================================================&gt;---------------] 82% est: 3s
-## plot: [6, 6] [=================================================================&gt;-------------] 84% est: 2s
-## plot: [6, 7] [===================================================================&gt;-----------] 86% est: 2s
-## plot: [7, 1] [====================================================================&gt;----------] 88% est: 2s
+## plot: [1, 2] [==&gt;----------------------------------------------------------------------------] 4% est: 5s
+## plot: [1, 3] [====&gt;--------------------------------------------------------------------------] 6% est: 5s
+## plot: [1, 4] [=====&gt;-------------------------------------------------------------------------] 8% est: 5s
+## plot: [1, 5] [=======&gt;-----------------------------------------------------------------------] 10% est: 5s
+## plot: [1, 6] [=========&gt;---------------------------------------------------------------------] 12% est: 5s
+## plot: [1, 7] [==========&gt;--------------------------------------------------------------------] 14% est: 5s
+## plot: [2, 1] [============&gt;------------------------------------------------------------------] 16% est: 5s
+## plot: [2, 2] [==============&gt;----------------------------------------------------------------] 18% est: 4s
+## plot: [2, 3] [===============&gt;---------------------------------------------------------------] 20% est: 4s
+## plot: [2, 4] [=================&gt;-------------------------------------------------------------] 22% est: 4s
+## plot: [2, 5] [==================&gt;------------------------------------------------------------] 24% est: 4s
+## plot: [2, 6] [====================&gt;----------------------------------------------------------] 27% est: 4s
+## plot: [2, 7] [======================&gt;--------------------------------------------------------] 29% est: 4s
+## plot: [3, 1] [=======================&gt;-------------------------------------------------------] 31% est: 4s
+## plot: [3, 2] [=========================&gt;-----------------------------------------------------] 33% est: 4s
+## plot: [3, 3] [==========================&gt;----------------------------------------------------] 35% est: 4s
+## plot: [3, 4] [============================&gt;--------------------------------------------------] 37% est: 3s
+## plot: [3, 5] [==============================&gt;------------------------------------------------] 39% est: 3s
+## plot: [3, 6] [===============================&gt;-----------------------------------------------] 41% est: 3s
+## plot: [3, 7] [=================================&gt;---------------------------------------------] 43% est: 3s
+## plot: [4, 1] [==================================&gt;--------------------------------------------] 45% est: 3s
+## plot: [4, 2] [====================================&gt;------------------------------------------] 47% est: 3s
+## plot: [4, 3] [======================================&gt;----------------------------------------] 49% est: 3s
+## plot: [4, 4] [=======================================&gt;---------------------------------------] 51% est: 3s
+## plot: [4, 5] [=========================================&gt;-------------------------------------] 53% est: 2s
+## plot: [4, 6] [===========================================&gt;-----------------------------------] 55% est: 2s
+## plot: [4, 7] [============================================&gt;----------------------------------] 57% est: 2s
+## plot: [5, 1] [==============================================&gt;--------------------------------] 59% est: 2s
+## plot: [5, 2] [===============================================&gt;-------------------------------] 61% est: 2s
+## plot: [5, 3] [=================================================&gt;-----------------------------] 63% est: 2s
+## plot: [5, 4] [===================================================&gt;---------------------------] 65% est: 2s
+## plot: [5, 5] [====================================================&gt;--------------------------] 67% est: 2s
+## plot: [5, 6] [======================================================&gt;------------------------] 69% est: 2s
+## plot: [5, 7] [=======================================================&gt;-----------------------] 71% est: 1s
+## plot: [6, 1] [=========================================================&gt;---------------------] 73% est: 1s
+## plot: [6, 2] [===========================================================&gt;-------------------] 76% est: 1s
+## plot: [6, 3] [============================================================&gt;------------------] 78% est: 1s
+## plot: [6, 4] [==============================================================&gt;----------------] 80% est: 1s
+## plot: [6, 5] [===============================================================&gt;---------------] 82% est: 1s
+## plot: [6, 6] [=================================================================&gt;-------------] 84% est: 1s
+## plot: [6, 7] [===================================================================&gt;-----------] 86% est: 1s
+## plot: [7, 1] [====================================================================&gt;----------] 88% est: 1s
 ## plot: [7, 2] [======================================================================&gt;--------] 90% est: 1s
-## plot: [7, 3] [========================================================================&gt;------] 92% est: 1s
-## plot: [7, 4] [=========================================================================&gt;-----] 94% est: 1s
-## plot: [7, 5] [===========================================================================&gt;---] 96% est: 1s
+## plot: [7, 3] [========================================================================&gt;------] 92% est: 0s
+## plot: [7, 4] [=========================================================================&gt;-----] 94% est: 0s
+## plot: [7, 5] [===========================================================================&gt;---] 96% est: 0s
 ## plot: [7, 6] [============================================================================&gt;--] 98% est: 0s
 ## plot: [7, 7] [===============================================================================]100% est: 0s</code></pre>
 <p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
@@ -517,20 +516,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>
