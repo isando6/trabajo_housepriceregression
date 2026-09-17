@@ -1,0 +1,69 @@
+--- 
+title: "Análisis Exploratorio de datos al conjunto 'House Price Regression'"
+author: "Karina Núñez Sarmiento, Isabella Sandoval Escorcia"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+#bibliography: [book.bib, packages.bib]
+#biblio-style: apalike
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+description: "tarea 2do corte de métodos estadísticos"
+---
+
+# Justificación Teórica
+
+## Introducción
+
+La economía es una ciencia social dedicada al estudio acerca de las decisiones tomadas por entidades, sociedades e individuos respecto a qué producir, cómo distribuirlo y a qué precio intercambiarlo, todo dentro de mercados concretos en los que la oferta, la demanda y las características de los bienes determinan el valor final de una transacción (Pontificia Universidad Javeriana, s.f.).
+
+El mercado inmobiliario, donde el precio de cada propiedad es el resultado de la combinación de atributos físicos, de localización y del entorno inmediato en que se encuentra (Rosen, 1974), es uno de los ejemplos más ilustrativos de la dinámica anteriormente mencionada. Bajo este enfoque, el tamaño del terreno, históricamente reconocido como uno de los atributos con mayor incidencia en el valor de una propiedad al reflejar la capacidad de uso del suelo y su escasez relativa en un contexto geográfico determinado (Colwell y Sirmans, 1978), también se ve modulado por factores como la escasez del suelo, la demanda del medio y la calidad del vecindario en que se ubica.
+
+## Objetivos 
+
+**Objetivo general**:
+
+Analizar la relación entre el tamaño del terreno y el precio de la venta de viviendas residenciales, identificando el punto a partir del cual se observa una desaceleración en el incremento del precio según el nivel de calidad del vecindario, mediante un Análisis Exploratorio de Datos.
+
+
+**Objetivos específicos**:
+
+1. Describir la distribución estadística de las variables Lot_Size y House_Price, identificando su comportamiento central, dispersión y presencia de valores atípicos.
+
+2. Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal
+
+3. Identificar el umbral aproximado de superficie a partir del cual el incremento en el precio de venta comienza a desacelerarse, utilizando técnicas de suavizamiento de la curva de relación (LOWESS).
+
+4. Comparar el comportamiento de relación entre Lot_Size y House_Price en grupos vecindarios de distinta calidad, evaluando si el punto de desaceleración varía según el nivel del entorno.
+
+
+## Marco teórico
+
+De esta forma, la contribución del terreno al valor total de una propiedad varía en función de la cantidad disponible y, en un sentido determinante, del entorno en que se encuentra; en vecindarios de alta calidad, donde la demanda es mayor y los precios bases, por naturaleza, son más elevados, cada unidad adicional de terreno puede poseer un peso distinto que vale la pena resaltar respecto a la realidad de los vecindarios de calidad baja, en los que la presión sobre el precio del suelo es menor y la superficie disponible más amplia.
+
+Así, la calidad del vecindario opera a modo de indicador del contexto socioeconómico de una zona determinada. Siguiendo la lógica del modelo clásico del uso del suelo (Alonso, 1964; DiPasquale y Wheaton, 1996), los precios tienden a concentrarse en las zonas de mayor atracción y a disminuir conforme el entorno pierde atractivo, lo que implica que el valor marginal del terreno es heterogéneo entre distintos contextos. Esta heterogeneidad sugiere que el punto a partir del cual el incremento en el precio de venta comienza a desacelerarse con respecto al tamaño del terreno puede variar de forma significativa según el nivel de calidad del sector en que se ubica la propiedad.
+
+## Fuente de los datos
+
+El análisis se desarrolla sobre el conjunto de datos House Price Regression Dataset (Kaggle, s.f.), compuesto por 1.000 observaciones y 8 variables: superficie construida, número de habitaciones, número de baños, año de construcción, tamaño del terreno, capacidad del garaje, calidad del vecindario y precio de venta. Dado que se trata de un conjunto de datos de acceso público, es necesario citarlo como fuente aunque no exista un artículo académico asociado.
+
+## Variables del conjunto de datos
+
+- **`Square_Footage`**: superficie construida de la vivienda (pies cuadrados).
+
+- **`Num_Bedrooms`**: número de habitaciones.
+
+- **`Num_Bathrooms`**: número de baños.
+
+- **`Year_Built`**: año de construcción del inmueble.
+
+- **`Lot_Size`**: tamaño del terreno (acres).
+
+- **`Garage_Size`**: capacidad del garaje (vehículos).
+
+- **`Neighborhood_Quality`**: calidad del vecindario, en una escala ordinal de 1 (más baja) a 10 (más alta).
+
+- **`House_Price`**: precio de venta de la vivienda (USD); es la variable respuesta del estudio.
+
+

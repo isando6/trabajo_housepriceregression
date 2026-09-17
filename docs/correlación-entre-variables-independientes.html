@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Correlación entre variables independientes | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <meta name="description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Correlación entre variables independientes | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Correlación entre variables independientes | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  
+  <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
+  
+
+<meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
+
+
+<meta name="date" content="2026-09-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-exploratorio-bivariado.html"/>
+<link rel="next" href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas"><i class="fa fa-check"></i><b>2.1</b> Instalación de librerías</a></li>
+<li class="chapter" data-level="2.2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#carga-del-conjunto-de-datos-house_price_regression_dataset"><i class="fa fa-check"></i><b>2.2</b> Carga del conjunto de datos <code>house_price_regression_dataset</code></a></li>
+<li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
+<li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
+<li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
+<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
+<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="prueba-formal-de-la-curvatura.html"><a href="prueba-formal-de-la-curvatura.html"><i class="fa fa-check"></i><b>8</b> Prueba formal de la curvatura</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-formal-de-la-curvatura.html"><a href="prueba-formal-de-la-curvatura.html#quintiles"><i class="fa fa-check"></i><b>8.1</b> Quintiles</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="objetivo-4.html"><a href="objetivo-4.html"><i class="fa fa-check"></i><b>9</b> Objetivo 4</a></li>
+<li class="chapter" data-level="10" data-path="grupo-baja.html"><a href="grupo-baja.html"><i class="fa fa-check"></i><b>10</b> — Grupo Baja —</a></li>
+<li class="chapter" data-level="11" data-path="grupo-media.html"><a href="grupo-media.html"><i class="fa fa-check"></i><b>11</b> — Grupo Media —</a></li>
+<li class="chapter" data-level="12" data-path="grupo-alta.html"><a href="grupo-alta.html"><i class="fa fa-check"></i><b>12</b> — Grupo Alta —</a></li>
+<li class="chapter" data-level="13" data-path="grupo-baja-1.html"><a href="grupo-baja-1.html"><i class="fa fa-check"></i><b>13</b> — Grupo Baja —</a></li>
+<li class="chapter" data-level="14" data-path="grupo-media-1.html"><a href="grupo-media-1.html"><i class="fa fa-check"></i><b>14</b> — Grupo Media —</a></li>
+<li class="chapter" data-level="15" data-path="grupo-alta-1.html"><a href="grupo-alta-1.html"><i class="fa fa-check"></i><b>15</b> — Grupo Alta —</a></li>
+<li class="chapter" data-level="16" data-path="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><a href="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><i class="fa fa-check"></i><b>16</b> Intervalos de confianza del 95% para β1 en cada grupo</a></li>
+<li class="chapter" data-level="17" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>17</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="correlación-entre-variables-independientes" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Correlación entre variables independientes<a href="correlación-entre-variables-independientes.html#correlaci%C3%B3n-entre-variables-independientes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Antes de resumir las relaciones entre las variables predictoras, es necesario verificar qué coeficiente de correlación es apropiado y probar formalmente, para cada pareja, si la asociación observada es estadísticamente real o si podría atribuirsele solo al azar de la muestra. Pearson exige variables continuas, relación lineal y, para la prueba de significancia, aproximación a la normalidad; Spearman y Kendall no requieren normalidad y son más adecuados para variables ordinales o relaciones monótonas no lineales.</p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="correlación-entre-variables-independientes.html#cb77-1" tabindex="-1"></a>predictoras <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;Square_Footage&quot;</span>, <span class="st">&quot;Num_Bedrooms&quot;</span>, <span class="st">&quot;Num_Bathrooms&quot;</span>, <span class="st">&quot;Year_Built&quot;</span>,</span>
+<span id="cb77-2"><a href="correlación-entre-variables-independientes.html#cb77-2" tabindex="-1"></a>                  <span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Garage_Size&quot;</span>, <span class="st">&quot;Neighborhood_Quality&quot;</span>)</span></code></pre></div>
+<div id="identificación-de-la-naturaleza-de-las-variables" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Identificación de la naturaleza de las variables<a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Conviene revisar cuántos valores distintos toma cada variable predictora, información valiosa teniendo en cuenta qure una prueba de normalidad sobre una variable con tan pocos niveles como lo serían entre 3 o 5, no sería informativa.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="correlación-entre-variables-independientes.html#cb78-1" tabindex="-1"></a><span class="fu">sapply</span>(df[predictoras], <span class="cf">function</span>(x) <span class="fu">length</span>(<span class="fu">unique</span>(x)))</span></code></pre></div>
+<pre><code>##       Square_Footage         Num_Bedrooms        Num_Bathrooms           Year_Built             Lot_Size 
+##                  894                    5                    3                   73                 1000 
+##          Garage_Size Neighborhood_Quality 
+##                    3                   10</code></pre>
+<p>De las 7 variables predictoras, <code>Square_Footage</code> (894 valores), <code>Lot_Size</code> (1.000 valores) y <code>Year_Built</code> (73 valores) tienen suficientes valores para tratarse.</p>
+<p><code>Num_Bathrooms</code> (3 niveles), <code>Num_Bedrooms</code> (5 niveles) y <code>Garage_Size</code> (3 niveles), en cambio, son variables discretas de pocos niveles.</p>
+</div>
+<div id="normalidad" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Normalidad<a href="correlación-entre-variables-independientes.html#normalidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Ahora se aplica Shapiro-Wilk a las tres variables que se identificaron en el paso anterior como aptas para tratarse.</p>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="correlación-entre-variables-independientes.html#cb80-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>Square_Footage)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df$Square_Footage
+## W = 0.96173, p-value = 1.581e-15</code></pre>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="correlación-entre-variables-independientes.html#cb82-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>Year_Built)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df$Year_Built
+## W = 0.95645, p-value &lt; 2.2e-16</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="correlación-entre-variables-independientes.html#cb84-1" tabindex="-1"></a><span class="fu">shapiro.test</span>(df<span class="sc">$</span>Lot_Size)</span></code></pre></div>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  df$Lot_Size
+## W = 0.9544, p-value &lt; 2.2e-16</code></pre>
+<p>En las tres pruebas, los resultados de los p-valores son menores a 0.05, rechazando la normalidad, hecho consistente con la distribución aproximadamente uniforme (de curtosis con valor redondeado a 1.9) no sesgada ya documentada.</p>
+</div>
+<div id="inspección-conjunta-de-la-linealidad" class="section level2 hasAnchor" number="6.3">
+<h2><span class="header-section-number">6.3</span> Inspección conjunta de la linealidad<a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A pesar de no ser un paso obligatorio, conviene revisar visualmente si alguna pareja de predictoras muestra un patrón, sea lineal o no, que valga la pena explorar con detenimiento.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="correlación-entre-variables-independientes.html#cb86-1" tabindex="-1"></a><span class="fu">ggpairs</span>(df[predictoras]) <span class="sc">+</span></span>
+<span id="cb86-2"><a href="correlación-entre-variables-independientes.html#cb86-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## plot: [1, 1] [=&gt;-----------------------------------------------------------------------------] 2% est: 0s
+## plot: [1, 2] [==&gt;----------------------------------------------------------------------------] 4% est: 5s
+## plot: [1, 3] [====&gt;--------------------------------------------------------------------------] 6% est: 6s
+## plot: [1, 4] [=====&gt;-------------------------------------------------------------------------] 8% est: 7s
+## plot: [1, 5] [=======&gt;-----------------------------------------------------------------------] 10% est: 7s
+## plot: [1, 6] [=========&gt;---------------------------------------------------------------------] 12% est: 7s
+## plot: [1, 7] [==========&gt;--------------------------------------------------------------------] 14% est: 7s
+## plot: [2, 1] [============&gt;------------------------------------------------------------------] 16% est: 7s
+## plot: [2, 2] [==============&gt;----------------------------------------------------------------] 18% est: 7s
+## plot: [2, 3] [===============&gt;---------------------------------------------------------------] 20% est: 7s
+## plot: [2, 4] [=================&gt;-------------------------------------------------------------] 22% est: 7s
+## plot: [2, 5] [==================&gt;------------------------------------------------------------] 24% est: 6s
+## plot: [2, 6] [====================&gt;----------------------------------------------------------] 27% est: 6s
+## plot: [2, 7] [======================&gt;--------------------------------------------------------] 29% est: 6s
+## plot: [3, 1] [=======================&gt;-------------------------------------------------------] 31% est: 6s
+## plot: [3, 2] [=========================&gt;-----------------------------------------------------] 33% est: 6s
+## plot: [3, 3] [==========================&gt;----------------------------------------------------] 35% est: 6s
+## plot: [3, 4] [============================&gt;--------------------------------------------------] 37% est: 5s
+## plot: [3, 5] [==============================&gt;------------------------------------------------] 39% est: 5s
+## plot: [3, 6] [===============================&gt;-----------------------------------------------] 41% est: 5s
+## plot: [3, 7] [=================================&gt;---------------------------------------------] 43% est: 5s
+## plot: [4, 1] [==================================&gt;--------------------------------------------] 45% est: 5s
+## plot: [4, 2] [====================================&gt;------------------------------------------] 47% est: 5s
+## plot: [4, 3] [======================================&gt;----------------------------------------] 49% est: 4s
+## plot: [4, 4] [=======================================&gt;---------------------------------------] 51% est: 4s
+## plot: [4, 5] [=========================================&gt;-------------------------------------] 53% est: 4s
+## plot: [4, 6] [===========================================&gt;-----------------------------------] 55% est: 4s
+## plot: [4, 7] [============================================&gt;----------------------------------] 57% est: 4s
+## plot: [5, 1] [==============================================&gt;--------------------------------] 59% est: 4s
+## plot: [5, 2] [===============================================&gt;-------------------------------] 61% est: 3s
+## plot: [5, 3] [=================================================&gt;-----------------------------] 63% est: 3s
+## plot: [5, 4] [===================================================&gt;---------------------------] 65% est: 3s
+## plot: [5, 5] [====================================================&gt;--------------------------] 67% est: 3s
+## plot: [5, 6] [======================================================&gt;------------------------] 69% est: 3s
+## plot: [5, 7] [=======================================================&gt;-----------------------] 71% est: 3s
+## plot: [6, 1] [=========================================================&gt;---------------------] 73% est: 2s
+## plot: [6, 2] [===========================================================&gt;-------------------] 76% est: 2s
+## plot: [6, 3] [============================================================&gt;------------------] 78% est: 2s
+## plot: [6, 4] [==============================================================&gt;----------------] 80% est: 2s
+## plot: [6, 5] [===============================================================&gt;---------------] 82% est: 2s
+## plot: [6, 6] [=================================================================&gt;-------------] 84% est: 1s
+## plot: [6, 7] [===================================================================&gt;-----------] 86% est: 1s
+## plot: [7, 1] [====================================================================&gt;----------] 88% est: 1s
+## plot: [7, 2] [======================================================================&gt;--------] 90% est: 1s
+## plot: [7, 3] [========================================================================&gt;------] 92% est: 1s
+## plot: [7, 4] [=========================================================================&gt;-----] 94% est: 1s
+## plot: [7, 5] [===========================================================================&gt;---] 96% est: 0s
+## plot: [7, 6] [============================================================================&gt;--] 98% est: 0s
+## plot: [7, 7] [===============================================================================]100% est: 0s</code></pre>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-7-1.png" alt="" width="672" /></p>
+<p>La matriz de dispersión arroja las 21 combinaciones de pares a la vez y se concluye que ninguna de ellas muestra un patrón discernible. Las nubes de puntos, entonces, son uniformes en todos los paneles.</p>
+</div>
+<div id="pruebas-de-hipótesis-de-correlación-entre-las-7-predictoras" class="section level2 hasAnchor" number="6.4">
+<h2><span class="header-section-number">6.4</span> Pruebas de hipótesis de correlación entre las 7 predictoras<a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Incluso si el patrón visual no es evidente, resulta imprudente concluir, sin marcha atrás, que no existe asociación. Por eso, para conservar las buenas prácticas, hay que hacer una prueba formal para cada una de las 21 parejas posibles entre las 7 predictoras. Se calcularán con <code>rcorr()</code> del paquete <code>Hmisc</code>, que entrega en un solo paso la matriz de coeficientes y la de p-valores correspondientes a esas mismas 21 pruebas.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="correlación-entre-variables-independientes.html#cb88-1" tabindex="-1"></a>resultado_rcorr <span class="ot">&lt;-</span> <span class="fu">rcorr</span>(<span class="fu">as.matrix</span>(df[predictoras]))</span>
+<span id="cb88-2"><a href="correlación-entre-variables-independientes.html#cb88-2" tabindex="-1"></a></span>
+<span id="cb88-3"><a href="correlación-entre-variables-independientes.html#cb88-3" tabindex="-1"></a><span class="fu">round</span>(resultado_rcorr<span class="sc">$</span>r, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                      Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size
+## Square_Footage                1.000       -0.044        -0.032     -0.022    0.089       0.031
+## Num_Bedrooms                 -0.044        1.000         0.023     -0.016   -0.009       0.114
+## Num_Bathrooms                -0.032        0.023         1.000     -0.021    0.035       0.025
+## Year_Built                   -0.022       -0.016        -0.021      1.000   -0.061      -0.025
+## Lot_Size                      0.089       -0.009         0.035     -0.061    1.000       0.002
+## Garage_Size                   0.031        0.114         0.025     -0.025    0.002       1.000
+## Neighborhood_Quality         -0.008       -0.049         0.018     -0.010    0.038      -0.011
+##                      Neighborhood_Quality
+## Square_Footage                     -0.008
+## Num_Bedrooms                       -0.049
+## Num_Bathrooms                       0.018
+## Year_Built                         -0.010
+## Lot_Size                            0.038
+## Garage_Size                        -0.011
+## Neighborhood_Quality                1.000</code></pre>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="correlación-entre-variables-independientes.html#cb90-1" tabindex="-1"></a><span class="fu">round</span>(resultado_rcorr<span class="sc">$</span>P, <span class="dv">4</span>)</span></code></pre></div>
+<pre><code>##                      Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size
+## Square_Footage                   NA       0.1687        0.3184     0.4794   0.0046      0.3338
+## Num_Bedrooms                 0.1687           NA        0.4705     0.6173   0.7676      0.0003
+## Num_Bathrooms                0.3184       0.4705            NA     0.5059   0.2699      0.4326
+## Year_Built                   0.4794       0.6173        0.5059         NA   0.0536      0.4208
+## Lot_Size                     0.0046       0.7676        0.2699     0.0536       NA      0.9387
+## Garage_Size                  0.3338       0.0003        0.4326     0.4208   0.9387          NA
+## Neighborhood_Quality         0.7918       0.1213        0.5786     0.7630   0.2345      0.7215
+##                      Neighborhood_Quality
+## Square_Footage                     0.7918
+## Num_Bedrooms                       0.1213
+## Num_Bathrooms                      0.5786
+## Year_Built                         0.7630
+## Lot_Size                           0.2345
+## Garage_Size                        0.7215
+## Neighborhood_Quality                   NA</code></pre>
+<p>De las 21 parejas, <code>Lot_Size</code>–<code>Square_Footage</code> (r = 0.089; p = 0.0046) y <code>Garage_Size</code>–<code>Num_Bedrooms</code> (r = 0.114; p = 0.0003) resultan estadísticamente significativas al 5%; en ambos casos se rechaza H₀, evidenciando una no normalidad, pero las magnitudes son tan pequeñas que carecen de relevancia práctica. Las 19 parejas restantes no muestran evidencia de asociación, por lo que no se rechaza H₀ en ninguna de ellas.</p>
+</div>
+<div id="magnitud-del-efecto" class="section level2 hasAnchor" number="6.5">
+<h2><span class="header-section-number">6.5</span> Magnitud del efecto<a href="correlación-entre-variables-independientes.html#magnitud-del-efecto" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cohen (1988) propone umbrales de referencia para interpretar la magnitud de un coeficiente de correlación, independientemente de su significancia: |r| &lt; 0.10 se considera un efecto trivial, entre 0.10 y 0.29 un efecto pequeño, entre 0.30 y 0.49 moderado, y 0.50 o más, grande.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="correlación-entre-variables-independientes.html#cb92-1" tabindex="-1"></a>r_matriz <span class="ot">&lt;-</span> <span class="fu">rcorr</span>(<span class="fu">as.matrix</span>(df[predictoras]))<span class="sc">$</span>r</span>
+<span id="cb92-2"><a href="correlación-entre-variables-independientes.html#cb92-2" tabindex="-1"></a>r_matriz[<span class="fu">upper.tri</span>(r_matriz, <span class="at">diag =</span> <span class="cn">TRUE</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="correlación-entre-variables-independientes.html#cb93-1" tabindex="-1"></a>r_vals <span class="ot">&lt;-</span> <span class="fu">abs</span>(r_matriz[<span class="sc">!</span><span class="fu">is.na</span>(r_matriz)])</span>
+<span id="cb93-2"><a href="correlación-entre-variables-independientes.html#cb93-2" tabindex="-1"></a></span>
+<span id="cb93-3"><a href="correlación-entre-variables-independientes.html#cb93-3" tabindex="-1"></a>clasificacion <span class="ot">&lt;-</span> <span class="fu">cut</span>(r_vals,</span>
+<span id="cb93-4"><a href="correlación-entre-variables-independientes.html#cb93-4" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.0999</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="cn">Inf</span>),</span>
+<span id="cb93-5"><a href="correlación-entre-variables-independientes.html#cb93-5" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Trivial (&lt;0.10)&quot;</span>, <span class="st">&quot;Pequeño (0.10-0.29)&quot;</span>,</span>
+<span id="cb93-6"><a href="correlación-entre-variables-independientes.html#cb93-6" tabindex="-1"></a>                                 <span class="st">&quot;Moderado (0.30-0.49)&quot;</span>, <span class="st">&quot;Grande (&gt;=0.50)&quot;</span>))</span>
+<span id="cb93-7"><a href="correlación-entre-variables-independientes.html#cb93-7" tabindex="-1"></a></span>
+<span id="cb93-8"><a href="correlación-entre-variables-independientes.html#cb93-8" tabindex="-1"></a><span class="fu">table</span>(clasificacion)</span></code></pre></div>
+<pre><code>## clasificacion
+##      Trivial (&lt;0.10)  Pequeño (0.10-0.29) Moderado (0.30-0.49)      Grande (&gt;=0.50) 
+##                   20                    1                    0                    0</code></pre>
+<p>De las 21 parejas de predictoras, 20 se clasifican como efecto <em>Trivial</em> según Cohen, y solo <code>Garage_Size</code>–<code>Num_Bedrooms</code> (r = 0.114) terminó encasillada en la categoría de efecto <em>Pequeño</em>. Incluso <code>Lot_Size</code>–<code>Square_Footage</code>, la otra correlación estadísticamente significativa de la sección anterior (r = 0.089), quede clasificada como trivial bajo este criterio, confirmando así, ahora con un criterio de magnitud del efecto respaldandolo, que ninguna de las 21 parejas de predictoras representa una asociación con relevancia en la práctica.</p>
+</div>
+<div id="comparación-pearson-vs.-spearman-vs.-kendall" class="section level2 hasAnchor" number="6.6">
+<h2><span class="header-section-number">6.6</span> Comparación Pearson vs. Spearman vs. Kendall<a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Dado que la normalidad se rechazó para las tres variables evaluadas en el apartado de <em>Normalidad</em>, se verificará si dependiendo del coeficiente elegido la conclusión anterior cambia.</p>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="correlación-entre-variables-independientes.html#cb95-1" tabindex="-1"></a>cor_pearson  <span class="ot">&lt;-</span> <span class="fu">cor</span>(df[predictoras], <span class="at">method =</span> <span class="st">&quot;pearson&quot;</span>)</span>
+<span id="cb95-2"><a href="correlación-entre-variables-independientes.html#cb95-2" tabindex="-1"></a>cor_spearman <span class="ot">&lt;-</span> <span class="fu">cor</span>(df[predictoras], <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span>
+<span id="cb95-3"><a href="correlación-entre-variables-independientes.html#cb95-3" tabindex="-1"></a>cor_kendall  <span class="ot">&lt;-</span> <span class="fu">cor</span>(df[predictoras], <span class="at">method =</span> <span class="st">&quot;kendall&quot;</span>)</span>
+<span id="cb95-4"><a href="correlación-entre-variables-independientes.html#cb95-4" tabindex="-1"></a></span>
+<span id="cb95-5"><a href="correlación-entre-variables-independientes.html#cb95-5" tabindex="-1"></a><span class="fu">round</span>(cor_pearson, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                      Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size
+## Square_Footage                1.000       -0.044        -0.032     -0.022    0.089       0.031
+## Num_Bedrooms                 -0.044        1.000         0.023     -0.016   -0.009       0.114
+## Num_Bathrooms                -0.032        0.023         1.000     -0.021    0.035       0.025
+## Year_Built                   -0.022       -0.016        -0.021      1.000   -0.061      -0.025
+## Lot_Size                      0.089       -0.009         0.035     -0.061    1.000       0.002
+## Garage_Size                   0.031        0.114         0.025     -0.025    0.002       1.000
+## Neighborhood_Quality         -0.008       -0.049         0.018     -0.010    0.038      -0.011
+##                      Neighborhood_Quality
+## Square_Footage                     -0.008
+## Num_Bedrooms                       -0.049
+## Num_Bathrooms                       0.018
+## Year_Built                         -0.010
+## Lot_Size                            0.038
+## Garage_Size                        -0.011
+## Neighborhood_Quality                1.000</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="correlación-entre-variables-independientes.html#cb97-1" tabindex="-1"></a><span class="fu">round</span>(cor_spearman, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                      Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size
+## Square_Footage                1.000       -0.043        -0.031     -0.022    0.090       0.030
+## Num_Bedrooms                 -0.043        1.000         0.023     -0.015   -0.009       0.114
+## Num_Bathrooms                -0.031        0.023         1.000     -0.021    0.035       0.025
+## Year_Built                   -0.022       -0.015        -0.021      1.000   -0.061      -0.026
+## Lot_Size                      0.090       -0.009         0.035     -0.061    1.000       0.003
+## Garage_Size                   0.030        0.114         0.025     -0.026    0.003       1.000
+## Neighborhood_Quality         -0.008       -0.049         0.018     -0.010    0.038      -0.011
+##                      Neighborhood_Quality
+## Square_Footage                     -0.008
+## Num_Bedrooms                       -0.049
+## Num_Bathrooms                       0.018
+## Year_Built                         -0.010
+## Lot_Size                            0.038
+## Garage_Size                        -0.011
+## Neighborhood_Quality                1.000</code></pre>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="correlación-entre-variables-independientes.html#cb99-1" tabindex="-1"></a><span class="fu">round</span>(cor_kendall, <span class="dv">3</span>)</span></code></pre></div>
+<pre><code>##                      Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size
+## Square_Footage                1.000       -0.032        -0.024     -0.014    0.060       0.023
+## Num_Bedrooms                 -0.032        1.000         0.020     -0.011   -0.007       0.097
+## Num_Bathrooms                -0.024        0.020         1.000     -0.016    0.027       0.022
+## Year_Built                   -0.014       -0.011        -0.016      1.000   -0.041      -0.020
+## Lot_Size                      0.060       -0.007         0.027     -0.041    1.000       0.003
+## Garage_Size                   0.023        0.097         0.022     -0.020    0.003       1.000
+## Neighborhood_Quality         -0.006       -0.038         0.014     -0.007    0.027      -0.009
+##                      Neighborhood_Quality
+## Square_Footage                     -0.006
+## Num_Bedrooms                       -0.038
+## Num_Bathrooms                       0.014
+## Year_Built                         -0.007
+## Lot_Size                            0.027
+## Garage_Size                        -0.009
+## Neighborhood_Quality                1.000</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="correlación-entre-variables-independientes.html#cb101-1" tabindex="-1"></a>diferencia <span class="ot">&lt;-</span> <span class="fu">abs</span>(cor_pearson <span class="sc">-</span> cor_spearman)</span>
+<span id="cb101-2"><a href="correlación-entre-variables-independientes.html#cb101-2" tabindex="-1"></a><span class="fu">diag</span>(diferencia) <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb101-3"><a href="correlación-entre-variables-independientes.html#cb101-3" tabindex="-1"></a><span class="fu">max</span>(diferencia, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<pre><code>## [1] 0.0008825937</code></pre>
+<p>Los tres métodos coinciden casi exactamente, con la mayor diferencia entre Pearson y Spearman siendo de apenas 0.001.</p>
+</div>
+<div id="decisión-metodológica-de-acuerdo-a-las-pruebas" class="section level2 hasAnchor" number="6.7">
+<h2><span class="header-section-number">6.7</span> Decisión metodológica de acuerdo a las pruebas<a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Aunque, en sentido estricto, la falta de normalidad y la presencia de variables discretas de pocos niveles hacen de Spearman o Kendall la elección técnicamente más defendible, la comparación anterior muestra que la elección del método no cambia ninguna conclusión sustantiva. Se reporta el mapa de calor de Pearson por simplicidad de lectura, respaldado por la equivalencia empírica, las pruebas de hipótesis y los criterios de magnitud del efecto ya demostrados.</p>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="correlación-entre-variables-independientes.html#cb103-1" tabindex="-1"></a><span class="fu">ggcorr</span>(df[predictoras], <span class="at">label =</span> <span class="cn">TRUE</span>, <span class="at">label_round =</span> <span class="dv">2</span>, <span class="at">hjust =</span> <span class="fl">0.85</span>, <span class="at">layout.exp =</span> <span class="dv">2</span>,</span>
+<span id="cb103-2"><a href="correlación-entre-variables-independientes.html#cb103-2" tabindex="-1"></a>       <span class="at">low =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb103-3"><a href="correlación-entre-variables-independientes.html#cb103-3" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Correlación entre las variables independientes - Pearson&quot;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
+<p>La gran mayoría de las casillas están cerca de cero, en tonos tan pálidos que apenas se distinguen del blanco. Las dos correlaciones más altas del conjunto, <code>Num_Bedrooms</code>–<code>Garage_Size</code> (0.11) y <code>Square_Footage</code>–<code>Lot_Size</code> (0.09), son también las únicas dos casillas con un leve tinte verde, aunque siguen estando muy lejos de un tono fuerte. El resto de las 19 parejas se ubica entre −0.06 y 0.04, prácticamente indistinguibles de cero tanto en el número como en el color.</p>
+<p>Con un mapa de calor como este, uno ya se hace una idea de qué variables podrían combinarse o transformarse para sacarles más provecho; cuando una casilla se pinta con un color fuerte, hacia el verde oscuro o el rojo, suele ser una señal de que vale la pena construir algo a partir de esas dos variables. Empero, casi todo el mapa quedó en blanco, y las dos casillas menos pálidas siguen representando, según los criterios de Cohen, una magnitud demasiado pequeña para considerarse una asociación real. En otras palabras, no hay ninguna pareja de variables que esté “pidiendo” ser combinada o transformada, ya que las 7 predictoras se comportan, en la práctica, como si fueran independientes entre sí.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-exploratorio-bivariado.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/05.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

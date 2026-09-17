@@ -1,0 +1,84 @@
+# Extracción, transformación y carga de datos (ETL) 
+
+Antes de realizar cualquier análisis exploratorio o estadístico, es necesario garantizar que los datos con los que se trabajará sean confiables, estén completos y en un formato adecuado para su manipulación.
+
+Este proceso, conocido como **ETL** (Extracción, Transformación y Carga), constituye la base de todo análisis de datos. Si esta etapa se realiza de forma deficiente, cualquier resultado o interpretación posterior, por más sofisticado que resulte siendo, quedará comprometido. De esta manera, se realizará la carga del conjunto de datos `house_price_regression_dataset.csv`, la identificación, el tratamiento de valores faltantes y, como último paso, el ajuste de los tipos de variable necesarios para el análisis exploratorio que se desarrollará más adelante.
+
+## Instalación de librerías
+
+Pendiente por hacer cuando ya tenga todas las librerias que necesitaba
+
+```{r librerias}
+library(Amelia)
+library(tidyverse)
+library(moments)
+library(patchwork)
+library(GGally)
+library(Hmisc)
+```
+
+## Carga del conjunto de datos `house_price_regression_dataset`
+
+Se procede a cargar el conjunto de datos, correspondiente a información de viviendas residenciales individuales, con variables estructurales (superficie, habitaciones, baños, garaje), temporales (año de construcción), de entorno (calidad del vecindario) y el precio de venta observado.
+
+```{r carga}
+data <- read_csv("C:/Users/Isabella Sandoval/Downloads/dataset_trabajocorte2/house_price_regression_dataset.csv")
+```
+
+## Visualización del conjunto de datos y su estructura
+
+El dataset contiene 1.000 observaciones, un número conveniente para inspeccionar. 
+
+De todas formas, para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).
+
+```{r estructura}
+head(data, n = 10)
+dim(data)
+colnames(data)
+str(data)
+```
+
+## Identificación de valores faltantes (NA)
+
+Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica, como el tamaño del garaje o la antigüedad de la construcción). Así, se cuantifica primero el número de valores faltantes por columna:
+
+```{r nas}
+data %>% summarise(across(everything(), ~sum(is.na(.)), .names = "NA_{.col}"))
+missmap(data)
+```
+
+El conteo de `NA` arrojo cero en todas las columnas, y el mapa de `Amelia` confirma una matriz de datos completa (100% observado).
+
+## Identificación de valores duplicados
+
+```{r duplicados}
+sum(duplicated(data))
+```
+
+El conjunto de datos tampoco contiene filas duplicadas, por lo que se conservan las 1.000 observaciones originales.
+
+## Conversión a variables categóricas
+
+Las variables discretas `Num_Bedrooms`, `Num_Bathrooms` y `Garage_Size` se convierten a factor con el fin de poder usarla en tablas de frecuencias y diagramas de caja, siempre conservando en paralelo su versión numérica original. Por su parte, `Neighborhood_Quality` se convierte a un factor ordenado, dado que representa una escala ordinal referente a la calidad (con 1 = más baja, 10 = más alta).
+
+```{r conversion-factor}
+df$Num_Bedrooms_f         <- factor(df$Num_Bedrooms)
+df$Num_Bathrooms_f        <- factor(df$Num_Bathrooms)
+df$Garage_Size_f          <- factor(df$Garage_Size)
+df$Neighborhood_Quality_f <- factor(df$Neighborhood_Quality, ordered = TRUE)
+```
+
+## Verificación de rangos plausibles
+
+```{r rangos}
+range(df$Neighborhood_Quality)
+range(df$Year_Built)
+range(df$House_Price)
+range(df$Lot_Size)
+range(df$Square_Footage)
+```
+
+Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. `Neighborhood_Quality` cubre la escala completa del 1 al 10; `Year_Built` va desde 1950 a 2022; `Lot-Size` entre 0.5 y 5 acres, y `Square_Footage` entre 503 y 4.999 pies cuadrados. 
+
+
+

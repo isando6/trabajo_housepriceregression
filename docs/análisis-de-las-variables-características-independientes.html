@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Análisis de las variables características (independientes) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <meta name="description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Análisis de las variables características (independientes) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Análisis de las variables características (independientes) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  
+  <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
+  
+
+<meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
+
+
+<meta name="date" content="2026-09-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="análisis-de-la-variable-objetivo-house_price.html"/>
+<link rel="next" href="análisis-exploratorio-bivariado.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas"><i class="fa fa-check"></i><b>2.1</b> Instalación de librerías</a></li>
+<li class="chapter" data-level="2.2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#carga-del-conjunto-de-datos-house_price_regression_dataset"><i class="fa fa-check"></i><b>2.2</b> Carga del conjunto de datos <code>house_price_regression_dataset</code></a></li>
+<li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
+<li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
+<li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
+<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
+<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="prueba-formal-de-la-curvatura.html"><a href="prueba-formal-de-la-curvatura.html"><i class="fa fa-check"></i><b>8</b> Prueba formal de la curvatura</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="prueba-formal-de-la-curvatura.html"><a href="prueba-formal-de-la-curvatura.html#quintiles"><i class="fa fa-check"></i><b>8.1</b> Quintiles</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="objetivo-4.html"><a href="objetivo-4.html"><i class="fa fa-check"></i><b>9</b> Objetivo 4</a></li>
+<li class="chapter" data-level="10" data-path="grupo-baja.html"><a href="grupo-baja.html"><i class="fa fa-check"></i><b>10</b> — Grupo Baja —</a></li>
+<li class="chapter" data-level="11" data-path="grupo-media.html"><a href="grupo-media.html"><i class="fa fa-check"></i><b>11</b> — Grupo Media —</a></li>
+<li class="chapter" data-level="12" data-path="grupo-alta.html"><a href="grupo-alta.html"><i class="fa fa-check"></i><b>12</b> — Grupo Alta —</a></li>
+<li class="chapter" data-level="13" data-path="grupo-baja-1.html"><a href="grupo-baja-1.html"><i class="fa fa-check"></i><b>13</b> — Grupo Baja —</a></li>
+<li class="chapter" data-level="14" data-path="grupo-media-1.html"><a href="grupo-media-1.html"><i class="fa fa-check"></i><b>14</b> — Grupo Media —</a></li>
+<li class="chapter" data-level="15" data-path="grupo-alta-1.html"><a href="grupo-alta-1.html"><i class="fa fa-check"></i><b>15</b> — Grupo Alta —</a></li>
+<li class="chapter" data-level="16" data-path="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><a href="intervalos-de-confianza-del-95-para-β1-en-cada-grupo.html"><i class="fa fa-check"></i><b>16</b> Intervalos de confianza del 95% para β1 en cada grupo</a></li>
+<li class="chapter" data-level="17" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>17</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="análisis-de-las-variables-características-independientes" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Análisis de las variables características (independientes)<a href="análisis-de-las-variables-características-independientes.html#an%C3%A1lisis-de-las-variables-caracter%C3%ADsticas-independientes" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Antes de buscar entender qué factores influyen en el precio de la vivienda y evaluar cómo el tamaño del terreno interactúa con el entorno, se hace indispensable analizar las variables características, o también llamadas variables predictoras, del conjunto de datos, con ayuda del uso de tablas de frecuencias, gráficos, estadísticas descriptivas y diagramas de caja según la pertinencia.</p>
+<p>Por razones metodológicas, se separan las variables en <strong>discretas</strong> y <strong>continuas</strong>:</p>
+<ul>
+<li><p>Variables discretas: representan recuentos ordinales. En este estudio, corresponden a las variables <code>Num_Bedrooms</code> (número de habitaciones), <code>Num_Bathrooms</code> (número de baños), <code>Garage_Size</code> (capacidad del garaje en vehículos) y <code>Neighborhood_Quality</code> (calidad del vecindario).</p></li>
+<li><p>Variables continuas: representan valores dentro de un rango numérico continuo. En este estudio, corresponden a las variables <code>Square_Footage</code> (superficie construida en pies cuadrados), <code>Lot_Size</code> (tamaño del terreno en acres) y <code>Year_Built</code> (año de construcción del inmueble).</p></li>
+</ul>
+<div id="variables-discretas" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Variables discretas<a href="análisis-de-las-variables-características-independientes.html#variables-discretas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-de-las-variables-características-independientes.html#cb41-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bedrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb41-2"><a href="análisis-de-las-variables-características-independientes.html#cb41-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##   Num_Bedrooms   n Porcentaje
+## 1            1 201       20.1
+## 2            2 215       21.5
+## 3            3 182       18.2
+## 4            4 197       19.7
+## 5            5 205       20.5</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análisis-de-las-variables-características-independientes.html#cb43-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bathrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="análisis-de-las-variables-características-independientes.html#cb43-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##   Num_Bathrooms   n Porcentaje
+## 1             1 350       35.0
+## 2             2 327       32.7
+## 3             3 323       32.3</code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-de-las-variables-características-independientes.html#cb45-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Garage_Size, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb45-2"><a href="análisis-de-las-variables-características-independientes.html#cb45-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##   Garage_Size   n Porcentaje
+## 1           0 321       32.1
+## 2           1 336       33.6
+## 3           2 343       34.3</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="análisis-de-las-variables-características-independientes.html#cb47-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Neighborhood_Quality, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb47-2"><a href="análisis-de-las-variables-características-independientes.html#cb47-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Porcentaje =</span> <span class="fu">round</span>(n <span class="sc">/</span> <span class="fu">sum</span>(n) <span class="sc">*</span> <span class="dv">100</span>, <span class="dv">2</span>))</span></code></pre></div>
+<pre><code>##    Neighborhood_Quality   n Porcentaje
+## 1                     1  91        9.1
+## 2                     2 105       10.5
+## 3                     3  85        8.5
+## 4                     4  99        9.9
+## 5                     5 109       10.9
+## 6                     6 101       10.1
+## 7                     7 102       10.2
+## 8                     8  97        9.7
+## 9                     9  88        8.8
+## 10                   10 123       12.3</code></pre>
+<p>Las cuatro variables discretas muestran una distribución de frecuencias equilibrada entre sus categorías:</p>
+<p>En <code>Num_Bedrooms</code>, los cinco niveles (1 a 5 habitaciones) se reparten entre el 18.2% y el 21.5% de las viviendas cada uno.</p>
+<p>En <code>Neighborhood_Quality</code>, con diez niveles, mantiene una distribución pareja entre el 8.5% y el 12.3% por categoría, sin concentración en los extremos de la escala (baja o alta calidad) ni en el centro.</p>
+<p><code>Num_Bathrooms</code> y <code>Garage_Size</code>, entretanto, muestran un patrón similar, oscilando entre el 32.3% y 35%; específicamente, a <code>Num_Bathrooms</code> le corresponde entre el 32.3% y 35%, mientras que a <code>Garage_Size</code> entre el 32.1% y 34.3%.</p>
+<p>Esta lectura numérica se traduce visualmente en los siguientes gráficos de barras, que permitirán confirmar de un vistazo si la uniformidad detectada en las tablas se sostiene también en su representación gráfica.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="análisis-de-las-variables-características-independientes.html#cb49-1" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bedrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-2"><a href="análisis-de-las-variables-características-independientes.html#cb49-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bedrooms), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb49-3"><a href="análisis-de-las-variables-características-independientes.html#cb49-3" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb49-4"><a href="análisis-de-las-variables-características-independientes.html#cb49-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Habitaciones&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Num_Bedrooms&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="análisis-de-las-variables-características-independientes.html#cb49-5" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-6"><a href="análisis-de-las-variables-características-independientes.html#cb49-6" tabindex="-1"></a></span>
+<span id="cb49-7"><a href="análisis-de-las-variables-características-independientes.html#cb49-7" tabindex="-1"></a>p5 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Num_Bathrooms, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-8"><a href="análisis-de-las-variables-características-independientes.html#cb49-8" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bathrooms), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb49-9"><a href="análisis-de-las-variables-características-independientes.html#cb49-9" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb49-10"><a href="análisis-de-las-variables-características-independientes.html#cb49-10" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Baños&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Num_Bathrooms&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-11"><a href="análisis-de-las-variables-características-independientes.html#cb49-11" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-12"><a href="análisis-de-las-variables-características-independientes.html#cb49-12" tabindex="-1"></a></span>
+<span id="cb49-13"><a href="análisis-de-las-variables-características-independientes.html#cb49-13" tabindex="-1"></a>p6 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Garage_Size, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-14"><a href="análisis-de-las-variables-características-independientes.html#cb49-14" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Garage_Size), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb49-15"><a href="análisis-de-las-variables-características-independientes.html#cb49-15" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb49-16"><a href="análisis-de-las-variables-características-independientes.html#cb49-16" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Garaje&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Garage_Size&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-17"><a href="análisis-de-las-variables-características-independientes.html#cb49-17" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-18"><a href="análisis-de-las-variables-características-independientes.html#cb49-18" tabindex="-1"></a></span>
+<span id="cb49-19"><a href="análisis-de-las-variables-características-independientes.html#cb49-19" tabindex="-1"></a>p7 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="fu">count</span>(Neighborhood_Quality, <span class="at">name =</span> <span class="st">&quot;n&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb49-20"><a href="análisis-de-las-variables-características-independientes.html#cb49-20" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Neighborhood_Quality), <span class="at">y =</span> n)) <span class="sc">+</span></span>
+<span id="cb49-21"><a href="análisis-de-las-variables-características-independientes.html#cb49-21" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">width =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb49-22"><a href="análisis-de-las-variables-características-independientes.html#cb49-22" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Calidad del vecindad&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Neighborhood_Quality&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Frecuencia&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-23"><a href="análisis-de-las-variables-características-independientes.html#cb49-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb49-24"><a href="análisis-de-las-variables-características-independientes.html#cb49-24" tabindex="-1"></a></span>
+<span id="cb49-25"><a href="análisis-de-las-variables-características-independientes.html#cb49-25" tabindex="-1"></a>(p4 <span class="sc">+</span> p5) <span class="sc">/</span> (p6 <span class="sc">+</span> p7)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/barras%20variables%20discretas-1.png" alt="" width="672" /></p>
+<p>Los cuatro gráficos de barra evidencian que, en general, ninguna de las categorías se distingue por una barra drásticamente más alta que las demás, aunque hay anotaciones a simple vista que vale la pena destacar:</p>
+<p>En <code>Num_Bedrooms</code>, la categoría 3 se distingue como la que tiene menor frecuencia de las cinco, mientras que la categoría 2, en contraste, es la más frecuente.</p>
+<p>En <code>Num_Bathrooms</code>, la barra de 1 baño es más alta que las otras dos que, a su vez, son casi idénticas entre sí.</p>
+<p>En <code>Garage_Size</code>, la barra de 2 vehículos se ubica ligeramente por encima de las demás.</p>
+<p>En el caso de <code>Neighborhood_Quality</code>, las categorías 1 a 9 se mantienen dentro de un rango estrecho, pero la categoría 10 (calidad más alta) sobresale, siendo la barra más alta de las diez.</p>
+</div>
+<div id="variables-continuas" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Variables continuas<a href="análisis-de-las-variables-características-independientes.html#variables-continuas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En primer lugar, se calcula los estimadores puntuales y medidas de forma para las características cuantitativas de un inmueble.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="análisis-de-las-variables-características-independientes.html#cb50-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="análisis-de-las-variables-características-independientes.html#cb50-2" tabindex="-1"></a>  <span class="fu">select</span>(Square_Footage, Lot_Size, Year_Built) <span class="sc">%&gt;%</span></span>
+<span id="cb50-3"><a href="análisis-de-las-variables-características-independientes.html#cb50-3" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">everything</span>(), <span class="at">names_to =</span> <span class="st">&quot;variable&quot;</span>, <span class="at">values_to =</span> <span class="st">&quot;valor&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb50-4"><a href="análisis-de-las-variables-características-independientes.html#cb50-4" tabindex="-1"></a>  <span class="fu">group_by</span>(variable) <span class="sc">%&gt;%</span></span>
+<span id="cb50-5"><a href="análisis-de-las-variables-características-independientes.html#cb50-5" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb50-6"><a href="análisis-de-las-variables-características-independientes.html#cb50-6" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">length</span>(valor),</span>
+<span id="cb50-7"><a href="análisis-de-las-variables-características-independientes.html#cb50-7" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(valor),</span>
+<span id="cb50-8"><a href="análisis-de-las-variables-características-independientes.html#cb50-8" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(valor),</span>
+<span id="cb50-9"><a href="análisis-de-las-variables-características-independientes.html#cb50-9" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(valor),</span>
+<span id="cb50-10"><a href="análisis-de-las-variables-características-independientes.html#cb50-10" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(valor),</span>
+<span id="cb50-11"><a href="análisis-de-las-variables-características-independientes.html#cb50-11" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(valor, <span class="fl">0.25</span>),</span>
+<span id="cb50-12"><a href="análisis-de-las-variables-características-independientes.html#cb50-12" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(valor, <span class="fl">0.75</span>),</span>
+<span id="cb50-13"><a href="análisis-de-las-variables-características-independientes.html#cb50-13" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(valor),</span>
+<span id="cb50-14"><a href="análisis-de-las-variables-características-independientes.html#cb50-14" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(valor),</span>
+<span id="cb50-15"><a href="análisis-de-las-variables-características-independientes.html#cb50-15" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(valor),</span>
+<span id="cb50-16"><a href="análisis-de-las-variables-características-independientes.html#cb50-16" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(valor)</span>
+<span id="cb50-17"><a href="análisis-de-las-variables-características-independientes.html#cb50-17" tabindex="-1"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 3 × 12
+##   variable           n   media      sd mediana     RIC      Q1      Q3   minimo  maximo asimetria curtosis
+##   &lt;chr&gt;          &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Lot_Size        1000    2.78    1.30    2.81    2.26    1.67    3.92    0.506    4.99   -0.0442     1.80
+## 2 Square_Footage  1000 2815.   1256.   2862.   2100    1750.   3850.    503     4999      -0.0659     1.87
+## 3 Year_Built      1000 1987.     20.6  1986      35.2  1969    2004.   1950     2022      -0.0212     1.81</code></pre>
+<p>Las 1.000 observaciones están completas para las tres variables continuas.</p>
+<p>En <code>Square_Footage</code>, el promedio de superficie construida es de 2.815 pies cuadrados, con el 50% de las viviendas presentando una superficie igual o inferior a 2.862 pies cuadrados (mediana); la cercanía entre ambos valores es un primer indicio de simetría, confirmado por una asimetría de apenas −0.066. La desviación estándar es de 1.256 pies cuadrados y el rango intercuartílico de 2.100: el 50% central de las viviendas se reparte entre los 1.750 (Q1) y los 3.850 (Q3) pies cuadrados, dentro de un rango total que va de 503 (mínimo) a 4.999 (máximo). La curtosis (1.87), al ubicarse por debajo del valor de referencia de 3, presenta una distribución platicúrtica.</p>
+<p>En <code>Lot_Size</code>, el tamaño promedio del terreno es de 2.78 acres, con una mediana de 2.81 acres y una asimetría de −0.044 que refuerza, una vez más, la lectura de simetría. La desviación estándar es de 1.30 acres y el rango intercuartílico de 2.26: el 50% central de los terrenos se ubica entre 1.67 (Q1) y 3.92 (Q3) acres, dentro de un rango total de 0.51 (mínimo) a 4.99 acres (máximo). La curtosis (1.80) es inferior a 3, por lo que la distribución también es platicúrtica.</p>
+<p>Por último, en <code>Year_Built</code>, el año promedio de construcción es 1986.55, con una mediana de 1986 junto a una asimetría de −0.021, confirmando una distribución simétrica. La desviación estándar es de 20.63 años y el rango intercuartílico de 35.25: el 50% central de las viviendas fue construido entre 1969 (Q1) y 2004 (Q3), dentro de un rango total que va de 1950 (mínimo) a 2022 (máximo). La curtosis (1.81), por debajo de 3, indica una distribución platicúrtica.</p>
+<p>A continuación, se construyen diagramas de cajas para contemplar la simetría y detectar valores atípicos en las tres variables continuas.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="análisis-de-las-variables-características-independientes.html#cb52-1" tabindex="-1"></a>p1 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="análisis-de-las-variables-características-independientes.html#cb52-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> Square_Footage)) <span class="sc">+</span></span>
+<span id="cb52-3"><a href="análisis-de-las-variables-características-independientes.html#cb52-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb52-4"><a href="análisis-de-las-variables-características-independientes.html#cb52-4" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb52-5"><a href="análisis-de-las-variables-características-independientes.html#cb52-5" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f52&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-6"><a href="análisis-de-las-variables-características-independientes.html#cb52-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Superficie construida&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Pies cuadrados&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-7"><a href="análisis-de-las-variables-características-independientes.html#cb52-7" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb52-8"><a href="análisis-de-las-variables-características-independientes.html#cb52-8" tabindex="-1"></a></span>
+<span id="cb52-9"><a href="análisis-de-las-variables-características-independientes.html#cb52-9" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb52-10"><a href="análisis-de-las-variables-características-independientes.html#cb52-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> Lot_Size)) <span class="sc">+</span></span>
+<span id="cb52-11"><a href="análisis-de-las-variables-características-independientes.html#cb52-11" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb52-12"><a href="análisis-de-las-variables-características-independientes.html#cb52-12" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb52-13"><a href="análisis-de-las-variables-características-independientes.html#cb52-13" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f52&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-14"><a href="análisis-de-las-variables-características-independientes.html#cb52-14" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Tamaño del terreno&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Acres&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-15"><a href="análisis-de-las-variables-características-independientes.html#cb52-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb52-16"><a href="análisis-de-las-variables-características-independientes.html#cb52-16" tabindex="-1"></a></span>
+<span id="cb52-17"><a href="análisis-de-las-variables-características-independientes.html#cb52-17" tabindex="-1"></a>p3 <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb52-18"><a href="análisis-de-las-variables-características-independientes.html#cb52-18" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> Year_Built)) <span class="sc">+</span></span>
+<span id="cb52-19"><a href="análisis-de-las-variables-características-independientes.html#cb52-19" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb52-20"><a href="análisis-de-las-variables-características-independientes.html#cb52-20" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb52-21"><a href="análisis-de-las-variables-características-independientes.html#cb52-21" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f52&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-22"><a href="análisis-de-las-variables-características-independientes.html#cb52-22" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Año de construcción&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Año&quot;</span>, <span class="at">x =</span> <span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb52-23"><a href="análisis-de-las-variables-características-independientes.html#cb52-23" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="análisis-de-las-variables-características-independientes.html#cb53-1" tabindex="-1"></a>p1</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/p1-1.png" alt="" width="672" /></p>
+<p>Se aprecia una caja simétrica, con la mediana (2.862 pies cuadrados) supuerpuesta con respecto al centro de la caja. Además, los bigotes se extienden hasta los valores extremos reales de la variable (503 y 4.999 pies cuadrados), sin que se recorten antes de llegar a ellos; ningún valor cae fuera del límite de 1.5 veces el rango intercuartílico, y los datos se reparten hasta los extremos sin concentrarse cerca de la mediana.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="análisis-de-las-variables-características-independientes.html#cb54-1" tabindex="-1"></a>p2</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/p2-1.png" alt="" width="672" />
+El comportamiento de <code>Lot_Size</code> es un calco del de <code>Square_Footage</code> en su propia escala. Se ve una caja simétrica centrada en 2.81 acres, con la media y la mediana coincidiendo casi exactamente, y bigotes que se extienden hasta el mínimo (0.51) y el máximo (4.99) reales del conjunto de datos. No hay ningún punto marcado como atípico.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="análisis-de-las-variables-características-independientes.html#cb55-1" tabindex="-1"></a>p3</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/p3-1.png" alt="" width="672" /></p>
+<p>La caja es simétrica alrededor de 1986, con la media y la mediana (1986) superpuestas. Los bigotes llegan hasta 1950 y 2022, sin ningún punto marcado por fuera de ese rango.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="análisis-de-la-variable-objetivo-house_price.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="análisis-exploratorio-bivariado.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/03.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

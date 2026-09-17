@@ -1,0 +1,59 @@
+# Análisis de la variable objetivo `House_Price`
+
+En este estudio, el precio de la venta, identificado en el dataset como `House_Price`, es la variable respuesta, representando el valor comercial que se busca predecir y el eje para responder la pregunta de investigación plantrada. Es importante examinar el comportamiento de esta por si sola: dónde se concentra, qué tan dispersa está, si su forma se aleja de la normalidad y si hay presencia de valores atípicos.
+
+## Resumen de estadísticos descriptivos
+
+Se calculan los estimadores puntuales de tendencia central, variabilidad y forma para resumir numéricamente las propiedades de la distribución del precio de venta.
+
+```{r resumen House_Price}
+df %>%
+  summarise(
+    n         = n(),
+    media     = mean(House_Price),
+    mediana   = median(House_Price),
+    sd        = sd(House_Price),
+    RIC       = IQR(House_Price),
+    Q1        = quantile(House_Price, 0.25),
+    Q3        = quantile(House_Price, 0.75),
+    minimo    = min(House_Price),
+    maximo    = max(House_Price),
+    asimetria = skewness(House_Price),
+    curtosis  = kurtosis(House_Price)
+  )
+```
+
+Tal y como se mencionó en un principio, el dataset contiene 1.000 observaciones, y dichas están completas para la variable `House_Price`. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267 (mediana); la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con la asimetría, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.
+
+## Distribución de Frecuencias y Densidad
+
+La combinación del histograma con la curva de densidad permite inspeccionar visualmente la morfología de la distribución y evaluar si esta presenta asimetría o desviaciones de una distribución teórica normal.
+
+```{r histograma House_Price}
+df %>%
+  ggplot(aes(x = House_Price)) +
+  geom_histogram(aes(y = after_stat(density)),
+                 bins = 30, fill = "#8fa8a0", color = "white", alpha = 0.8) +
+  geom_density(color = "#2c5f6e", linewidth = 1) +
+  labs(title = "Distribución del precio de venta",
+       x = "Precio de venta (USD)", y = "Densidad") +
+  theme_minimal()
+```
+El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el _Resumen de estadísticos descriptivos_ (1.90).
+
+## Evaluación de Dispersión y Detección de valores atípicos 
+
+El diagrama de caja facilita la identificación visual de la mediana, del rango intercuartílico y de aquellas observacoiones que sobrepasan los umbrales esperados de variabilidad, mejor conocidos como _outliers_ o valores atípicos.
+
+```{r boxplot House_Price}
+df %>%
+  ggplot(aes(x = "", y = House_Price)) +
+  geom_boxplot(fill = "#8fa8a0", color = "black",
+               outlier.color = "#c47b6b", outlier.alpha = 0.6) +
+  stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "#2c5f6e") +
+  labs(title = "Boxplot - House_Price",
+       x = "", y = "Precio de venta (USD)") +
+  theme_minimal()
+```
+
+El diagrama de caja muestra una caja centrada de forma prácticamente simétrica dentro del rango de los bigotes: el bigote inferior se extiende desde aproximadamente USD 110.000 hasta el límite inferior de la caja (Q1, USD 401.648), mientras que el bigote superior llega hasta aproximadamente USD 1.05 millones desde el límite superior (Q3, USD 827.141), ambas distancias de longitud comparable. La línea de la mediana se ubica ligeramente por encima del centro vertical de la caja, y el punto que marca la media queda prácticamente superpuesto con ella, a solo unos USD 9.600 de diferencia, lo que confirma la simetría casi perfecta de la distribución. No se observa ningún punto por fuera de los bigotes, por lo que no se identifican valores atípicos en `House_Price`.

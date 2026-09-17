@@ -1,0 +1,120 @@
+# Objetivo 4
+
+
+
+
+
+
+datos <- read.csv("C:/Users/nunez/Downloads/house_price_regression_dataset.csv") %>%
+  mutate(
+    Calidad_Grupo = case_when(
+      Neighborhood_Quality <= 3 ~ "Baja",
+      Neighborhood_Quality <= 7 ~ "Media",
+      Neighborhood_Quality >= 8 ~ "Alta"
+    ),
+    Calidad_Grupo = factor(Calidad_Grupo, levels = c("Baja", "Media", "Alta"))
+  )
+
+table(datos$Calidad_Grupo)
+
+baja  <- datos %>% filter(Calidad_Grupo == "Baja")
+media <- datos %>% filter(Calidad_Grupo == "Media")
+alta  <- datos %>% filter(Calidad_Grupo == "Alta")
+
+# --- Grupo Baja ---
+baja %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point() +
+  facet_grid(. ~ 'Baja calidad de vecindario') +
+  theme_bw()
+
+with(baja, cor(Lot_Size, House_Price))
+
+# --- Grupo Media ---
+media %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point() +
+  facet_grid(. ~ 'Media calidad de vecindario') +
+  theme_bw()
+
+with(media, cor(Lot_Size, House_Price))
+
+# --- Grupo Alta ---
+alta %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point() +
+  facet_grid(. ~ 'Alta calidad de vecindario') +
+  theme_bw()
+
+
+# --- Grupo Baja ---
+X <- baja$Lot_Size
+Y <- baja$House_Price
+n_baja <- length(X)
+
+x_bar <- mean(X); y_bar <- mean(Y)
+Sxx_baja <- sum((X - x_bar)^2)
+Sxy_baja <- sum((X - x_bar) * (Y - y_bar))
+
+beta1_baja <- Sxy_baja / Sxx_baja
+beta0_baja <- y_bar - beta1_baja * x_bar
+beta0_baja; beta1_baja
+
+# --- Grupo Media ---
+X <- media$Lot_Size
+Y <- media$House_Price
+n_media <- length(X)
+
+x_bar <- mean(X); y_bar <- mean(Y)
+Sxx_media <- sum((X - x_bar)^2)
+Sxy_media <- sum((X - x_bar) * (Y - y_bar))
+
+beta1_media <- Sxy_media / Sxx_media
+beta0_media <- y_bar - beta1_media * x_bar
+beta0_media; beta1_media
+
+# --- Grupo Alta ---
+X <- alta$Lot_Size
+Y <- alta$House_Price
+n_alta <- length(X)
+
+x_bar <- mean(X); y_bar <- mean(Y)
+Sxx_alta <- sum((X - x_bar)^2)
+Sxy_alta <- sum((X - x_bar) * (Y - y_bar))
+
+beta1_alta <- Sxy_alta / Sxx_alta
+beta0_alta <- y_bar - beta1_alta * x_bar
+beta0_alta; beta1_alta
+with(alta, cor(Lot_Size, House_Price))
+
+#Rectificandoon la funcion
+modelo_baja  <- lm(House_Price ~ Lot_Size, data = baja)
+modelo_media <- lm(House_Price ~ Lot_Size, data = media)
+modelo_alta  <- lm(House_Price ~ Lot_Size, data = alta)
+
+summary(modelo_baja)
+summary(modelo_media)
+summary(modelo_alta)
+
+# Intervalos de confianza del 95% para β1 en cada grupo
+confint.default(modelo_baja)
+confint.default(modelo_media)
+confint.default(modelo_alta)
+
+#Anova
+anova(modelo_baja)
+anova(modelo_media)
+anova(modelo_alta)
+
+comparacion <- tibble(
+  Grupo = c("Baja", "Media", "Alta"),
+  n = c(nrow(baja), nrow(media), nrow(alta)),
+  r = c(0.0283, 0.2082, 0.2229),
+  beta1_hat = c(coef(modelo_baja)[2], coef(modelo_media)[2], coef(modelo_alta)[2]),
+  IC_95 = c("(-17386.5 ; 28424.7)", "(23250.5 ; 62126.3)", "(20954.9 ; 61224.9)"),
+  p_valor = c(0.637, 2.1e-05, 7.96e-05),
+  R2 = c(0.0008, 0.0433, 0.0497),
+  Significativo = c("No", "Sí", "Sí")
+)
+
+comparacion

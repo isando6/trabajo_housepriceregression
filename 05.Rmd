@@ -1,0 +1,123 @@
+# Correlación entre variables independientes
+
+Antes de resumir las relaciones entre las variables predictoras, es necesario verificar qué coeficiente de correlación es apropiado y probar formalmente, para cada pareja, si la asociación observada es estadísticamente real o si podría atribuirsele solo al azar de la muestra. Pearson exige variables continuas, relación lineal y, para la prueba de significancia, aproximación a la normalidad; Spearman y Kendall no requieren normalidad y son más adecuados para variables ordinales o relaciones monótonas no lineales.
+
+```{r}
+predictoras <- c("Square_Footage", "Num_Bedrooms", "Num_Bathrooms", "Year_Built",
+                  "Lot_Size", "Garage_Size", "Neighborhood_Quality")
+
+```
+
+## Identificación de la naturaleza de las variables
+
+Conviene revisar cuántos valores distintos toma cada variable predictora, información valiosa teniendo en cuenta qure una prueba de normalidad sobre una variable con tan pocos niveles como lo serían entre 3 o 5, no sería informativa.
+
+```{r}
+sapply(df[predictoras], function(x) length(unique(x)))
+
+```
+
+De las 7 variables predictoras, `Square_Footage` (894 valores), `Lot_Size` (1.000 valores) y `Year_Built` (73 valores) tienen suficientes valores para tratarse. 
+
+`Num_Bathrooms` (3 niveles), `Num_Bedrooms` (5 niveles) y `Garage_Size` (3 niveles), en cambio, son variables discretas de pocos niveles.
+
+## Normalidad
+
+Ahora se aplica Shapiro-Wilk a las tres variables que se identificaron en el paso anterior como aptas para tratarse.
+
+```{r}
+shapiro.test(df$Square_Footage)
+shapiro.test(df$Year_Built)
+shapiro.test(df$Lot_Size)
+
+```
+
+En las tres pruebas, los resultados de los p-valores son menores a 0.05, rechazando la normalidad, hecho consistente con la distribución aproximadamente uniforme (de curtosis con valor redondeado a 1.9) no sesgada ya documentada.
+
+## Inspección conjunta de la linealidad
+
+A pesar de no ser un paso obligatorio, conviene revisar visualmente si alguna pareja de predictoras muestra un patrón, sea lineal o no, que valga la pena explorar con detenimiento.
+
+```{r}
+ggpairs(df[predictoras]) +
+  theme_minimal(base_size = 8)
+```
+
+La matriz de dispersión arroja las 21 combinaciones de pares a la vez y se concluye que ninguna de ellas muestra un patrón discernible. Las nubes de puntos, entonces, son uniformes en todos los paneles.
+
+## Pruebas de hipótesis de correlación entre las 7 predictoras
+
+Incluso si el patrón visual no es evidente, resulta imprudente concluir, sin marcha atrás, que no existe asociación. Por eso, para conservar las buenas prácticas, hay que hacer una prueba formal para cada una de las 21 parejas posibles entre las 7 predictoras. Se calcularán con `rcorr()` del paquete `Hmisc`, que entrega en un solo paso la matriz de coeficientes y la de p-valores correspondientes a esas mismas 21 pruebas.
+
+```{r rcorr-independientes}
+resultado_rcorr <- rcorr(as.matrix(df[predictoras]))
+
+round(resultado_rcorr$r, 3)
+round(resultado_rcorr$P, 4)
+
+```
+
+De las 21 parejas, `Lot_Size`–`Square_Footage` (r = 0.089; p = 0.0046) y `Garage_Size`–`Num_Bedrooms` (r = 0.114; p = 0.0003) resultan estadísticamente significativas al 5%; en ambos casos se rechaza H₀, evidenciando una no normalidad, pero las magnitudes son tan pequeñas que carecen de relevancia práctica. Las 19 parejas restantes no muestran evidencia de asociación, por lo que no se rechaza H₀ en ninguna de ellas.
+
+## Magnitud del efecto
+
+Cohen (1988) propone umbrales de referencia para interpretar la magnitud de un coeficiente de correlación, independientemente de su significancia: |r| < 0.10 se considera un efecto trivial, entre 0.10 y 0.29 un efecto pequeño, entre 0.30 y 0.49 moderado, y 0.50 o más, grande.
+
+```{r}
+r_matriz <- rcorr(as.matrix(df[predictoras]))$r
+r_matriz[upper.tri(r_matriz, diag = TRUE)] <- NA
+```
+
+```{r}
+r_vals <- abs(r_matriz[!is.na(r_matriz)])
+
+clasificacion <- cut(r_vals,
+                      breaks = c(-Inf, 0.0999, 0.3, 0.5, Inf),
+                      labels = c("Trivial (<0.10)", "Pequeño (0.10-0.29)",
+                                 "Moderado (0.30-0.49)", "Grande (>=0.50)"))
+
+table(clasificacion)
+
+```
+
+De las 21 parejas de predictoras, 20 se clasifican como efecto _Trivial_ según Cohen, y solo `Garage_Size`–`Num_Bedrooms` (r = 0.114) terminó encasillada en la categoría de efecto _Pequeño_. Incluso `Lot_Size`–`Square_Footage`, la otra correlación estadísticamente significativa de la sección anterior (r = 0.089), quede clasificada como trivial bajo este criterio, confirmando así, ahora con un criterio de magnitud del efecto respaldandolo, que ninguna de las 21 parejas de predictoras representa una asociación con relevancia en la práctica.
+
+## Comparación Pearson vs. Spearman vs. Kendall
+
+Dado que la normalidad se rechazó para las tres variables evaluadas en el apartado de _Normalidad_, se verificará si dependiendo del coeficiente elegido la conclusión anterior cambia.
+
+```{r}
+cor_pearson  <- cor(df[predictoras], method = "pearson")
+cor_spearman <- cor(df[predictoras], method = "spearman")
+cor_kendall  <- cor(df[predictoras], method = "kendall")
+
+round(cor_pearson, 3)
+round(cor_spearman, 3)
+round(cor_kendall, 3)
+
+```
+
+```{r}
+diferencia <- abs(cor_pearson - cor_spearman)
+diag(diferencia) <- NA
+max(diferencia, na.rm = TRUE)
+
+```
+
+Los tres métodos coinciden casi exactamente, con la mayor diferencia entre Pearson y Spearman siendo de apenas 0.001.
+
+## Decisión metodológica de acuerdo a las pruebas
+
+Aunque, en sentido estricto, la falta de normalidad y la presencia de variables discretas de pocos niveles hacen de Spearman o Kendall la elección técnicamente más defendible, la comparación anterior muestra que la elección del método no cambia ninguna conclusión sustantiva. Se reporta el mapa de calor de Pearson por simplicidad de lectura, respaldado por la equivalencia empírica, las pruebas de hipótesis y los criterios de magnitud del efecto ya demostrados.
+
+
+```{r}
+ggcorr(df[predictoras], label = TRUE, label_round = 2, hjust = 0.85, layout.exp = 2,
+       low = "#c47b6b", mid = "white", high = "#2c5f6e") +
+  labs(title = "Correlación entre las variables independientes - Pearson")
+
+```
+
+La gran mayoría de las casillas están cerca de cero, en tonos tan pálidos que apenas se distinguen del blanco. Las dos correlaciones más altas del conjunto, `Num_Bedrooms`–`Garage_Size` (0.11) y `Square_Footage`–`Lot_Size` (0.09), son también las únicas dos casillas con un leve tinte verde, aunque siguen estando muy lejos de un tono fuerte. El resto de las 19 parejas se ubica entre −0.06 y 0.04, prácticamente indistinguibles de cero tanto en el número como en el color.
+
+Con un mapa de calor como este, uno ya se hace una idea de qué variables podrían combinarse o transformarse para sacarles más provecho; cuando una casilla se pinta con un color fuerte, hacia el verde oscuro o el rojo, suele ser una señal de que vale la pena construir algo a partir de esas dos variables. Empero, casi todo el mapa quedó en blanco, y las dos casillas menos pálidas siguen representando, según los criterios de Cohen, una magnitud demasiado pequeña para considerarse una asociación real. En otras palabras, no hay ninguna pareja de variables que esté "pidiendo" ser combinada o transformada, ya que las 7 predictoras se comportan, en la práctica, como si fueran independientes entre sí.

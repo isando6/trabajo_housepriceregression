@@ -1,0 +1,200 @@
+# Análisis Exploratorio Bivariado
+
+Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (`House_Price`). Este análisis permite identificar patrones de asociación, evaluar la dirección y fuerza de las relaciones, así como detectar posibles comportamientos no lineales.
+
+## Variables continuas vs. `House_Price`
+
+
+### `Lot_Size` vs `House_Price` 
+
+```{r 04-1}
+df %>%
+  ggplot(aes(x = Lot_Size, y = House_Price)) +
+  geom_point(alpha = 0.4, color = "#8fa8a0") +
+  labs(title = "Dispersión: Lot_Size vs House_Price",
+       x = "Tamaño del terreno (Lot_Size en acres)", y = "Precio de venta (USD)") +
+  theme_bw()
+
+```
+
+La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal ni una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.
+
+
+```{r}
+cor.test(df$Lot_Size, df$House_Price)
+```
+ 
+ ---
+
+
+### `Square_Footage` vs `House_Price`
+
+```{r 04-2}
+df %>%
+  ggplot(aes(x = Square_Footage, y = House_Price)) +
+  geom_point(alpha = 0.4, color = '#8fa8a0') +
+  labs(x = 'Superficie construida (Square_Footage en sqft)', y = 'Precio de venta (USD)') +
+  theme_bw() +
+  facet_grid(. ~ 'Dispersión: Square_Footage vs House_Price')
+```
+La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), grafican una relación evidente al ojo. 
+
+```{r}
+cor.test(df$Square_Footage, df$House_Price)
+```
+
+---
+
+
+
+### `Year_Built` vs `House_Price` 
+
+```{r 04-3}
+df %>%
+  ggplot(aes(x = Year_Built, y = House_Price)) +
+  geom_point(alpha = 0.4, color = '#8fa8a0') +
+  labs(x = 'Año de construcción (Year_Built)', y = 'Precio de venta (USD)') +
+  theme_bw() +
+  facet_grid(. ~ 'Dispersión: Year_Built vs House_Price')
+```
+La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleaatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 2020 y las de 1950. 
+
+```{r}
+cor.test(df$Year_Built, df$House_Price)
+```
+
+---
+
+
+## Variables discretas y categóricas vs. `House_Price`
+
+### `Num_Bedrooms` vs `House_Price` 
+
+```{r 04-4}
+df %>%
+  group_by(Num_Bedrooms) %>%
+  summarise(
+    n         = n(),
+    media     = mean(House_Price, na.rm = TRUE),
+    mediana   = median(House_Price, na.rm = TRUE),
+    sd        = sd(House_Price, na.rm = TRUE),
+    RIC       = IQR(House_Price, na.rm = TRUE),
+    Q1        = quantile(House_Price, 0.25, na.rm = TRUE),
+    Q3        = quantile(House_Price, 0.75, na.rm = TRUE),
+    minimo    = min(House_Price, na.rm = TRUE),
+    maximo    = max(House_Price, na.rm = TRUE),
+    asimetria = skewness(House_Price, na.rm = TRUE),
+    curtosis  = kurtosis(House_Price, na.rm = TRUE))
+```
+
+
+
+```{r 04-5}
+df %>%
+  ggplot(aes(x = factor(Num_Bedrooms), y = House_Price)) +
+  geom_boxplot(fill = "#8fa8a0", color = "black", outlier.color = "darkred") +
+  stat_summary(fun = mean, geom = 'point', shape = 20, size = 3, color = "darkgreen") +
+  labs(x = "Número de habitaciones (Num_Bedrooms)", y = "Precio de venta (USD)") +
+  theme_minimal()
+```
+
+
+
+
+
+###`Num_Bathrooms` vs `House_Price` 
+
+```{r 04-6}
+df %>%
+  group_by(Num_Bathrooms) %>%
+  summarise(
+    n         = n(),
+    media     = mean(House_Price, na.rm = TRUE),
+    mediana   = median(House_Price, na.rm = TRUE),
+    sd        = sd(House_Price, na.rm = TRUE),
+    RIC       = IQR(House_Price, na.rm = TRUE),
+    Q1        = quantile(House_Price, 0.25, na.rm = TRUE),
+    Q3        = quantile(House_Price, 0.75, na.rm = TRUE),
+    minimo    = min(House_Price, na.rm = TRUE),
+    maximo    = max(House_Price, na.rm = TRUE),
+    asimetria = skewness(House_Price, na.rm = TRUE),
+    curtosis  = kurtosis(House_Price, na.rm = TRUE))
+```
+
+
+
+```{r 04-7}
+df %>%
+  ggplot(aes(x = factor(Num_Bathrooms), y = House_Price)) +
+  geom_boxplot(fill = "#8fa8a0", color = "black", outlier.color = "darkred") +
+  stat_summary(fun = mean, geom = 'point', shape = 20, size = 3, color = "darkgreen") +
+  labs(x = "Número de baños (Num_Bathrooms)", y = "Precio de venta (USD)") +
+  theme_minimal()
+```
+
+
+### `Garage_Size` vs `House_Price` 
+
+```{r 04-8}
+df %>%
+  group_by(Garage_Size) %>%
+  summarise(
+    n         = n(),
+    media     = mean(House_Price, na.rm = TRUE),
+    mediana   = median(House_Price, na.rm = TRUE),
+    sd        = sd(House_Price, na.rm = TRUE),
+    RIC       = IQR(House_Price, na.rm = TRUE),
+    Q1        = quantile(House_Price, 0.25, na.rm = TRUE),
+    Q3        = quantile(House_Price, 0.75, na.rm = TRUE),
+    minimo    = min(House_Price, na.rm = TRUE),
+    maximo    = max(House_Price, na.rm = TRUE),
+    asimetria = skewness(House_Price, na.rm = TRUE),
+    curtosis  = kurtosis(House_Price, na.rm = TRUE)
+  )
+```
+
+
+
+```{r 04-9}
+df %>%
+  ggplot(aes(x = factor(Garage_Size), y = House_Price)) +
+  geom_boxplot(fill = "#8fa8a0", color = "black", outlier.color = "darkred") +
+  stat_summary(fun = mean, geom = 'point', shape = 20, size = 3, color = "darkgreen") +
+  labs(x = "Capacidad del garaje en vehículos (Garage_Size)", y = "Precio de venta (USD)") +
+  theme_minimal()
+```
+
+
+
+### `Neighborhood_Quality` vs. `House_Price`
+
+```{r 04-10}
+df %>%
+  group_by(Neighborhood_Quality) %>%
+  summarise(
+    n         = n(),
+    media     = mean(House_Price, na.rm = TRUE),
+    mediana   = median(House_Price, na.rm = TRUE),
+    sd        = sd(House_Price, na.rm = TRUE),
+    RIC       = IQR(House_Price, na.rm = TRUE),
+    Q1        = quantile(House_Price, 0.25, na.rm = TRUE),
+    Q3        = quantile(House_Price, 0.75, na.rm = TRUE),
+    minimo    = min(House_Price, na.rm = TRUE),
+    maximo    = max(House_Price, na.rm = TRUE),
+    asimetria = skewness(House_Price, na.rm = TRUE),
+    curtosis  = kurtosis(House_Price, na.rm = TRUE)
+  )
+```
+
+
+
+```{r 04-11}
+df %>%
+  ggplot(aes(x = factor(Neighborhood_Quality), y = House_Price)) +
+  geom_boxplot(fill = "#8fa8a0", color = "black", outlier.color = "darkred") +
+  stat_summary(fun = mean, geom = 'point', shape = 20, size = 3, color = "darkgreen") +
+  labs(x = "Calidad del vecindario (Neighborhood_Quality)", y = "Precio de venta (USD)") +
+  theme_minimal()
+```
+
+
