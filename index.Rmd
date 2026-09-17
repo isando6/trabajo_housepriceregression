@@ -63,5 +63,3 @@ El análisis se desarrolla sobre el conjunto de datos House Price Regression Dat
 - **`Neighborhood_Quality`**: calidad del vecindario, en una escala ordinal de 1 (más baja) a 10 (más alta).
 
 - **`House_Price`**: precio de venta de la vivienda (USD); es la variable respuesta del estudio.
-
-
