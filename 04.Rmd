@@ -2,6 +2,8 @@
 
 Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (`House_Price`). Este análisis permite identificar patrones de asociación, evaluar la dirección y fuerza de las relaciones, así como detectar posibles comportamientos no lineales.
 
+Para las variables continuas, esa dirección y fuerza se mide con el coeficiente de correlación de Pearson (r), que resume en un solo número qué tan de la mano se mueven dos variables. r va de −1 a 1: valores cercanos a 1 indican que ambas variables suben juntas, cercanos a −1 que una sube mientras la otra baja, y cercanos a 0 que no hay relación lineal entre ellas. Como referencia orientativa, valores de |r| por debajo de 0.3 suelen considerarse una asociación débil, entre 0.3 y 0.7 moderada; valores por encima de 0.7 fuerte.
+
 ## Variables continuas vs. `House_Price`
 
 

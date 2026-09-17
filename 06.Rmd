@@ -21,7 +21,7 @@ La curva no muestra desaceleración; al contrario, en el tramo final, correspond
 
 ## Prueba formal de la curvatura
 
-Una curva puede "verse" torcida a simple vista solo por la variabilidad propia de los datos y no significar nada en la estadística. Para no quedarse con una impresión visual, se compara un modelo de regresión lineal simple contra uno que incluye un término cuadrático, y se usa ANOVA para decidir si esa curvatura adicional realmente mejora el ajuste o si es una complicación innecesaria.
+Una curva puede "verse" torcida a simple vista solo por la variabilidad propia de los datos y no significar nada en la estadística. Para no quedarse únicamente con la impresión visual, se compara un modelo de regresión lineal simple contra uno que incluye un término cuadrático, y se usa ANOVA para decidir si esa curvatura adicional realmente mejora el ajuste o si es una complicación innecesaria.
 
 ```{r}
 modelo_lineal     <- lm(House_Price ~ Lot_Size, data = df)
@@ -55,10 +55,13 @@ data.frame(
 
 ```
 
+El término cuadrático resulta estadísticamente significativo (F = 5.55; p = 0.019), lo que en un primer vistazo podría parecer evidencia de curvatura real. Pero el coeficiente cuadrático es positivo, es decir, la curva es convexa (se acelera), no cóncava (no se desacelera), justo lo contrario de lo que plantea la pregunta de investigación.
+
+El coeficiente de determinación (R²) indica qué proporción de la variabilidad del precio de venta queda explicada por el modelo, en una escala de 0 a 1: un R² de 0.03, por ejemplo, significa que el modelo explica apenas el 3% de esa variabilidad, dejando el 97% restante sin explicar. En este contexto, el R² del modelo lineal (0.0257) y el del cuadrático (0.0311) son bajos, con una diferencia de apenas 0.0054 entre uno y otro, lo que corresponde a menos de medio punto porcentual. Con mil observaciones, hasta una curvatura sin ninguna relevancia práctica termina siendo "significativa" en el sentido estadístico; el R² funciona, por lo tanto, como la evidencia definitiva de que, en términos prácticos, agregar el término cuadrático no mejora la capacidad del modelo para explicar el precio.
 
 ## Quintiles
 
-Otra alternativa para mirar lo mismo, sin depender de que la curvatura tenga que ser cuadrática, es partir el rango de terrenos en cinco tramos de igual tamaño (quintiles) y comparar qué tanto sube el precio promedio de un tramo al siguiente. Si de verdad existiera una desaceleracipon, se esperaría ver que esa subida sea grande entre los primeros quintiles y se haga cada vez más pequeña hacia el final.
+Otra alternativa para mirar lo mismo, sin depender de que la curvatura tenga que ser cuadrática, es partir el rango de terrenos en cinco tramos de igual tamaño (quintiles) y comparar qué tanto sube el precio promedio de un tramo al siguiente. Si de verdad existiera una desaceleración, se esperaría ver que esa subida sea grande entre los primeros quintiles y se haga cada vez más pequeña hacia el final.
 
 ```{r}
 df <- df %>% mutate(Quintil_Lot = ntile(Lot_Size, 5))

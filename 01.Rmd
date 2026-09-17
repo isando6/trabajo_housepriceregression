@@ -6,7 +6,7 @@ Este proceso, conocido como **ETL** (Extracción, Transformación y Carga), cons
 
 ## Instalación de librerías
 
-Pendiente por hacer cuando ya tenga todas las librerias que necesitaba
+En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: `tidyverse` para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (`%>%`); `Amelia`, utilizada para la detección visual de datos faltantes a través de la función `missmap()`; `moments`, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; `patchwork`, empleada para combinar múltiples gráficos de `ggplot2` en una sola figura; `GGally`, que amplía las capacidades de visualización de `ggplot2` con funciones como `ggpairs()` y `ggcorr()` para el análisis de relaciones entre variables; y `Hmisc`, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función `rcorr()`.
 
 ```{r librerias}
 library(Amelia)
@@ -23,8 +23,7 @@ library(Hmisc)
 Se procede a cargar el conjunto de datos, correspondiente a información de viviendas residenciales individuales, con variables estructurales (superficie, habitaciones, baños, garaje), temporales (año de construcción), de entorno (calidad del vecindario) y el precio de venta observado.
 
 ```{r carga}
-data <- read_csv("C:/Users/Isabella Sandoval/Downloads/dataset_trabajocorte2/house_price_regression_dataset.csv")
-df <- data
+   data <- read_csv("house_price_regression_dataset.csv")
 ```
 
 ## Visualización del conjunto de datos y su estructura
