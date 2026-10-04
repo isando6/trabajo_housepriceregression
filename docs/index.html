@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <title>Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:title" content="Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta name="twitter:title" content="Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   
   <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-09-26" />
+<meta name="date" content="2026-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -76,13 +76,12 @@
 <li><a href="./">Trabajo de Métodos Estadísticos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico-alargar"><i class="fa fa-check"></i><b>1.2</b> Marco teórico (alargar!!!)</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
 <ul>
@@ -91,30 +90,35 @@
 <li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
 <li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
 <li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
-<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
-<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos plausibles</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de frecuencias y densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de dispersión y detección de valores atípicos</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#resumen-num%C3%A9rico-de-las-variables-predictoras"><i class="fa fa-check"></i><b>4.1</b> Resumen numérico de las variables predictoras</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas-distribuci%C3%B3n-de-frecuencias"><i class="fa fa-check"></i><b>4.2</b> Variables discretas: distribución de frecuencias</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas-diagramas-de-caja"><i class="fa fa-check"></i><b>4.3</b> Variables continuas: diagramas de caja</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.2</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.3</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.4</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.5</b> Variables discretas y categóricas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.6" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.6</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.7" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.7</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.8" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.8</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Num_Bathrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.4</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
 <ul>
@@ -123,14 +127,14 @@
 <li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
 <li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
 <li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
-<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
-<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones"><i class="fa fa-check"></i><b>6.6</b> Mapa de calor de correlaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<li class="chapter" data-level="7" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><i class="fa fa-check"></i><b>7</b> Modelo de regresión lineal con <code>Lot_Size</code> como predictor de <code>House_Price</code></a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
-<li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
-<li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
+<li class="chapter" data-level="7.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#diagrama-de-dispersi%C3%B3n-con-la-recta-ajustada"><i class="fa fa-check"></i><b>7.1</b> Diagrama de dispersión con la recta ajustada</a></li>
+<li class="chapter" data-level="7.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimación del modelo</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Tabla ANOVA del modelo</a></li>
+<li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Capacidad explicativa del modelo</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -153,7 +157,7 @@
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</a>
           </h1>
         </div>
 
@@ -162,49 +166,47 @@
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</h1>
+<h1 class="title">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</h1>
 <p class="author"><em>Karina Núñez Sarmiento, Isabella Sandoval Escorcia</em></p>
-<p class="date"><em>2026-09-26</em></p>
+<p class="date"><em>2026-10-04</em></p>
 </div>
-<div id="justificación-teórica" class="section level1 hasAnchor" number="1">
-<h1><span class="header-section-number"> 1</span> Justificación Teórica<a href="index.html#justificaci%C3%B3n-te%C3%B3rica" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<div id="introducción" class="section level2 hasAnchor" number="1.1">
-<h2><span class="header-section-number">1.1</span> Introducción<a href="index.html#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="introducción" class="section level1 hasAnchor" number="1">
+<h1><span class="header-section-number"> 1</span> Introducción<a href="index.html#introducci%C3%B3n" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>La economía es una ciencia social dedicada al estudio acerca de las decisiones tomadas por entidades, sociedades e individuos respecto a qué producir, cómo distribuirlo y a qué precio intercambiarlo, todo dentro de mercados concretos en los que la oferta, la demanda y las características de los bienes determinan el valor final de una transacción (Pontificia Universidad Javeriana, s.f.).</p>
 <p>El mercado inmobiliario, donde el precio de cada propiedad es el resultado de la combinación de atributos físicos, de localización y del entorno inmediato en que se encuentra (Rosen, 1974), es uno de los ejemplos más ilustrativos de la dinámica anteriormente mencionada. Bajo este enfoque, el tamaño del terreno, históricamente reconocido como uno de los atributos con mayor incidencia en el valor de una propiedad al reflejar la capacidad de uso del suelo y su escasez relativa en un contexto geográfico determinado (Colwell y Sirmans, 1978), también se ve modulado por factores como la escasez del suelo, la demanda del medio y la calidad del vecindario en que se ubica.</p>
-</div>
-<div id="objetivos" class="section level2 hasAnchor" number="1.2">
-<h2><span class="header-section-number">1.2</span> Objetivos<a href="index.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="objetivos" class="section level2 hasAnchor" number="1.1">
+<h2><span class="header-section-number">1.1</span> Objetivos<a href="index.html#objetivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>Objetivo general</strong>:</p>
-<p>Analizar la relación entre el tamaño del terreno y el precio de la venta de viviendas residenciales, identificando el punto a partir del cual se observa una desaceleración en el incremento del precio según el nivel de calidad del vecindario, mediante un Análisis Exploratorio de Datos.</p>
+<p>Construir un modelo de regresión lineal que permita predecir el precio de venta de viviendas residenciales a partir de sus características estructurales, temporales y de entorno, mediante un análisis exploratorio de datos.</p>
 <p><strong>Objetivos específicos</strong>:</p>
 <ol style="list-style-type: decimal">
 <li><p>Describir la distribución estadística de las variables <code>Lot_Size</code> y <code>House_Price</code>, identificando su comportamiento central, dispersión y presencia de valores atípicos.</p></li>
-<li><p>Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal</p></li>
-<li><p>Identificar el umbral aproximado de superficie a partir del cual el incremento en el precio de venta comienza a desacelerarse, utilizando técnicas de suavizamiento de la curva de relación (LOWESS).</p></li>
-<li><p>Comparar el comportamiento de relación entre Lot_Size y House_Price en grupos vecindarios de distinta calidad, evaluando si el punto de desaceleración varía según el nivel del entorno.</p></li>
+<li><p>Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal.</p></li>
+<li><p>Estimar un modelo de regresión lineal simple que permita predecir el precio de venta a partir del tamaño del terreno, evaluando su significancia y su capacidad explicativa.</p></li>
+<li><p>Comparar el comportamiento de relación entre <code>Lot_Size</code> y <code>House_Price</code> en grupos vecindarios de distinta calidad, evaluando si la capacidad predictiva del modelo varía según el nivel del entorno.</p></li>
 </ol>
 </div>
-<div id="marco-teórico" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> Marco teórico<a href="index.html#marco-te%C3%B3rico" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="marco-teórico-alargar" class="section level2 hasAnchor" number="1.2">
+<h2><span class="header-section-number">1.2</span> Marco teórico (alargar!!!)<a href="index.html#marco-te%C3%B3rico-alargar" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>De esta forma, la contribución del terreno al valor total de una propiedad varía en función de la cantidad disponible y, en un sentido determinante, del entorno en que se encuentra; en vecindarios de alta calidad, donde la demanda es mayor y los precios bases, por naturaleza, son más elevados, cada unidad adicional de terreno puede poseer un peso distinto que vale la pena resaltar respecto a la realidad de los vecindarios de calidad baja, en los que la presión sobre el precio del suelo es menor y la superficie disponible más amplia.</p>
 <p>Así, la calidad del vecindario opera a modo de indicador del contexto socioeconómico de una zona determinada. Siguiendo la lógica del modelo clásico del uso del suelo (Alonso, 1964; DiPasquale y Wheaton, 1996), los precios tienden a concentrarse en las zonas de mayor atracción y a disminuir conforme el entorno pierde atractivo, lo que implica que el valor marginal del terreno es heterogéneo entre distintos contextos. Esta heterogeneidad sugiere que el punto a partir del cual el incremento en el precio de venta comienza a desacelerarse con respecto al tamaño del terreno puede variar de forma significativa según el nivel de calidad del sector en que se ubica la propiedad.</p>
 </div>
-<div id="fuente-de-los-datos" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Fuente de los datos<a href="index.html#fuente-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="fuente-de-los-datos" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Fuente de los datos<a href="index.html#fuente-de-los-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El análisis se desarrolla sobre el conjunto de datos House Price Regression Dataset (Kaggle, s.f.), compuesto por 1.000 observaciones y 8 variables: superficie construida, número de habitaciones, número de baños, año de construcción, tamaño del terreno, capacidad del garaje, calidad del vecindario y precio de venta. Dado que se trata de un conjunto de datos de acceso público, es necesario citarlo como fuente aunque no exista un artículo académico asociado.</p>
 </div>
-<div id="variables-del-conjunto-de-datos" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Variables del conjunto de datos<a href="index.html#variables-del-conjunto-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="variables-del-conjunto-de-datos" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Variables del conjunto de datos<a href="index.html#variables-del-conjunto-de-datos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El conjunto de datos está compuesto en su totalidad por variables numéricas: 4 continuas (<code>Square_Footage</code>, <code>Year_Built</code>, <code>Lot_Size</code> y <code>House_Price</code>) y 4 discretas (<code>Num_Bedrooms</code>, <code>Num_Bathrooms</code>, <code>Garage_Size</code> y <code>Neighborhood_Quality</code>).</p>
 <ul>
-<li><p><strong><code>Square_Footage</code></strong>: superficie construida de la vivienda (pies cuadrados).</p></li>
-<li><p><strong><code>Num_Bedrooms</code></strong>: número de habitaciones.</p></li>
-<li><p><strong><code>Num_Bathrooms</code></strong>: número de baños.</p></li>
-<li><p><strong><code>Year_Built</code></strong>: año de construcción del inmueble.</p></li>
-<li><p><strong><code>Lot_Size</code></strong>: tamaño del terreno (acres).</p></li>
-<li><p><strong><code>Garage_Size</code></strong>: capacidad del garaje (vehículos).</p></li>
-<li><p><strong><code>Neighborhood_Quality</code></strong>: calidad del vecindario, en una escala ordinal de 1 (más baja) a 10 (más alta).</p></li>
-<li><p><strong><code>House_Price</code></strong>: precio de venta de la vivienda (USD); es la variable respuesta del estudio.</p></li>
+<li><p><strong><code>Square_Footage</code></strong> (numérica continua): superficie construida de la vivienda (pies cuadrados).</p></li>
+<li><p><strong><code>Num_Bedrooms</code></strong> (numérica discreta): número de habitaciones.</p></li>
+<li><p><strong><code>Num_Bathrooms</code></strong> (numérica discreta): número de baños.</p></li>
+<li><p><strong><code>Year_Built</code></strong> (numérica continua): año de construcción del inmueble.</p></li>
+<li><p><strong><code>Lot_Size</code></strong> (numérica continua): tamaño del terreno (acres).</p></li>
+<li><p><strong><code>Garage_Size</code></strong> (numérica discreta): capacidad del garaje (vehículos).</p></li>
+<li><p><strong><code>Neighborhood_Quality</code></strong> (numérica discreta): calidad del vecindario, en una escala de 1 (más baja) a 10 (más alta).</p></li>
+<li><p><strong><code>House_Price</code></strong> (numérica continua): precio de venta de la vivienda (USD); es la variable respuesta del estudio.</p></li>
 </ul>
 
 </div>

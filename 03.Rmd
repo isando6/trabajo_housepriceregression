@@ -1,27 +1,68 @@
 # Análisis de las variables características (independientes)
 
-Antes de buscar entender qué factores influyen en el precio de la vivienda y evaluar cómo el tamaño del terreno interactúa con el entorno, se hace indispensable analizar las variables características, o también llamadas variables predictoras, del conjunto de datos, con ayuda del uso de tablas de frecuencias, gráficos, estadísticas descriptivas y diagramas de caja según la pertinencia.
+Antes de buscar entender qué factores influyen en el precio de la vivienda y evaluar cómo el tamaño del terreno interactúa con el entorno, se hace indispensable analizar las variables características, o también llamadas variables predictoras, del conjunto de datos. Las 7 predictoras (`Square_Footage`, `Num_Bedrooms`, `Num_Bathrooms`, `Year_Built`, `Lot_Size`, `Garage_Size` y `Neighborhood_Quality`) son todas numéricas, así que primero se resumen todas juntas con los mismos estadísticos de tendencia central, dispersión y forma; las de menor cantidad de niveles (`Num_Bedrooms`, `Num_Bathrooms`, `Garage_Size` y `Neighborhood_Quality`) se complementan además con tablas de frecuencia y gráficos de barra, y las de rango continuo (`Square_Footage`, `Lot_Size` y `Year_Built`) con diagramas de caja.
 
-Por razones metodológicas, se separan las variables en **discretas** y **continuas**:
+## Resumen numérico de las variables predictoras
 
-- Variables discretas: representan recuentos ordinales. En este estudio, corresponden a las variables `Num_Bedrooms` (número de habitaciones), `Num_Bathrooms` (número de baños), `Garage_Size` (capacidad del garaje en vehículos) y `Neighborhood_Quality` (calidad del vecindario).
+```{r resumen variables predictoras, message=FALSE, warning=FALSE}
 
-- Variables continuas: representan valores dentro de un rango numérico continuo. En este estudio, corresponden a las variables `Square_Footage` (superficie construida en pies cuadrados), `Lot_Size` (tamaño del terreno en acres) y `Year_Built` (año de construcción del inmueble).
+predictoras <- c("Square_Footage", "Num_Bedrooms", "Num_Bathrooms", "Year_Built",
+                  "Lot_Size", "Garage_Size", "Neighborhood_Quality")
 
-## Variables discretas
+data %>%
+  select(all_of(predictoras)) %>%
+  pivot_longer(cols = everything(), names_to = "variable", values_to = "valor") %>%
+  group_by(variable) %>%
+  summarise(
+    n         = length(valor),
+    media     = mean(valor),
+    sd        = sd(valor),
+    mediana   = median(valor),
+    RIC       = IQR(valor),
+    Q1        = quantile(valor, 0.25),
+    Q3        = quantile(valor, 0.75),
+    minimo    = min(valor),
+    maximo    = max(valor),
+    asimetria = skewness(valor),
+    curtosis  = kurtosis(valor)
+  ) %>%
+  kableExtra::kbl(digits = 3, caption = "Estadísticos descriptivos de las 7 variables predictoras") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 
-```{r tablas frecuencia discretas}
+```
+
+Tratadas numéricamente, las cuatro variables que antes solo se describían como categóricas resultan, en realidad, bastante simétricas y de dispersión moderada: `Num_Bedrooms` (media = 2.99, mediana = 3, asimetría = 0.026) y `Num_Bathrooms` (media = 1.97, mediana = 2, asimetría = 0.050) se reparten de forma casi pareja alrededor de su valor central; `Garage_Size` (media = 1.02, mediana = 1, asimetría = −0.040) hace lo mismo entre 0 y 2 vehículos; y `Neighborhood_Quality` (media = 5.62, mediana = 6, asimetría = −0.020) cubre la escala completa de 1 a 10 sin sesgo hacia ningún extremo. Las cuatro, además, comparten la curtosis platicúrtica (entre 1.49 y 1.79, siempre por debajo de 3) ya documentada en las variables continuas. `Square_Footage`, `Lot_Size` y `Year_Built` repiten los valores ya presentados en el capítulo de la variable objetivo y se retoman aquí solo para que la tabla quede completa con las 7 predictoras a la vez.
+
+## Variables discretas: distribución de frecuencias
+
+Como complemento visual al resumen numérico anterior, se construyen tablas de frecuencia y gráficos de barra para las cuatro predictoras de menor cantidad de niveles.
+
+```{r tablas frecuencia discretas, message=FALSE, warning=FALSE}
+
 data %>% count(Num_Bedrooms, name = "n") %>%
-  mutate(Porcentaje = round(n / sum(n) * 100, 2))
+  mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
+  kableExtra::kbl(caption = "Num_Bedrooms") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 
 data %>% count(Num_Bathrooms, name = "n") %>%
-  mutate(Porcentaje = round(n / sum(n) * 100, 2))
+  mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
+  kableExtra::kbl(caption = "Num_Bathrooms") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 
 data %>% count(Garage_Size, name = "n") %>%
-  mutate(Porcentaje = round(n / sum(n) * 100, 2))
+  mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
+  kableExtra::kbl(caption = "Garage_Size") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 
 data %>% count(Neighborhood_Quality, name = "n") %>%
-  mutate(Porcentaje = round(n / sum(n) * 100, 2))
+  mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
+  kableExtra::kbl(caption = "Neighborhood_Quality") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 ```
 
 Las cuatro variables discretas muestran una distribución de frecuencias equilibrada entre sus categorías:
@@ -36,7 +77,7 @@ En `Neighborhood_Quality`, con diez niveles, mantiene una distribución pareja e
 Esta lectura numérica se traduce visualmente en los siguientes gráficos de barras, que permitirán confirmar de un vistazo si la uniformidad detectada en las tablas se sostiene también en su representación gráfica.
 
 
-```{r barras variables discretas}
+```{r barras variables discretas, message=FALSE, warning=FALSE}
 p4 <- data %>% count(Num_Bedrooms, name = "n") %>%
   ggplot(aes(x = factor(Num_Bedrooms), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
@@ -74,43 +115,12 @@ En `Garage_Size`, la barra de 2 vehículos se ubica ligeramente por encima de la
 
 En el caso de `Neighborhood_Quality`, las categorías 1 a 9 se mantienen dentro de un rango estrecho, pero la categoría 10 (calidad más alta) sobresale, siendo la barra más alta de las diez.
 
- 
 
-## Variables continuas
+## Variables continuas: diagramas de caja
 
-En primer lugar, se calcula los estimadores puntuales y medidas de forma para las características cuantitativas de un inmueble.
+Retomando los estadísticos ya presentados en el resumen numérico para `Square_Footage`, `Lot_Size` y `Year_Built`, se construyen a continuación diagramas de caja para contemplar visualmente la simetría y detectar valores atípicos en estas tres variables.
 
-```{r resumen variables continuas}
-data %>%
-  select(Square_Footage, Lot_Size, Year_Built) %>%
-  pivot_longer(cols = everything(), names_to = "variable", values_to = "valor") %>%
-  group_by(variable) %>%
-  summarise(
-    n         = length(valor),
-    media     = mean(valor),
-    sd        = sd(valor),
-    mediana   = median(valor),
-    RIC       = IQR(valor),
-    Q1        = quantile(valor, 0.25),
-    Q3        = quantile(valor, 0.75),
-    minimo    = min(valor),
-    maximo    = max(valor),
-    asimetria = skewness(valor),
-    curtosis  = kurtosis(valor)
-  )
-```
-
-Las 1.000 observaciones están completas para las tres variables continuas. 
-
-En `Square_Footage`, el promedio de superficie construida es de 2.815 pies cuadrados, con el 50% de las viviendas presentando una superficie igual o inferior a 2.862 pies cuadrados (mediana); la cercanía entre ambos valores es un primer indicio de simetría, confirmado por una asimetría de apenas −0.066. La desviación estándar es de 1.256 pies cuadrados y el rango intercuartílico de 2.100: el 50% central de las viviendas se reparte entre los 1.750 (Q1) y los 3.850 (Q3) pies cuadrados, dentro de un rango total que va de 503 (mínimo) a 4.999 (máximo). La curtosis (1.87), al ubicarse por debajo del valor de referencia de 3, presenta una distribución platicúrtica.
-
-En `Lot_Size`, el tamaño promedio del terreno es de 2.78 acres, con una mediana de 2.81 acres y una asimetría de −0.044 que refuerza, una vez más, la lectura de simetría. La desviación estándar es de 1.30 acres y el rango intercuartílico de 2.26: el 50% central de los terrenos se ubica entre 1.67 (Q1) y 3.92 (Q3) acres, dentro de un rango total de 0.51 (mínimo) a 4.99 acres (máximo). La curtosis (1.80) es inferior a 3, por lo que la distribución también es platicúrtica.
-
-Por último, en `Year_Built`, el año promedio de construcción es 1986.55, con una mediana de 1986 junto a una asimetría de −0.021, confirmando una distribución simétrica. La desviación estándar es de 20.63 años y el rango intercuartílico de 35.25: el 50% central de las viviendas fue construido entre 1969 (Q1) y 2004 (Q3), dentro de un rango total que va de 1950 (mínimo) a 2022 (máximo). La curtosis (1.81), por debajo de 3, indica una distribución platicúrtica.
-
-A continuación, se construyen diagramas de cajas para contemplar la simetría y detectar valores atípicos en las tres variables continuas.
-
-```{r boxplots variables continuas}
+```{r boxplots variables continuas, message=FALSE, warning=FALSE}
 p1 <- data %>%
   ggplot(aes(x = "", y = Square_Footage)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",
@@ -137,22 +147,22 @@ p3 <- data %>%
 ```
 
 
-```{r p1}
+```{r p1, message=FALSE, warning=FALSE}
 p1
 ```
 
 Se aprecia una caja simétrica, con la mediana (2.862 pies cuadrados) supuerpuesta con respecto al centro de la caja. Además, los bigotes se extienden hasta los valores extremos reales de la variable (503 y 4.999 pies cuadrados), sin que se recorten antes de llegar a ellos; ningún valor cae fuera del límite de 1.5 veces el rango intercuartílico, y los datos se reparten hasta los extremos sin concentrarse cerca de la mediana.
 
 
-```{r p2}
+```{r p2, message=FALSE, warning=FALSE}
 p2
 ```
 
 El comportamiento de `Lot_Size` es un calco del de `Square_Footage` en su propia escala. Se ve una caja simétrica centrada en 2.81 acres, con la media y la mediana coincidiendo casi exactamente, y bigotes que se extienden hasta el mínimo (0.51) y el máximo (4.99) reales del conjunto de datos. No hay ningún punto marcado como atípico.
 
 
-```{r p3}
+```{r p3, message=FALSE, warning=FALSE}
 p3
 ```
 
-La caja es simétrica alrededor de 1986, con la media y la mediana (1986) superpuestas. Los bigotes llegan hasta 1950 y 2022, sin ningún punto marcado por fuera de ese rango. 
+La caja es simétrica alrededor de 1986, con la media y la mediana (1986) superpuestas. Los bigotes llegan hasta 1950 y 2022, sin ningún punto marcado por fuera de ese rango.

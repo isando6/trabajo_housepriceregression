@@ -1,5 +1,5 @@
 --- 
-title: "Análisis Exploratorio de datos al conjunto 'House Price Regression'"
+title: "Modelo de regresión lineal para la predicción del precio de vivienda: conjunto 'House Price Regression'"
 author: "Karina Núñez Sarmiento, Isabella Sandoval Escorcia"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -12,9 +12,7 @@ github-repo: rstudio/bookdown-demo
 description: "tarea 2do corte de métodos estadísticos"
 ---
 
-# Justificación Teórica
-
-## Introducción
+# Introducción
 
 La economía es una ciencia social dedicada al estudio acerca de las decisiones tomadas por entidades, sociedades e individuos respecto a qué producir, cómo distribuirlo y a qué precio intercambiarlo, todo dentro de mercados concretos en los que la oferta, la demanda y las características de los bienes determinan el valor final de una transacción (Pontificia Universidad Javeriana, s.f.).
 
@@ -24,19 +22,20 @@ El mercado inmobiliario, donde el precio de cada propiedad es el resultado de la
 
 **Objetivo general**:
 
-Analizar la relación entre el tamaño del terreno y el precio de la venta de viviendas residenciales, identificando el punto a partir del cual se observa una desaceleración en el incremento del precio según el nivel de calidad del vecindario, mediante un Análisis Exploratorio de Datos.
+Construir un modelo de regresión lineal que permita predecir el precio de venta de viviendas residenciales a partir de sus características estructurales, temporales y de entorno, mediante un análisis exploratorio de datos.
 
 **Objetivos específicos**:
 
 1. Describir la distribución estadística de las variables `Lot_Size` y `House_Price`, identificando su comportamiento central, dispersión y presencia de valores atípicos.
 
-2. Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal
+2. Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal.
 
-3. Identificar el umbral aproximado de superficie a partir del cual el incremento en el precio de venta comienza a desacelerarse, utilizando técnicas de suavizamiento de la curva de relación (LOWESS).
+3. Estimar un modelo de regresión lineal simple que permita predecir el precio de venta a partir del tamaño del terreno, evaluando su significancia y su capacidad explicativa.
 
-4. Comparar el comportamiento de relación entre Lot_Size y House_Price en grupos vecindarios de distinta calidad, evaluando si el punto de desaceleración varía según el nivel del entorno.
+4. Comparar el comportamiento de relación entre `Lot_Size` y `House_Price` en grupos vecindarios de distinta calidad, evaluando si la capacidad predictiva del modelo varía según el nivel del entorno.
 
-## Marco teórico
+
+## Marco teórico (alargar!!!)
 
 De esta forma, la contribución del terreno al valor total de una propiedad varía en función de la cantidad disponible y, en un sentido determinante, del entorno en que se encuentra; en vecindarios de alta calidad, donde la demanda es mayor y los precios bases, por naturaleza, son más elevados, cada unidad adicional de terreno puede poseer un peso distinto que vale la pena resaltar respecto a la realidad de los vecindarios de calidad baja, en los que la presión sobre el precio del suelo es menor y la superficie disponible más amplia.
 
@@ -48,18 +47,20 @@ El análisis se desarrolla sobre el conjunto de datos House Price Regression Dat
 
 ## Variables del conjunto de datos
 
-- **`Square_Footage`**: superficie construida de la vivienda (pies cuadrados).
+El conjunto de datos está compuesto en su totalidad por variables numéricas: 4 continuas (`Square_Footage`, `Year_Built`, `Lot_Size` y `House_Price`) y 4 discretas (`Num_Bedrooms`, `Num_Bathrooms`, `Garage_Size` y `Neighborhood_Quality`).
 
-- **`Num_Bedrooms`**: número de habitaciones.
+- **`Square_Footage`** (numérica continua): superficie construida de la vivienda (pies cuadrados).
 
-- **`Num_Bathrooms`**: número de baños.
+- **`Num_Bedrooms`** (numérica discreta): número de habitaciones.
 
-- **`Year_Built`**: año de construcción del inmueble.
+- **`Num_Bathrooms`** (numérica discreta): número de baños.
 
-- **`Lot_Size`**: tamaño del terreno (acres).
+- **`Year_Built`** (numérica continua): año de construcción del inmueble.
 
-- **`Garage_Size`**: capacidad del garaje (vehículos).
+- **`Lot_Size`** (numérica continua): tamaño del terreno (acres).
 
-- **`Neighborhood_Quality`**: calidad del vecindario, en una escala ordinal de 1 (más baja) a 10 (más alta).
+- **`Garage_Size`** (numérica discreta): capacidad del garaje (vehículos).
 
-- **`House_Price`**: precio de venta de la vivienda (USD); es la variable respuesta del estudio.
+- **`Neighborhood_Quality`** (numérica discreta): calidad del vecindario, en una escala de 1 (más baja) a 10 (más alta).
+
+- **`House_Price`** (numérica continua): precio de venta de la vivienda (USD); es la variable respuesta del estudio.

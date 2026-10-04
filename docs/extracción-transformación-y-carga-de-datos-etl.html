@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 2 Extracción, transformación y carga de datos (ETL) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <title> 2 Extracción, transformación y carga de datos (ETL) | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 2 Extracción, transformación y carga de datos (ETL) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:title" content=" 2 Extracción, transformación y carga de datos (ETL) | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 2 Extracción, transformación y carga de datos (ETL) | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta name="twitter:title" content=" 2 Extracción, transformación y carga de datos (ETL) | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   
   <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-09-17" />
+<meta name="date" content="2026-10-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,10 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -141,13 +145,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Trabajo de Métodos Estadísticos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico-alargar"><i class="fa fa-check"></i><b>1.2</b> Marco teórico (alargar!!!)</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
 <ul>
@@ -156,8 +159,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
 <li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
 <li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
-<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
-<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos plausibles</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
 <ul>
@@ -218,7 +220,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</a>
           </h1>
         </div>
 
@@ -229,146 +231,502 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="extracción-transformación-y-carga-de-datos-etl" class="section level1 hasAnchor" number="2">
 <h1><span class="header-section-number"> 2</span> Extracción, transformación y carga de datos (ETL)<a href="extracción-transformación-y-carga-de-datos-etl.html#extracci%C3%B3n-transformaci%C3%B3n-y-carga-de-datos-etl" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <p>Antes de realizar cualquier análisis exploratorio o estadístico, es necesario garantizar que los datos con los que se trabajará sean confiables, estén completos y en un formato adecuado para su manipulación.</p>
-<p>Este proceso, conocido como <strong>ETL</strong> (Extracción, Transformación y Carga), constituye la base de todo análisis de datos. Si esta etapa se realiza de forma deficiente, cualquier resultado o interpretación posterior, por más sofisticado que resulte siendo, quedará comprometido. De esta manera, se realizará la carga del conjunto de datos <code>house_price_regression_dataset.csv</code>, la identificación, el tratamiento de valores faltantes y, como último paso, el ajuste de los tipos de variable necesarios para el análisis exploratorio que se desarrollará más adelante.</p>
+<p>Este proceso, conocido como <strong>ETL</strong> (Extracción, Transformación y Carga), constituye la base de todo análisis de datos. Si esta etapa se realiza de forma deficiente, cualquier resultado o interpretación posterior, por más sofisticado que resulte siendo, quedará comprometido. De esta manera, se realizará la carga del conjunto de datos <code>house_price_regression_dataset.csv</code>, la identificación de valores faltantes y duplicados y, como último paso, la verificación de que cada variable se mueva dentro de rangos plausibles antes de iniciar el análisis exploratorio que se desarrollará más adelante.</p>
 <div id="instalación-de-librerías" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Instalación de librerías<a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: <code>tidyverse</code> para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (<code>%&gt;%</code>); <code>Amelia</code>, utilizada para la detección visual de datos faltantes a través de la función <code>missmap()</code>; <code>moments</code>, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; <code>patchwork</code>, empleada para combinar múltiples gráficos de <code>ggplot2</code> en una sola figura; <code>GGally</code>, que amplía las capacidades de visualización de <code>ggplot2</code> con funciones como <code>ggpairs()</code> y <code>ggcorr()</code> para el análisis de relaciones entre variables; y <code>Hmisc</code>, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función <code>rcorr()</code>.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span></code></pre></div>
-<pre><code>## Cargando paquete requerido: Rcpp</code></pre>
-<pre><code>## ## 
-## ## Amelia II: Multiple Imputation
-## ## (Version 1.8.3, built: 2024-11-07)
-## ## Copyright (C) 2005-2026 James Honaker, Gary King and Matthew Blackwell
-## ## Refer to http://gking.harvard.edu/amelia/ for more information
-## ##</code></pre>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
-<pre><code>## ── Attaching core tidyverse packages ────────────────────────────────────────────────────── tidyverse 2.0.0 ──
-## ✔ dplyr     1.2.1     ✔ readr     2.2.0
-## ✔ forcats   1.0.1     ✔ stringr   1.6.0
-## ✔ ggplot2   4.0.3     ✔ tibble    3.3.1
-## ✔ lubridate 1.9.5     ✔ tidyr     1.3.2
-## ✔ purrr     1.2.2</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()
-## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb7-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-2" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
-<span id="cb7-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-3" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
-<span id="cb7-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-4" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
-<span id="cb7-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-5" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span></code></pre></div>
-<pre><code>## 
-## Adjuntando el paquete: &#39;Hmisc&#39;
-## 
-## The following objects are masked from &#39;package:dplyr&#39;:
-## 
-##     src, summarize
-## 
-## The following objects are masked from &#39;package:base&#39;:
-## 
-##     format.pval, units</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
+<span id="cb1-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-4" tabindex="-1"></a><span class="fu">library</span>(moments)</span>
+<span id="cb1-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-5" tabindex="-1"></a><span class="fu">library</span>(patchwork)</span>
+<span id="cb1-6"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-6" tabindex="-1"></a><span class="fu">library</span>(GGally)</span>
+<span id="cb1-7"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-7" tabindex="-1"></a><span class="fu">library</span>(Hmisc)</span>
+<span id="cb1-8"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-8" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span></code></pre></div>
 </div>
 <div id="carga-del-conjunto-de-datos-house_price_regression_dataset" class="section level2 hasAnchor" number="2.2">
 <h2><span class="header-section-number">2.2</span> Carga del conjunto de datos <code>house_price_regression_dataset</code><a href="extracción-transformación-y-carga-de-datos-etl.html#carga-del-conjunto-de-datos-house_price_regression_dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se procede a cargar el conjunto de datos, correspondiente a información de viviendas residenciales individuales, con variables estructurales (superficie, habitaciones, baños, garaje), temporales (año de construcción), de entorno (calidad del vecindario) y el precio de venta observado.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb9-1" tabindex="-1"></a>   data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;house_price_regression_dataset.csv&quot;</span>)</span></code></pre></div>
-<pre><code>## Rows: 1000 Columns: 8
-## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## dbl (8): Square_Footage, Num_Bedrooms, Num_Bathrooms, Year_Built, Lot_Size, Garage_Size, Neighborhood_Qual...
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb2-1" tabindex="-1"></a>   data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;house_price_regression_dataset.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="visualización-del-conjunto-de-datos-y-su-estructura" class="section level2 hasAnchor" number="2.3">
 <h2><span class="header-section-number">2.3</span> Visualización del conjunto de datos y su estructura<a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>El dataset contiene 1.000 observaciones, un número conveniente para inspeccionar.</p>
-<p>De todas formas, para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb11-1" tabindex="-1"></a><span class="fu">head</span>(data, <span class="at">n =</span> <span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 8
-##    Square_Footage Num_Bedrooms Num_Bathrooms Year_Built Lot_Size Garage_Size Neighborhood_Quality House_Price
-##             &lt;dbl&gt;        &lt;dbl&gt;         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;       &lt;dbl&gt;                &lt;dbl&gt;       &lt;dbl&gt;
-##  1           1360            2             1       1981    0.600           0                    5     262383.
-##  2           4272            3             3       2016    4.75            1                    6     985261.
-##  3           3592            1             2       2016    3.63            0                    9     777977.
-##  4            966            1             2       1977    2.73            1                    8     229699.
-##  5           4926            2             1       1993    4.70            0                    8    1041741.
-##  6           3944            5             3       1990    2.48            2                    8     879797.
-##  7           3671            1             2       2012    4.91            0                    1     814428.
-##  8           3419            1             1       1972    2.81            1                    1     703413.
-##  9            630            3             3       1997    1.01            1                    8     173875.
-## 10           2185            4             2       1981    3.94            2                    5     504177.</code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb13-1" tabindex="-1"></a><span class="fu">dim</span>(data)</span></code></pre></div>
-<pre><code>## [1] 1000    8</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb15-1" tabindex="-1"></a><span class="fu">colnames</span>(data)</span></code></pre></div>
-<pre><code>## [1] &quot;Square_Footage&quot;       &quot;Num_Bedrooms&quot;         &quot;Num_Bathrooms&quot;        &quot;Year_Built&quot;          
-## [5] &quot;Lot_Size&quot;             &quot;Garage_Size&quot;          &quot;Neighborhood_Quality&quot; &quot;House_Price&quot;</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb17-1" tabindex="-1"></a><span class="fu">str</span>(data)</span></code></pre></div>
-<pre><code>## spc_tbl_ [1,000 × 8] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
-##  $ Square_Footage      : num [1:1000] 1360 4272 3592 966 4926 ...
-##  $ Num_Bedrooms        : num [1:1000] 2 3 1 1 2 5 1 1 3 4 ...
-##  $ Num_Bathrooms       : num [1:1000] 1 3 2 2 1 3 2 1 3 2 ...
-##  $ Year_Built          : num [1:1000] 1981 2016 2016 1977 1993 ...
-##  $ Lot_Size            : num [1:1000] 0.6 4.75 3.63 2.73 4.7 ...
-##  $ Garage_Size         : num [1:1000] 0 1 0 1 0 2 0 1 1 2 ...
-##  $ Neighborhood_Quality: num [1:1000] 5 6 9 8 8 8 1 1 8 5 ...
-##  $ House_Price         : num [1:1000] 262383 985261 777977 229699 1041741 ...
-##  - attr(*, &quot;spec&quot;)=
-##   .. cols(
-##   ..   Square_Footage = col_double(),
-##   ..   Num_Bedrooms = col_double(),
-##   ..   Num_Bathrooms = col_double(),
-##   ..   Year_Built = col_double(),
-##   ..   Lot_Size = col_double(),
-##   ..   Garage_Size = col_double(),
-##   ..   Neighborhood_Quality = col_double(),
-##   ..   House_Price = col_double()
-##   .. )
-##  - attr(*, &quot;problems&quot;)=&lt;pointer: 0x00000289f6bb0080&gt;</code></pre>
+<p>Para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación o avistamiento a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-1" tabindex="-1"></a><span class="fu">head</span>(data, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-2" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Primeras 10 observaciones del conjunto de datos&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb3-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-4" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-5" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:estructura">Table 2.1: </span><span id="tab:estructura">Table 2.2: </span>Primeras 10 observaciones del conjunto de datos
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+Square_Footage
+</th>
+<th style="text-align:right;">
+Num_Bedrooms
+</th>
+<th style="text-align:right;">
+Num_Bathrooms
+</th>
+<th style="text-align:right;">
+Year_Built
+</th>
+<th style="text-align:right;">
+Lot_Size
+</th>
+<th style="text-align:right;">
+Garage_Size
+</th>
+<th style="text-align:right;">
+Neighborhood_Quality
+</th>
+<th style="text-align:right;">
+House_Price
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1360
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1981
+</td>
+<td style="text-align:right;">
+0.5996366
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+262382.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4272
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+4.7530138
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+985260.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3592
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2016
+</td>
+<td style="text-align:right;">
+3.6348227
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+777977.4
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+966
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1977
+</td>
+<td style="text-align:right;">
+2.7306669
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+229698.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4926
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1993
+</td>
+<td style="text-align:right;">
+4.6990726
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+1041740.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3944
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1990
+</td>
+<td style="text-align:right;">
+2.4759300
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+879797.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3671
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+2012
+</td>
+<td style="text-align:right;">
+4.9119601
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+814427.9
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3419
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1972
+</td>
+<td style="text-align:right;">
+2.8052814
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+703413.1
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+630
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1997
+</td>
+<td style="text-align:right;">
+1.0142860
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+173875.0
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2185
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+1981
+</td>
+<td style="text-align:right;">
+3.9416044
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+504176.5
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 <div id="identificación-de-valores-faltantes-na" class="section level2 hasAnchor" number="2.4">
 <h2><span class="header-section-number">2.4</span> Identificación de valores faltantes (NA)<a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica, como el tamaño del garaje o la antigüedad de la construcción). Así, se cuantifica primero el número de valores faltantes por columna:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb19-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">&quot;NA_{.col}&quot;</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 8
-##   NA_Square_Footage NA_Num_Bedrooms NA_Num_Bathrooms NA_Year_Built NA_Lot_Size NA_Garage_Size
-##               &lt;int&gt;           &lt;int&gt;            &lt;int&gt;         &lt;int&gt;       &lt;int&gt;          &lt;int&gt;
-## 1                 0               0                0             0           0              0
-## # ℹ 2 more variables: NA_Neighborhood_Quality &lt;int&gt;, NA_House_Price &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb21-1" tabindex="-1"></a><span class="fu">missmap</span>(data)</span></code></pre></div>
-<pre><code>## Warning: Unknown or uninitialised column: `arguments`.
-## Unknown or uninitialised column: `arguments`.</code></pre>
-<pre><code>## Warning: Unknown or uninitialised column: `imputations`.</code></pre>
-<p><img src="bookdown-demo_files/figure-html/nas-1.png" alt="" width="672" /></p>
+<p>Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica). Así, se cuantifica primero el número de valores faltantes por columna:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">&quot;NA_{.col}&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-3" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Conteo de valores faltantes por columna&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-4" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb4-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-5" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:nas">Table 2.3: </span><span id="tab:nas">Table 2.4: </span>Conteo de valores faltantes por columna
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+NA_Square_Footage
+</th>
+<th style="text-align:right;">
+NA_Num_Bedrooms
+</th>
+<th style="text-align:right;">
+NA_Num_Bathrooms
+</th>
+<th style="text-align:right;">
+NA_Year_Built
+</th>
+<th style="text-align:right;">
+NA_Lot_Size
+</th>
+<th style="text-align:right;">
+NA_Garage_Size
+</th>
+<th style="text-align:right;">
+NA_Neighborhood_Quality
+</th>
+<th style="text-align:right;">
+NA_House_Price
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
 <p>El conteo de <code>NA</code> arrojo cero en todas las columnas, y el mapa de <code>Amelia</code> confirma una matriz de datos completa (100% observado).</p>
 </div>
 <div id="identificación-de-valores-duplicados" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Identificación de valores duplicados<a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb24-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(data))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb5-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(data))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>El conjunto de datos tampoco contiene filas duplicadas, por lo que se conservan las 1.000 observaciones originales.</p>
 </div>
-<div id="conversión-a-variables-categóricas" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Conversión a variables categóricas<a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Las variables discretas <code>Num_Bedrooms</code>, <code>Num_Bathrooms</code> y <code>Garage_Size</code> se convierten a factor con el fin de poder usarla en tablas de frecuencias y diagramas de caja, siempre conservando en paralelo su versión numérica original. Por su parte, <code>Neighborhood_Quality</code> se convierte a un factor ordenado, dado que representa una escala ordinal referente a la calidad (con 1 = más baja, 10 = más alta).</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb26-1" tabindex="-1"></a>df<span class="sc">$</span>Num_Bedrooms_f         <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Num_Bedrooms)</span>
-<span id="cb26-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb26-2" tabindex="-1"></a>df<span class="sc">$</span>Num_Bathrooms_f        <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Num_Bathrooms)</span>
-<span id="cb26-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb26-3" tabindex="-1"></a>df<span class="sc">$</span>Garage_Size_f          <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Garage_Size)</span>
-<span id="cb26-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb26-4" tabindex="-1"></a>df<span class="sc">$</span>Neighborhood_Quality_f <span class="ot">&lt;-</span> <span class="fu">factor</span>(df<span class="sc">$</span>Neighborhood_Quality, <span class="at">ordered =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-</div>
-<div id="verificación-de-rangos-plausibles" class="section level2 hasAnchor" number="2.7">
-<h2><span class="header-section-number">2.7</span> Verificación de rangos plausibles<a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb27-1" tabindex="-1"></a><span class="fu">range</span>(df<span class="sc">$</span>Neighborhood_Quality)</span></code></pre></div>
-<pre><code>## [1]  1 10</code></pre>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb29-1" tabindex="-1"></a><span class="fu">range</span>(df<span class="sc">$</span>Year_Built)</span></code></pre></div>
-<pre><code>## [1] 1950 2022</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb31-1" tabindex="-1"></a><span class="fu">range</span>(df<span class="sc">$</span>House_Price)</span></code></pre></div>
-<pre><code>## [1]  111626.9 1108236.8</code></pre>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb33-1" tabindex="-1"></a><span class="fu">range</span>(df<span class="sc">$</span>Lot_Size)</span></code></pre></div>
-<pre><code>## [1] 0.5060582 4.9893027</code></pre>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb35-1" tabindex="-1"></a><span class="fu">range</span>(df<span class="sc">$</span>Square_Footage)</span></code></pre></div>
-<pre><code>## [1]  503 4999</code></pre>
-<p>Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. <code>Neighborhood_Quality</code> cubre la escala completa del 1 al 10; <code>Year_Built</code> va desde 1950 a 2022; <code>Lot-Size</code> entre 0.5 y 5 acres, y <code>Square_Footage</code> entre 503 y 4.999 pies cuadrados.</p>
+<div id="verificación-de-rangos-plausibles" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Verificación de rangos plausibles<a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Antes de avanzar al análisis exploratorio, se revisa que cada variable se mueva dentro de un rango razonable para un conjunto de viviendas residenciales, lo que permite descartar errores de digitación o valores negativos imposibles (como una superficie o un precio menor a cero).</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-1" tabindex="-1"></a>rangos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">c</span>(<span class="st">&quot;Neighborhood_Quality&quot;</span>, <span class="st">&quot;Year_Built&quot;</span>, <span class="st">&quot;House_Price&quot;</span>, <span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Square_Footage&quot;</span>),</span>
+<span id="cb7-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-3" tabindex="-1"></a>  <span class="at">Minimo   =</span> <span class="fu">c</span>(<span class="fu">min</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">min</span>(data<span class="sc">$</span>Year_Built), <span class="fu">min</span>(data<span class="sc">$</span>House_Price),</span>
+<span id="cb7-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-4" tabindex="-1"></a>               <span class="fu">min</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">min</span>(data<span class="sc">$</span>Square_Footage)),</span>
+<span id="cb7-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-5" tabindex="-1"></a>  <span class="at">Maximo   =</span> <span class="fu">c</span>(<span class="fu">max</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">max</span>(data<span class="sc">$</span>Year_Built), <span class="fu">max</span>(data<span class="sc">$</span>House_Price),</span>
+<span id="cb7-6"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-6" tabindex="-1"></a>               <span class="fu">max</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">max</span>(data<span class="sc">$</span>Square_Footage))</span>
+<span id="cb7-7"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-7" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-9"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-9" tabindex="-1"></a>    <span class="at">Minimo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Minimo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-10"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-10" tabindex="-1"></a>    <span class="at">Maximo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Maximo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-11"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-11" tabindex="-1"></a>  )</span>
+<span id="cb7-12"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-13" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(rangos, <span class="at">caption =</span> <span class="st">&quot;Rangos observados por variable&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lrr&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-14"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-14" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb7-15"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-15" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:rangos">Table 2.5: </span><span id="tab:rangos">Table 2.6: </span>Rangos observados por variable
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Variable
+</th>
+<th style="text-align:right;">
+Minimo
+</th>
+<th style="text-align:right;">
+Maximo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Neighborhood_Quality
+</td>
+<td style="text-align:right;">
+1.00
+</td>
+<td style="text-align:right;">
+10.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Year_Built
+</td>
+<td style="text-align:right;">
+1,950.00
+</td>
+<td style="text-align:right;">
+2,022.00
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+House_Price
+</td>
+<td style="text-align:right;">
+111,626.85
+</td>
+<td style="text-align:right;">
+1,108,236.84
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lot_Size
+</td>
+<td style="text-align:right;">
+0.51
+</td>
+<td style="text-align:right;">
+4.99
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Square_Footage
+</td>
+<td style="text-align:right;">
+503.00
+</td>
+<td style="text-align:right;">
+4,999.00
+</td>
+</tr>
+</tbody>
+</table>
+<p>Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. <code>Neighborhood_Quality</code> cubre la escala completa del 1 al 10; <code>Year_Built</code> va desde 1950 a 2022; <code>Lot_Size</code> entre 0.5 y 5 acres, y <code>Square_Footage</code> entre 503 y 4.999 pies cuadrados.</p>
 
 </div>
 </div>

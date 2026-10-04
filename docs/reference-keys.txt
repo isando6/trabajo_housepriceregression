@@ -47,3 +47,17 @@ grupo-alta-calidad
 comparación-entre-los-tres-grupos
 conclusiones
 referencias
+tab:estructura
+tab:nas
+tab:rangos
+marco-teórico-alargar
+resumen-numérico-de-las-variables-predictoras
+variables-discretas-distribución-de-frecuencias
+variables-continuas-diagramas-de-caja
+num_bathrooms-vs-house_price
+mapa-de-calor-de-correlaciones
+modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price
+diagrama-de-dispersión-con-la-recta-ajustada
+estimación-del-modelo
+tabla-anova-del-modelo
+capacidad-explicativa-del-modelo
