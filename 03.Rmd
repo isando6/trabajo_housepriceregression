@@ -11,16 +11,16 @@ Por razones metodológicas, se separan las variables en **discretas** y **contin
 ## Variables discretas
 
 ```{r tablas frecuencia discretas}
-df %>% count(Num_Bedrooms, name = "n") %>%
+data %>% count(Num_Bedrooms, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2))
 
-df %>% count(Num_Bathrooms, name = "n") %>%
+data %>% count(Num_Bathrooms, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2))
 
-df %>% count(Garage_Size, name = "n") %>%
+data %>% count(Garage_Size, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2))
 
-df %>% count(Neighborhood_Quality, name = "n") %>%
+data %>% count(Neighborhood_Quality, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2))
 ```
 
@@ -37,25 +37,25 @@ Esta lectura numérica se traduce visualmente en los siguientes gráficos de bar
 
 
 ```{r barras variables discretas}
-p4 <- df %>% count(Num_Bedrooms, name = "n") %>%
+p4 <- data %>% count(Num_Bedrooms, name = "n") %>%
   ggplot(aes(x = factor(Num_Bedrooms), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
   labs(title = "Habitaciones", x = "Num_Bedrooms", y = "Frecuencia") +
   theme_minimal()
 
-p5 <- df %>% count(Num_Bathrooms, name = "n") %>%
+p5 <- data %>% count(Num_Bathrooms, name = "n") %>%
   ggplot(aes(x = factor(Num_Bathrooms), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
   labs(title = "Baños", x = "Num_Bathrooms", y = "Frecuencia") +
   theme_minimal()
 
-p6 <- df %>% count(Garage_Size, name = "n") %>%
+p6 <- data %>% count(Garage_Size, name = "n") %>%
   ggplot(aes(x = factor(Garage_Size), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
   labs(title = "Garaje", x = "Garage_Size", y = "Frecuencia") +
   theme_minimal()
 
-p7 <- df %>% count(Neighborhood_Quality, name = "n") %>%
+p7 <- data %>% count(Neighborhood_Quality, name = "n") %>%
   ggplot(aes(x = factor(Neighborhood_Quality), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
   labs(title = "Calidad del vecindad", x = "Neighborhood_Quality", y = "Frecuencia") +
@@ -64,7 +64,7 @@ p7 <- df %>% count(Neighborhood_Quality, name = "n") %>%
 (p4 + p5) / (p6 + p7)
 ```
 
-Los cuatro gráficos de barra evidencian que, en general, ninguna de las categorías se distingue por una barra drásticamente más alta que las demás, aunque hay anotaciones a simple vista que vale la pena destacar:
+Los cuatro gráficos de barra evidencian que, en general, ninguna de las categorías se distingue por una barra drásticamente más alta que las demás, aunque hay anotaciones que vale la pena destacar:
 
 En `Num_Bedrooms`, la categoría 3 se distingue como la que tiene menor frecuencia de las cinco, mientras que la categoría 2, en contraste, es la más frecuente.
 
@@ -81,7 +81,7 @@ En el caso de `Neighborhood_Quality`, las categorías 1 a 9 se mantienen dentro 
 En primer lugar, se calcula los estimadores puntuales y medidas de forma para las características cuantitativas de un inmueble.
 
 ```{r resumen variables continuas}
-df %>%
+data %>%
   select(Square_Footage, Lot_Size, Year_Built) %>%
   pivot_longer(cols = everything(), names_to = "variable", values_to = "valor") %>%
   group_by(variable) %>%
@@ -111,7 +111,7 @@ Por último, en `Year_Built`, el año promedio de construcción es 1986.55, con 
 A continuación, se construyen diagramas de cajas para contemplar la simetría y detectar valores atípicos en las tres variables continuas.
 
 ```{r boxplots variables continuas}
-p1 <- df %>%
+p1 <- data %>%
   ggplot(aes(x = "", y = Square_Footage)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",
                outlier.color = "#c47b6b", outlier.alpha = 0.6) +
@@ -119,7 +119,7 @@ p1 <- df %>%
   labs(title = "Superficie construida", y = "Pies cuadrados", x = "") +
   theme_minimal()
 
-p2 <- df %>%
+p2 <- data %>%
   ggplot(aes(x = "", y = Lot_Size)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",
                outlier.color = "#c47b6b", outlier.alpha = 0.6) +
@@ -127,7 +127,7 @@ p2 <- df %>%
   labs(title = "Tamaño del terreno", y = "Acres", x = "") +
   theme_minimal()
 
-p3 <- df %>%
+p3 <- data %>%
   ggplot(aes(x = "", y = Year_Built)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",
                outlier.color = "#c47b6b", outlier.alpha = 0.6) +

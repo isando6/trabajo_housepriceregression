@@ -28,7 +28,7 @@ Analizar la relación entre el tamaño del terreno y el precio de la venta de vi
 
 **Objetivos específicos**:
 
-1. Describir la distribución estadística de las variables Lot_Size y House_Price, identificando su comportamiento central, dispersión y presencia de valores atípicos.
+1. Describir la distribución estadística de las variables `Lot_Size` y `House_Price`, identificando su comportamiento central, dispersión y presencia de valores atípicos.
 
 2. Examinar la relación bivariada entre el tamaño del terreno y el precio de venta a través de visualizaciones y medidas de asociación, determinando si dicha relación presenta un comportamiento no lineal
 

@@ -1,13 +1,13 @@
 # Análisis de la variable objetivo `House_Price`
 
-En este estudio, el precio de la venta, identificado en el dataset como `House_Price`, es la variable respuesta, representando el valor comercial que se busca predecir y el eje para responder la pregunta de investigación plantrada. Es importante examinar el comportamiento de esta por si sola: dónde se concentra, qué tan dispersa está, si su forma se aleja de la normalidad y si hay presencia de valores atípicos.
+En este estudio, el precio de la venta es la variable respuesta, identificado en el dataset como `House_Price`, representando el valor comercial que se busca predecir y el eje para responder la pregunta de investigación planteada. Es importante examinar su comportamiento por sí sola: dónde se concentra, qué tan dispersa está, si su forma se aleja de la normalidad y si hay presencia de valores atípicos.
 
 ## Resumen de estadísticos descriptivos
 
 Se calculan los estimadores puntuales de tendencia central, variabilidad y forma para resumir numéricamente las propiedades de la distribución del precio de venta.
 
 ```{r resumen House_Price}
-df %>%
+data %>%
   summarise(
     n         = n(),
     media     = mean(House_Price),
@@ -23,14 +23,14 @@ df %>%
   )
 ```
 
-Tal y como se mencionó en un principio, el dataset contiene 1.000 observaciones, y dichas están completas para la variable `House_Price`. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267 (mediana); la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con la asimetría, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.
+Tal y como se mencionó en un principio, el dataset contiene 1.000 observaciones, y dichas están completas para la variable `House_Price`. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267 (mediana); la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con el valor de la asimetría proporcionado por la tabla, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.
 
 ## Distribución de Frecuencias y Densidad
 
 La combinación del histograma con la curva de densidad permite inspeccionar visualmente la morfología de la distribución y evaluar si esta presenta asimetría o desviaciones de una distribución teórica normal.
 
 ```{r histograma House_Price}
-df %>%
+data %>%
   ggplot(aes(x = House_Price)) +
   geom_histogram(aes(y = after_stat(density)),
                  bins = 30, fill = "#8fa8a0", color = "white", alpha = 0.8) +
@@ -44,10 +44,10 @@ El histograma muestra una distribución con una dispersión amplia a lo largo de
 
 ## Evaluación de Dispersión y Detección de valores atípicos 
 
-El diagrama de caja facilita la identificación visual de la mediana, del rango intercuartílico y de aquellas observacoiones que sobrepasan los umbrales esperados de variabilidad, mejor conocidos como _outliers_ o valores atípicos.
+El diagrama de caja facilita la identificación visual de la mediana, del rango intercuartílico y de aquellas observaciones que sobrepasan los umbrales esperados de variabilidad, mejor conocidos como _outliers_ o valores atípicos.
 
 ```{r boxplot House_Price}
-df %>%
+data %>%
   ggplot(aes(x = "", y = House_Price)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",
                outlier.color = "#c47b6b", outlier.alpha = 0.6) +

@@ -30,7 +30,7 @@ Se procede a cargar el conjunto de datos, correspondiente a información de vivi
 
 El dataset contiene 1.000 observaciones, un número conveniente para inspeccionar. 
 
-De todas formas, para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).
+Para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación o avistamiento a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).
 
 ```{r estructura}
 head(data, n = 10)
@@ -41,7 +41,7 @@ str(data)
 
 ## Identificación de valores faltantes (NA)
 
-Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica, como el tamaño del garaje o la antigüedad de la construcción). Así, se cuantifica primero el número de valores faltantes por columna:
+Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica). Así, se cuantifica primero el número de valores faltantes por columna:
 
 ```{r nas}
 data %>% summarise(across(everything(), ~sum(is.na(.)), .names = "NA_{.col}"))
@@ -63,20 +63,20 @@ El conjunto de datos tampoco contiene filas duplicadas, por lo que se conservan 
 Las variables discretas `Num_Bedrooms`, `Num_Bathrooms` y `Garage_Size` se convierten a factor con el fin de poder usarla en tablas de frecuencias y diagramas de caja, siempre conservando en paralelo su versión numérica original. Por su parte, `Neighborhood_Quality` se convierte a un factor ordenado, dado que representa una escala ordinal referente a la calidad (con 1 = más baja, 10 = más alta).
 
 ```{r conversion-factor}
-df$Num_Bedrooms_f         <- factor(df$Num_Bedrooms)
-df$Num_Bathrooms_f        <- factor(df$Num_Bathrooms)
-df$Garage_Size_f          <- factor(df$Garage_Size)
-df$Neighborhood_Quality_f <- factor(df$Neighborhood_Quality, ordered = TRUE)
+data$Num_Bedrooms_f         <- factor(data$Num_Bedrooms)
+data$Num_Bathrooms_f        <- factor(data$Num_Bathrooms)
+data$Garage_Size_f          <- factor(data$Garage_Size)
+data$Neighborhood_Quality_f <- factor(data$Neighborhood_Quality, ordered = TRUE)
 ```
 
 ## Verificación de rangos plausibles
 
 ```{r rangos}
-range(df$Neighborhood_Quality)
-range(df$Year_Built)
-range(df$House_Price)
-range(df$Lot_Size)
-range(df$Square_Footage)
+range(data$Neighborhood_Quality_f)
+range(data$Year_Built)
+range(data$House_Price)
+range(data$Lot_Size)
+range(data$Square_Footage)
 ```
 
 Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. `Neighborhood_Quality` cubre la escala completa del 1 al 10; `Year_Built` va desde 1950 a 2022; `Lot-Size` entre 0.5 y 5 acres, y `Square_Footage` entre 503 y 4.999 pies cuadrados. 

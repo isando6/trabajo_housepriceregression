@@ -7,7 +7,7 @@ En el apartado de _Análisis Exploratorio Bivariado_, se encontró que el tamañ
 Se utilizarán los datos para "dibujar", sin asumir una fórmula matemática previa, la tendencia con el suavizamiento LOWESS, construyendo una curva local que se adapta a lo que va mostrando cada tramo.
 
 ```{r}
-df %>%
+data %>%
   ggplot(aes(x = Lot_Size, y = House_Price)) +
   geom_point(alpha = 0.25, color = "#7fa8b5") +
   geom_smooth(method = "loess", se = TRUE, color = "#2c5f6e", fill = "#2c5f6e") +
@@ -24,8 +24,8 @@ La curva no muestra desaceleración; al contrario, en el tramo final, correspond
 Una curva puede "verse" torcida a simple vista solo por la variabilidad propia de los datos y no significar nada en la estadística. Para no quedarse únicamente con la impresión visual, se compara un modelo de regresión lineal simple contra uno que incluye un término cuadrático, y se usa ANOVA para decidir si esa curvatura adicional realmente mejora el ajuste o si es una complicación innecesaria.
 
 ```{r}
-modelo_lineal     <- lm(House_Price ~ Lot_Size, data = df)
-modelo_cuadratico <- lm(House_Price ~ poly(Lot_Size, 2, raw = TRUE), data = df)
+modelo_lineal     <- lm(House_Price ~ Lot_Size, data = data)
+modelo_cuadratico <- lm(House_Price ~ poly(Lot_Size, 2, raw = TRUE), data = data)
 
 summary(modelo_lineal)$coefficients
 summary(modelo_cuadratico)$coefficients
@@ -33,7 +33,7 @@ summary(modelo_cuadratico)$coefficients
 ```
 
 ```{r}
-df %>%
+data %>%
   ggplot(aes(x = Lot_Size, y = House_Price)) +
   geom_point(alpha = 0.25, color = "#8fa8a0") +
   geom_smooth(method = "lm", formula = y ~ x, se = FALSE, color = "#c47b6b", linetype = "dashed") +
@@ -64,9 +64,9 @@ El coeficiente de determinación (R²) indica qué proporción de la variabilida
 Otra alternativa para mirar lo mismo, sin depender de que la curvatura tenga que ser cuadrática, es partir el rango de terrenos en cinco tramos de igual tamaño (quintiles) y comparar qué tanto sube el precio promedio de un tramo al siguiente. Si de verdad existiera una desaceleración, se esperaría ver que esa subida sea grande entre los primeros quintiles y se haga cada vez más pequeña hacia el final.
 
 ```{r}
-df <- df %>% mutate(Quintil_Lot = ntile(Lot_Size, 5))
+data <- data %>% mutate(Quintil_Lot = ntile(Lot_Size, 5))
 
-quintiles <- df %>%
+quintiles <- data %>%
   group_by(Quintil_Lot) %>%
   summarise(Lot_Size_medio = mean(Lot_Size), House_Price_medio = mean(House_Price))
 
