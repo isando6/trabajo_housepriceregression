@@ -35,11 +35,17 @@ Construir un modelo de regresión lineal que permita predecir el precio de venta
 4. Comparar el comportamiento de relación entre `Lot_Size` y `House_Price` en grupos vecindarios de distinta calidad, evaluando si la capacidad predictiva del modelo varía según el nivel del entorno.
 
 
-## Marco teórico (alargar!!!)
+## Marco teórico
 
 De esta forma, la contribución del terreno al valor total de una propiedad varía en función de la cantidad disponible y, en un sentido determinante, del entorno en que se encuentra; en vecindarios de alta calidad, donde la demanda es mayor y los precios bases, por naturaleza, son más elevados, cada unidad adicional de terreno puede poseer un peso distinto que vale la pena resaltar respecto a la realidad de los vecindarios de calidad baja, en los que la presión sobre el precio del suelo es menor y la superficie disponible más amplia.
 
-Así, la calidad del vecindario opera a modo de indicador del contexto socioeconómico de una zona determinada. Siguiendo la lógica del modelo clásico del uso del suelo (Alonso, 1964; DiPasquale y Wheaton, 1996), los precios tienden a concentrarse en las zonas de mayor atracción y a disminuir conforme el entorno pierde atractivo, lo que implica que el valor marginal del terreno es heterogéneo entre distintos contextos. Esta heterogeneidad sugiere que el punto a partir del cual el incremento en el precio de venta comienza a desacelerarse con respecto al tamaño del terreno puede variar de forma significativa según el nivel de calidad del sector en que se ubica la propiedad.
+Así, la calidad del vecindario opera a modo de indicador del contexto socioeconómico de una zona determinada. Siguiendo la lógica del modelo clásico del uso del suelo (Alonso, 1964; DiPasquale y Wheaton, 1996), los precios tienden a concentrarse en las zonas de mayor atracción y a disminuir conforme el entorno pierde atractivo, lo que implica que el valor marginal del terreno es heterogéneo entre distintos contextos. Esta heterogeneidad sugiere que la capacidad del tamaño del terreno para predecir el precio de venta puede variar de forma significativa según el nivel de calidad del sector en que se ubica la propiedad, una posibilidad que se pone a prueba más adelante al estimar el modelo por separado en cada grupo de vecindarios.
+
+La teoría de los precios hedónicos (Rosen, 1974) es el marco que sustenta, en términos más amplios, este tipo de análisis. Según este enfoque, la vivienda se transa en el mercado como un paquete de atributos, estructurales (superficie, número de habitaciones y baños, capacidad del garaje), temporales (año de construcción) y de entorno (calidad del vecindario), cada uno de los cuales posee un precio implícito que, en conjunto, determina el precio final observado de la transacción. Bajo esta lógica, al precio de venta se le considera como la suma de las valoraciones marginales que el mercado le asigna a cada característica de la propiedad.
+
+Diversos estudios sobre la literatura de precios hedónicos aplicados a bienes raíces (Sirmans, Macpherson y Zietz, 2005) coinciden en que los atributos estructurales, como la superficie construida y la antigüedad de la vivienda, suelen ser los predictores con mayor peso explicativo dentro de estos modelos, seguidos de cerca por variables de entorno como la calidad del vecindario, resultado consistente con las 7 variables predictoras seleccionadas para este trabajo.
+
+Finalmente, la regresión lineal se adopta como la herramienta estadística apropiada para cuantificar empíricamente estas relaciones teóricas, al permitir estimar el efecto marginal de una variable predictora sobre el precio de venta, manteniendo el resto de condiciones constantes y al proveer, mediante sus pruebas de significancia, un criterio objetivo para determinar si dicho efecto es estadísticamente distinguible del azar (Montgomery, Peck y Vining, 2012).
 
 ## Fuente de los datos
 

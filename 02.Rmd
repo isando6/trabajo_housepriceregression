@@ -21,12 +21,14 @@ data %>%
     asimetria = skewness(House_Price),
     curtosis  = kurtosis(House_Price)
   ) %>%
-  kableExtra::kbl(digits = 2, caption = "Estadísticos descriptivos de House_Price") %>%
+  kableExtra::kbl(digits = 2) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%") 
+
 ```
 
-El dataset contiene 1.000 observaciones, y dichas están completas para la variable `House_Price`. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267; la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con el valor de la asimetría proporcionado por la tabla, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 a USD 1.108.237. Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.
+El dataset contiene 1.000 observaciones, y dichas están completas para la variable `House_Price`. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267; la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con el valor de la asimetría proporcionado por la tabla, de apenas -0.06. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 a USD 1.108.237. Por último, la curtosis (1.91), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.
 
 ## Distribución de frecuencias y densidad
 
@@ -43,7 +45,7 @@ data %>%
   theme_minimal()
 ```
 
-El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el _Resumen de estadísticos descriptivos_ (1.90).
+El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el _Resumen de estadísticos descriptivos_ (1.91).
 
 ## Evaluación de dispersión y detección de valores atípicos 
 
@@ -55,7 +57,7 @@ data %>%
   geom_boxplot(fill = "#8fa8a0", color = "black",
                outlier.color = "#c47b6b", outlier.alpha = 0.6) +
   stat_summary(fun = mean, geom = "point", shape = 20, size = 3, color = "#2c5f6e") +
-  labs(title = "Boxplot - House_Price",
+  labs(title = "House_Price",
        x = "", y = "Precio de venta (USD)") +
   theme_minimal()
 ```

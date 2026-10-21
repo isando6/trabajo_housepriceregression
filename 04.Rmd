@@ -1,8 +1,8 @@
 # Análisis Exploratorio Bivariado
 
-Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (`House_Price`). Este análisis permite identificar patrones de asociación, evaluar la dirección y fuerza de las relaciones, así como detectar posibles comportamientos no lineales.
+Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (`House_Price`), protocolo en el que se identifican patrones de asociación, se evaluan la dirección, fuerza de las relaciones y se detectan posibles comportamientos no lineales.
 
-Para las variables continuas, esa dirección y fuerza se mide con un coeficiente de correlación, que resume en un solo número qué tan de la mano se mueven dos variables: valores cercanos a 1 indican que ambas suben juntas, cercanos a −1 que una sube mientras la otra baja, y cercanos a 0 que no hay relación entre ellas. Como ya se documentó en los capítulos de la variable objetivo y de las variables predictoras, ninguna de `House_Price`, `Lot_Size`, `Square_Footage` ni `Year_Built` sigue una distribución normal (todas resultan platicúrticas), por lo que se usa el coeficiente de correlación de Spearman ($r_s$), que no exige normalidad y se basa en el orden (rango) de los datos en lugar de en su valor exacto. Como referencia orientativa, valores de $|r_s|$ por debajo de 0.3 suelen considerarse una asociación débil, entre 0.3 y 0.7 moderada, y por encima de 0.7 fuerte.
+Para las variables continuas, esa dirección y fuerza se mide con un coeficiente de correlación, que resume en un solo número qué tan de la mano se mueven dos variables: valores cercanos a 1 indican que ambas suben juntas, cercanos a -1 que una sube mientras la otra baja, y cercanos a 0 que no hay relación entre ellas. Se ha documentado, en los apartados _Análisis de la variable objetivo `House_Price`_ y _Análisis de las variables características (independientes)_, que `House_Price`, `Lot_Size`, `Square_Footage` ni `Year_Built` siguen una distribución normal (todas resultan platicúrticas), razón por la que se usa el coeficiente de correlación de Spearman ($r_s$) que no exige normalidad y se basa en el orden (rango) de los datos en lugar de en su valor exacto. Para referencia orientativa, valores de $|r_s|$ por debajo de 0.3 suelen considerarse una asociación débil, entre 0.3 y 0.7 moderada, y por encima de 0.7 fuerte.
 
 
 ## Variables continuas vs. `House_Price`
@@ -13,20 +13,20 @@ Para las variables continuas, esa dirección y fuerza se mide con un coeficiente
 data %>%
   ggplot(aes(x = Lot_Size, y = House_Price)) +
   geom_point(alpha = 0.4, color = "#8fa8a0") +
-  labs(title = "Dispersión: Lot_Size vs House_Price",
+  labs(title = "Lot_Size vs House_Price",
        x = "Tamaño del terreno (Lot_Size en acres)", y = "Precio de venta (USD)") +
   theme_bw()
 
 ```
 
-La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal ni una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.
+La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal o una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.
 
 
 ```{r, message=FALSE, warning=FALSE}
 cor.test(data$Lot_Size, data$House_Price, method = "spearman")
 ```
 
-La prueba de hipótesis (H₀: $\rho_s = 0$ vs. H₁: $\rho_s \neq 0$) confirma que esa asociación, aunque invisible a simple vista, es estadísticamente real: S = 140.320.780, p = 5.057e-07. Al ser p < 0.05, se rechaza H₀; no es producto del azar de esta muestra en particular, aunque su magnitud ($r_s$ = 0.158) sigue siendo débil.
+La prueba de hipótesis (H₀: $\rho_s = 0$ vs. H₁: $\rho_s \neq 0$) corrobora que esa asociación, aunque invisible a simple vista, es estadísticamente real (S = 140.320.780, p = 5.057e-07). Al ser p < 0.05, se rechaza H₀; no es producto del azar de esta muestra en particular, aunque su magnitud ($r_s$ = 0.158) sigue siendo débil.
 
 ### `Square_Footage` vs `House_Price`
 
@@ -36,16 +36,17 @@ data %>%
   geom_point(alpha = 0.4, color = '#8fa8a0') +
   labs(x = 'Superficie construida (Square_Footage en sqft)', y = 'Precio de venta (USD)') +
   theme_bw() +
-  facet_grid(. ~ 'Dispersión: Square_Footage vs House_Price')
+  facet_grid(. ~ 'Square_Footage vs House_Price')
 ```
 
-La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), grafican una relación evidente al ojo. 
+La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), muestra una trayectoria clara y fácilmente reconocible.
+
 
 ```{r, message=FALSE, warning=FALSE}
 cor.test(data$Square_Footage, data$House_Price, method = "spearman")
 ```
 
-La prueba de hipótesis respalda con contundencia lo que ya mostraba el gráfico: S ≈ 1.399.700, p < 2.2e-16. Se rechaza H₀ sin ninguna ambigüedad. Con $r_s$ = 0.992, `Square_Footage` es, por mucho, el predictor con mayor asociación con el precio.
+La prueba de hipótesis respalda con contundencia lo que ya mostraba el gráfico (S ≈ 1.399.700, p < 2.2e-16). Se rechaza H₀ sin ninguna ambigüedad. Con $r_s$ = 0.992, `Square_Footage` es, por mucho, el predictor con mayor asociación con el precio.
 
 ### `Year_Built` vs `House_Price`
 
@@ -55,16 +56,16 @@ data %>%
   geom_point(alpha = 0.4, color = '#8fa8a0') +
   labs(x = 'Año de construcción (Year_Built)', y = 'Precio de venta (USD)') +
   theme_bw() +
-  facet_grid(. ~ 'Dispersión: Year_Built vs House_Price')
+  facet_grid(. ~ 'Year_Built vs House_Price')
 ```
 
-La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleaatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 2020 y las de 1950. 
+La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 1950 y 2020. 
 
 ```{r, message=FALSE, warning=FALSE}
 cor.test(data$Year_Built, data$House_Price, method = "spearman")
 ```
 
-La prueba de hipótesis confirma la ausencia de patrón visto en el gráfico: S = 158.763.749, p = 0.134. Al ser p > 0.05, no se rechaza H₀. Con esta muestra, no hay evidencia suficiente de que el año de construcción esté correlacionado con el precio de venta.
+La prueba de hipótesis confirma la ausencia de patrón visto en el gráfico (S = 158.763.749, p = 0.134). Al ser p > 0.05, no se rechaza H₀. Con esta muestra, no hay evidencia suficiente de que el año de construcción esté correlacionado con el precio de venta.
 
 
 ## Variables discretas y categóricas vs. `House_Price`
@@ -86,9 +87,10 @@ data %>%
     maximo    = max(House_Price, na.rm = TRUE),
     asimetria = skewness(House_Price, na.rm = TRUE),
     curtosis  = kurtosis(House_Price, na.rm = TRUE)) %>%
-  kableExtra::kbl(digits = 2, caption = "House_Price según Num_Bedrooms") %>%
+  kableExtra::kbl(digits = 2) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE)  %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 En las viviendas de 1 habitación (n = 201), el precio promedio es de USD 610.105, con una mediana de USD 628.611; la cercanía entre ambos valores, junto con una asimetría de −0.128, sugiere una distribución razonablemente simétrica, con una ligera cola hacia la izquierda. La desviación estándar es de USD 245.539 y el rango intercuartílico de USD 400.384: el 50% central de estas viviendas se ubica entre USD 402.330 (Q1) y USD 802.714 (Q3), dentro de un rango total que va de USD 146.020 (mínimo) a USD 1.102.534 (máximo). Su curtosis (1.98), por debajo del valor de referencia de 3, corresponde a una distribución platicúrtica.
@@ -117,7 +119,7 @@ Las cinco cajas del diagrama se solapan ampliamente, con las líneas de mediana 
 kruskal.test(House_Price ~ factor(Num_Bedrooms), data = data)
 ```
 
-La prueba de Kruskal-Wallis lo confirma (H = 4.79; gl = 4; p = 0.309): no hay evidencia de que la mediana del precio de venta difiera entre las cinco categorías de número de habitaciones.
+La prueba de Kruskal-Wallis (H = 4.79; gl = 4; p = 0.309) ratifica que no hay evidencia de que la mediana del precio de venta difiera entre las cinco categorías de número de habitaciones.
 
 ### `Num_Bathrooms` vs `House_Price`
 
@@ -136,7 +138,10 @@ data %>%
     maximo    = max(House_Price, na.rm = TRUE),
     asimetria = skewness(House_Price, na.rm = TRUE),
     curtosis  = kurtosis(House_Price, na.rm = TRUE)) %>%
-  knitr::kable(digits = 2)
+  kableExtra::kbl(digits = 2) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)  %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 En las viviendas con 1 baño (n = 350, la categoría más numerosa), el precio promedio es de USD 616.475, con una mediana de USD 638.762; la mediana por encima de la media, junto con una asimetría de −0.121, indica una distribución con una ligera cola hacia la izquierda. La desviación estándar es de USD 252.316 y el rango intercuartílico de USD 418.894: el 50% central se reparte entre USD 401.725 (Q1) y USD 820.620 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). La curtosis (1.91), por debajo de 3, corresponde a una distribución platicúrtica.
@@ -154,7 +159,7 @@ data %>%
   theme_minimal()
 ```
 
-Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas analizadas en este capítulo.
+Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas tratadas.
 
 Para confirmar formalmente esta ausencia de diferencia visual, se compara la distribución de `House_Price` entre los tres grupos con la prueba de Kruskal-Wallis, la versión no paramétrica del ANOVA de un factor, apropiada aquí porque ya se documentó que `House_Price` no sigue una distribución normal.
 
@@ -168,7 +173,7 @@ El resultado (H = 0.26; gl = 2; p = 0.878) no rechaza H₀: no hay evidencia de 
 
 ```{r 04-8, message=FALSE, warning=FALSE}
 data %>%
-  group_by(Num_Bathrooms) %>%
+  group_by(Garage_Size) %>%
   summarise(
     n         = n(),
     media     = mean(House_Price, na.rm = TRUE),
@@ -181,9 +186,10 @@ data %>%
     maximo    = max(House_Price, na.rm = TRUE),
     asimetria = skewness(House_Price, na.rm = TRUE),
     curtosis  = kurtosis(House_Price, na.rm = TRUE)) %>%
-  kableExtra::kbl(digits = 2, caption = "House_Price según Num_Bathrooms") %>%
+  kableExtra::kbl(digits = 2) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 En las viviendas sin garaje (Garage_Size = 0, n = 321), el precio promedio es de USD 606.032 (el más bajo de los tres grupos), con una mediana de USD 624.412 y una asimetría de −0.096, indicio de una distribución razonablemente simétrica con una ligera cola hacia la izquierda. La desviación estándar es de USD 248.183 (la más baja de los tres grupos) y el rango intercuartílico de USD 400.621: el 50% central se reparte entre USD 400.585 (Q1) y USD 801.206 (Q3), dentro de un rango total que va de USD 111.627 (mínimo, el más bajo de los tres) a USD 1.092.027 (máximo, el más bajo de los tres). Su curtosis (1.95), por debajo de 3, corresponde a una distribución platicúrtica.
@@ -210,7 +216,7 @@ Se aplica la misma prueba de Kruskal-Wallis para verificar si ese leve corrimien
 kruskal.test(House_Price ~ factor(Garage_Size), data = data)
 ```
 
-El resultado (H = 2.87; gl = 2; p = 0.238) tampoco rechaza H₀: a pesar del leve corrimiento visual, no hay evidencia suficiente de que la mediana del precio difiera según la capacidad del garaje.
+El resultado (H = 2.87; gl = 2; p = 0.238) tampoco rechaza H₀; a pesar del leve corrimiento visual, no hay evidencia suficiente de que la mediana del precio difiera según la capacidad del garaje.
 
 ### `Neighborhood_Quality` vs. `House_Price`
 
@@ -231,9 +237,10 @@ data %>%
     asimetria = skewness(House_Price, na.rm = TRUE),
     curtosis  = kurtosis(House_Price, na.rm = TRUE)
   ) %>%
-  kableExtra::kbl(digits = 2, caption = "House_Price según Neighborhood_Quality") %>%
+  kableExtra::kbl(digits = 2) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 En el nivel 1 de calidad (n = 91), el precio promedio es de USD 632.969, con una mediana de USD 663.905; la mediana por encima de la media y una asimetría de −0.150 sugieren una ligera cola hacia la izquierda. La desviación estándar es de USD 268.239, la más alta de las diez categorías, y el rango intercuartílico de USD 460.056: el 50% central va de USD 401.776 (Q1) a USD 861.832 (Q3), dentro de un rango de USD 113.577 (mínimo) a USD 1.102.534 (máximo). La curtosis (1.76), la más baja de las diez, corresponde a una distribución platicúrtica.
@@ -271,4 +278,4 @@ Esta ausencia de un patrón claro es visible también en el diagrama. Las diez c
 kruskal.test(House_Price ~ factor(Neighborhood_Quality), data = data)
 ```
 
-La prueba de Kruskal-Wallis confirma esta lectura visual (H = 4.55; gl = 9; p = 0.872): no hay evidencia de que la mediana del precio de venta difiera entre los diez niveles de calidad del vecindario. De las cuatro variables discretas analizadas en este capítulo, ninguna muestra una diferencia estadísticamente significativa en el precio de venta entre sus categorías.
+Los resultados de la prueba de Kruskal-Wallis (H = 4.55; gl = 9; p = 0.872) arrojan que no hay evidencia de que la mediana del precio de venta difiera entre los diez niveles de calidad del vecindario. De las cuatro variables discretas analizadas en este apartado, ninguna muestra una diferencia estadísticamente significativa en el precio de venta entre sus categorías.

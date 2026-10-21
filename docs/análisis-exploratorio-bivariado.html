@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 5 Análisis Exploratorio Bivariado | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <title> 5 Análisis Exploratorio Bivariado | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 5 Análisis Exploratorio Bivariado | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:title" content=" 5 Análisis Exploratorio Bivariado | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 5 Análisis Exploratorio Bivariado | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta name="twitter:title" content=" 5 Análisis Exploratorio Bivariado | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   
   <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-09-17" />
+<meta name="date" content="2026-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -141,13 +143,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Trabajo de Métodos Estadísticos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.2</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
 <ul>
@@ -156,46 +157,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
 <li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
 <li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
-<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
-<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de frecuencias y densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de dispersión y detección de valores atípicos</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#resumen-num%C3%A9rico-de-las-variables-predictoras"><i class="fa fa-check"></i><b>4.1</b> Resumen numérico de las variables predictoras</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas-distribuci%C3%B3n-de-frecuencias"><i class="fa fa-check"></i><b>4.2</b> Variables discretas: distribución de frecuencias</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas-diagramas-de-caja"><i class="fa fa-check"></i><b>4.3</b> Variables continuas: diagramas de caja</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.2</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.3</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.4</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.5</b> Variables discretas y categóricas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.6" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.6</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.7" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.7</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.8" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.8</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Num_Bathrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.4</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
-<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
-<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
-<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
-<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
-<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
-<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.1</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.2</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.3</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones"><i class="fa fa-check"></i><b>6.4</b> Mapa de calor de correlaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<li class="chapter" data-level="7" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><i class="fa fa-check"></i><b>7</b> Modelo de regresión lineal con <code>Lot_Size</code> como predictor de <code>House_Price</code></a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
-<li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
-<li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
+<li class="chapter" data-level="7.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#diagrama-de-dispersi%C3%B3n-con-la-recta-ajustada"><i class="fa fa-check"></i><b>7.1</b> Diagrama de dispersión con la recta ajustada</a></li>
+<li class="chapter" data-level="7.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimación del modelo</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Inferencia sobre los parámetros del modelo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#pendiente-beta_1"><i class="fa fa-check"></i><b>7.3.1</b> Pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.3.2</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#varianza-de-los-errores-sigma2"><i class="fa fa-check"></i><b>7.3.3</b> Varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
+<li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -218,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</a>
           </h1>
         </div>
 
@@ -228,222 +238,1234 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="análisis-exploratorio-bivariado" class="section level1 hasAnchor" number="5">
 <h1><span class="header-section-number"> 5</span> Análisis Exploratorio Bivariado<a href="análisis-exploratorio-bivariado.html#an%C3%A1lisis-exploratorio-bivariado" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (<code>House_Price</code>). Este análisis permite identificar patrones de asociación, evaluar la dirección y fuerza de las relaciones, así como detectar posibles comportamientos no lineales.</p>
-<p>Para las variables continuas, esa dirección y fuerza se mide con el coeficiente de correlación de Pearson (r), que resume en un solo número qué tan de la mano se mueven dos variables. r va de −1 a 1: valores cercanos a 1 indican que ambas variables suben juntas, cercanos a −1 que una sube mientras la otra baja, y cercanos a 0 que no hay relación lineal entre ellas. Como referencia orientativa, valores de |r| por debajo de 0.3 suelen considerarse una asociación débil, entre 0.3 y 0.7 moderada; valores por encima de 0.7 fuerte.</p>
+<p>Tras haber caracterizado el comportamiento univariado de las variables, corresponde examinar cómo se relaciona cada uno de los predictores con el precio de venta (<code>House_Price</code>), protocolo en el que se identifican patrones de asociación, se evaluan la dirección, fuerza de las relaciones y se detectan posibles comportamientos no lineales.</p>
+<p>Para las variables continuas, esa dirección y fuerza se mide con un coeficiente de correlación, que resume en un solo número qué tan de la mano se mueven dos variables: valores cercanos a 1 indican que ambas suben juntas, cercanos a -1 que una sube mientras la otra baja, y cercanos a 0 que no hay relación entre ellas. Se ha documentado, en los apartados <em>Análisis de la variable objetivo <code>House_Price</code></em> y <em>Análisis de las variables características (independientes)</em>, que <code>House_Price</code>, <code>Lot_Size</code>, <code>Square_Footage</code> ni <code>Year_Built</code> siguen una distribución normal (todas resultan platicúrticas), razón por la que se usa el coeficiente de correlación de Spearman (<span class="math inline">\(r_s\)</span>) que no exige normalidad y se basa en el orden (rango) de los datos en lugar de en su valor exacto. Para referencia orientativa, valores de <span class="math inline">\(|r_s|\)</span> por debajo de 0.3 suelen considerarse una asociación débil, entre 0.3 y 0.7 moderada, y por encima de 0.7 fuerte.</p>
 <div id="variables-continuas-vs.-house_price" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> Variables continuas vs. <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-</div>
-<div id="lot_size-vs-house_price" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> <code>Lot_Size</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="análisis-exploratorio-bivariado.html#cb56-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb56-2"><a href="análisis-exploratorio-bivariado.html#cb56-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb56-3"><a href="análisis-exploratorio-bivariado.html#cb56-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
-<span id="cb56-4"><a href="análisis-exploratorio-bivariado.html#cb56-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Dispersión: Lot_Size vs House_Price&quot;</span>,</span>
-<span id="cb56-5"><a href="análisis-exploratorio-bivariado.html#cb56-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (Lot_Size en acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb56-6"><a href="análisis-exploratorio-bivariado.html#cb56-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<div id="lot_size-vs-house_price" class="section level3 hasAnchor" number="5.1.1">
+<h3><span class="header-section-number">5.1.1</span> <code>Lot_Size</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="análisis-exploratorio-bivariado.html#cb22-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="análisis-exploratorio-bivariado.html#cb22-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb22-3"><a href="análisis-exploratorio-bivariado.html#cb22-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-4"><a href="análisis-exploratorio-bivariado.html#cb22-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Lot_Size vs House_Price&quot;</span>,</span>
+<span id="cb22-5"><a href="análisis-exploratorio-bivariado.html#cb22-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (Lot_Size en acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-6"><a href="análisis-exploratorio-bivariado.html#cb22-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/04-1-1.png" alt="" width="672" /></p>
-<p>La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal ni una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="análisis-exploratorio-bivariado.html#cb57-1" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>Lot_Size, df<span class="sc">$</span>House_Price)</span></code></pre></div>
+<p>La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal o una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="análisis-exploratorio-bivariado.html#cb23-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Lot_Size, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-##  Pearson&#39;s product-moment correlation
+##  Spearman&#39;s rank correlation rho
 ## 
-## data:  df$Lot_Size and df$House_Price
-## t = 5.1341, df = 998, p-value = 3.408e-07
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.09940715 0.22021486
+## data:  data$Lot_Size and data$House_Price
+## S = 140320780, p-value = 5.236e-07
+## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
-##       cor 
-## 0.1604117</code></pre>
-<p>La prueba de hipótesis (H₀: ρ = 0 vs. H₁: ρ ≠ 0) confirma que esa asociación, aunque invisible a simple vista, es estadísticamente real: t = 5.13, df = 998, p = 3.408e-07. Al ser p &lt; 0.05, se rechaza H₀; no es producto del azar de esta muestra en particular, aunque su magnitud (r = 0.160) sigue siendo débil.</p>
+##       rho 
+## 0.1580745</code></pre>
+<p>La prueba de hipótesis (H₀: <span class="math inline">\(\rho_s = 0\)</span> vs. H₁: <span class="math inline">\(\rho_s \neq 0\)</span>) corrobora que esa asociación, aunque invisible a simple vista, es estadísticamente real (S = 140.320.780, p = 5.057e-07). Al ser p &lt; 0.05, se rechaza H₀; no es producto del azar de esta muestra en particular, aunque su magnitud (<span class="math inline">\(r_s\)</span> = 0.158) sigue siendo débil.</p>
 </div>
-<div id="square_footage-vs-house_price" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> <code>Square_Footage</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="análisis-exploratorio-bivariado.html#cb59-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb59-2"><a href="análisis-exploratorio-bivariado.html#cb59-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Square_Footage, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb59-3"><a href="análisis-exploratorio-bivariado.html#cb59-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;#8fa8a0&#39;</span>) <span class="sc">+</span></span>
-<span id="cb59-4"><a href="análisis-exploratorio-bivariado.html#cb59-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Superficie construida (Square_Footage en sqft)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
-<span id="cb59-5"><a href="análisis-exploratorio-bivariado.html#cb59-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb59-6"><a href="análisis-exploratorio-bivariado.html#cb59-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Dispersión: Square_Footage vs House_Price&#39;</span>)</span></code></pre></div>
+<div id="square_footage-vs-house_price" class="section level3 hasAnchor" number="5.1.2">
+<h3><span class="header-section-number">5.1.2</span> <code>Square_Footage</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="análisis-exploratorio-bivariado.html#cb25-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="análisis-exploratorio-bivariado.html#cb25-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Square_Footage, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb25-3"><a href="análisis-exploratorio-bivariado.html#cb25-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;#8fa8a0&#39;</span>) <span class="sc">+</span></span>
+<span id="cb25-4"><a href="análisis-exploratorio-bivariado.html#cb25-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Superficie construida (Square_Footage en sqft)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
+<span id="cb25-5"><a href="análisis-exploratorio-bivariado.html#cb25-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb25-6"><a href="análisis-exploratorio-bivariado.html#cb25-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Square_Footage vs House_Price&#39;</span>)</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/04-2-1.png" alt="" width="672" /></p>
-<p>La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), grafican una relación evidente al ojo.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="análisis-exploratorio-bivariado.html#cb60-1" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>Square_Footage, df<span class="sc">$</span>House_Price)</span></code></pre></div>
+<p>La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), muestra una trayectoria clara y fácilmente reconocible.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="análisis-exploratorio-bivariado.html#cb26-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Square_Footage, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-##  Pearson&#39;s product-moment correlation
+##  Spearman&#39;s rank correlation rho
 ## 
-## data:  df$Square_Footage and df$House_Price
-## t = 237.39, df = 998, p-value &lt; 2.2e-16
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  0.9901121 0.9922777
+## data:  data$Square_Footage and data$House_Price
+## S = 1399699, p-value &lt; 2.2e-16
+## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
-##       cor 
-## 0.9912615</code></pre>
-<p>La prueba de hipótesis respalda con contundencia lo que ya mostraba el gráfico: t = 237.39, df = 998, p &lt; 2.2e-16. Se rechaza H₀ sin ninguna ambigüedad. Con r = 0.991, <code>Square_Footage</code> es, por mucho, el predictor con mayor asociación lineal con el precio.</p>
+##       rho 
+## 0.9916018</code></pre>
+<p>La prueba de hipótesis respalda con contundencia lo que ya mostraba el gráfico (S ≈ 1.399.700, p &lt; 2.2e-16). Se rechaza H₀ sin ninguna ambigüedad. Con <span class="math inline">\(r_s\)</span> = 0.992, <code>Square_Footage</code> es, por mucho, el predictor con mayor asociación con el precio.</p>
 </div>
-<div id="year_built-vs-house_price" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> <code>Year_Built</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="análisis-exploratorio-bivariado.html#cb62-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb62-2"><a href="análisis-exploratorio-bivariado.html#cb62-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year_Built, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb62-3"><a href="análisis-exploratorio-bivariado.html#cb62-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;#8fa8a0&#39;</span>) <span class="sc">+</span></span>
-<span id="cb62-4"><a href="análisis-exploratorio-bivariado.html#cb62-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Año de construcción (Year_Built)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
-<span id="cb62-5"><a href="análisis-exploratorio-bivariado.html#cb62-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
-<span id="cb62-6"><a href="análisis-exploratorio-bivariado.html#cb62-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Dispersión: Year_Built vs House_Price&#39;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-3-1.png" alt="" width="672" />
-La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleaatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 2020 y las de 1950.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="análisis-exploratorio-bivariado.html#cb63-1" tabindex="-1"></a><span class="fu">cor.test</span>(df<span class="sc">$</span>Year_Built, df<span class="sc">$</span>House_Price)</span></code></pre></div>
+<div id="year_built-vs-house_price" class="section level3 hasAnchor" number="5.1.3">
+<h3><span class="header-section-number">5.1.3</span> <code>Year_Built</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="análisis-exploratorio-bivariado.html#cb28-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb28-2"><a href="análisis-exploratorio-bivariado.html#cb28-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Year_Built, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb28-3"><a href="análisis-exploratorio-bivariado.html#cb28-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&#39;#8fa8a0&#39;</span>) <span class="sc">+</span></span>
+<span id="cb28-4"><a href="análisis-exploratorio-bivariado.html#cb28-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Año de construcción (Year_Built)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
+<span id="cb28-5"><a href="análisis-exploratorio-bivariado.html#cb28-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
+<span id="cb28-6"><a href="análisis-exploratorio-bivariado.html#cb28-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Year_Built vs House_Price&#39;</span>)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/04-3-1.png" alt="" width="672" /></p>
+<p>La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 1950 y 2020.</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="análisis-exploratorio-bivariado.html#cb29-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Year_Built, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
-##  Pearson&#39;s product-moment correlation
+##  Spearman&#39;s rank correlation rho
 ## 
-## data:  df$Year_Built and df$House_Price
-## t = 1.6439, df = 998, p-value = 0.1005
-## alternative hypothesis: true correlation is not equal to 0
-## 95 percent confidence interval:
-##  -0.01005812  0.11359449
+## data:  data$Year_Built and data$House_Price
+## S = 158763749, p-value = 0.134
+## alternative hypothesis: true rho is not equal to 0
 ## sample estimates:
-##        cor 
-## 0.05196736</code></pre>
-<p>La prueba de hipótesis confirma la ausencia de patrón visto en el gráfico: t = 1.64, df = 998, p = 0.1005. Al ser p &gt; 0.05, no se rechaza H₀. Con esta muestra, no hay evidencia suficiente de que el año de construcción esté correlacionado con el precio de venta.</p>
+##        rho 
+## 0.04741656</code></pre>
+<p>La prueba de hipótesis confirma la ausencia de patrón visto en el gráfico (S = 158.763.749, p = 0.134). Al ser p &gt; 0.05, no se rechaza H₀. Con esta muestra, no hay evidencia suficiente de que el año de construcción esté correlacionado con el precio de venta.</p>
 </div>
-<div id="variables-discretas-y-categóricas-vs.-house_price" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Variables discretas y categóricas vs. <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 </div>
-<div id="num_bedrooms-vs-house_price" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> <code>Num_Bedrooms</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="análisis-exploratorio-bivariado.html#cb65-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb65-2"><a href="análisis-exploratorio-bivariado.html#cb65-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Num_Bedrooms) <span class="sc">%&gt;%</span></span>
-<span id="cb65-3"><a href="análisis-exploratorio-bivariado.html#cb65-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb65-4"><a href="análisis-exploratorio-bivariado.html#cb65-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
-<span id="cb65-5"><a href="análisis-exploratorio-bivariado.html#cb65-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-6"><a href="análisis-exploratorio-bivariado.html#cb65-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-7"><a href="análisis-exploratorio-bivariado.html#cb65-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-8"><a href="análisis-exploratorio-bivariado.html#cb65-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-9"><a href="análisis-exploratorio-bivariado.html#cb65-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-10"><a href="análisis-exploratorio-bivariado.html#cb65-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-11"><a href="análisis-exploratorio-bivariado.html#cb65-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-12"><a href="análisis-exploratorio-bivariado.html#cb65-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-13"><a href="análisis-exploratorio-bivariado.html#cb65-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb65-14"><a href="análisis-exploratorio-bivariado.html#cb65-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 5 × 12
-##   Num_Bedrooms     n   media mediana      sd     RIC      Q1      Q3  minimo   maximo asimetria curtosis
-##          &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1            1   201 610105. 628611. 245539. 400384. 402330. 802714. 146020. 1102534.  -0.128       1.98
-## 2            2   215 601325. 613606. 263879. 443319. 375341. 818660. 111627. 1064775.  -0.00942     1.82
-## 3            3   182 653491. 681989. 248147. 382247. 475563. 857810. 120796. 1096158.  -0.239       2.03
-## 4            4   197 621163. 611558. 257071. 447764. 394409. 842172. 147602. 1108237.   0.0470      1.81
-## 5            5   205 612881. 619516. 251144. 408599. 400307. 808906. 140538. 1107045.  -0.0137      1.98</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="análisis-exploratorio-bivariado.html#cb67-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb67-2"><a href="análisis-exploratorio-bivariado.html#cb67-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bedrooms), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb67-3"><a href="análisis-exploratorio-bivariado.html#cb67-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
-<span id="cb67-4"><a href="análisis-exploratorio-bivariado.html#cb67-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb67-5"><a href="análisis-exploratorio-bivariado.html#cb67-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de habitaciones (Num_Bedrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb67-6"><a href="análisis-exploratorio-bivariado.html#cb67-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div id="variables-discretas-y-categóricas-vs.-house_price" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Variables discretas y categóricas vs. <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="num_bedrooms-vs-house_price" class="section level3 hasAnchor" number="5.2.1">
+<h3><span class="header-section-number">5.2.1</span> <code>Num_Bedrooms</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="análisis-exploratorio-bivariado.html#cb31-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb31-2"><a href="análisis-exploratorio-bivariado.html#cb31-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Num_Bedrooms) <span class="sc">%&gt;%</span></span>
+<span id="cb31-3"><a href="análisis-exploratorio-bivariado.html#cb31-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-4"><a href="análisis-exploratorio-bivariado.html#cb31-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
+<span id="cb31-5"><a href="análisis-exploratorio-bivariado.html#cb31-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-6"><a href="análisis-exploratorio-bivariado.html#cb31-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-7"><a href="análisis-exploratorio-bivariado.html#cb31-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-8"><a href="análisis-exploratorio-bivariado.html#cb31-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-9"><a href="análisis-exploratorio-bivariado.html#cb31-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-10"><a href="análisis-exploratorio-bivariado.html#cb31-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-11"><a href="análisis-exploratorio-bivariado.html#cb31-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-12"><a href="análisis-exploratorio-bivariado.html#cb31-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-13"><a href="análisis-exploratorio-bivariado.html#cb31-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-14"><a href="análisis-exploratorio-bivariado.html#cb31-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb31-15"><a href="análisis-exploratorio-bivariado.html#cb31-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb31-16"><a href="análisis-exploratorio-bivariado.html#cb31-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb31-17"><a href="análisis-exploratorio-bivariado.html#cb31-17" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb31-18"><a href="análisis-exploratorio-bivariado.html#cb31-18" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Num_Bedrooms
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+mediana
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+RIC
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+<th style="text-align:right;">
+minimo
+</th>
+<th style="text-align:right;">
+maximo
+</th>
+<th style="text-align:right;">
+asimetria
+</th>
+<th style="text-align:right;">
+curtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+201
+</td>
+<td style="text-align:right;">
+610105.1
+</td>
+<td style="text-align:right;">
+628611.0
+</td>
+<td style="text-align:right;">
+245538.9
+</td>
+<td style="text-align:right;">
+400384.0
+</td>
+<td style="text-align:right;">
+402330.0
+</td>
+<td style="text-align:right;">
+802714.1
+</td>
+<td style="text-align:right;">
+146020.4
+</td>
+<td style="text-align:right;">
+1102534
+</td>
+<td style="text-align:right;">
+-0.13
+</td>
+<td style="text-align:right;">
+1.98
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+215
+</td>
+<td style="text-align:right;">
+601324.7
+</td>
+<td style="text-align:right;">
+613606.2
+</td>
+<td style="text-align:right;">
+263878.9
+</td>
+<td style="text-align:right;">
+443318.8
+</td>
+<td style="text-align:right;">
+375341.4
+</td>
+<td style="text-align:right;">
+818660.2
+</td>
+<td style="text-align:right;">
+111626.9
+</td>
+<td style="text-align:right;">
+1064775
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+182
+</td>
+<td style="text-align:right;">
+653491.5
+</td>
+<td style="text-align:right;">
+681989.1
+</td>
+<td style="text-align:right;">
+248146.6
+</td>
+<td style="text-align:right;">
+382246.9
+</td>
+<td style="text-align:right;">
+475563.1
+</td>
+<td style="text-align:right;">
+857809.9
+</td>
+<td style="text-align:right;">
+120795.6
+</td>
+<td style="text-align:right;">
+1096158
+</td>
+<td style="text-align:right;">
+-0.24
+</td>
+<td style="text-align:right;">
+2.03
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+197
+</td>
+<td style="text-align:right;">
+621162.8
+</td>
+<td style="text-align:right;">
+611557.9
+</td>
+<td style="text-align:right;">
+257071.5
+</td>
+<td style="text-align:right;">
+447763.6
+</td>
+<td style="text-align:right;">
+394408.6
+</td>
+<td style="text-align:right;">
+842172.2
+</td>
+<td style="text-align:right;">
+147601.5
+</td>
+<td style="text-align:right;">
+1108237
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+1.81
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+205
+</td>
+<td style="text-align:right;">
+612880.8
+</td>
+<td style="text-align:right;">
+619516.3
+</td>
+<td style="text-align:right;">
+251144.0
+</td>
+<td style="text-align:right;">
+408598.6
+</td>
+<td style="text-align:right;">
+400307.0
+</td>
+<td style="text-align:right;">
+808905.6
+</td>
+<td style="text-align:right;">
+140538.1
+</td>
+<td style="text-align:right;">
+1107045
+</td>
+<td style="text-align:right;">
+-0.01
+</td>
+<td style="text-align:right;">
+1.98
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En las viviendas de 1 habitación (n = 201), el precio promedio es de USD 610.105, con una mediana de USD 628.611; la cercanía entre ambos valores, junto con una asimetría de −0.128, sugiere una distribución razonablemente simétrica, con una ligera cola hacia la izquierda. La desviación estándar es de USD 245.539 y el rango intercuartílico de USD 400.384: el 50% central de estas viviendas se ubica entre USD 402.330 (Q1) y USD 802.714 (Q3), dentro de un rango total que va de USD 146.020 (mínimo) a USD 1.102.534 (máximo). Su curtosis (1.98), por debajo del valor de referencia de 3, corresponde a una distribución platicúrtica.</p>
+<p>En las de 2 habitaciones (n = 215), el precio promedio (USD 601.325) y la mediana (USD 613.606) también se mantienen cercanos, con una asimetría de apenas −0.009 (la más simétrica de las cinco categorías). La desviación estándar (USD 263.879) y el rango intercuartílico (USD 443.319) son, de hecho, los más altos del grupo: el 50% central va de USD 375.341 (Q1) a USD 818.660 (Q3), dentro de un rango que se extiende de USD 111.627 (mínimo, el más bajo de las cinco categorías) a USD 1.064.775 (máximo). La curtosis (1.82) también se ubica por debajo de 3, por lo que la distribución es platicúrtica.</p>
+<p>En las de 3 habitaciones (n = 182, la categoría con menos observaciones), el precio promedio (USD 653.492) y la mediana (USD 681.989) son los más altos de las cinco categorías, con una asimetría de −0.239 (la más marcada del grupo, aunque todavía leve). La desviación estándar (USD 248.147) y el rango intercuartílico (USD 382.247, el más bajo de los cinco) delimitan un 50% central entre USD 475.563 (Q1) y USD 857.810 (Q3), dentro de un rango de USD 120.796 (mínimo) a USD 1.096.158 (máximo). Con una curtosis de 2.03 (la más cercana a 3 de las cinco, aunque aún por debajo), la distribución sigue siendo platicúrtica.</p>
+<p>En las de 4 habitaciones (n = 197), el precio promedio (USD 621.163) y la mediana (USD 611.558) se mantienen cercanos, con una asimetría de 0.047 (la única positiva de las cinco categorías, aunque prácticamente nula). La desviación estándar es de USD 257.072 y el rango intercuartílico de USD 447.764: el 50% central va de USD 394.409 (Q1) a USD 842.172 (Q3), dentro de un rango de USD 147.602 (mínimo) a USD 1.108.237 (máximo, el más alto de las cinco categorías). La curtosis (1.81) confirma, una vez más, una distribución platicúrtica.</p>
+<p>Por último, en las de 5 habitaciones (n = 205), el precio promedio (USD 612.881) y la mediana (USD 619.516) son cercanos, con una asimetría de −0.014 que refuerza la lectura de simetría. La desviación estándar es de USD 251.144 y el rango intercuartílico de USD 408.599: el 50% central se ubica entre USD 400.307 (Q1) y USD 808.906 (Q3), dentro de un rango de USD 140.538 (mínimo) a USD 1.107.045 (máximo). La curtosis (1.98), por debajo de 3, indica de nuevo una distribución platicúrtica.</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="análisis-exploratorio-bivariado.html#cb32-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="análisis-exploratorio-bivariado.html#cb32-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bedrooms), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb32-3"><a href="análisis-exploratorio-bivariado.html#cb32-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-4"><a href="análisis-exploratorio-bivariado.html#cb32-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-5"><a href="análisis-exploratorio-bivariado.html#cb32-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de habitaciones (Num_Bedrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb32-6"><a href="análisis-exploratorio-bivariado.html#cb32-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/04-5-1.png" alt="" width="672" /></p>
-<p>Las cinco cajas del diagrama se solapan ampliamente, con las líneas de mediana prácticamente a la misma altura entre sí. No se observa ningún grupo cuya caja quede claramente por encima o por debajo de las demás, lo que confirma visualmente que el número de habitaciones por sí solo no distingue el precio de venta.</p>
-<p>##<code>Num_Bathrooms</code> vs <code>House_Price</code></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="análisis-exploratorio-bivariado.html#cb68-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb68-2"><a href="análisis-exploratorio-bivariado.html#cb68-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Num_Bathrooms) <span class="sc">%&gt;%</span></span>
-<span id="cb68-3"><a href="análisis-exploratorio-bivariado.html#cb68-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb68-4"><a href="análisis-exploratorio-bivariado.html#cb68-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
-<span id="cb68-5"><a href="análisis-exploratorio-bivariado.html#cb68-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-6"><a href="análisis-exploratorio-bivariado.html#cb68-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-7"><a href="análisis-exploratorio-bivariado.html#cb68-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-8"><a href="análisis-exploratorio-bivariado.html#cb68-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-9"><a href="análisis-exploratorio-bivariado.html#cb68-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-10"><a href="análisis-exploratorio-bivariado.html#cb68-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-11"><a href="análisis-exploratorio-bivariado.html#cb68-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-12"><a href="análisis-exploratorio-bivariado.html#cb68-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-13"><a href="análisis-exploratorio-bivariado.html#cb68-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb68-14"><a href="análisis-exploratorio-bivariado.html#cb68-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 12
-##   Num_Bathrooms     n   media mediana      sd     RIC      Q1      Q3  minimo   maximo asimetria curtosis
-##           &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1             1   350 616475. 638762. 252316. 418894. 401725. 820620. 111627. 1108237.   -0.122      1.92
-## 2             2   327 625152. 645375. 253935. 430293. 397535. 827828. 120796. 1107045.   -0.0493     1.88
-## 3             3   323 615078. 611558. 255213. 436625. 402272. 838897. 140538. 1102534.   -0.0177     1.92</code></pre>
-<p>El precio promedio es prácticamente idéntico entre los tres niveles (entre USD 615.078 y USD 625.152, una diferencia menor al 2%), con desviaciones estándar casi calcadas entre sí (USD 252.316 a USD 255.213). De las cuatro variables discretas, esta es la que muestra la asociación más débil con el precio a nivel de estadísticos descriptivos.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="análisis-exploratorio-bivariado.html#cb70-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb70-2"><a href="análisis-exploratorio-bivariado.html#cb70-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bathrooms), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb70-3"><a href="análisis-exploratorio-bivariado.html#cb70-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
-<span id="cb70-4"><a href="análisis-exploratorio-bivariado.html#cb70-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb70-5"><a href="análisis-exploratorio-bivariado.html#cb70-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de baños (Num_Bathrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb70-6"><a href="análisis-exploratorio-bivariado.html#cb70-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-7-1.png" alt="" width="672" /></p>
-<p>Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas analizadas en este capítulo.</p>
+<p>Las cinco cajas del diagrama se solapan ampliamente, con las líneas de mediana prácticamente a la misma altura entre sí. No se observa ningún grupo cuya caja quede claramente por encima o por debajo de las demás, lo que sugiere visualmente que el número de habitaciones por sí solo no distingue el precio de venta.</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="análisis-exploratorio-bivariado.html#cb33-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Num_Bedrooms), <span class="at">data =</span> data)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  House_Price by factor(Num_Bedrooms)
+## Kruskal-Wallis chi-squared = 4.791, df =
+## 4, p-value = 0.3094</code></pre>
+<p>La prueba de Kruskal-Wallis (H = 4.79; gl = 4; p = 0.309) ratifica que no hay evidencia de que la mediana del precio de venta difiera entre las cinco categorías de número de habitaciones.</p>
 </div>
-<div id="garage_size-vs-house_price" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> <code>Garage_Size</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="análisis-exploratorio-bivariado.html#cb71-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb71-2"><a href="análisis-exploratorio-bivariado.html#cb71-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Garage_Size) <span class="sc">%&gt;%</span></span>
-<span id="cb71-3"><a href="análisis-exploratorio-bivariado.html#cb71-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb71-4"><a href="análisis-exploratorio-bivariado.html#cb71-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
-<span id="cb71-5"><a href="análisis-exploratorio-bivariado.html#cb71-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-6"><a href="análisis-exploratorio-bivariado.html#cb71-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-7"><a href="análisis-exploratorio-bivariado.html#cb71-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-8"><a href="análisis-exploratorio-bivariado.html#cb71-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-9"><a href="análisis-exploratorio-bivariado.html#cb71-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-10"><a href="análisis-exploratorio-bivariado.html#cb71-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-11"><a href="análisis-exploratorio-bivariado.html#cb71-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-12"><a href="análisis-exploratorio-bivariado.html#cb71-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-13"><a href="análisis-exploratorio-bivariado.html#cb71-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb71-14"><a href="análisis-exploratorio-bivariado.html#cb71-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb71-15"><a href="análisis-exploratorio-bivariado.html#cb71-15" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 3 × 12
-##   Garage_Size     n   media mediana      sd     RIC      Q1      Q3  minimo   maximo asimetria curtosis
-##         &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1           0   321 606032. 624412. 248183. 400621. 400585. 801206. 111627. 1092027.   -0.0960     1.96
-## 2           1   336 611343. 619462. 256592. 464137. 370089. 834226. 140538. 1102534.   -0.0166     1.82
-## 3           2   343 638232. 641014. 255153. 405383. 433915. 839298. 113577. 1108237.   -0.0910     1.94</code></pre>
-<p>Acá sí se insinúa una tendencia leve: el precio promedio aumenta de forma progresiva con la capacidad del garaje, de USD 606.032 (sin garaje) a USD 611.343 (1 vehículo) y USD 638.232 (2 vehículos). Es la única de las cuatro variables discretas donde las medias muestran un orden consistente, aunque la diferencia entre el primer y el último grupo sigue siendo modesta (~5%) y las desviaciones estándar (USD 248.183 a USD 256.592) son, de nuevo, muy similares entre grupos.</p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="análisis-exploratorio-bivariado.html#cb73-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb73-2"><a href="análisis-exploratorio-bivariado.html#cb73-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Garage_Size), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb73-3"><a href="análisis-exploratorio-bivariado.html#cb73-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
-<span id="cb73-4"><a href="análisis-exploratorio-bivariado.html#cb73-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb73-5"><a href="análisis-exploratorio-bivariado.html#cb73-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Capacidad del garaje en vehículos (Garage_Size)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb73-6"><a href="análisis-exploratorio-bivariado.html#cb73-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div id="num_bathrooms-vs-house_price" class="section level3 hasAnchor" number="5.2.2">
+<h3><span class="header-section-number">5.2.2</span> <code>Num_Bathrooms</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="análisis-exploratorio-bivariado.html#cb35-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb35-2"><a href="análisis-exploratorio-bivariado.html#cb35-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Num_Bathrooms) <span class="sc">%&gt;%</span></span>
+<span id="cb35-3"><a href="análisis-exploratorio-bivariado.html#cb35-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-4"><a href="análisis-exploratorio-bivariado.html#cb35-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
+<span id="cb35-5"><a href="análisis-exploratorio-bivariado.html#cb35-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-6"><a href="análisis-exploratorio-bivariado.html#cb35-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-7"><a href="análisis-exploratorio-bivariado.html#cb35-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-8"><a href="análisis-exploratorio-bivariado.html#cb35-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-9"><a href="análisis-exploratorio-bivariado.html#cb35-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-10"><a href="análisis-exploratorio-bivariado.html#cb35-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-11"><a href="análisis-exploratorio-bivariado.html#cb35-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-12"><a href="análisis-exploratorio-bivariado.html#cb35-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-13"><a href="análisis-exploratorio-bivariado.html#cb35-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-14"><a href="análisis-exploratorio-bivariado.html#cb35-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb35-15"><a href="análisis-exploratorio-bivariado.html#cb35-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb35-16"><a href="análisis-exploratorio-bivariado.html#cb35-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb35-17"><a href="análisis-exploratorio-bivariado.html#cb35-17" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)  <span class="sc">%&gt;%</span></span>
+<span id="cb35-18"><a href="análisis-exploratorio-bivariado.html#cb35-18" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Num_Bathrooms
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+mediana
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+RIC
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+<th style="text-align:right;">
+minimo
+</th>
+<th style="text-align:right;">
+maximo
+</th>
+<th style="text-align:right;">
+asimetria
+</th>
+<th style="text-align:right;">
+curtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+350
+</td>
+<td style="text-align:right;">
+616475.0
+</td>
+<td style="text-align:right;">
+638762.3
+</td>
+<td style="text-align:right;">
+252315.7
+</td>
+<td style="text-align:right;">
+418894.5
+</td>
+<td style="text-align:right;">
+401725.3
+</td>
+<td style="text-align:right;">
+820619.7
+</td>
+<td style="text-align:right;">
+111626.9
+</td>
+<td style="text-align:right;">
+1108237
+</td>
+<td style="text-align:right;">
+-0.12
+</td>
+<td style="text-align:right;">
+1.92
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+327
+</td>
+<td style="text-align:right;">
+625152.0
+</td>
+<td style="text-align:right;">
+645375.2
+</td>
+<td style="text-align:right;">
+253934.7
+</td>
+<td style="text-align:right;">
+430293.1
+</td>
+<td style="text-align:right;">
+397534.8
+</td>
+<td style="text-align:right;">
+827827.9
+</td>
+<td style="text-align:right;">
+120795.6
+</td>
+<td style="text-align:right;">
+1107045
+</td>
+<td style="text-align:right;">
+-0.05
+</td>
+<td style="text-align:right;">
+1.88
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+323
+</td>
+<td style="text-align:right;">
+615077.6
+</td>
+<td style="text-align:right;">
+611557.9
+</td>
+<td style="text-align:right;">
+255212.9
+</td>
+<td style="text-align:right;">
+436625.0
+</td>
+<td style="text-align:right;">
+402271.7
+</td>
+<td style="text-align:right;">
+838896.7
+</td>
+<td style="text-align:right;">
+140538.1
+</td>
+<td style="text-align:right;">
+1102534
+</td>
+<td style="text-align:right;">
+-0.02
+</td>
+<td style="text-align:right;">
+1.92
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En las viviendas con 1 baño (n = 350, la categoría más numerosa), el precio promedio es de USD 616.475, con una mediana de USD 638.762; la mediana por encima de la media, junto con una asimetría de −0.121, indica una distribución con una ligera cola hacia la izquierda. La desviación estándar es de USD 252.316 y el rango intercuartílico de USD 418.894: el 50% central se reparte entre USD 401.725 (Q1) y USD 820.620 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). La curtosis (1.91), por debajo de 3, corresponde a una distribución platicúrtica.</p>
+<p>En las de 2 baños (n = 327), el precio promedio (USD 625.152) es el más alto de los tres grupos, con una mediana de USD 645.375 y una asimetría de −0.049 (la más cercana a cero de las tres, es decir la más simétrica). La desviación estándar es de USD 253.935 y el rango intercuartílico de USD 430.293: el 50% central va de USD 397.535 (Q1) a USD 827.828 (Q3), dentro de un rango de USD 120.796 (mínimo) a USD 1.107.045 (máximo). Su curtosis (1.87) también se ubica por debajo de 3, por lo que la distribución es platicúrtica.</p>
+<p>Por último, en las de 3 baños (n = 323), el precio promedio (USD 615.078) es el más bajo de los tres, con una mediana de USD 611.558 (la única de las tres en la que la mediana queda por debajo de la media) y una asimetría de −0.018, prácticamente nula. La desviación estándar (USD 255.213) y el rango intercuartílico (USD 436.625, el más alto de los tres) delimitan un 50% central entre USD 402.272 (Q1) y USD 838.897 (Q3), dentro de un rango de USD 140.538 (mínimo, el más alto de los tres) a USD 1.102.534 (máximo). La curtosis (1.90) confirma, de nuevo, una distribución platicúrtica.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="análisis-exploratorio-bivariado.html#cb36-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb36-2"><a href="análisis-exploratorio-bivariado.html#cb36-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Num_Bathrooms), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb36-3"><a href="análisis-exploratorio-bivariado.html#cb36-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-4"><a href="análisis-exploratorio-bivariado.html#cb36-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-5"><a href="análisis-exploratorio-bivariado.html#cb36-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de baños (Num_Bathrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb36-6"><a href="análisis-exploratorio-bivariado.html#cb36-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/04-7-1.png" alt="" width="672" /></p>
+<p>Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas tratadas.</p>
+<p>Para confirmar formalmente esta ausencia de diferencia visual, se compara la distribución de <code>House_Price</code> entre los tres grupos con la prueba de Kruskal-Wallis, la versión no paramétrica del ANOVA de un factor, apropiada aquí porque ya se documentó que <code>House_Price</code> no sigue una distribución normal.</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-exploratorio-bivariado.html#cb37-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Num_Bathrooms), <span class="at">data =</span> data)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  House_Price by factor(Num_Bathrooms)
+## Kruskal-Wallis chi-squared = 0.26049, df
+## = 2, p-value = 0.8779</code></pre>
+<p>El resultado (H = 0.26; gl = 2; p = 0.878) no rechaza H₀: no hay evidencia de que la mediana del precio de venta difiera entre los tres grupos de número de baños, confirmando numéricamente lo que ya mostraba el diagrama de caja.</p>
+</div>
+<div id="garage_size-vs-house_price" class="section level3 hasAnchor" number="5.2.3">
+<h3><span class="header-section-number">5.2.3</span> <code>Garage_Size</code> vs <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="análisis-exploratorio-bivariado.html#cb39-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb39-2"><a href="análisis-exploratorio-bivariado.html#cb39-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Garage_Size) <span class="sc">%&gt;%</span></span>
+<span id="cb39-3"><a href="análisis-exploratorio-bivariado.html#cb39-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb39-4"><a href="análisis-exploratorio-bivariado.html#cb39-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
+<span id="cb39-5"><a href="análisis-exploratorio-bivariado.html#cb39-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-6"><a href="análisis-exploratorio-bivariado.html#cb39-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-7"><a href="análisis-exploratorio-bivariado.html#cb39-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-8"><a href="análisis-exploratorio-bivariado.html#cb39-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-9"><a href="análisis-exploratorio-bivariado.html#cb39-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-10"><a href="análisis-exploratorio-bivariado.html#cb39-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-11"><a href="análisis-exploratorio-bivariado.html#cb39-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-12"><a href="análisis-exploratorio-bivariado.html#cb39-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-13"><a href="análisis-exploratorio-bivariado.html#cb39-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-14"><a href="análisis-exploratorio-bivariado.html#cb39-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb39-15"><a href="análisis-exploratorio-bivariado.html#cb39-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-16"><a href="análisis-exploratorio-bivariado.html#cb39-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb39-17"><a href="análisis-exploratorio-bivariado.html#cb39-17" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb39-18"><a href="análisis-exploratorio-bivariado.html#cb39-18" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Garage_Size
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+mediana
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+RIC
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+<th style="text-align:right;">
+minimo
+</th>
+<th style="text-align:right;">
+maximo
+</th>
+<th style="text-align:right;">
+asimetria
+</th>
+<th style="text-align:right;">
+curtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+321
+</td>
+<td style="text-align:right;">
+606031.5
+</td>
+<td style="text-align:right;">
+624411.6
+</td>
+<td style="text-align:right;">
+248182.9
+</td>
+<td style="text-align:right;">
+400620.7
+</td>
+<td style="text-align:right;">
+400585.5
+</td>
+<td style="text-align:right;">
+801206.2
+</td>
+<td style="text-align:right;">
+111626.9
+</td>
+<td style="text-align:right;">
+1092027
+</td>
+<td style="text-align:right;">
+-0.10
+</td>
+<td style="text-align:right;">
+1.96
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+336
+</td>
+<td style="text-align:right;">
+611343.0
+</td>
+<td style="text-align:right;">
+619462.0
+</td>
+<td style="text-align:right;">
+256592.5
+</td>
+<td style="text-align:right;">
+464137.2
+</td>
+<td style="text-align:right;">
+370089.0
+</td>
+<td style="text-align:right;">
+834226.2
+</td>
+<td style="text-align:right;">
+140538.1
+</td>
+<td style="text-align:right;">
+1102534
+</td>
+<td style="text-align:right;">
+-0.02
+</td>
+<td style="text-align:right;">
+1.82
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+343
+</td>
+<td style="text-align:right;">
+638232.3
+</td>
+<td style="text-align:right;">
+641013.9
+</td>
+<td style="text-align:right;">
+255153.4
+</td>
+<td style="text-align:right;">
+405383.1
+</td>
+<td style="text-align:right;">
+433915.1
+</td>
+<td style="text-align:right;">
+839298.2
+</td>
+<td style="text-align:right;">
+113576.5
+</td>
+<td style="text-align:right;">
+1108237
+</td>
+<td style="text-align:right;">
+-0.09
+</td>
+<td style="text-align:right;">
+1.94
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En las viviendas sin garaje (Garage_Size = 0, n = 321), el precio promedio es de USD 606.032 (el más bajo de los tres grupos), con una mediana de USD 624.412 y una asimetría de −0.096, indicio de una distribución razonablemente simétrica con una ligera cola hacia la izquierda. La desviación estándar es de USD 248.183 (la más baja de los tres grupos) y el rango intercuartílico de USD 400.621: el 50% central se reparte entre USD 400.585 (Q1) y USD 801.206 (Q3), dentro de un rango total que va de USD 111.627 (mínimo, el más bajo de los tres) a USD 1.092.027 (máximo, el más bajo de los tres). Su curtosis (1.95), por debajo de 3, corresponde a una distribución platicúrtica.</p>
+<p>En las de 1 vehículo (n = 336), el precio promedio (USD 611.343) y la mediana (USD 619.462) se mantienen cercanos, con una asimetría de −0.017, la más próxima a cero de las tres categorías. La desviación estándar (USD 256.592) y el rango intercuartílico (USD 464.137) son los más altos de los tres grupos: el 50% central va de USD 370.089 (Q1, el más bajo de los tres) a USD 834.226 (Q3), dentro de un rango de USD 140.538 (mínimo) a USD 1.102.534 (máximo). La curtosis (1.81), la más baja de los tres grupos, también se ubica por debajo de 3, por lo que la distribución es platicúrtica.</p>
+<p>Por último, en las de 2 vehículos (n = 343), el precio promedio (USD 638.232) es, con claridad, el más alto de los tres (una diferencia de USD 32.200 frente al grupo sin garaje), con una mediana de USD 641.014 y una asimetría de −0.091. La desviación estándar es de USD 255.153 y el rango intercuartílico de USD 405.383, el más bajo de los tres: el 50% central se ubica entre USD 433.915 (Q1, el más alto de los tres) y USD 839.298 (Q3), dentro de un rango que va de USD 113.577 (mínimo) a USD 1.108.237 (máximo, el más alto de los tres). La curtosis (1.93) confirma, de nuevo, una distribución platicúrtica.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="análisis-exploratorio-bivariado.html#cb40-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="análisis-exploratorio-bivariado.html#cb40-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Garage_Size), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb40-3"><a href="análisis-exploratorio-bivariado.html#cb40-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-4"><a href="análisis-exploratorio-bivariado.html#cb40-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-5"><a href="análisis-exploratorio-bivariado.html#cb40-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Capacidad del garaje en vehículos (Garage_Size)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb40-6"><a href="análisis-exploratorio-bivariado.html#cb40-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/04-9-1.png" alt="" width="672" /></p>
 <p>El diagrama de caja deja ver un leve corrimiento hacia arriba de la caja correspondiente a 2 vehículos frente a las otras dos, coherente con la tendencia ya señalada en la tabla, aunque el solapamiento entre las tres cajas sigue siendo considerable.</p>
+<p>Se aplica la misma prueba de Kruskal-Wallis para verificar si ese leve corrimiento es, o no, estadísticamente significativo.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-exploratorio-bivariado.html#cb41-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Garage_Size), <span class="at">data =</span> data)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  House_Price by factor(Garage_Size)
+## Kruskal-Wallis chi-squared = 2.872, df =
+## 2, p-value = 0.2379</code></pre>
+<p>El resultado (H = 2.87; gl = 2; p = 0.238) tampoco rechaza H₀; a pesar del leve corrimiento visual, no hay evidencia suficiente de que la mediana del precio difiera según la capacidad del garaje.</p>
 </div>
-<div id="neighborhood_quality-vs.-house_price" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> <code>Neighborhood_Quality</code> vs. <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="análisis-exploratorio-bivariado.html#cb74-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb74-2"><a href="análisis-exploratorio-bivariado.html#cb74-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Neighborhood_Quality) <span class="sc">%&gt;%</span></span>
-<span id="cb74-3"><a href="análisis-exploratorio-bivariado.html#cb74-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb74-4"><a href="análisis-exploratorio-bivariado.html#cb74-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
-<span id="cb74-5"><a href="análisis-exploratorio-bivariado.html#cb74-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-6"><a href="análisis-exploratorio-bivariado.html#cb74-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-7"><a href="análisis-exploratorio-bivariado.html#cb74-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-8"><a href="análisis-exploratorio-bivariado.html#cb74-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-9"><a href="análisis-exploratorio-bivariado.html#cb74-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-10"><a href="análisis-exploratorio-bivariado.html#cb74-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-11"><a href="análisis-exploratorio-bivariado.html#cb74-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-12"><a href="análisis-exploratorio-bivariado.html#cb74-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-13"><a href="análisis-exploratorio-bivariado.html#cb74-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb74-14"><a href="análisis-exploratorio-bivariado.html#cb74-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb74-15"><a href="análisis-exploratorio-bivariado.html#cb74-15" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 10 × 12
-##    Neighborhood_Quality     n   media mediana      sd     RIC      Q1      Q3 minimo maximo asimetria curtosis
-##                   &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-##  1                    1    91 632969. 663905. 268239. 460056. 401776. 861832. 1.14e5 1.10e6   -0.153      1.80
-##  2                    2   105 613066. 635097. 251391. 396437. 408014. 804450. 1.12e5 1.11e6   -0.0428     2.07
-##  3                    3    85 625681. 656223. 246547. 446096. 384461. 830557. 1.48e5 1.02e6   -0.178      1.95
-##  4                    4    99 629867. 626454. 260256. 446932. 411523. 858455. 1.46e5 1.05e6   -0.0627     1.83
-##  5                    5   109 595240. 602549. 246143. 414788. 389645. 804434. 1.47e5 1.08e6    0.0574     1.94
-##  6                    6   101 593804. 574913. 265933. 469667. 362720. 832386. 1.21e5 1.06e6    0.132      1.84
-##  7                    7   102 648856. 664200. 264277. 440449. 444561. 885011. 1.46e5 1.10e6   -0.176      1.85
-##  8                    8    97 630746. 654467. 238596. 405620. 440726. 846346. 1.59e5 1.07e6   -0.187      1.99
-##  9                    9    88 617873. 666352. 255896. 430857. 366417. 797274. 1.59e5 1.10e6   -0.157      1.90
-## 10                   10   123 607767. 581948. 245054. 382109. 427187. 809296. 1.50e5 1.11e6    0.0139     2.03</code></pre>
-<p>A pesar de tener diez niveles, el precio promedio se mantiene en un rango relativamente estrecho (entre USD 593.804 en el nivel 6 y USD 648.856 en el nivel 7), sin que los niveles de mayor calidad (8, 9, 10) muestren sistemáticamente precios más altos que los de menor calidad (1, 2, 3): el nivel 10, de hecho, tiene el segundo promedio más bajo de toda la escala (USD 607.767).</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="análisis-exploratorio-bivariado.html#cb76-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb76-2"><a href="análisis-exploratorio-bivariado.html#cb76-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Neighborhood_Quality), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb76-3"><a href="análisis-exploratorio-bivariado.html#cb76-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;darkred&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-4"><a href="análisis-exploratorio-bivariado.html#cb76-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;darkgreen&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-5"><a href="análisis-exploratorio-bivariado.html#cb76-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Calidad del vecindario (Neighborhood_Quality)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb76-6"><a href="análisis-exploratorio-bivariado.html#cb76-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div id="neighborhood_quality-vs.-house_price" class="section level3 hasAnchor" number="5.2.4">
+<h3><span class="header-section-number">5.2.4</span> <code>Neighborhood_Quality</code> vs. <code>House_Price</code><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="análisis-exploratorio-bivariado.html#cb43-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb43-2"><a href="análisis-exploratorio-bivariado.html#cb43-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Neighborhood_Quality) <span class="sc">%&gt;%</span></span>
+<span id="cb43-3"><a href="análisis-exploratorio-bivariado.html#cb43-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb43-4"><a href="análisis-exploratorio-bivariado.html#cb43-4" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
+<span id="cb43-5"><a href="análisis-exploratorio-bivariado.html#cb43-5" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-6"><a href="análisis-exploratorio-bivariado.html#cb43-6" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-7"><a href="análisis-exploratorio-bivariado.html#cb43-7" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-8"><a href="análisis-exploratorio-bivariado.html#cb43-8" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-9"><a href="análisis-exploratorio-bivariado.html#cb43-9" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-10"><a href="análisis-exploratorio-bivariado.html#cb43-10" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-11"><a href="análisis-exploratorio-bivariado.html#cb43-11" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-12"><a href="análisis-exploratorio-bivariado.html#cb43-12" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-13"><a href="análisis-exploratorio-bivariado.html#cb43-13" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb43-14"><a href="análisis-exploratorio-bivariado.html#cb43-14" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb43-15"><a href="análisis-exploratorio-bivariado.html#cb43-15" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb43-16"><a href="análisis-exploratorio-bivariado.html#cb43-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-17"><a href="análisis-exploratorio-bivariado.html#cb43-17" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb43-18"><a href="análisis-exploratorio-bivariado.html#cb43-18" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb43-19"><a href="análisis-exploratorio-bivariado.html#cb43-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Neighborhood_Quality
+</th>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+mediana
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+RIC
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+<th style="text-align:right;">
+minimo
+</th>
+<th style="text-align:right;">
+maximo
+</th>
+<th style="text-align:right;">
+asimetria
+</th>
+<th style="text-align:right;">
+curtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+91
+</td>
+<td style="text-align:right;">
+632968.7
+</td>
+<td style="text-align:right;">
+663905.0
+</td>
+<td style="text-align:right;">
+268239.4
+</td>
+<td style="text-align:right;">
+460056.0
+</td>
+<td style="text-align:right;">
+401776.0
+</td>
+<td style="text-align:right;">
+861832.0
+</td>
+<td style="text-align:right;">
+113576.5
+</td>
+<td style="text-align:right;">
+1102534
+</td>
+<td style="text-align:right;">
+-0.15
+</td>
+<td style="text-align:right;">
+1.80
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+105
+</td>
+<td style="text-align:right;">
+613066.1
+</td>
+<td style="text-align:right;">
+635097.4
+</td>
+<td style="text-align:right;">
+251391.1
+</td>
+<td style="text-align:right;">
+396436.5
+</td>
+<td style="text-align:right;">
+408013.6
+</td>
+<td style="text-align:right;">
+804450.1
+</td>
+<td style="text-align:right;">
+111626.9
+</td>
+<td style="text-align:right;">
+1108237
+</td>
+<td style="text-align:right;">
+-0.04
+</td>
+<td style="text-align:right;">
+2.07
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+85
+</td>
+<td style="text-align:right;">
+625680.9
+</td>
+<td style="text-align:right;">
+656223.2
+</td>
+<td style="text-align:right;">
+246546.8
+</td>
+<td style="text-align:right;">
+446095.8
+</td>
+<td style="text-align:right;">
+384461.3
+</td>
+<td style="text-align:right;">
+830557.2
+</td>
+<td style="text-align:right;">
+147601.5
+</td>
+<td style="text-align:right;">
+1021135
+</td>
+<td style="text-align:right;">
+-0.18
+</td>
+<td style="text-align:right;">
+1.95
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+99
+</td>
+<td style="text-align:right;">
+629867.2
+</td>
+<td style="text-align:right;">
+626454.3
+</td>
+<td style="text-align:right;">
+260256.2
+</td>
+<td style="text-align:right;">
+446931.9
+</td>
+<td style="text-align:right;">
+411522.6
+</td>
+<td style="text-align:right;">
+858454.5
+</td>
+<td style="text-align:right;">
+146406.9
+</td>
+<td style="text-align:right;">
+1046316
+</td>
+<td style="text-align:right;">
+-0.06
+</td>
+<td style="text-align:right;">
+1.83
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+109
+</td>
+<td style="text-align:right;">
+595239.6
+</td>
+<td style="text-align:right;">
+602549.3
+</td>
+<td style="text-align:right;">
+246143.2
+</td>
+<td style="text-align:right;">
+414788.5
+</td>
+<td style="text-align:right;">
+389645.3
+</td>
+<td style="text-align:right;">
+804433.8
+</td>
+<td style="text-align:right;">
+147206.9
+</td>
+<td style="text-align:right;">
+1075814
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+1.94
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+101
+</td>
+<td style="text-align:right;">
+593803.9
+</td>
+<td style="text-align:right;">
+574912.8
+</td>
+<td style="text-align:right;">
+265932.5
+</td>
+<td style="text-align:right;">
+469666.7
+</td>
+<td style="text-align:right;">
+362719.6
+</td>
+<td style="text-align:right;">
+832386.3
+</td>
+<td style="text-align:right;">
+120795.6
+</td>
+<td style="text-align:right;">
+1060713
+</td>
+<td style="text-align:right;">
+0.13
+</td>
+<td style="text-align:right;">
+1.84
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+102
+</td>
+<td style="text-align:right;">
+648856.3
+</td>
+<td style="text-align:right;">
+664199.6
+</td>
+<td style="text-align:right;">
+264277.3
+</td>
+<td style="text-align:right;">
+440449.2
+</td>
+<td style="text-align:right;">
+444561.5
+</td>
+<td style="text-align:right;">
+885010.7
+</td>
+<td style="text-align:right;">
+146020.4
+</td>
+<td style="text-align:right;">
+1096158
+</td>
+<td style="text-align:right;">
+-0.18
+</td>
+<td style="text-align:right;">
+1.85
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+8
+</td>
+<td style="text-align:right;">
+97
+</td>
+<td style="text-align:right;">
+630746.1
+</td>
+<td style="text-align:right;">
+654466.9
+</td>
+<td style="text-align:right;">
+238596.4
+</td>
+<td style="text-align:right;">
+405620.0
+</td>
+<td style="text-align:right;">
+440726.3
+</td>
+<td style="text-align:right;">
+846346.3
+</td>
+<td style="text-align:right;">
+158636.7
+</td>
+<td style="text-align:right;">
+1070454
+</td>
+<td style="text-align:right;">
+-0.19
+</td>
+<td style="text-align:right;">
+1.99
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+9
+</td>
+<td style="text-align:right;">
+88
+</td>
+<td style="text-align:right;">
+617873.1
+</td>
+<td style="text-align:right;">
+666351.5
+</td>
+<td style="text-align:right;">
+255896.4
+</td>
+<td style="text-align:right;">
+430857.3
+</td>
+<td style="text-align:right;">
+366417.1
+</td>
+<td style="text-align:right;">
+797274.4
+</td>
+<td style="text-align:right;">
+158856.8
+</td>
+<td style="text-align:right;">
+1099212
+</td>
+<td style="text-align:right;">
+-0.16
+</td>
+<td style="text-align:right;">
+1.90
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+10
+</td>
+<td style="text-align:right;">
+123
+</td>
+<td style="text-align:right;">
+607767.1
+</td>
+<td style="text-align:right;">
+581948.2
+</td>
+<td style="text-align:right;">
+245054.3
+</td>
+<td style="text-align:right;">
+382108.8
+</td>
+<td style="text-align:right;">
+427187.1
+</td>
+<td style="text-align:right;">
+809295.9
+</td>
+<td style="text-align:right;">
+149743.5
+</td>
+<td style="text-align:right;">
+1107045
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+2.03
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>En el nivel 1 de calidad (n = 91), el precio promedio es de USD 632.969, con una mediana de USD 663.905; la mediana por encima de la media y una asimetría de −0.150 sugieren una ligera cola hacia la izquierda. La desviación estándar es de USD 268.239, la más alta de las diez categorías, y el rango intercuartílico de USD 460.056: el 50% central va de USD 401.776 (Q1) a USD 861.832 (Q3), dentro de un rango de USD 113.577 (mínimo) a USD 1.102.534 (máximo). La curtosis (1.76), la más baja de las diez, corresponde a una distribución platicúrtica.</p>
+<p>En el nivel 2 (n = 105), el precio promedio (USD 613.066) y la mediana (USD 635.097) muestran una asimetría de −0.042, casi nula. La desviación estándar es de USD 251.391 y el rango intercuartílico de USD 396.437, el segundo más bajo de los diez: el 50% central se ubica entre USD 408.014 (Q1) y USD 804.450 (Q3), dentro de un rango de USD 111.627 (mínimo, el más bajo de las diez categorías) a USD 1.108.237 (máximo). Su curtosis (2.03) es la más alta de las diez, aunque sigue por debajo de 3, por lo que la distribución es platicúrtica.</p>
+<p>En el nivel 3 (n = 85, la categoría con menos observaciones), el precio promedio (USD 625.681) y la mediana (USD 656.223) presentan una asimetría de −0.175. La desviación estándar (USD 246.547) y el rango intercuartílico (USD 446.096) delimitan un 50% central entre USD 384.461 (Q1) y USD 830.557 (Q3), dentro de un rango de USD 147.602 (mínimo) a USD 1.021.135 (máximo, el más bajo de las diez categorías). La curtosis (1.90) confirma una distribución platicúrtica.</p>
+<p>En el nivel 4 (n = 99), el precio promedio (USD 629.867) y la mediana (USD 626.454) son prácticamente idénticos, con una asimetría de −0.062. La desviación estándar es de USD 260.256 y el rango intercuartílico de USD 446.932: el 50% central va de USD 411.523 (Q1) a USD 858.455 (Q3), dentro de un rango de USD 146.407 (mínimo) a USD 1.046.316 (máximo). Con una curtosis de 1.80, la distribución también es platicúrtica.</p>
+<p>En el nivel 5 (n = 109), el precio promedio (USD 595.240) y la mediana (USD 602.549) muestran una asimetría de 0.057, positiva, aunque leve. La desviación estándar (USD 246.143, la más baja de las diez categorías) y el rango intercuartílico (USD 414.788) delimitan un 50% central entre USD 389.645 (Q1) y USD 804.434 (Q3), dentro de un rango de USD 147.207 (mínimo) a USD 1.075.814 (máximo). La curtosis (1.90) indica, de nuevo, una distribución platicúrtica.</p>
+<p>En el nivel 6 (n = 101), el precio promedio (USD 593.804) es el más bajo de las diez categorías, con una mediana de USD 574.913, la única junto con el nivel 10 en la que la mediana queda por debajo de la media, y la asimetría más alta de las diez (0.130, positiva). La desviación estándar (USD 265.933) y el rango intercuartílico (USD 469.667) son los más altos de las diez categorías: el 50% central va de USD 362.720 (Q1, el más bajo de las diez) a USD 832.386 (Q3), dentro de un rango de USD 120.796 (mínimo) a USD 1.060.713 (máximo). La curtosis (1.81) confirma una distribución platicúrtica.</p>
+<p>En el nivel 7 (n = 102), el precio promedio (USD 648.856) es el más alto de las diez categorías, con una mediana de USD 664.200 y una asimetría de −0.174. La desviación estándar es de USD 264.277 y el rango intercuartílico de USD 440.449: el 50% central se ubica entre USD 444.561 (Q1, el más alto de las diez) y USD 885.011 (Q3, el más alto de las diez), dentro de un rango de USD 146.020 (mínimo) a USD 1.096.158 (máximo). La curtosis (1.81) también corresponde a una distribución platicúrtica.</p>
+<p>En el nivel 8 (n = 97), el precio promedio (USD 630.746) y la mediana (USD 654.467) presentan una asimetría de −0.184, la más marcada de las diez categorías, aunque sigue siendo leve. La desviación estándar (USD 238.596) es la más baja de las diez, y el rango intercuartílico de USD 405.620: el 50% central va de USD 440.726 (Q1) a USD 846.346 (Q3), dentro de un rango de USD 158.637 (mínimo, el más alto de las diez) a USD 1.070.454 (máximo). La curtosis (1.95) confirma, de nuevo, una distribución platicúrtica.</p>
+<p>En el nivel 9 (n = 88), el precio promedio (USD 617.873) y la mediana (USD 666.352, la más alta de las diez categorías) muestran una asimetría de −0.154. La desviación estándar es de USD 255.896 y el rango intercuartílico de USD 430.857: el 50% central se ubica entre USD 366.417 (Q1) y USD 797.274 (Q3), dentro de un rango de USD 158.857 (mínimo) a USD 1.099.212 (máximo). La curtosis (1.86) indica una distribución platicúrtica.</p>
+<p>Por último, en el nivel 10 (n = 123, la categoría más numerosa, y la de mayor calidad de vecindario), el precio promedio (USD 607.767) es, sorpresivamente, el segundo más bajo de las diez categorías, con una mediana de USD 581.948 por debajo de la media y una asimetría de 0.014, prácticamente nula. La desviación estándar (USD 245.054) es la segunda más baja de las diez, y el rango intercuartílico de USD 382.109, el más bajo de las diez categorías: el 50% central va de USD 427.187 (Q1) a USD 809.296 (Q3), dentro de un rango de USD 149.744 (mínimo) a USD 1.107.045 (máximo). La curtosis (1.99) confirma, una vez más, una distribución platicúrtica.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="análisis-exploratorio-bivariado.html#cb44-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb44-2"><a href="análisis-exploratorio-bivariado.html#cb44-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">factor</span>(Neighborhood_Quality), <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="análisis-exploratorio-bivariado.html#cb44-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-4"><a href="análisis-exploratorio-bivariado.html#cb44-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="análisis-exploratorio-bivariado.html#cb44-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Calidad del vecindario (Neighborhood_Quality)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="análisis-exploratorio-bivariado.html#cb44-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/04-11-1.png" alt="" width="672" /></p>
-<p>Esta ausencia de un patrón claro es visible también en el diagrama. Las diez cajas se ubican a alturas muy similares, sin una progresión ascendente de izquierda a derecha, y es consistente con lo que se retoma con mayor rigor estadístico (ANOVA y Kruskal-Wallis) en el capítulo de comparación por calidad del vecindario.</p>
+<p>Esta ausencia de un patrón claro es visible también en el diagrama. Las diez cajas se ubican a alturas muy similares, sin una progresión ascendente de izquierda a derecha.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-exploratorio-bivariado.html#cb45-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Neighborhood_Quality), <span class="at">data =</span> data)</span></code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  House_Price by factor(Neighborhood_Quality)
+## Kruskal-Wallis chi-squared = 4.5457, df =
+## 9, p-value = 0.872</code></pre>
+<p>Los resultados de la prueba de Kruskal-Wallis (H = 4.55; gl = 9; p = 0.872) arrojan que no hay evidencia de que la mediana del precio de venta difiera entre los diez niveles de calidad del vecindario. De las cuatro variables discretas analizadas en este apartado, ninguna muestra una diferencia estadísticamente significativa en el precio de venta entre sus categorías.</p>
 
+</div>
 </div>
 </div>
             </section>
@@ -506,6 +1528,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

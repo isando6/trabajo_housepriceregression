@@ -1,9 +1,6 @@
 # Modelo de regresión lineal con `Lot_Size` como predictor de `House_Price`
 
-En el apartado de _Análisis Exploratorio Bivariado_, se encontró que el tamaño del terreno tiene que ver, de una forma modesta, con el precio de venta (r = 0.160). Saber que hay una relación no es lo mismo que saber cómo es esa relación a lo largo de todo el rango de terrenos. Teniendo en cuenta que la pregunta de investigación apunta a algo más específico (¿el precio sube al mismo ritmo sin importar qué tan grande sea el terreno, o llega un punto en el que cada acre adicional empieza a "rendir menos"?), un solo coeficiente de correlación no puede responderla, porque resume toda la relación en un número y asume, de entrada, que es una línea recta.
-
-En el apartado de _Análisis Exploratorio Bivariado_, se encontró que el tamaño del terreno tiene que ver, de una forma modesta, con el precio de venta ($r_s$ = 0.158). Corresponde ahora dar el siguiente paso: en lugar de solo describir esa asociación con un coeficiente, se estima un modelo de regresión lineal simple que la exprese como una ecuación capaz de predecir el precio de venta a partir del tamaño del terreno.
-
+En el apartado de _Análisis Exploratorio Bivariado_, se encontró que el tamaño del terreno tiene que ver, de una forma modesta, con el precio de venta ($r_s$ = 0.158). Corresponde ahora, en lugar de solo describir esa asociación con un coeficiente, estimar un modelo de regresión lineal simple que la exprese como una ecuación capaz de predecir el precio de venta a partir del tamaño del terreno.
 
 ## Diagrama de dispersión con la recta ajustada
 
@@ -17,47 +14,168 @@ data %>%
   theme_bw()
 ```
 
-La recta ajustada muestra una pendiente positiva, pero muy suave en comparación con la enorme dispersión vertical de los puntos a su alrededor: para un mismo tamaño de terreno, el precio de venta observado varía en varios cientos de miles de dólares.
+La recta ajustada muestra una pendiente positiva muy suave en comparación con la enorme dispersión vertical de los puntos a su alrededor. Para un mismo tamaño de terreno, el precio de venta observado varía en varios cientos de miles de dólares.
 
 ## Estimación del modelo
 
-El modelo de regresión lineal simple propuesto es:
+El modelo de regresión lineal simple propuesto se expresa con la siguiente ecuación.
 
-$$\text{House\_Price}_i = \beta_0 + \beta_1 \cdot \text{Lot\_Size}_i + \varepsilon_i$$
+$$\text{House Price} = \beta_0 + \beta_1 \cdot \text{Lot Size} + \varepsilon$$
 
-donde $\beta_0$ es el precio esperado cuando `Lot_Size` es cero, $\beta_1$ es el cambio esperado en el precio por cada acre adicional de terreno, y $\varepsilon_i$ es el error aleatorio del modelo.
+Aquí $\beta_0$ es el precio esperado cuando `Lot_Size` es cero, $\beta_1$ es el cambio esperado en el precio por cada acre adicional de terreno, y $\varepsilon$ es el error aleatorio del modelo.
+
+Para que las pruebas de hipótesis y los intervalos de confianza de este modelo sean válidos, se asume que la relación entre `Lot_Size` y `House_Price` es lineal y que los errores $\varepsilon$ cumplen cuatro condiciones. Tienen media cero, tienen varianza constante $\sigma^2$ (homocedasticidad), son independientes entre sí y siguen una distribución normal, es decir, $\varepsilon \sim N(0, \sigma^2)$. Estos son los supuestos sobre los que se apoya la inferencia que se presenta a continuación.
+
+Se ajusta el modelo por mínimos cuadrados con `lm()`.
 
 ```{r, message=FALSE, warning=FALSE}
 modelo_lineal <- lm(House_Price ~ Lot_Size, data = data)
-summary(modelo_lineal)
 ```
+
+La siguiente tabla recoge los coeficientes estimados, con su error estándar, el estadístico t y el p-valor de la prueba sobre cada uno.
 
 ```{r, message=FALSE, warning=FALSE}
-confint(modelo_lineal)
+coeficientes <- summary(modelo_lineal)$coefficients
+
+data.frame(
+  Termino        = c("Intercepto", "Lot_Size"),
+  Estimacion     = round(coeficientes[, 1], 2),
+  Error_estandar = round(coeficientes[, 2], 2),
+  Estadistico_t  = round(coeficientes[, 3], 2),
+  P_valor        = format(coeficientes[, 4], scientific = TRUE, digits = 3)
+) %>%
+  kableExtra::kbl(row.names = FALSE,
+                  col.names = c("Término", "Estimación", "Error estándar", "Estadístico t", "P-valor")) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 ```
 
-Los coeficientes estimados son $\hat\beta_0$ = USD 531.798 y $\hat\beta_1$ = USD 31.339, de modo que el modelo ajustado queda:
+Los coeficientes estimados son $\hat\beta_0$ = USD 531.798 y $\hat\beta_1$ = USD 31.339, de modo que el modelo ajustado se expresa con la siguiente ecuación.
 
-$$\widehat{\text{House\_Price}} = 531.798 + 31.339 \cdot \text{Lot\_Size}$$
+$$\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}$$
 
-Es decir, por cada acre adicional de terreno, el precio de venta predicho aumenta, en promedio, USD 31.339. La prueba de hipótesis sobre la pendiente (H₀: $\beta_1 = 0$ vs. H₁: $\beta_1 \neq 0$) la encuentra estadísticamente significativa (t = 5.13; gl = 998; p = 3.41e-07), y el intervalo de confianza al 95% para $\beta_1$ (USD 19.361 ; USD 43.318) no incluye el cero, confirmando que el efecto del tamaño del terreno sobre el precio, aunque modesto, es real y no producto del azar de esta muestra.
+Es decir, por cada acre adicional de terreno, el precio de venta predicho aumenta, en promedio, USD 31.339.
+
+## Inferencia sobre los parámetros del modelo
+
+Las estimaciones anteriores son puntuales y dependen de esta muestra en particular, por lo que conviene acompañarlas de intervalos de confianza y pruebas de hipótesis que muestren qué tan confiables son. Se trabaja con la pendiente $\beta_1$, el intercepto $\beta_0$ y la varianza de los errores $\sigma^2$, con un nivel de significancia $\alpha$ = 0.05 y n - 2 = 998 grados de libertad. Se empieza por los intervalos de confianza al 95% de los dos coeficientes.
+
+```{r, message=FALSE, warning=FALSE}
+confint(modelo_lineal) %>%
+  round(2) %>%
+  kableExtra::kbl(col.names = c("Límite inferior (2.5%)", "Límite superior (97.5%)")) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
+```
+
+### Pendiente ($\beta_1$)
+
+La prueba sobre la pendiente contrasta la hipótesis nula de que $\beta_1$ es igual a cero frente a la alternativa de que es distinta de cero, y resulta estadísticamente significativa (t = 5.13; gl = 998; p = 3.41e-07). Como p es menor a 0.05, se rechaza H₀. El intervalo de confianza al 95% para $\beta_1$, que va de USD 19.361 a USD 43.318, no incluye el cero, lo que confirma que el efecto del tamaño del terreno sobre el precio, aunque modesto, es real y no producto del azar de esta muestra.
+
+### Intercepto ($\beta_0$)
+
+Para el intercepto se contrasta de la misma forma la hipótesis nula de que $\beta_0$ es igual a cero, y el resultado también es significativo (t = 28.41; gl = 998; p < 2e-16), con un intervalo de confianza al 95% que va de USD 495.071 a USD 568.524. Aun así, este valor tiene poco sentido práctico, porque representa el precio esperado de una vivienda con 0 acres de terreno, un punto que queda fuera del rango observado (de 0.5 a 5 acres). El intercepto sirve para ubicar la recta más que para interpretarse por sí solo.
+
+### Varianza de los errores ($\sigma^2$)
+
+La varianza de los errores mide qué tan dispersos quedan los precios reales alrededor de la recta, y su intervalo de confianza se construye con la distribución $\chi^2$ de n - 2 grados de libertad, de acuerdo con la siguiente expresión.
+
+$$\frac{(n-2)\,\hat\sigma^2}{\chi^2_{1-\alpha/2;\,n-2}} \;\le\; \sigma^2 \;\le\; \frac{(n-2)\,\hat\sigma^2}{\chi^2_{\alpha/2;\,n-2}}$$
+
+```{r, message=FALSE, warning=FALSE}
+gl         <- nrow(data) - 2
+sigma_hat  <- summary(modelo_lineal)$sigma
+sigma2_hat <- sigma_hat^2
+
+lim_inf <- gl * sigma2_hat / qchisq(0.975, gl)
+lim_sup <- gl * sigma2_hat / qchisq(0.025, gl)
+
+data.frame(
+  Parametro  = c("Varianza (σ²)", "Desviación estándar (σ)"),
+  Estimacion = c(format(sigma2_hat, scientific = TRUE, digits = 4),
+                 format(round(sigma_hat), big.mark = ",")),
+  IC_inf     = c(format(lim_inf, scientific = TRUE, digits = 4),
+                 format(round(sqrt(lim_inf)), big.mark = ",")),
+  IC_sup     = c(format(lim_sup, scientific = TRUE, digits = 4),
+                 format(round(sqrt(lim_sup)), big.mark = ","))
+) %>%
+  kableExtra::kbl(row.names = FALSE,
+                  col.names = c("Parámetro", "Estimación", "IC 95% inferior", "IC 95% superior")) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
+```
+
+La desviación estándar de los errores se estima en USD 250.410, con un intervalo de confianza del 95% que va de USD 239.891 a USD 261.901. Dicho de otra forma, el precio real de una vivienda se aleja en promedio unos USD 250.000 de lo que predice la recta, un error muy grande frente a la pendiente estimada (USD 31.339 por acre) que anticipa la baja capacidad explicativa del modelo. Este valor coincide, además, con el cuadrado medio de los residuos de la tabla ANOVA que sigue.
 
 ## Tabla ANOVA del modelo
 
+La tabla ANOVA descompone la variabilidad del precio en la parte que explica el tamaño del terreno y la parte que queda como residuo.
+
 ```{r, message=FALSE, warning=FALSE}
-anova(modelo_lineal)
+tabla_anova <- anova(modelo_lineal)
+
+data.frame(
+  Fuente         = c("Lot_Size", "Residuos"),
+  gl             = tabla_anova$Df,
+  Suma_cuadrados = format(tabla_anova$`Sum Sq`, scientific = TRUE, digits = 4),
+  Cuadrado_medio = format(tabla_anova$`Mean Sq`, scientific = TRUE, digits = 4),
+  F_valor        = c(round(tabla_anova$`F value`[1], 2), ""),
+  P_valor        = c(format(tabla_anova$`Pr(>F)`[1], scientific = TRUE, digits = 3), "")
+) %>%
+  kableExtra::kbl(row.names = FALSE,
+                  col.names = c("Fuente de variación", "gl", "Suma de cuadrados", "Cuadrado medio", "F", "P-valor")) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
-La tabla ANOVA llega a la misma conclusión desde otro ángulo (F = 26.36; p = 3.41e-07): se rechaza H₀, y el modelo en su conjunto es estadísticamente significativo.
+La tabla ANOVA contrasta la hipótesis global de que $\beta_1$ es igual a cero frente a la alternativa de que no lo es, es decir, si el modelo con `Lot_Size` explica algo de la variabilidad del precio. Con F = 26.36 (p = 3.41e-07) se rechaza H₀ y el modelo en su conjunto resulta estadísticamente significativo. En la regresión lineal simple, F equivale al cuadrado del estadístico t de la pendiente (5.13² ≈ 26.36), por eso ambos p-valores coinciden.
 
 ## Capacidad explicativa del modelo
 
-El coeficiente de determinación (R²) indica qué proporción de la variabilidad del precio de venta queda explicada por el modelo, en una escala de 0 a 1: un R² de 0.03, por ejemplo, significa que el modelo explica apenas el 3% de esa variabilidad, dejando el 97% restante sin explicar.
+El coeficiente de determinación (R²) indica qué proporción de la variabilidad del precio de venta queda explicada por el modelo, en una escala de 0 a 1. Un R² de 0.03, por ejemplo, significa que el modelo explica apenas el 3% de esa variabilidad, dejando el 97% restante sin explicar.
 
 ```{r, message=FALSE, warning=FALSE}
-summary(modelo_lineal)$r.squared
+data.frame(R2 = round(summary(modelo_lineal)$r.squared, 4)) %>%
+  kableExtra::kbl(row.names = FALSE, col.names = "Coeficiente de determinación (R²)") %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE)
 ```
 
-Acá el R² es de apenas 0.0257: el tamaño del terreno, por sí solo, explica únicamente el 2.6% de la variabilidad del precio de venta. En otras palabras, aunque la pendiente es estadísticamente significativa, `Lot_Size` tiene, en la práctica, una capacidad predictiva muy limitada sobre `House_Price` cuando se usa como único predictor; el 97.4% restante de la variabilidad depende de otros factores no incluidos en este modelo simple, como la superficie construida (`Square_Footage`), que en el capítulo de _Análisis Exploratorio Bivariado_ mostró una asociación mucho más fuerte con el precio.
+Acá el R² es de apenas 0.0257, lo que dice que el tamaño del terreno, por sí solo, explica únicamente el 2.6% de la variabilidad del precio de venta.
 
-La pregunta natural que sigue es si esta capacidad predictiva, aunque limitada, se mantiene igual de modesta en todos los vecindarios por igual, o si cambia según la calidad del entorno (la comparación que se desarrolla en el siguiente capítulo).
+En otras palabras, aunque la pendiente es estadísticamente significativa, `Lot_Size` tiene, en la práctica, una capacidad predictiva muy limitada sobre `House_Price` cuando se usa como único predictor. El 97.4% restante de la variabilidad depende de otros factores no incluidos en este modelo simple, como la superficie construida (`Square_Footage`), que en el apartado de _Análisis Exploratorio Bivariado_ mostró una asociación mucho más fuerte con el precio.
+
+## Transformaciones para mejorar el ajuste
+
+Cuando un modelo ajusta mal o incumple algún supuesto, una alternativa es transformar la variable respuesta, el predictor o ambos (por ejemplo, con logaritmo) y verificar si el ajuste mejora. El diagrama de dispersión no mostró curvatura ni forma de embudo, así que no hay una razón clara para transformar, pero se prueban de todas formas las tres variantes logarítmicas más comunes. Se comparan con el modelo original según su R² y según la normalidad de sus residuos, medida con el estadístico W de Shapiro-Wilk, donde un valor más cercano a 1 indica residuos más cercanos a la normalidad.
+
+```{r, message=FALSE, warning=FALSE}
+modelo_log_y  <- lm(log(House_Price) ~ Lot_Size, data = data)
+modelo_log_x  <- lm(House_Price ~ log(Lot_Size), data = data)
+modelo_log_xy <- lm(log(House_Price) ~ log(Lot_Size), data = data)
+
+data.frame(
+  Modelo = c("House_Price ~ Lot_Size (original)",
+             "log(House_Price) ~ Lot_Size",
+             "House_Price ~ log(Lot_Size)",
+             "log(House_Price) ~ log(Lot_Size)"),
+  R2     = round(c(summary(modelo_lineal)$r.squared,
+                   summary(modelo_log_y)$r.squared,
+                   summary(modelo_log_x)$r.squared,
+                   summary(modelo_log_xy)$r.squared), 4),
+  W      = round(unname(c(shapiro.test(residuals(modelo_lineal))$statistic,
+                          shapiro.test(residuals(modelo_log_y))$statistic,
+                          shapiro.test(residuals(modelo_log_x))$statistic,
+                          shapiro.test(residuals(modelo_log_xy))$statistic)), 4)
+) %>%
+  kableExtra::kbl(row.names = FALSE,
+                  col.names = c("Modelo", "R²", "W de Shapiro-Wilk (residuos)")) %>%
+  kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
+```
+
+Ninguna transformación mejora el modelo. El R² del modelo original (0.0257) sigue siendo el más alto, y las tres variantes lo reducen (0.0246, 0.0198 y 0.0182). Respecto a los residuos, aplicar logaritmo al precio empeora la normalidad (W baja de 0.9669 a 0.9332 y 0.9308), algo coherente con que `House_Price` tiene una distribución aproximadamente uniforme y no una cola larga hacia la derecha, que es el caso en que el logaritmo suele ayudar. Por esta razón se conserva el modelo original, sin transformar.
+
+En conjunto, los resultados de este capítulo muestran que el tamaño del terreno tiene un efecto real pero pequeño sobre el precio, y que el modelo predice poco. Queda por ver si esa relación se mantiene igual de modesta en todos los vecindarios o si cambia según la calidad del entorno, comparación que se desarrolla en el siguiente capítulo.

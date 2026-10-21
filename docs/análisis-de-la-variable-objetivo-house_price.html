@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title> 3 Análisis de la variable objetivo House_Price | Análisis Exploratorio de datos al conjunto ‘House Price Regression’</title>
+  <title> 3 Análisis de la variable objetivo House_Price | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
 
-  <meta property="og:title" content=" 3 Análisis de la variable objetivo House_Price | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta property="og:title" content=" 3 Análisis de la variable objetivo House_Price | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content=" 3 Análisis de la variable objetivo House_Price | Análisis Exploratorio de datos al conjunto ‘House Price Regression’" />
+  <meta name="twitter:title" content=" 3 Análisis de la variable objetivo House_Price | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   
   <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
   
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-09-17" />
+<meta name="date" content="2026-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -52,6 +52,8 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 <style type="text/css">
@@ -141,13 +143,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Trabajo de Métodos Estadísticos</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Justificación Teórica</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#introducci%C3%B3n"><i class="fa fa-check"></i><b>1.1</b> Introducción</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.2</b> Objetivos</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.3</b> Marco teórico</a></li>
-<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.4</b> Fuente de los datos</a></li>
-<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.5</b> Variables del conjunto de datos</a></li>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.2</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
 </ul></li>
 <li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
 <ul>
@@ -156,46 +157,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
 <li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
 <li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
-<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#conversi%C3%B3n-a-variables-categ%C3%B3ricas"><i class="fa fa-check"></i><b>2.6</b> Conversión a variables categóricas</a></li>
-<li class="chapter" data-level="2.7" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.7</b> Verificación de rangos plausibles</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de frecuencias y densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de dispersión y detección de valores atípicos</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#resumen-num%C3%A9rico-de-las-variables-predictoras"><i class="fa fa-check"></i><b>4.1</b> Resumen numérico de las variables predictoras</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas-distribuci%C3%B3n-de-frecuencias"><i class="fa fa-check"></i><b>4.2</b> Variables discretas: distribución de frecuencias</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas-diagramas-de-caja"><i class="fa fa-check"></i><b>4.3</b> Variables continuas: diagramas de caja</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.2</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.3</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.4</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.5</b> Variables discretas y categóricas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.6" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.6</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.7" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.7</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.8" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.8</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Num_Bathrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.4</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
-<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
-<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
-<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
-<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
-<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
-<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.1</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.2</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.3</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones"><i class="fa fa-check"></i><b>6.4</b> Mapa de calor de correlaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<li class="chapter" data-level="7" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><i class="fa fa-check"></i><b>7</b> Modelo de regresión lineal con <code>Lot_Size</code> como predictor de <code>House_Price</code></a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
-<li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
-<li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
+<li class="chapter" data-level="7.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#diagrama-de-dispersi%C3%B3n-con-la-recta-ajustada"><i class="fa fa-check"></i><b>7.1</b> Diagrama de dispersión con la recta ajustada</a></li>
+<li class="chapter" data-level="7.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimación del modelo</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Inferencia sobre los parámetros del modelo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#pendiente-beta_1"><i class="fa fa-check"></i><b>7.3.1</b> Pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.3.2</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#varianza-de-los-errores-sigma2"><i class="fa fa-check"></i><b>7.3.3</b> Varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
+<li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -218,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Análisis Exploratorio de datos al conjunto ‘House Price Regression’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</a>
           </h1>
         </div>
 
@@ -228,55 +238,133 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="análisis-de-la-variable-objetivo-house_price" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number"> 3</span> Análisis de la variable objetivo <code>House_Price</code><a href="análisis-de-la-variable-objetivo-house_price.html#an%C3%A1lisis-de-la-variable-objetivo-house_price" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>En este estudio, el precio de la venta, identificado en el dataset como <code>House_Price</code>, es la variable respuesta, representando el valor comercial que se busca predecir y el eje para responder la pregunta de investigación plantrada. Es importante examinar el comportamiento de esta por si sola: dónde se concentra, qué tan dispersa está, si su forma se aleja de la normalidad y si hay presencia de valores atípicos.</p>
+<p>En este estudio, el precio de la venta es la variable respuesta, identificado en el dataset como <code>House_Price</code>, representando el valor comercial que se busca predecir y el eje para responder la pregunta de investigación planteada. Es importante examinar su comportamiento por sí sola: dónde se concentra, qué tan dispersa está, si su forma se aleja de la normalidad y si hay presencia de valores atípicos.</p>
 <div id="resumen-de-estadísticos-descriptivos" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Resumen de estadísticos descriptivos<a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Se calculan los estimadores puntuales de tendencia central, variabilidad y forma para resumir numéricamente las propiedades de la distribución del precio de venta.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb37-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-2" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb37-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-3" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
-<span id="cb37-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-4" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price),</span>
-<span id="cb37-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-5" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price),</span>
-<span id="cb37-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-6" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price),</span>
-<span id="cb37-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-7" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price),</span>
-<span id="cb37-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-8" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>),</span>
-<span id="cb37-9"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-9" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>),</span>
-<span id="cb37-10"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-10" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price),</span>
-<span id="cb37-11"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-11" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price),</span>
-<span id="cb37-12"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-12" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price),</span>
-<span id="cb37-13"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-13" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price)</span>
-<span id="cb37-14"><a href="análisis-de-la-variable-objetivo-house_price.html#cb37-14" tabindex="-1"></a>  )</span></code></pre></div>
-<pre><code>## # A tibble: 1 × 11
-##       n   media mediana      sd     RIC      Q1      Q3  minimo   maximo asimetria curtosis
-##   &lt;int&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;
-## 1  1000 618861. 628267. 253568. 425493. 401648. 827141. 111627. 1108237.   -0.0639     1.91</code></pre>
-<p>Tal y como se mencionó en un principio, el dataset contiene 1.000 observaciones, y dichas están completas para la variable <code>House_Price</code>. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267 (mediana); la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con la asimetría, de apenas -0.064. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 (mínimo) a USD 1.108.237 (máximo). Por último, la curtosis (1.90), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-2" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-3" tabindex="-1"></a>    <span class="at">n         =</span> <span class="fu">n</span>(),</span>
+<span id="cb9-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-4" tabindex="-1"></a>    <span class="at">media     =</span> <span class="fu">mean</span>(House_Price),</span>
+<span id="cb9-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-5" tabindex="-1"></a>    <span class="at">mediana   =</span> <span class="fu">median</span>(House_Price),</span>
+<span id="cb9-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-6" tabindex="-1"></a>    <span class="at">sd        =</span> <span class="fu">sd</span>(House_Price),</span>
+<span id="cb9-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-7" tabindex="-1"></a>    <span class="at">RIC       =</span> <span class="fu">IQR</span>(House_Price),</span>
+<span id="cb9-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-8" tabindex="-1"></a>    <span class="at">Q1        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.25</span>),</span>
+<span id="cb9-9"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-9" tabindex="-1"></a>    <span class="at">Q3        =</span> <span class="fu">quantile</span>(House_Price, <span class="fl">0.75</span>),</span>
+<span id="cb9-10"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-10" tabindex="-1"></a>    <span class="at">minimo    =</span> <span class="fu">min</span>(House_Price),</span>
+<span id="cb9-11"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-11" tabindex="-1"></a>    <span class="at">maximo    =</span> <span class="fu">max</span>(House_Price),</span>
+<span id="cb9-12"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-12" tabindex="-1"></a>    <span class="at">asimetria =</span> <span class="fu">skewness</span>(House_Price),</span>
+<span id="cb9-13"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-13" tabindex="-1"></a>    <span class="at">curtosis  =</span> <span class="fu">kurtosis</span>(House_Price)</span>
+<span id="cb9-14"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-14" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb9-15"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">digits =</span> <span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-16"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb9-17"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-17" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb9-18"><a href="análisis-de-la-variable-objetivo-house_price.html#cb9-18" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>) </span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+n
+</th>
+<th style="text-align:right;">
+media
+</th>
+<th style="text-align:right;">
+mediana
+</th>
+<th style="text-align:right;">
+sd
+</th>
+<th style="text-align:right;">
+RIC
+</th>
+<th style="text-align:right;">
+Q1
+</th>
+<th style="text-align:right;">
+Q3
+</th>
+<th style="text-align:right;">
+minimo
+</th>
+<th style="text-align:right;">
+maximo
+</th>
+<th style="text-align:right;">
+asimetria
+</th>
+<th style="text-align:right;">
+curtosis
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1000
+</td>
+<td style="text-align:right;">
+618861
+</td>
+<td style="text-align:right;">
+628267.3
+</td>
+<td style="text-align:right;">
+253568.1
+</td>
+<td style="text-align:right;">
+425493
+</td>
+<td style="text-align:right;">
+401648.2
+</td>
+<td style="text-align:right;">
+827141.3
+</td>
+<td style="text-align:right;">
+111626.9
+</td>
+<td style="text-align:right;">
+1108237
+</td>
+<td style="text-align:right;">
+-0.06
+</td>
+<td style="text-align:right;">
+1.91
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>El dataset contiene 1.000 observaciones, y dichas están completas para la variable <code>House_Price</code>. En general, el promedio de precios es de USD 618.861, con el 50% de las casas presentando un precio igual o inferior a USD 628.267; la cercanía entre ambos valores es un primer indicio de simetría, que se confirma con el valor de la asimetría proporcionado por la tabla, de apenas -0.06. En esta misma línea, el rango intercuartílico es de USD 425.493 y la desviación estándar es de USD 253.568: el 50% central de las viviendas se reparte en un rango de precio bastante amplio, entre los USD 401.648 (Q1) y USD 827.141 (Q3), dentro de un rango total que va de USD 111.627 a USD 1.108.237. Por último, la curtosis (1.91), al ubicarse por debajo del valor de referencia de 3, indica una distribución platicúrtica: más aplanada que una distribución normal, sin un pico de concentración marcado alrededor de un valor típico.</p>
 </div>
 <div id="distribución-de-frecuencias-y-densidad" class="section level2 hasAnchor" number="3.2">
-<h2><span class="header-section-number">3.2</span> Distribución de Frecuencias y Densidad<a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<h2><span class="header-section-number">3.2</span> Distribución de frecuencias y densidad<a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>La combinación del histograma con la curva de densidad permite inspeccionar visualmente la morfología de la distribución y evaluar si esta presenta asimetría o desviaciones de una distribución teórica normal.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb39-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb39-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
-<span id="cb39-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-4" tabindex="-1"></a>                 <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
-<span id="cb39-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-5" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb39-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del precio de venta&quot;</span>,</span>
-<span id="cb39-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
-<span id="cb39-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb39-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)),</span>
+<span id="cb10-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-4" tabindex="-1"></a>                 <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb10-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-5" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb10-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del precio de venta&quot;</span>,</span>
+<span id="cb10-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb10-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/histograma%20House_Price-1.png" alt="" width="672" /></p>
-<p>El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el <em>Resumen de estadísticos descriptivos</em> (1.90).</p>
+<p>El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el <em>Resumen de estadísticos descriptivos</em> (1.91).</p>
 </div>
 <div id="evaluación-de-dispersión-y-detección-de-valores-atípicos" class="section level2 hasAnchor" number="3.3">
-<h2><span class="header-section-number">3.3</span> Evaluación de Dispersión y Detección de valores atípicos<a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El diagrama de caja facilita la identificación visual de la mediana, del rango intercuartílico y de aquellas observacoiones que sobrepasan los umbrales esperados de variabilidad, mejor conocidos como <em>outliers</em> o valores atípicos.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-1" tabindex="-1"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb40-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
-<span id="cb40-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb40-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-4" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
-<span id="cb40-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-5" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
-<span id="cb40-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Boxplot - House_Price&quot;</span>,</span>
-<span id="cb40-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
-<span id="cb40-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb40-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
+<h2><span class="header-section-number">3.3</span> Evaluación de dispersión y detección de valores atípicos<a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El diagrama de caja facilita la identificación visual de la mediana, del rango intercuartílico y de aquellas observaciones que sobrepasan los umbrales esperados de variabilidad, mejor conocidos como <em>outliers</em> o valores atípicos.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> House_Price)) <span class="sc">+</span></span>
+<span id="cb11-3"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-3" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb11-4"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-4" tabindex="-1"></a>               <span class="at">outlier.color =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">outlier.alpha =</span> <span class="fl">0.6</span>) <span class="sc">+</span></span>
+<span id="cb11-5"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-5" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&quot;point&quot;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;House_Price&quot;</span>,</span>
+<span id="cb11-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb11-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
 <p><img src="bookdown-demo_files/figure-html/boxplot%20House_Price-1.png" alt="" width="672" /></p>
 <p>El diagrama de caja muestra una caja centrada de forma prácticamente simétrica dentro del rango de los bigotes: el bigote inferior se extiende desde aproximadamente USD 110.000 hasta el límite inferior de la caja (Q1, USD 401.648), mientras que el bigote superior llega hasta aproximadamente USD 1.05 millones desde el límite superior (Q3, USD 827.141), ambas distancias de longitud comparable. La línea de la mediana se ubica ligeramente por encima del centro vertical de la caja, y el punto que marca la media queda prácticamente superpuesto con ella, a solo unos USD 9.600 de diferencia, lo que confirma la simetría casi perfecta de la distribución. No se observa ningún punto por fuera de los bigotes, por lo que no se identifican valores atípicos en <code>House_Price</code>.</p>
 
@@ -342,6 +430,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

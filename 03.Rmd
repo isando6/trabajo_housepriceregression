@@ -4,7 +4,7 @@ Antes de buscar entender qué factores influyen en el precio de la vivienda y ev
 
 ## Resumen numérico de las variables predictoras
 
-```{r resumen variables predictoras, message=FALSE, warning=FALSE}
+```{r resumen-variables-predictoras, message=FALSE, warning=FALSE}
 
 predictoras <- c("Square_Footage", "Num_Bedrooms", "Num_Bathrooms", "Year_Built",
                   "Lot_Size", "Garage_Size", "Neighborhood_Quality")
@@ -26,41 +26,42 @@ data %>%
     asimetria = skewness(valor),
     curtosis  = kurtosis(valor)
   ) %>%
-  kableExtra::kbl(digits = 3, caption = "Estadísticos descriptivos de las 7 variables predictoras") %>%
+  kableExtra::kbl(digits = 3) %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 
 ```
 
-Tratadas numéricamente, las cuatro variables que antes solo se describían como categóricas resultan, en realidad, bastante simétricas y de dispersión moderada: `Num_Bedrooms` (media = 2.99, mediana = 3, asimetría = 0.026) y `Num_Bathrooms` (media = 1.97, mediana = 2, asimetría = 0.050) se reparten de forma casi pareja alrededor de su valor central; `Garage_Size` (media = 1.02, mediana = 1, asimetría = −0.040) hace lo mismo entre 0 y 2 vehículos; y `Neighborhood_Quality` (media = 5.62, mediana = 6, asimetría = −0.020) cubre la escala completa de 1 a 10 sin sesgo hacia ningún extremo. Las cuatro, además, comparten la curtosis platicúrtica (entre 1.49 y 1.79, siempre por debajo de 3) ya documentada en las variables continuas. `Square_Footage`, `Lot_Size` y `Year_Built` repiten los valores ya presentados en el capítulo de la variable objetivo y se retoman aquí solo para que la tabla quede completa con las 7 predictoras a la vez.
+Tratadas numéricamente, las cuatro variables que antes solo se describían con el adjetivo categórico resultan, en realidad, bastante simétricas y de dispersión moderada. `Num_Bedrooms` (media = 2.99, mediana = 3, asimetría = 0.026) y `Num_Bathrooms` (media = 1.97, mediana = 2, asimetría = 0.050) se reparten de forma casi pareja alrededor de su valor central; `Garage_Size` (media = 1.02, mediana = 1, asimetría = −0.040) hace lo mismo entre 0 y 2 vehículos; y `Neighborhood_Quality` (media = 5.62, mediana = 6, asimetría = −0.020) cubre la escala completa de 1 a 10 sin sesgo hacia ningún extremo. Las cuatro, además, comparten la curtosis platicúrtica (entre 1.49 y 1.79, siempre por debajo de 3) ya documentada en las variables continuas. `Square_Footage`, `Lot_Size` y `Year_Built` repiten los valores ya presentados en el apartado _Análisis de la variable objetivo `House_Price`_ y se retoman aquí para que la tabla quede completa con las 7 predictoras a la vez.
 
 ## Variables discretas: distribución de frecuencias
 
 Como complemento visual al resumen numérico anterior, se construyen tablas de frecuencia y gráficos de barra para las cuatro predictoras de menor cantidad de niveles.
 
-```{r tablas frecuencia discretas, message=FALSE, warning=FALSE}
+```{r tablas-frecuencia-discretas, message=FALSE, warning=FALSE}
 
 data %>% count(Num_Bedrooms, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
-  kableExtra::kbl(caption = "Num_Bedrooms") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
                              full_width = FALSE)
 
 data %>% count(Num_Bathrooms, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
-  kableExtra::kbl(caption = "Num_Bathrooms") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
                              full_width = FALSE)
 
 data %>% count(Garage_Size, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
-  kableExtra::kbl(caption = "Garage_Size") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
                              full_width = FALSE)
 
 data %>% count(Neighborhood_Quality, name = "n") %>%
   mutate(Porcentaje = round(n / sum(n) * 100, 2)) %>%
-  kableExtra::kbl(caption = "Neighborhood_Quality") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
                              full_width = FALSE)
 ```
@@ -77,7 +78,7 @@ En `Neighborhood_Quality`, con diez niveles, mantiene una distribución pareja e
 Esta lectura numérica se traduce visualmente en los siguientes gráficos de barras, que permitirán confirmar de un vistazo si la uniformidad detectada en las tablas se sostiene también en su representación gráfica.
 
 
-```{r barras variables discretas, message=FALSE, warning=FALSE}
+```{r barras-variables-discretas, message=FALSE, warning=FALSE}
 p4 <- data %>% count(Num_Bedrooms, name = "n") %>%
   ggplot(aes(x = factor(Num_Bedrooms), y = n)) +
   geom_col(fill = "#8fa8a0", width = 0.6) +
@@ -120,7 +121,7 @@ En el caso de `Neighborhood_Quality`, las categorías 1 a 9 se mantienen dentro 
 
 Retomando los estadísticos ya presentados en el resumen numérico para `Square_Footage`, `Lot_Size` y `Year_Built`, se construyen a continuación diagramas de caja para contemplar visualmente la simetría y detectar valores atípicos en estas tres variables.
 
-```{r boxplots variables continuas, message=FALSE, warning=FALSE}
+```{r boxplots-variables-continuas, message=FALSE, warning=FALSE}
 p1 <- data %>%
   ggplot(aes(x = "", y = Square_Footage)) +
   geom_boxplot(fill = "#8fa8a0", color = "black",

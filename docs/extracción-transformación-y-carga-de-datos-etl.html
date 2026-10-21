@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-04" />
+<meta name="date" content="2026-10-20" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,8 +54,6 @@
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 <style type="text/css">
@@ -148,7 +146,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico-alargar"><i class="fa fa-check"></i><b>1.2</b> Marco teórico (alargar!!!)</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.2</b> Marco teórico</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
 <li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
 </ul></li>
@@ -159,45 +157,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
 <li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
 <li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
-<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos plausibles</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
 <ul>
 <li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
-<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de Frecuencias y Densidad</a></li>
-<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de Dispersión y Detección de valores atípicos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de frecuencias y densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de dispersión y detección de valores atípicos</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas"><i class="fa fa-check"></i><b>4.1</b> Variables discretas</a></li>
-<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas"><i class="fa fa-check"></i><b>4.2</b> Variables continuas</a></li>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#resumen-num%C3%A9rico-de-las-variables-predictoras"><i class="fa fa-check"></i><b>4.1</b> Resumen numérico de las variables predictoras</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas-distribuci%C3%B3n-de-frecuencias"><i class="fa fa-check"></i><b>4.2</b> Variables discretas: distribución de frecuencias</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas-diagramas-de-caja"><i class="fa fa-check"></i><b>4.3</b> Variables continuas: diagramas de caja</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.2</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.3</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.4</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.5</b> Variables discretas y categóricas vs. <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.6" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.6</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.7" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.7</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
-<li class="chapter" data-level="5.8" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.8</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Num_Bathrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.4</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#identificaci%C3%B3n-de-la-naturaleza-de-las-variables"><i class="fa fa-check"></i><b>6.1</b> Identificación de la naturaleza de las variables</a></li>
-<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#normalidad"><i class="fa fa-check"></i><b>6.2</b> Normalidad</a></li>
-<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.3</b> Inspección conjunta de la linealidad</a></li>
-<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.4</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
-<li class="chapter" data-level="6.5" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.5</b> Magnitud del efecto</a></li>
-<li class="chapter" data-level="6.6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#comparaci%C3%B3n-pearson-vs.-spearman-vs.-kendall"><i class="fa fa-check"></i><b>6.6</b> Comparación Pearson vs. Spearman vs. Kendall</a></li>
-<li class="chapter" data-level="6.7" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#decisi%C3%B3n-metodol%C3%B3gica-de-acuerdo-a-las-pruebas"><i class="fa fa-check"></i><b>6.7</b> Decisión metodológica de acuerdo a las pruebas</a></li>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.1</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.2</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.3</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones"><i class="fa fa-check"></i><b>6.4</b> Mapa de calor de correlaciones</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><i class="fa fa-check"></i><b>7</b> Evaluación de rendimientos decrecientes y umbrales de superficie</a>
+<li class="chapter" data-level="7" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><i class="fa fa-check"></i><b>7</b> Modelo de regresión lineal con <code>Lot_Size</code> como predictor de <code>House_Price</code></a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#la-curva-suavizada"><i class="fa fa-check"></i><b>7.1</b> La curva suavizada</a></li>
-<li class="chapter" data-level="7.2" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#prueba-formal-de-la-curvatura"><i class="fa fa-check"></i><b>7.2</b> Prueba formal de la curvatura</a></li>
-<li class="chapter" data-level="7.3" data-path="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html"><a href="evaluación-de-rendimientos-decrecientes-y-umbrales-de-superficie.html#quintiles"><i class="fa fa-check"></i><b>7.3</b> Quintiles</a></li>
+<li class="chapter" data-level="7.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#diagrama-de-dispersi%C3%B3n-con-la-recta-ajustada"><i class="fa fa-check"></i><b>7.1</b> Diagrama de dispersión con la recta ajustada</a></li>
+<li class="chapter" data-level="7.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimación del modelo</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Inferencia sobre los parámetros del modelo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#pendiente-beta_1"><i class="fa fa-check"></i><b>7.3.1</b> Pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.3.2</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#varianza-de-los-errores-sigma2"><i class="fa fa-check"></i><b>7.3.3</b> Varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
+<li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -234,7 +242,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Este proceso, conocido como <strong>ETL</strong> (Extracción, Transformación y Carga), constituye la base de todo análisis de datos. Si esta etapa se realiza de forma deficiente, cualquier resultado o interpretación posterior, por más sofisticado que resulte siendo, quedará comprometido. De esta manera, se realizará la carga del conjunto de datos <code>house_price_regression_dataset.csv</code>, la identificación de valores faltantes y duplicados y, como último paso, la verificación de que cada variable se mueva dentro de rangos plausibles antes de iniciar el análisis exploratorio que se desarrollará más adelante.</p>
 <div id="instalación-de-librerías" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> Instalación de librerías<a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: <code>tidyverse</code> para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (<code>%&gt;%</code>); <code>Amelia</code>, utilizada para la detección visual de datos faltantes a través de la función <code>missmap()</code>; <code>moments</code>, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; <code>patchwork</code>, empleada para combinar múltiples gráficos de <code>ggplot2</code> en una sola figura; <code>GGally</code>, que amplía las capacidades de visualización de <code>ggplot2</code> con funciones como <code>ggpairs()</code> y <code>ggcorr()</code> para el análisis de relaciones entre variables; y <code>Hmisc</code>, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función <code>rcorr()</code>.</p>
+<p>En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: <code>tidyverse</code> para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (<code>%&gt;%</code>); <code>Amelia</code>, utilizada para la detección visual de datos faltantes a través de la función <code>missmap()</code>; <code>moments</code>, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; <code>patchwork</code>, empleada para combinar múltiples gráficos de <code>ggplot2</code> en una sola figura; <code>GGally</code>, que amplía las capacidades de visualización de <code>ggplot2</code> con funciones como <code>ggpairs()</code> y <code>ggcorr()</code> para el análisis de relaciones entre variables; <code>Hmisc</code>, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función <code>rcorr()</code>; y <code>kableExtra</code>, que permite dar un formato más vistoso (rayado, bordes, resaltado) a las tablas generadas con <code>knitr::kable()</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(Amelia)</span>
 <span id="cb1-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
@@ -254,15 +262,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>El dataset contiene 1.000 observaciones, un número conveniente para inspeccionar.</p>
 <p>Para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación o avistamiento a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-1" tabindex="-1"></a><span class="fu">head</span>(data, <span class="at">n =</span> <span class="dv">10</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb3-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-2" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Primeras 10 observaciones del conjunto de datos&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-2" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb3-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
 <span id="cb3-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-4" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb3-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb3-5" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:estructura">Table 2.1: </span><span id="tab:estructura">Table 2.2: </span>Primeras 10 observaciones del conjunto de datos
-</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -561,13 +566,12 @@ House_Price
 <p>Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica). Así, se cuantifica primero el número de valores faltantes por columna:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-2" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">everything</span>(), <span class="sc">~</span><span class="fu">sum</span>(<span class="fu">is.na</span>(.)), <span class="at">.names =</span> <span class="st">&quot;NA_{.col}&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-3" tabindex="-1"></a>  knitr<span class="sc">::</span><span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Conteo de valores faltantes por columna&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>() <span class="sc">%&gt;%</span></span>
 <span id="cb4-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-4" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb4-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-5" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<span id="cb4-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-5" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb4-6" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:nas">Table 2.3: </span><span id="tab:nas">Table 2.4: </span>Conteo de valores faltantes por columna
-</caption>
 <thead>
 <tr>
 <th style="text-align:right;">
@@ -625,36 +629,38 @@ NA_House_Price
 </tr>
 </tbody>
 </table>
+</div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb5-1" tabindex="-1"></a><span class="fu">missmap</span>(data)</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/nas-1.png" alt="" width="672" /></p>
 <p>El conteo de <code>NA</code> arrojo cero en todas las columnas, y el mapa de <code>Amelia</code> confirma una matriz de datos completa (100% observado).</p>
 </div>
 <div id="identificación-de-valores-duplicados" class="section level2 hasAnchor" number="2.5">
 <h2><span class="header-section-number">2.5</span> Identificación de valores duplicados<a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb5-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(data))</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb6-1" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">duplicated</span>(data))</span></code></pre></div>
 <pre><code>## [1] 0</code></pre>
 <p>El conjunto de datos tampoco contiene filas duplicadas, por lo que se conservan las 1.000 observaciones originales.</p>
 </div>
-<div id="verificación-de-rangos-plausibles" class="section level2 hasAnchor" number="2.6">
-<h2><span class="header-section-number">2.6</span> Verificación de rangos plausibles<a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos-plausibles" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="verificación-de-rangos" class="section level2 hasAnchor" number="2.6">
+<h2><span class="header-section-number">2.6</span> Verificación de rangos<a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Antes de avanzar al análisis exploratorio, se revisa que cada variable se mueva dentro de un rango razonable para un conjunto de viviendas residenciales, lo que permite descartar errores de digitación o valores negativos imposibles (como una superficie o un precio menor a cero).</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-1" tabindex="-1"></a>rangos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">c</span>(<span class="st">&quot;Neighborhood_Quality&quot;</span>, <span class="st">&quot;Year_Built&quot;</span>, <span class="st">&quot;House_Price&quot;</span>, <span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Square_Footage&quot;</span>),</span>
-<span id="cb7-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-3" tabindex="-1"></a>  <span class="at">Minimo   =</span> <span class="fu">c</span>(<span class="fu">min</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">min</span>(data<span class="sc">$</span>Year_Built), <span class="fu">min</span>(data<span class="sc">$</span>House_Price),</span>
-<span id="cb7-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-4" tabindex="-1"></a>               <span class="fu">min</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">min</span>(data<span class="sc">$</span>Square_Footage)),</span>
-<span id="cb7-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-5" tabindex="-1"></a>  <span class="at">Maximo   =</span> <span class="fu">c</span>(<span class="fu">max</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">max</span>(data<span class="sc">$</span>Year_Built), <span class="fu">max</span>(data<span class="sc">$</span>House_Price),</span>
-<span id="cb7-6"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-6" tabindex="-1"></a>               <span class="fu">max</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">max</span>(data<span class="sc">$</span>Square_Footage))</span>
-<span id="cb7-7"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-7" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb7-9"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-9" tabindex="-1"></a>    <span class="at">Minimo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Minimo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>),</span>
-<span id="cb7-10"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-10" tabindex="-1"></a>    <span class="at">Maximo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Maximo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb7-11"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-11" tabindex="-1"></a>  )</span>
-<span id="cb7-12"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-12" tabindex="-1"></a></span>
-<span id="cb7-13"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-13" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(rangos, <span class="at">caption =</span> <span class="st">&quot;Rangos observados por variable&quot;</span>, <span class="at">align =</span> <span class="st">&quot;lrr&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-14"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-14" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb7-15"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb7-15" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-1" tabindex="-1"></a>rangos <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb8-2"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-2" tabindex="-1"></a>  <span class="at">Variable =</span> <span class="fu">c</span>(<span class="st">&quot;Neighborhood_Quality&quot;</span>, <span class="st">&quot;Year_Built&quot;</span>, <span class="st">&quot;House_Price&quot;</span>, <span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Square_Footage&quot;</span>),</span>
+<span id="cb8-3"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-3" tabindex="-1"></a>  <span class="at">Minimo   =</span> <span class="fu">c</span>(<span class="fu">min</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">min</span>(data<span class="sc">$</span>Year_Built), <span class="fu">min</span>(data<span class="sc">$</span>House_Price),</span>
+<span id="cb8-4"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-4" tabindex="-1"></a>               <span class="fu">min</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">min</span>(data<span class="sc">$</span>Square_Footage)),</span>
+<span id="cb8-5"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-5" tabindex="-1"></a>  <span class="at">Maximo   =</span> <span class="fu">c</span>(<span class="fu">max</span>(data<span class="sc">$</span>Neighborhood_Quality), <span class="fu">max</span>(data<span class="sc">$</span>Year_Built), <span class="fu">max</span>(data<span class="sc">$</span>House_Price),</span>
+<span id="cb8-6"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-6" tabindex="-1"></a>               <span class="fu">max</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">max</span>(data<span class="sc">$</span>Square_Footage))</span>
+<span id="cb8-7"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-7" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-8"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-8" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb8-9"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-9" tabindex="-1"></a>    <span class="at">Minimo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Minimo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb8-10"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-10" tabindex="-1"></a>    <span class="at">Maximo =</span> <span class="fu">format</span>(<span class="fu">round</span>(Maximo, <span class="dv">2</span>), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>, <span class="at">trim =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-11"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-11" tabindex="-1"></a>  )</span>
+<span id="cb8-12"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-13" tabindex="-1"></a>kableExtra<span class="sc">::</span><span class="fu">kbl</span>(rangos, <span class="at">align =</span> <span class="st">&quot;lrr&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-14"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-14" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb8-15"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-15" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb8-16"><a href="extracción-transformación-y-carga-de-datos-etl.html#cb8-16" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
-<caption>
-<span id="tab:rangos">Table 2.5: </span><span id="tab:rangos">Table 2.6: </span>Rangos observados por variable
-</caption>
 <thead>
 <tr>
 <th style="text-align:left;">
@@ -726,7 +732,8 @@ Square_Footage
 </tr>
 </tbody>
 </table>
-<p>Los rangos son plausibles para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. <code>Neighborhood_Quality</code> cubre la escala completa del 1 al 10; <code>Year_Built</code> va desde 1950 a 2022; <code>Lot_Size</code> entre 0.5 y 5 acres, y <code>Square_Footage</code> entre 503 y 4.999 pies cuadrados.</p>
+</div>
+<p>Los rangos son razonables para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. <code>Neighborhood_Quality</code> cubre la escala completa del 1 al 10; <code>Year_Built</code> va desde 1950 a 2022; <code>Lot_Size</code> entre 0.5 y 5 acres, y <code>Square_Footage</code> entre 503 y 4.999 pies cuadrados.</p>
 
 </div>
 </div>
@@ -790,6 +797,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>

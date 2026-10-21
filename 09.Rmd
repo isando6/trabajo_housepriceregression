@@ -17,3 +17,7 @@ Pontificia Universidad Javeriana. (s.f.). *¿Para qué sirve la economía?* Facu
 Prokshitha. (s.f.). *House Price Regression Dataset* [Conjunto de datos]. Kaggle. https://www.kaggle.com/datasets/prokshitha/home-value-insights
 
 Rosen, S. (1974). Hedonic prices and implicit markets: Product differentiation in pure competition. *Journal of Political Economy*, *82*(1), 34-55.
+
+Sirmans, G. S., Macpherson, D. A., y Zietz, E. N. (2005). The composition of hedonic pricing models. *Journal of Real Estate Literature*, 13(1), 3-43.
+
+Montgomery, D. C., Peck, E. A., y Vining, G. G. (2012). *Introduction to Linear Regression Analysis* (5th ed.). Wiley.

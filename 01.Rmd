@@ -6,7 +6,7 @@ Este proceso, conocido como **ETL** (Extracción, Transformación y Carga), cons
 
 ## Instalación de librerías
 
-En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: `tidyverse` para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (`%>%`); `Amelia`, utilizada para la detección visual de datos faltantes a través de la función `missmap()`; `moments`, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; `patchwork`, empleada para combinar múltiples gráficos de `ggplot2` en una sola figura; `GGally`, que amplía las capacidades de visualización de `ggplot2` con funciones como `ggpairs()` y `ggcorr()` para el análisis de relaciones entre variables; y `Hmisc`, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función `rcorr()`.
+En primer lugar, se cargan las librerías necesarias para el desarrollo de este trabajo: `tidyverse` para la manipulación y visualización de datos mediante una sintaxis basada en el operador pipe (`%>%`); `Amelia`, utilizada para la detección visual de datos faltantes a través de la función `missmap()`; `moments`, que permite calcular medidas de forma de la distribución como la asimetría y la curtosis; `patchwork`, empleada para combinar múltiples gráficos de `ggplot2` en una sola figura; `GGally`, que amplía las capacidades de visualización de `ggplot2` con funciones como `ggpairs()` y `ggcorr()` para el análisis de relaciones entre variables; `Hmisc`, utilizada específicamente para calcular, en un solo paso, la matriz de correlación junto con la matriz de p-valores correspondiente a cada pareja de variables predictoras mediante la función `rcorr()`; y `kableExtra`, que permite dar un formato más vistoso (rayado, bordes, resaltado) a las tablas generadas con `knitr::kable()`.
 
 ```{r librerias, message=FALSE, warning=FALSE}
 library(Amelia)
@@ -23,7 +23,7 @@ library(kableExtra)
 
 Se procede a cargar el conjunto de datos, correspondiente a información de viviendas residenciales individuales, con variables estructurales (superficie, habitaciones, baños, garaje), temporales (año de construcción), de entorno (calidad del vecindario) y el precio de venta observado.
 
-```{r carga, message=FALSE, warning=FALSE}
+```{r carga,  message=FALSE, warning=FALSE}
    data <- read_csv("house_price_regression_dataset.csv")
 ```
 
@@ -33,24 +33,26 @@ El dataset contiene 1.000 observaciones, un número conveniente para inspecciona
 
 Para no perder la buena práctica de verificar que la carga se haya hecho correctamente y tener una primera aproximación o avistamiento a las variables disponibles, se mostrarán las primeras 10 filas; asimismo, para determinar qué operaciones y transformaciones son válidas, se revisará la estructura interna de los datos (tipo de dato asignado a cada variable).
 
-```{r estructura, message=FALSE, warning=FALSE}
+```{r estructura,  message=FALSE, warning=FALSE}
 head(data, n = 10) %>%
-  kableExtra::kbl(caption = "Primeras 10 observaciones del conjunto de datos") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
                              full_width = FALSE) %>%
   kableExtra::scroll_box(width = "100%")
+
 ```
 
 ## Identificación de valores faltantes (NA)
 
 Uno de los pasos más importantes de esta etapa es identificar la presencia de valores faltantes. En este contexto, ignorar los datos faltantes podría sesgar las estadísticas descriptivas y los análisis posteriores, especialmente si la ausencia de datos no ocurre de forma aleatoria (por ejemplo, si ciertas viviendas reportan sistemáticamente menos información sobre alguna característica). Así, se cuantifica primero el número de valores faltantes por columna:
 
-```{r nas, message=FALSE, warning=FALSE}
+```{r nas,  message=FALSE, warning=FALSE}
 data %>%
   summarise(across(everything(), ~sum(is.na(.)), .names = "NA_{.col}")) %>%
-  kableExtra::kbl(caption = "Conteo de valores faltantes por columna") %>%
+  kableExtra::kbl() %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 
 missmap(data)
 ```
@@ -59,17 +61,17 @@ El conteo de `NA` arrojo cero en todas las columnas, y el mapa de `Amelia` confi
 
 ## Identificación de valores duplicados
 
-```{r duplicados, message=FALSE, warning=FALSE}
+```{r duplicados,  message=FALSE, warning=FALSE}
 sum(duplicated(data))
 ```
 
 El conjunto de datos tampoco contiene filas duplicadas, por lo que se conservan las 1.000 observaciones originales.
 
-## Verificación de rangos plausibles
+## Verificación de rangos
 
 Antes de avanzar al análisis exploratorio, se revisa que cada variable se mueva dentro de un rango razonable para un conjunto de viviendas residenciales, lo que permite descartar errores de digitación o valores negativos imposibles (como una superficie o un precio menor a cero).
 
-```{r rangos, message=FALSE, warning=FALSE}
+```{r rangos,  message=FALSE, warning=FALSE}
 rangos <- data.frame(
   Variable = c("Neighborhood_Quality", "Year_Built", "House_Price", "Lot_Size", "Square_Footage"),
   Minimo   = c(min(data$Neighborhood_Quality), min(data$Year_Built), min(data$House_Price),
@@ -82,9 +84,10 @@ rangos <- data.frame(
     Maximo = format(round(Maximo, 2), big.mark = ",", scientific = FALSE, trim = TRUE)
   )
 
-kableExtra::kbl(rangos, caption = "Rangos observados por variable", align = "lrr") %>%
+kableExtra::kbl(rangos, align = "lrr") %>%
   kableExtra::kable_styling(bootstrap_options = c("striped", "hover", "condensed", "bordered"),
-                             full_width = FALSE)
+                             full_width = FALSE) %>%
+  kableExtra::scroll_box(width = "100%")
 ```
 
 Los rangos son razonables para un conjunto de viviendas residenciales, sin valores negativos ni atípicos evidentes por error de digitación. `Neighborhood_Quality` cubre la escala completa del 1 al 10; `Year_Built` va desde 1950 a 2022; `Lot_Size` entre 0.5 y 5 acres, y `Square_Footage` entre 503 y 4.999 pies cuadrados.
