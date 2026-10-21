@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-20" />
+<meta name="date" content="2026-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,6 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
 <li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#transformaciones-para-mejorar-el-ajuste"><i class="fa fa-check"></i><b>7.6</b> Transformaciones para mejorar el ajuste</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -246,7 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>A pesar de no ser un paso obligatorio, conviene revisar visualmente si alguna pareja de predictoras muestra un patrón, sea lineal o no, que valga la pena explorar con detenimiento.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="correlación-entre-variables-independientes.html#cb48-1" tabindex="-1"></a><span class="fu">ggpairs</span>(data[predictoras]) <span class="sc">+</span></span>
 <span id="cb48-2"><a href="correlación-entre-variables-independientes.html#cb48-2" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">8</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-9-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-53-1.png" alt="" width="672" /></p>
 <p>La matriz de dispersión arroja las 21 combinaciones de pares a la vez y se concluye que ninguna de ellas muestra un patrón discernible. Las nubes de puntos, entonces, son uniformes en todos los paneles.</p>
 </div>
 <div id="pruebas-de-hipótesis-de-correlación-entre-las-7-predictoras" class="section level2 hasAnchor" number="6.2">
@@ -700,12 +701,16 @@ NA
 <div id="magnitud-del-efecto" class="section level2 hasAnchor" number="6.3">
 <h2><span class="header-section-number">6.3</span> Magnitud del efecto<a href="correlación-entre-variables-independientes.html#magnitud-del-efecto" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Cohen (1988) propone umbrales de referencia para interpretar la magnitud de un coeficiente de correlación, independientemente de su significancia: |r| &lt; 0.10 se considera un efecto trivial, entre 0.10 y 0.29 un efecto pequeño, entre 0.30 y 0.49 moderado, y 0.50 o más, grande.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="correlación-entre-variables-independientes.html#cb52-1" tabindex="-1"></a>r_vals <span class="ot">&lt;-</span> <span class="fu">abs</span>(r_matriz[<span class="sc">!</span><span class="fu">is.na</span>(r_matriz)])</span>
-<span id="cb52-2"><a href="correlación-entre-variables-independientes.html#cb52-2" tabindex="-1"></a></span>
-<span id="cb52-3"><a href="correlación-entre-variables-independientes.html#cb52-3" tabindex="-1"></a>clasificacion <span class="ot">&lt;-</span> <span class="fu">cut</span>(r_vals,</span>
-<span id="cb52-4"><a href="correlación-entre-variables-independientes.html#cb52-4" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.0999</span>, <span class="fl">0.3</span>, <span class="fl">0.5</span>, <span class="cn">Inf</span>),</span>
-<span id="cb52-5"><a href="correlación-entre-variables-independientes.html#cb52-5" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Trivial (&lt;0.10)&quot;</span>, <span class="st">&quot;Pequeño (0.10-0.29)&quot;</span>,</span>
-<span id="cb52-6"><a href="correlación-entre-variables-independientes.html#cb52-6" tabindex="-1"></a>                                 <span class="st">&quot;Moderado (0.30-0.49)&quot;</span>, <span class="st">&quot;Grande (&gt;=0.50)&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="correlación-entre-variables-independientes.html#cb52-1" tabindex="-1"></a><span class="co"># Extraemos la matriz numérica pura de coeficientes</span></span>
+<span id="cb52-2"><a href="correlación-entre-variables-independientes.html#cb52-2" tabindex="-1"></a>r_matriz_num <span class="ot">&lt;-</span> resultado_rcorr<span class="sc">$</span>r</span>
+<span id="cb52-3"><a href="correlación-entre-variables-independientes.html#cb52-3" tabindex="-1"></a></span>
+<span id="cb52-4"><a href="correlación-entre-variables-independientes.html#cb52-4" tabindex="-1"></a><span class="co"># Seleccionamos solo las 21 parejas únicas del triángulo inferior</span></span>
+<span id="cb52-5"><a href="correlación-entre-variables-independientes.html#cb52-5" tabindex="-1"></a>r_vals <span class="ot">&lt;-</span> <span class="fu">abs</span>(r_matriz_num[<span class="fu">lower.tri</span>(r_matriz_num)])</span>
+<span id="cb52-6"><a href="correlación-entre-variables-independientes.html#cb52-6" tabindex="-1"></a></span>
+<span id="cb52-7"><a href="correlación-entre-variables-independientes.html#cb52-7" tabindex="-1"></a>clasificacion <span class="ot">&lt;-</span> <span class="fu">cut</span>(r_vals,</span>
+<span id="cb52-8"><a href="correlación-entre-variables-independientes.html#cb52-8" tabindex="-1"></a>                      <span class="at">breaks =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="cn">Inf</span>, <span class="fl">0.0999</span>, <span class="fl">0.2999</span>, <span class="fl">0.4999</span>, <span class="cn">Inf</span>),</span>
+<span id="cb52-9"><a href="correlación-entre-variables-independientes.html#cb52-9" tabindex="-1"></a>                      <span class="at">labels =</span> <span class="fu">c</span>(<span class="st">&quot;Trivial (&lt;0.10)&quot;</span>, <span class="st">&quot;Pequeño (0.10-0.29)&quot;</span>,</span>
+<span id="cb52-10"><a href="correlación-entre-variables-independientes.html#cb52-10" tabindex="-1"></a>                                 <span class="st">&quot;Moderado (0.30-0.49)&quot;</span>, <span class="st">&quot;Grande (&gt;=0.50)&quot;</span>))</span></code></pre></div>
 <p>Aplicando estos umbrales a las 21 correlaciones calculadas, se obtiene la siguiente clasificación:</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="correlación-entre-variables-independientes.html#cb53-1" tabindex="-1"></a><span class="fu">table</span>(clasificacion) <span class="sc">%&gt;%</span></span>
 <span id="cb53-2"><a href="correlación-entre-variables-independientes.html#cb53-2" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">%&gt;%</span></span>
@@ -758,7 +763,7 @@ Grande (&gt;=0.50)
 </tr>
 </tbody>
 </table>
-<p>De las 21 parejas de predictoras, 20 se clasifican como efecto <em>Trivial</em> según Cohen, y solo <code>Garage_Size</code>–<code>Num_Bedrooms</code> (<span class="math inline">\(r_s\)</span> = 0.114) terminó encasillada en la categoría de efecto <em>Pequeño</em>. Incluso <code>Lot_Size</code>–<code>Square_Footage</code>, la otra correlación estadísticamente significativa de la sección anterior (<span class="math inline">\(r_s\)</span> = 0.090), queda clasificada como trivial bajo este criterio, confirmando así, ahora con un criterio de magnitud del efecto respaldándolo, que ninguna de las 21 parejas de predictoras representa una asociación con relevancia en la práctica.</p>
+<p>De las 21 parejas de predictoras, 20 se clasifican como efecto <em>Trivial</em> según Cohen, y solo <code>Garage_Size</code>–<code>Num_Bedrooms</code> (<span class="math inline">\(r_s\)</span> = 0.114) terminó encasillada en la categoría de efecto <em>Pequeño</em>. Incluso <code>Lot_Size</code>–<code>Square_Footage</code>, la otra correlación estadísticamente significativa de la sección anterior (<span class="math inline">\(r_s\)</span> = 0.090), queda clasificada como trivial bajo este criterio, confirmando así, ahora con un criterion de magnitud del efecto respaldándolo, que ninguna of las 21 parejas de predictoras representa una asociación con relevancia en la práctica.</p>
 </div>
 <div id="mapa-de-calor-de-correlaciones" class="section level2 hasAnchor" number="6.4">
 <h2><span class="header-section-number">6.4</span> Mapa de calor de correlaciones<a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -766,7 +771,7 @@ Grande (&gt;=0.50)
 <span id="cb54-2"><a href="correlación-entre-variables-independientes.html#cb54-2" tabindex="-1"></a>       <span class="at">method =</span> <span class="fu">c</span>(<span class="st">&quot;pairwise&quot;</span>, <span class="st">&quot;spearman&quot;</span>),</span>
 <span id="cb54-3"><a href="correlación-entre-variables-independientes.html#cb54-3" tabindex="-1"></a>       <span class="at">low =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">mid =</span> <span class="st">&quot;white&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
 <span id="cb54-4"><a href="correlación-entre-variables-independientes.html#cb54-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Correlación entre las variables independientes - Spearman&quot;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-12-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-56-1.png" alt="" width="672" /></p>
 <p>La gran mayoría de las casillas están cerca de cero, en tonos tan pálidos que apenas se distinguen del blanco. Las dos correlaciones más altas del conjunto, <code>Num_Bedrooms</code>-<code>Garage_Size</code> (0.11) y <code>Square_Footage</code>-<code>Lot_Size</code> (0.09), son también las únicas dos casillas con un leve tinte verde, aunque siguen estando muy lejos de un tono fuerte. Por otra parte, el resto de las 19 parejas se ubica entre −0.06 y 0.04, prácticamente indistinguibles de cero tanto en el número como en el color.</p>
 <p>Con un mapa de calor como este, es posible hacerse una idea respecto a qué variables podrían combinarse o transformarse para sacarles más provecho; cuando una casilla se pinta con un color fuerte, hacia el verde oscuro o el rojo, suele ser una señal de que vale la pena construir algo a partir de esas dos variables. Empero, casi todo el mapa quedó en blanco, y las dos casillas menos pálidas siguen representando, según los criterios de Cohen, una magnitud demasiado pequeña para considerarse una asociación real. En otras palabras, no hay ninguna pareja de variables que esté “pidiendo” ser combinada o transformada, ya que las 7 predictoras se comportan, en la práctica, como si fueran independientes entre sí.</p>
 

@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-20" />
+<meta name="date" content="2026-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,6 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
 <li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#transformaciones-para-mejorar-el-ajuste"><i class="fa fa-check"></i><b>7.6</b> Transformaciones para mejorar el ajuste</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -248,19 +249,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb55-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb55-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Lot_Size vs House_Price - Recta de regresión ajustada&quot;</span>,</span>
 <span id="cb55-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb55-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb55-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb55-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-13-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-57-1.png" alt="" width="672" /></p>
 <p>La recta ajustada muestra una pendiente positiva muy suave en comparación con la enorme dispersión vertical de los puntos a su alrededor. Para un mismo tamaño de terreno, el precio de venta observado varía en varios cientos de miles de dólares.</p>
 </div>
 <div id="estimación-del-modelo" class="section level2 hasAnchor" number="7.2">
 <h2><span class="header-section-number">7.2</span> Estimación del modelo<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El modelo de regresión lineal simple propuesto es:</p>
+<p>El modelo de regresión lineal simple propuesto se expresa con la siguiente ecuación.</p>
 <p><span class="math display">\[\text{House Price} = \beta_0 + \beta_1 \cdot \text{Lot Size} + \varepsilon\]</span></p>
-<p>donde <span class="math inline">\(\beta_0\)</span> es el precio esperado cuando <code>Lot_Size</code> es cero, <span class="math inline">\(\beta_1\)</span> es el cambio esperado en el precio por cada acre adicional de terreno, y <span class="math inline">\(\varepsilon\)</span> es el error aleatorio del modelo.</p>
-<p>Para que las pruebas de hipótesis y los intervalos de confianza de este modelo sean válidos, se asume que la relación entre <code>Lot_Size</code> y <code>House_Price</code> es lineal y que los errores <span class="math inline">\(\varepsilon\)</span> cumplen cuatro condiciones: tienen media cero, tienen varianza constante <span class="math inline">\(\sigma^2\)</span> (homocedasticidad), son independientes entre sí y siguen una distribución normal. Es decir, <span class="math inline">\(\varepsilon \sim N(0, \sigma^2)\)</span>. Estos supuestos no se dan por ciertos, sino que más adelante se verifican a partir de los residuos del modelo.</p>
-<p>Se ajusta el modelo por mínimos cuadrados con <code>lm()</code>:
-Se ajusta el modelo por mínimos cuadrados con <code>lm()</code>:</p>
+<p>Aquí <span class="math inline">\(\beta_0\)</span> es el precio esperado cuando <code>Lot_Size</code> es cero, <span class="math inline">\(\beta_1\)</span> es el cambio esperado en el precio por cada acre adicional de terreno, y <span class="math inline">\(\varepsilon\)</span> es el error aleatorio del modelo.</p>
+<p>Para que las pruebas de hipótesis y los intervalos de confianza de este modelo sean válidos, se asume que la relación entre <code>Lot_Size</code> y <code>House_Price</code> es lineal y que los errores <span class="math inline">\(\varepsilon\)</span> cumplen cuatro condiciones. Tienen media cero, tienen varianza constante <span class="math inline">\(\sigma^2\)</span> (homocedasticidad), son independientes entre sí y siguen una distribución normal, es decir, <span class="math inline">\(\varepsilon \sim N(0, \sigma^2)\)</span>. Estos son los supuestos sobre los que se apoya la inferencia que se presenta a continuación.</p>
+<p>Se ajusta el modelo por mínimos cuadrados con <code>lm()</code>.</p>
 <div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb56-1" tabindex="-1"></a>modelo_lineal <span class="ot">&lt;-</span> <span class="fu">lm</span>(House_Price <span class="sc">~</span> Lot_Size, <span class="at">data =</span> data)</span></code></pre></div>
-<p>La siguiente tabla recoge los coeficientes estimados, con su error estándar, el estadístico t y el p-valor de la prueba sobre cada uno:</p>
+<p>La siguiente tabla recoge los coeficientes estimados, con su error estándar, el estadístico t y el p-valor de la prueba sobre cada uno.</p>
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb57-1" tabindex="-1"></a>coeficientes <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>coefficients</span>
 <span id="cb57-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb57-2" tabindex="-1"></a></span>
 <span id="cb57-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb57-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
@@ -331,105 +331,18 @@ Lot_Size
 </tr>
 </tbody>
 </table>
-<p>Y esta otra, los intervalos de confianza al 95% para esos mismos coeficientes:</p>
+<p>Los coeficientes estimados son <span class="math inline">\(\hat\beta_0\)</span> = USD 531.798 y <span class="math inline">\(\hat\beta_1\)</span> = USD 31.339, de modo que el modelo ajustado se expresa con la siguiente ecuación.</p>
+<p><span class="math display">\[\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}\]</span></p>
+<p>Es decir, por cada acre adicional de terreno, el precio de venta predicho aumenta, en promedio, USD 31.339.</p>
+</div>
+<div id="inferencia-sobre-los-parámetros-del-modelo" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Inferencia sobre los parámetros del modelo<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Las estimaciones anteriores son puntuales y dependen de esta muestra en particular, por lo que conviene acompañarlas de intervalos de confianza y pruebas de hipótesis que muestren qué tan confiables son. Se trabaja con la pendiente <span class="math inline">\(\beta_1\)</span>, el intercepto <span class="math inline">\(\beta_0\)</span> y la varianza de los errores <span class="math inline">\(\sigma^2\)</span>, con un nivel de significancia <span class="math inline">\(\alpha\)</span> = 0.05 y n - 2 = 998 grados de libertad. Se empieza por los intervalos de confianza al 95% de los dos coeficientes.</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb58-1" tabindex="-1"></a><span class="fu">confint</span>(modelo_lineal) <span class="sc">%&gt;%</span></span>
 <span id="cb58-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb58-2" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb58-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb58-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Límite inferior (2.5%)&quot;</span>, <span class="st">&quot;Límite superior (97.5%)&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb58-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb58-4" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
 <span id="cb58-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb58-5" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-Límite inferior (2.5%)
-</th>
-<th style="text-align:right;">
-Límite superior (97.5%)
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-(Intercept)
-</td>
-<td style="text-align:right;">
-495071.37
-</td>
-<td style="text-align:right;">
-568524.4
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Lot_Size
-</td>
-<td style="text-align:right;">
-19360.76
-</td>
-<td style="text-align:right;">
-43317.7
-</td>
-</tr>
-</tbody>
-</table>
-<p>Los coeficientes estimados son <span class="math inline">\(\hat\beta_0\)</span> = USD 531.798 y <span class="math inline">\(\hat\beta_1\)</span> = USD 31.339, de modo que el modelo ajustado queda:</p>
-<p><span class="math display">\[\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}\]</span></p>
-<p>Es decir, por cada acre adicional de terreno, el precio de venta predicho aumenta, en promedio, USD 31.339.</p>
-<p>La prueba de hipótesis sobre la pendiente (H₀: <span class="math inline">\(\beta_1 = 0\)</span> vs. H₁: <span class="math inline">\(\beta_1 \neq 0\)</span>) la encuentra estadísticamente significativa (t = 5.13; gl = 998; p = 3.41e-07), y el intervalo de confianza al 95% para <span class="math inline">\(\beta_1\)</span> (USD 19.361 ; USD 43.318) no incluye el cero, confirmando que el efecto del tamaño del terreno sobre el precio, aunque modesto, es real y no producto del azar de esta muestra.</p>
-<p>Además de los coeficientes, el modelo estima la varianza de los errores <span class="math inline">\(\sigma^2\)</span>, que mide qué tan dispersos quedan los precios reales alrededor de la recta ajustada. Su raíz cuadrada, <span class="math inline">\(\hat\sigma\)</span>, es el error estándar residual y se expresa en las mismas unidades del precio (USD):</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-1" tabindex="-1"></a>sigma_hat <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>sigma</span>
-<span id="cb59-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-2" tabindex="-1"></a></span>
-<span id="cb59-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb59-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-4" tabindex="-1"></a>  <span class="at">Estimador =</span> <span class="fu">c</span>(<span class="st">&quot;Error estándar residual (σ̂)&quot;</span>, <span class="st">&quot;Varianza residual (σ̂²)&quot;</span>),</span>
-<span id="cb59-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-5" tabindex="-1"></a>  <span class="at">Valor     =</span> <span class="fu">c</span>(<span class="fu">format</span>(<span class="fu">round</span>(sigma_hat, <span class="dv">0</span>), <span class="at">big.mark =</span> <span class="st">&quot;.&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>),</span>
-<span id="cb59-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-6" tabindex="-1"></a>                <span class="fu">format</span>(sigma_hat<span class="sc">^</span><span class="dv">2</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>))</span>
-<span id="cb59-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-7" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-8" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb59-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-9" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb59-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-10" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
-<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-Estimador
-</th>
-<th style="text-align:left;">
-Valor
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Error estándar residual (σ̂)
-</td>
-<td style="text-align:left;">
-250.410
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Varianza residual (σ̂²)
-</td>
-<td style="text-align:left;">
-6.271e+10
-</td>
-</tr>
-</tbody>
-</table>
-<p>El error estándar residual es de aproximadamente USD 250.400. En promedio, el precio real de una vivienda se aleja unos USD 250.400 de lo que predice la recta. Es un error muy grande frente a la pendiente estimada (USD 31.339 por acre), lo que confirma que el tamaño del terreno por sí solo deja casi toda la variabilidad del precio sin explicar. Este valor coincide con el cuadrado medio de los residuos de la tabla ANOVA que se presenta a continuación.</p>
-</div>
-<div id="inferencia-sobre-los-parámetros-del-modelo" class="section level2 hasAnchor" number="7.3">
-<h2><span class="header-section-number">7.3</span> Inferencia sobre los parámetros del modelo<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Las estimaciones anteriores son puntuales y dependen de esta muestra en particular, por lo que conviene acompañarlas de intervalos de confianza y pruebas de hipótesis que muestren qué tan confiables son. Se trabaja con la pendiente <span class="math inline">\(\beta_1\)</span>, el intercepto <span class="math inline">\(\beta_0\)</span> y la varianza de los errores <span class="math inline">\(\sigma^2\)</span>, con un nivel de significancia <span class="math inline">\(\alpha\)</span> = 0.05 y n - 2 = 998 grados de libertad. Se empieza por los intervalos de confianza al 95% de los dos coeficientes.</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-1" tabindex="-1"></a><span class="fu">confint</span>(modelo_lineal) <span class="sc">%&gt;%</span></span>
-<span id="cb60-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-2" tabindex="-1"></a>  <span class="fu">round</span>(<span class="dv">2</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb60-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Límite inferior (2.5%)&quot;</span>, <span class="st">&quot;Límite superior (97.5%)&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb60-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-4" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb60-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-5" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -480,26 +393,26 @@ Lot_Size
 <h3><span class="header-section-number">7.3.3</span> Varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#varianza-de-los-errores-sigma2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La varianza de los errores mide qué tan dispersos quedan los precios reales alrededor de la recta, y su intervalo de confianza se construye con la distribución <span class="math inline">\(\chi^2\)</span> de n - 2 grados de libertad, de acuerdo con la siguiente expresión.</p>
 <p><span class="math display">\[\frac{(n-2)\,\hat\sigma^2}{\chi^2_{1-\alpha/2;\,n-2}} \;\le\; \sigma^2 \;\le\; \frac{(n-2)\,\hat\sigma^2}{\chi^2_{\alpha/2;\,n-2}}\]</span></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-1" tabindex="-1"></a>gl         <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="sc">-</span> <span class="dv">2</span></span>
-<span id="cb61-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-2" tabindex="-1"></a>sigma_hat  <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>sigma</span>
-<span id="cb61-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-3" tabindex="-1"></a>sigma2_hat <span class="ot">&lt;-</span> sigma_hat<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb61-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-4" tabindex="-1"></a></span>
-<span id="cb61-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-5" tabindex="-1"></a>lim_inf <span class="ot">&lt;-</span> gl <span class="sc">*</span> sigma2_hat <span class="sc">/</span> <span class="fu">qchisq</span>(<span class="fl">0.975</span>, gl)</span>
-<span id="cb61-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-6" tabindex="-1"></a>lim_sup <span class="ot">&lt;-</span> gl <span class="sc">*</span> sigma2_hat <span class="sc">/</span> <span class="fu">qchisq</span>(<span class="fl">0.025</span>, gl)</span>
-<span id="cb61-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-7" tabindex="-1"></a></span>
-<span id="cb61-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-8" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb61-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-9" tabindex="-1"></a>  <span class="at">Parametro  =</span> <span class="fu">c</span>(<span class="st">&quot;Varianza (σ²)&quot;</span>, <span class="st">&quot;Desviación estándar (σ)&quot;</span>),</span>
-<span id="cb61-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-10" tabindex="-1"></a>  <span class="at">Estimacion =</span> <span class="fu">c</span>(<span class="fu">format</span>(sigma2_hat, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
-<span id="cb61-11"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-11" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(sigma_hat), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)),</span>
-<span id="cb61-12"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-12" tabindex="-1"></a>  <span class="at">IC_inf     =</span> <span class="fu">c</span>(<span class="fu">format</span>(lim_inf, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
-<span id="cb61-13"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-13" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(lim_inf)), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)),</span>
-<span id="cb61-14"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-14" tabindex="-1"></a>  <span class="at">IC_sup     =</span> <span class="fu">c</span>(<span class="fu">format</span>(lim_sup, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
-<span id="cb61-15"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-15" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(lim_sup)), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>))</span>
-<span id="cb61-16"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-16" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb61-17"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-17" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb61-18"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-18" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Parámetro&quot;</span>, <span class="st">&quot;Estimación&quot;</span>, <span class="st">&quot;IC 95% inferior&quot;</span>, <span class="st">&quot;IC 95% superior&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb61-19"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb61-20"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-20" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-1" tabindex="-1"></a>gl         <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data) <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb59-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-2" tabindex="-1"></a>sigma_hat  <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>sigma</span>
+<span id="cb59-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-3" tabindex="-1"></a>sigma2_hat <span class="ot">&lt;-</span> sigma_hat<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb59-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-4" tabindex="-1"></a></span>
+<span id="cb59-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-5" tabindex="-1"></a>lim_inf <span class="ot">&lt;-</span> gl <span class="sc">*</span> sigma2_hat <span class="sc">/</span> <span class="fu">qchisq</span>(<span class="fl">0.975</span>, gl)</span>
+<span id="cb59-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-6" tabindex="-1"></a>lim_sup <span class="ot">&lt;-</span> gl <span class="sc">*</span> sigma2_hat <span class="sc">/</span> <span class="fu">qchisq</span>(<span class="fl">0.025</span>, gl)</span>
+<span id="cb59-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-7" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-8" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb59-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-9" tabindex="-1"></a>  <span class="at">Parametro  =</span> <span class="fu">c</span>(<span class="st">&quot;Varianza (σ²)&quot;</span>, <span class="st">&quot;Desviación estándar (σ)&quot;</span>),</span>
+<span id="cb59-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-10" tabindex="-1"></a>  <span class="at">Estimacion =</span> <span class="fu">c</span>(<span class="fu">format</span>(sigma2_hat, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
+<span id="cb59-11"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-11" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(sigma_hat), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)),</span>
+<span id="cb59-12"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-12" tabindex="-1"></a>  <span class="at">IC_inf     =</span> <span class="fu">c</span>(<span class="fu">format</span>(lim_inf, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
+<span id="cb59-13"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-13" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(lim_inf)), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>)),</span>
+<span id="cb59-14"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-14" tabindex="-1"></a>  <span class="at">IC_sup     =</span> <span class="fu">c</span>(<span class="fu">format</span>(lim_sup, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
+<span id="cb59-15"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-15" tabindex="-1"></a>                 <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(lim_sup)), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>))</span>
+<span id="cb59-16"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-16" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb59-17"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-17" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb59-18"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-18" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Parámetro&quot;</span>, <span class="st">&quot;Estimación&quot;</span>, <span class="st">&quot;IC 95% inferior&quot;</span>, <span class="st">&quot;IC 95% superior&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb59-19"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb59-20"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb59-20" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -548,28 +461,27 @@ Desviación estándar (σ)
 </tr>
 </tbody>
 </table>
-<p>La desviación estándar de los errores se estima en USD 250.410, con un intervalo de confianza del 95% que va de USD 239.891 a USD 261.901. Dicho de otra forma, el precio real de una vivienda se aleja en promedio unos USD 250.000 de lo que predice la recta, un error muy grande frente a la pendiente estimada (USD 31.339 por acre) que anticipa la baja capacidad explicativa del modelo. Este valor coincide con el cuadrado medio de los residuos de la tabla ANOVA que sigue.</p>
+<p>La desviación estándar de los errores se estima en USD 250.410, con un intervalo de confianza del 95% que va de USD 239.891 a USD 261.901. Dicho de otra forma, el precio real de una vivienda se aleja en promedio unos USD 250.000 de lo que predice la recta, un error muy grande frente a la pendiente estimada (USD 31.339 por acre) que anticipa la baja capacidad explicativa del modelo. Este valor coincide, además, con el cuadrado medio de los residuos de la tabla ANOVA que sigue.</p>
 </div>
 </div>
 <div id="tabla-anova-del-modelo" class="section level2 hasAnchor" number="7.4">
 <h2><span class="header-section-number">7.4</span> Tabla ANOVA del modelo<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>La tabla ANOVA contrasta la hipótesis global H₀: <span class="math inline">\(\beta_1 = 0\)</span> vs. H₁: <span class="math inline">\(\beta_1 \neq 0\)</span>, o sea, si el modelo con <code>Lot_Size</code> explica algo de la variabilidad del precio. Con F = 26.36 (p = 3.41e-07) se rechaza H₀, y el modelo en su conjunto es estadísticamente significativo.</p>
-<p>En regresión lineal simple, F es el cuadrado del estadístico t de la pendiente (5.13² ≈ 26.36), por eso los dos p-valores coinciden.</p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-1" tabindex="-1"></a>tabla_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelo_lineal)</span>
-<span id="cb62-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-2" tabindex="-1"></a></span>
-<span id="cb62-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
-<span id="cb62-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-4" tabindex="-1"></a>  <span class="at">Fuente         =</span> <span class="fu">c</span>(<span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Residuos&quot;</span>),</span>
-<span id="cb62-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-5" tabindex="-1"></a>  <span class="at">gl             =</span> tabla_anova<span class="sc">$</span>Df,</span>
-<span id="cb62-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-6" tabindex="-1"></a>  <span class="at">Suma_cuadrados =</span> <span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Sum Sq</span><span class="st">`</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
-<span id="cb62-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-7" tabindex="-1"></a>  <span class="at">Cuadrado_medio =</span> <span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Mean Sq</span><span class="st">`</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
-<span id="cb62-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-8" tabindex="-1"></a>  <span class="at">F_valor        =</span> <span class="fu">c</span>(<span class="fu">round</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">F value</span><span class="st">`</span>[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">&quot;&quot;</span>),</span>
-<span id="cb62-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-9" tabindex="-1"></a>  <span class="at">P_valor        =</span> <span class="fu">c</span>(<span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>], <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>), <span class="st">&quot;&quot;</span>)</span>
-<span id="cb62-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-10" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-11"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-11" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb62-12"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-12" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Fuente de variación&quot;</span>, <span class="st">&quot;gl&quot;</span>, <span class="st">&quot;Suma de cuadrados&quot;</span>, <span class="st">&quot;Cuadrado medio&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb62-13"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-13" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb62-14"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-14" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb62-15"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<p>La tabla ANOVA descompone la variabilidad del precio en la parte que explica el tamaño del terreno y la parte que queda como residuo.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-1" tabindex="-1"></a>tabla_anova <span class="ot">&lt;-</span> <span class="fu">anova</span>(modelo_lineal)</span>
+<span id="cb60-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-2" tabindex="-1"></a></span>
+<span id="cb60-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb60-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-4" tabindex="-1"></a>  <span class="at">Fuente         =</span> <span class="fu">c</span>(<span class="st">&quot;Lot_Size&quot;</span>, <span class="st">&quot;Residuos&quot;</span>),</span>
+<span id="cb60-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-5" tabindex="-1"></a>  <span class="at">gl             =</span> tabla_anova<span class="sc">$</span>Df,</span>
+<span id="cb60-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-6" tabindex="-1"></a>  <span class="at">Suma_cuadrados =</span> <span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Sum Sq</span><span class="st">`</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
+<span id="cb60-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-7" tabindex="-1"></a>  <span class="at">Cuadrado_medio =</span> <span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Mean Sq</span><span class="st">`</span>, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">4</span>),</span>
+<span id="cb60-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-8" tabindex="-1"></a>  <span class="at">F_valor        =</span> <span class="fu">c</span>(<span class="fu">round</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">F value</span><span class="st">`</span>[<span class="dv">1</span>], <span class="dv">2</span>), <span class="st">&quot;&quot;</span>),</span>
+<span id="cb60-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-9" tabindex="-1"></a>  <span class="at">P_valor        =</span> <span class="fu">c</span>(<span class="fu">format</span>(tabla_anova<span class="sc">$</span><span class="st">`</span><span class="at">Pr(&gt;F)</span><span class="st">`</span>[<span class="dv">1</span>], <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>), <span class="st">&quot;&quot;</span>)</span>
+<span id="cb60-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-10" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-11"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-11" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb60-12"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-12" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Fuente de variación&quot;</span>, <span class="st">&quot;gl&quot;</span>, <span class="st">&quot;Suma de cuadrados&quot;</span>, <span class="st">&quot;Cuadrado medio&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb60-13"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-13" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb60-14"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-14" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb60-15"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb60-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -636,15 +548,15 @@ Residuos
 </tbody>
 </table>
 </div>
-<p>La tabla ANOVA llega a la misma conclusión desde otro ángulo (F = 26.36; p = 3.41e-07): se rechaza H₀, y el modelo en su conjunto es estadísticamente significativo.</p>
+<p>La tabla ANOVA contrasta la hipótesis global de que <span class="math inline">\(\beta_1\)</span> es igual a cero frente a la alternativa de que no lo es, es decir, si el modelo con <code>Lot_Size</code> explica algo de la variabilidad del precio. Con F = 26.36 (p = 3.41e-07) se rechaza H₀ y el modelo en su conjunto resulta estadísticamente significativo. En la regresión lineal simple, F equivale al cuadrado del estadístico t de la pendiente (5.13² ≈ 26.36), por eso ambos p-valores coinciden.</p>
 </div>
 <div id="capacidad-explicativa-del-modelo" class="section level2 hasAnchor" number="7.5">
 <h2><span class="header-section-number">7.5</span> Capacidad explicativa del modelo<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>El coeficiente de determinación (R²) indica qué proporción de la variabilidad del precio de venta queda explicada por el modelo, en una escala de 0 a 1: un R² de 0.03, por ejemplo, significa que el modelo explica apenas el 3% de esa variabilidad, dejando el 97% restante sin explicar.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb63-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">R2 =</span> <span class="fu">round</span>(<span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>r.squared, <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb63-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb63-2" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="st">&quot;Coeficiente de determinación (R²)&quot;</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb63-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb63-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
-<span id="cb63-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb63-4" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<p>El coeficiente de determinación (R²) indica qué proporción de la variabilidad del precio de venta queda explicada por el modelo, en una escala de 0 a 1. Un R² de 0.03, por ejemplo, significa que el modelo explica apenas el 3% de esa variabilidad, dejando el 97% restante sin explicar.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-1" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">R2 =</span> <span class="fu">round</span>(<span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>r.squared, <span class="dv">4</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb61-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-2" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">col.names =</span> <span class="st">&quot;Coeficiente de determinación (R²)&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb61-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-3" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb61-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb61-4" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
 <table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -662,7 +574,99 @@ Coeficiente de determinación (R²)
 </tbody>
 </table>
 <p>Acá el R² es de apenas 0.0257, lo que dice que el tamaño del terreno, por sí solo, explica únicamente el 2.6% de la variabilidad del precio de venta.</p>
-<p>En otras palabras, aunque la pendiente es estadísticamente significativa, <code>Lot_Size</code> tiene, en la práctica, una capacidad predictiva muy limitada sobre <code>House_Price</code> cuando se usa como único predictor; el 97.4% restante de la variabilidad depende de otros factores no incluidos en este modelo simple, como la superficie construida (<code>Square_Footage</code>), que en el apartado de <em>Análisis Exploratorio Bivariado</em> mostró una asociación mucho más fuerte con el precio.</p>
+<p>En otras palabras, aunque la pendiente es estadísticamente significativa, <code>Lot_Size</code> tiene, en la práctica, una capacidad predictiva muy limitada sobre <code>House_Price</code> cuando se usa como único predictor. El 97.4% restante de la variabilidad depende de otros factores no incluidos en este modelo simple, como la superficie construida (<code>Square_Footage</code>), que en el apartado de <em>Análisis Exploratorio Bivariado</em> mostró una asociación mucho más fuerte con el precio.</p>
+</div>
+<div id="transformaciones-para-mejorar-el-ajuste" class="section level2 hasAnchor" number="7.6">
+<h2><span class="header-section-number">7.6</span> Transformaciones para mejorar el ajuste<a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#transformaciones-para-mejorar-el-ajuste" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Cuando un modelo ajusta mal o incumple algún supuesto, una alternativa es transformar la variable respuesta, el predictor o ambos (por ejemplo, con logaritmo) y verificar si el ajuste mejora. El diagrama de dispersión no mostró curvatura ni forma de embudo, así que no hay una razón clara para transformar; no obstante, se prueban las tres variantes logarítmicas más comunes. Se comparan con el modelo original según su R² y según la normalidad de sus residuos, medida con el estadístico W de Shapiro-Wilk, donde un valor más cercano a 1 indica residuos más cercanos a la normalidad.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-1" tabindex="-1"></a>modelo_log_y  <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(House_Price) <span class="sc">~</span> Lot_Size, <span class="at">data =</span> data)</span>
+<span id="cb62-2"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-2" tabindex="-1"></a>modelo_log_x  <span class="ot">&lt;-</span> <span class="fu">lm</span>(House_Price <span class="sc">~</span> <span class="fu">log</span>(Lot_Size), <span class="at">data =</span> data)</span>
+<span id="cb62-3"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-3" tabindex="-1"></a>modelo_log_xy <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">log</span>(House_Price) <span class="sc">~</span> <span class="fu">log</span>(Lot_Size), <span class="at">data =</span> data)</span>
+<span id="cb62-4"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-4" tabindex="-1"></a></span>
+<span id="cb62-5"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-5" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb62-6"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-6" tabindex="-1"></a>  <span class="at">Modelo =</span> <span class="fu">c</span>(<span class="st">&quot;House_Price ~ Lot_Size (original)&quot;</span>,</span>
+<span id="cb62-7"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-7" tabindex="-1"></a>             <span class="st">&quot;log(House_Price) ~ Lot_Size&quot;</span>,</span>
+<span id="cb62-8"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-8" tabindex="-1"></a>             <span class="st">&quot;House_Price ~ log(Lot_Size)&quot;</span>,</span>
+<span id="cb62-9"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-9" tabindex="-1"></a>             <span class="st">&quot;log(House_Price) ~ log(Lot_Size)&quot;</span>),</span>
+<span id="cb62-10"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-10" tabindex="-1"></a>  <span class="at">R2     =</span> <span class="fu">round</span>(<span class="fu">c</span>(<span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>r.squared,</span>
+<span id="cb62-11"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-11" tabindex="-1"></a>                   <span class="fu">summary</span>(modelo_log_y)<span class="sc">$</span>r.squared,</span>
+<span id="cb62-12"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-12" tabindex="-1"></a>                   <span class="fu">summary</span>(modelo_log_x)<span class="sc">$</span>r.squared,</span>
+<span id="cb62-13"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-13" tabindex="-1"></a>                   <span class="fu">summary</span>(modelo_log_xy)<span class="sc">$</span>r.squared), <span class="dv">4</span>),</span>
+<span id="cb62-14"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-14" tabindex="-1"></a>  <span class="at">W      =</span> <span class="fu">round</span>(<span class="fu">unname</span>(<span class="fu">c</span>(<span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(modelo_lineal))<span class="sc">$</span>statistic,</span>
+<span id="cb62-15"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-15" tabindex="-1"></a>                          <span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(modelo_log_y))<span class="sc">$</span>statistic,</span>
+<span id="cb62-16"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-16" tabindex="-1"></a>                          <span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(modelo_log_x))<span class="sc">$</span>statistic,</span>
+<span id="cb62-17"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-17" tabindex="-1"></a>                          <span class="fu">shapiro.test</span>(<span class="fu">residuals</span>(modelo_log_xy))<span class="sc">$</span>statistic)), <span class="dv">4</span>)</span>
+<span id="cb62-18"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-18" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-19"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb62-20"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-20" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Modelo&quot;</span>, <span class="st">&quot;R²&quot;</span>, <span class="st">&quot;W de Shapiro-Wilk (residuos)&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb62-21"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-21" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb62-22"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-22" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb62-23"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#cb62-23" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">scroll_box</span>(<span class="at">width =</span> <span class="st">&quot;100%&quot;</span>)</span></code></pre></div>
+<div style="border: 1px solid #ddd; padding: 5px; overflow-x: scroll; width:100%; ">
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Modelo
+</th>
+<th style="text-align:right;">
+R²
+</th>
+<th style="text-align:right;">
+W de Shapiro-Wilk (residuos)
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+House_Price ~ Lot_Size (original)
+</td>
+<td style="text-align:right;">
+0.0257
+</td>
+<td style="text-align:right;">
+0.9669
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+log(House_Price) ~ Lot_Size
+</td>
+<td style="text-align:right;">
+0.0246
+</td>
+<td style="text-align:right;">
+0.9332
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+House_Price ~ log(Lot_Size)
+</td>
+<td style="text-align:right;">
+0.0198
+</td>
+<td style="text-align:right;">
+0.9667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+log(House_Price) ~ log(Lot_Size)
+</td>
+<td style="text-align:right;">
+0.0182
+</td>
+<td style="text-align:right;">
+0.9308
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Ninguna transformación mejora el modelo. El R² del modelo original (0.0257) sigue siendo el más alto, y las tres variantes lo reducen (0.0246, 0.0198 y 0.0182). Respecto a los residuos, aplicar logaritmo al precio empeora la normalidad (W baja de 0.9669 a 0.9332 y 0.9308), algo coherente con que <code>House_Price</code> tiene una distribución aproximadamente uniforme y no una cola larga hacia la derecha, que es el caso en que el logaritmo suele ayudar. Por esta razón se conserva el modelo original, sin transformar.</p>
+<p>En conjunto, los resultados de este apartado muestran que el tamaño del terreno tiene un efecto real pero pequeño sobre el precio, y que el modelo predice poco. Queda por ver si esa relación se mantiene igual de modesta en todos los vecindarios o si cambia según la calidad del entorno, comparación que se desarrollara en el siguiente apartado.</p>
 
 </div>
 </div>

@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-20" />
+<meta name="date" content="2026-10-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -206,6 +206,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
 <li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#transformaciones-para-mejorar-el-ajuste"><i class="fa fa-check"></i><b>7.6</b> Transformaciones para mejorar el ajuste</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
 <ul>
@@ -585,8 +586,7 @@ curtosis
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  House_Price by factor(Num_Bedrooms)
-## Kruskal-Wallis chi-squared = 4.791, df =
-## 4, p-value = 0.3094</code></pre>
+## Kruskal-Wallis chi-squared = 4.791, df = 4, p-value = 0.3094</code></pre>
 <p>La prueba de Kruskal-Wallis (H = 4.79; gl = 4; p = 0.309) ratifica que no hay evidencia de que la mediana del precio de venta difiera entre las cinco categorías de número de habitaciones.</p>
 </div>
 <div id="num_bathrooms-vs-house_price" class="section level3 hasAnchor" number="5.2.2">
@@ -786,8 +786,7 @@ curtosis
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  House_Price by factor(Num_Bathrooms)
-## Kruskal-Wallis chi-squared = 0.26049, df
-## = 2, p-value = 0.8779</code></pre>
+## Kruskal-Wallis chi-squared = 0.26049, df = 2, p-value = 0.8779</code></pre>
 <p>El resultado (H = 0.26; gl = 2; p = 0.878) no rechaza H₀: no hay evidencia de que la mediana del precio de venta difiera entre los tres grupos de número de baños, confirmando numéricamente lo que ya mostraba el diagrama de caja.</p>
 </div>
 <div id="garage_size-vs-house_price" class="section level3 hasAnchor" number="5.2.3">
@@ -987,8 +986,7 @@ curtosis
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  House_Price by factor(Garage_Size)
-## Kruskal-Wallis chi-squared = 2.872, df =
-## 2, p-value = 0.2379</code></pre>
+## Kruskal-Wallis chi-squared = 2.872, df = 2, p-value = 0.2379</code></pre>
 <p>El resultado (H = 2.87; gl = 2; p = 0.238) tampoco rechaza H₀; a pesar del leve corrimiento visual, no hay evidencia suficiente de que la mediana del precio difiera según la capacidad del garaje.</p>
 </div>
 <div id="neighborhood_quality-vs.-house_price" class="section level3 hasAnchor" number="5.2.4">
@@ -1461,8 +1459,7 @@ curtosis
 ##  Kruskal-Wallis rank sum test
 ## 
 ## data:  House_Price by factor(Neighborhood_Quality)
-## Kruskal-Wallis chi-squared = 4.5457, df =
-## 9, p-value = 0.872</code></pre>
+## Kruskal-Wallis chi-squared = 4.5457, df = 9, p-value = 0.872</code></pre>
 <p>Los resultados de la prueba de Kruskal-Wallis (H = 4.55; gl = 9; p = 0.872) arrojan que no hay evidencia de que la mediana del precio de venta difiera entre los diez niveles de calidad del vecindario. De las cuatro variables discretas analizadas en este apartado, ninguna muestra una diferencia estadísticamente significativa en el precio de venta entre sus categorías.</p>
 
 </div>

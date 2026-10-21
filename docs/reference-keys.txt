@@ -42,6 +42,7 @@ intercepto-beta_0
 varianza-de-los-errores-sigma2
 tabla-anova-del-modelo
 capacidad-explicativa-del-modelo
+transformaciones-para-mejorar-el-ajuste
 comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario
 grupo-baja-calidad
 grupo-media-calidad
