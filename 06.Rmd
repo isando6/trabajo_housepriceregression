@@ -148,7 +148,7 @@ En otras palabras, aunque la pendiente es estadísticamente significativa, `Lot_
 
 ## Transformaciones para mejorar el ajuste
 
-Cuando un modelo ajusta mal o incumple algún supuesto, una alternativa es transformar la variable respuesta, el predictor o ambos (por ejemplo, con logaritmo) y verificar si el ajuste mejora. El diagrama de dispersión no mostró curvatura ni forma de embudo, así que no hay una razón clara para transformar, pero se prueban de todas formas las tres variantes logarítmicas más comunes. Se comparan con el modelo original según su R² y según la normalidad de sus residuos, medida con el estadístico W de Shapiro-Wilk, donde un valor más cercano a 1 indica residuos más cercanos a la normalidad.
+Cuando un modelo ajusta mal o incumple algún supuesto, una alternativa es transformar la variable respuesta, el predictor o ambos (por ejemplo, con logaritmo) y verificar si el ajuste mejora. El diagrama de dispersión no mostró curvatura ni forma de embudo, así que no hay una razón clara para transformar; no obstante, se prueban las tres variantes logarítmicas más comunes. Se comparan con el modelo original según su R² y según la normalidad de sus residuos, medida con el estadístico W de Shapiro-Wilk, donde un valor más cercano a 1 indica residuos más cercanos a la normalidad.
 
 ```{r, message=FALSE, warning=FALSE}
 modelo_log_y  <- lm(log(House_Price) ~ Lot_Size, data = data)
@@ -178,4 +178,4 @@ data.frame(
 
 Ninguna transformación mejora el modelo. El R² del modelo original (0.0257) sigue siendo el más alto, y las tres variantes lo reducen (0.0246, 0.0198 y 0.0182). Respecto a los residuos, aplicar logaritmo al precio empeora la normalidad (W baja de 0.9669 a 0.9332 y 0.9308), algo coherente con que `House_Price` tiene una distribución aproximadamente uniforme y no una cola larga hacia la derecha, que es el caso en que el logaritmo suele ayudar. Por esta razón se conserva el modelo original, sin transformar.
 
-En conjunto, los resultados de este capítulo muestran que el tamaño del terreno tiene un efecto real pero pequeño sobre el precio, y que el modelo predice poco. Queda por ver si esa relación se mantiene igual de modesta en todos los vecindarios o si cambia según la calidad del entorno, comparación que se desarrolla en el siguiente capítulo.
+En conjunto, los resultados de este apartado muestran que el tamaño del terreno tiene un efecto real pero pequeño sobre el precio, y que el modelo predice poco. Queda por ver si esa relación se mantiene igual de modesta en todos los vecindarios o si cambia según la calidad del entorno, comparación que se desarrollara en el siguiente apartado.
