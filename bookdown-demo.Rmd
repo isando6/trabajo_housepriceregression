@@ -486,6 +486,8 @@ Primero, se ve un quiebre bien marcado entre el grupo de baja calidad y los otro
 
 # Conclusiones
 
+Hola
+
 <!--chapter:end:08.Rmd-->
 
 # Referencias
