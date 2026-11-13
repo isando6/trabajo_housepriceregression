@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 5 Análisis Exploratorio Bivariado | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
-  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 5 Análisis Exploratorio Bivariado | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-21" />
+<meta name="date" content="2026-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -251,7 +251,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb22-4"><a href="análisis-exploratorio-bivariado.html#cb22-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Lot_Size vs House_Price&quot;</span>,</span>
 <span id="cb22-5"><a href="análisis-exploratorio-bivariado.html#cb22-5" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (Lot_Size en acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb22-6"><a href="análisis-exploratorio-bivariado.html#cb22-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-1-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-1-1.png" width="672" /></p>
 <p>La nube de datos, sin ninguna forma reconocible, ocupa todo el rectángulo del gráfico. No hay un ensanchamiento ni un estrechamiento visible de la nube a medida que avanza el eje horizontal o una inclinación perceptible de la masa de puntos hacia arriba o hacia la derecha. Es decir, para cualquier tamaño del terreno, desde los más pequeños (cerca de 0.5 acres) hasta los más grandes (cerca de 5 acres), el precio de venta se reparte de forma silmilar entre los USD 110.000 y USD 1.1 millones.</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="análisis-exploratorio-bivariado.html#cb23-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Lot_Size, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
@@ -273,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-4"><a href="análisis-exploratorio-bivariado.html#cb25-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Superficie construida (Square_Footage en sqft)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
 <span id="cb25-5"><a href="análisis-exploratorio-bivariado.html#cb25-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb25-6"><a href="análisis-exploratorio-bivariado.html#cb25-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Square_Footage vs House_Price&#39;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-2-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-2-1.png" width="672" /></p>
 <p>La relación, con los puntos formando una banda diagonal angosta y consistente que recorre desde la esquina inferior izquierda (viviendas pequeñas y baratas) hasta la esquina superior derecha (viviendas grandes y costosas), muestra una trayectoria clara y fácilmente reconocible.</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="análisis-exploratorio-bivariado.html#cb26-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Square_Footage, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
@@ -295,7 +295,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb28-4"><a href="análisis-exploratorio-bivariado.html#cb28-4" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&#39;Año de construcción (Year_Built)&#39;</span>, <span class="at">y =</span> <span class="st">&#39;Precio de venta (USD)&#39;</span>) <span class="sc">+</span></span>
 <span id="cb28-5"><a href="análisis-exploratorio-bivariado.html#cb28-5" tabindex="-1"></a>  <span class="fu">theme_bw</span>() <span class="sc">+</span></span>
 <span id="cb28-6"><a href="análisis-exploratorio-bivariado.html#cb28-6" tabindex="-1"></a>  <span class="fu">facet_grid</span>(. <span class="sc">~</span> <span class="st">&#39;Year_Built vs House_Price&#39;</span>)</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-3-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-3-1.png" width="672" /></p>
 <p>La nube de puntos cubre todo el rango vertical de precios de forma pareja para cualquier año de construcción. En esta misma línea, el patrón es indistinguible de una dispersión aleatoria respecto al eje horizontal. No se identifican precios sistemáticamente más alto que otros entre las viviendas de 1950 y 2020.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="análisis-exploratorio-bivariado.html#cb29-1" tabindex="-1"></a><span class="fu">cor.test</span>(data<span class="sc">$</span>Year_Built, data<span class="sc">$</span>House_Price, <span class="at">method =</span> <span class="st">&quot;spearman&quot;</span>)</span></code></pre></div>
 <pre><code>## 
@@ -579,7 +579,7 @@ curtosis
 <span id="cb32-4"><a href="análisis-exploratorio-bivariado.html#cb32-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
 <span id="cb32-5"><a href="análisis-exploratorio-bivariado.html#cb32-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de habitaciones (Num_Bedrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb32-6"><a href="análisis-exploratorio-bivariado.html#cb32-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-5-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-5-1.png" width="672" /></p>
 <p>Las cinco cajas del diagrama se solapan ampliamente, con las líneas de mediana prácticamente a la misma altura entre sí. No se observa ningún grupo cuya caja quede claramente por encima o por debajo de las demás, lo que sugiere visualmente que el número de habitaciones por sí solo no distingue el precio de venta.</p>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="análisis-exploratorio-bivariado.html#cb33-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Num_Bedrooms), <span class="at">data =</span> data)</span></code></pre></div>
 <pre><code>## 
@@ -778,7 +778,7 @@ curtosis
 <span id="cb36-4"><a href="análisis-exploratorio-bivariado.html#cb36-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
 <span id="cb36-5"><a href="análisis-exploratorio-bivariado.html#cb36-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Número de baños (Num_Bathrooms)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb36-6"><a href="análisis-exploratorio-bivariado.html#cb36-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-7-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-7-1.png" width="672" /></p>
 <p>Las tres cajas se superponen casi por completo, con puntos de media y líneas de mediana a alturas casi indistinguibles entre los tres grupos. Es el diagrama de caja con menor separación visual de las cuatro variables discretas tratadas.</p>
 <p>Para confirmar formalmente esta ausencia de diferencia visual, se compara la distribución de <code>House_Price</code> entre los tres grupos con la prueba de Kruskal-Wallis, la versión no paramétrica del ANOVA de un factor, apropiada aquí porque ya se documentó que <code>House_Price</code> no sigue una distribución normal.</p>
 <div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="análisis-exploratorio-bivariado.html#cb37-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Num_Bathrooms), <span class="at">data =</span> data)</span></code></pre></div>
@@ -978,7 +978,7 @@ curtosis
 <span id="cb40-4"><a href="análisis-exploratorio-bivariado.html#cb40-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
 <span id="cb40-5"><a href="análisis-exploratorio-bivariado.html#cb40-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Capacidad del garaje en vehículos (Garage_Size)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb40-6"><a href="análisis-exploratorio-bivariado.html#cb40-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-9-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-9-1.png" width="672" /></p>
 <p>El diagrama de caja deja ver un leve corrimiento hacia arriba de la caja correspondiente a 2 vehículos frente a las otras dos, coherente con la tendencia ya señalada en la tabla, aunque el solapamiento entre las tres cajas sigue siendo considerable.</p>
 <p>Se aplica la misma prueba de Kruskal-Wallis para verificar si ese leve corrimiento es, o no, estadísticamente significativo.</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="análisis-exploratorio-bivariado.html#cb41-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Garage_Size), <span class="at">data =</span> data)</span></code></pre></div>
@@ -1452,7 +1452,7 @@ curtosis
 <span id="cb44-4"><a href="análisis-exploratorio-bivariado.html#cb44-4" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun =</span> mean, <span class="at">geom =</span> <span class="st">&#39;point&#39;</span>, <span class="at">shape =</span> <span class="dv">20</span>, <span class="at">size =</span> <span class="dv">3</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
 <span id="cb44-5"><a href="análisis-exploratorio-bivariado.html#cb44-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Calidad del vecindario (Neighborhood_Quality)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb44-6"><a href="análisis-exploratorio-bivariado.html#cb44-6" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/04-11-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/04-11-1.png" width="672" /></p>
 <p>Esta ausencia de un patrón claro es visible también en el diagrama. Las diez cajas se ubican a alturas muy similares, sin una progresión ascendente de izquierda a derecha.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="análisis-exploratorio-bivariado.html#cb45-1" tabindex="-1"></a><span class="fu">kruskal.test</span>(House_Price <span class="sc">~</span> <span class="fu">factor</span>(Neighborhood_Quality), <span class="at">data =</span> data)</span></code></pre></div>
 <pre><code>## 

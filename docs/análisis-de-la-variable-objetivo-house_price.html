@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title> 3 Análisis de la variable objetivo House_Price | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
   <meta name="description" content="tarea 2do corte de métodos estadísticos" />
-  <meta name="generator" content="bookdown 0.48 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
 
   <meta property="og:title" content=" 3 Análisis de la variable objetivo House_Price | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
 
 
-<meta name="date" content="2026-10-21" />
+<meta name="date" content="2026-11-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -352,7 +352,7 @@ curtosis
 <span id="cb10-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Distribución del precio de venta&quot;</span>,</span>
 <span id="cb10-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
 <span id="cb10-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb10-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/histograma%20House_Price-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/histograma%20House_Price-1.png" width="672" /></p>
 <p>El histograma muestra una distribución con una dispersión amplia a lo largo de casi todo el rango de precios, sin una única moda dominante ni una forma acampanada clásica. La curva de densidad revela una elevación puntual alrededor de los USD 600.000-650.000, donde se alcanza la densidad máxima, seguida de una meseta ligeramente elevada que se sostiene entre los USD 700.000 y 900.000 antes de descender. Sin embargo, los extremos de la distribución muestran una caída marcada pues la densidad disminuye de forma notoria, estrechando, en consecuencia, las colas, por debajo de los USD 300.000 y por encima de USD 950.000. Esta caracterización es consistente con la curtosis platicúrtica calculada en el <em>Resumen de estadísticos descriptivos</em> (1.91).</p>
 </div>
 <div id="evaluación-de-dispersión-y-detección-de-valores-atípicos" class="section level2 hasAnchor" number="3.3">
@@ -366,7 +366,7 @@ curtosis
 <span id="cb11-6"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;House_Price&quot;</span>,</span>
 <span id="cb11-7"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
 <span id="cb11-8"><a href="análisis-de-la-variable-objetivo-house_price.html#cb11-8" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code></pre></div>
-<p><img src="bookdown-demo_files/figure-html/boxplot%20House_Price-1.png" alt="" width="672" /></p>
+<p><img src="bookdown-demo_files/figure-html/boxplot%20House_Price-1.png" width="672" /></p>
 <p>El diagrama de caja muestra una caja centrada de forma prácticamente simétrica dentro del rango de los bigotes: el bigote inferior se extiende desde aproximadamente USD 110.000 hasta el límite inferior de la caja (Q1, USD 401.648), mientras que el bigote superior llega hasta aproximadamente USD 1.05 millones desde el límite superior (Q3, USD 827.141), ambas distancias de longitud comparable. La línea de la mediana se ubica ligeramente por encima del centro vertical de la caja, y el punto que marca la media queda prácticamente superpuesto con ella, a solo unos USD 9.600 de diferencia, lo que confirma la simetría casi perfecta de la distribución. No se observa ningún punto por fuera de los bigotes, por lo que no se identifican valores atípicos en <code>House_Price</code>.</p>
 
 </div>
