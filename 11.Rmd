@@ -1,0 +1,39 @@
+# Referencias
+
+Akaike, H. (1974). A new look at the statistical model identification. *IEEE Transactions on Automatic Control*, *19*(6), 716-723.
+
+Alonso, W. (1964). *Location and land use: Toward a general theory of land rent*. Harvard University Press.
+
+Breusch, T. S., y Pagan, A. R. (1979). A simple test for heteroscedasticity and random coefficient variation. *Econometrica*, *47*(5), 1287-1294.
+
+Cohen, J. (1988). *Statistical power analysis for the behavioral sciences* (2.ª ed.). Lawrence Erlbaum Associates.
+
+Colwell, P. F., y Sirmans, C. F. (1978). Area, time, centrality, and the value of urban land. *Land Economics*, *54*(4), 514-519.
+
+Cook, R. D. (1977). Detection of influential observation in linear regression. *Technometrics*, *19*(1), 15-18.
+
+DiPasquale, D., y Wheaton, W. C. (1996). *Urban economics and real estate markets*. Prentice Hall.
+
+Durbin, J., y Watson, G. S. (1950). Testing for serial correlation in least squares regression: I. *Biometrika*, *37*(3/4), 409-428.
+
+Fox, J., y Weisberg, S. (2019). *An R companion to applied regression* (3.ª ed.). Sage.
+
+Hebbali, A. (2024). *olsrr: Tools for building OLS regression models* [Paquete de R]. CRAN. https://CRAN.R-project.org/package=olsrr
+
+Montgomery, D. C., Peck, E. A., y Vining, G. G. (2012). *Introduction to linear regression analysis* (5.ª ed.). Wiley.
+
+Navidi, W. (2021). *Statistics for engineers and scientists* (5.ª ed.). McGraw-Hill Education.
+
+Pontificia Universidad Javeriana. (s.f.). *¿Para qué sirve la economía?* Facultad de Ciencias Económicas y Administrativas. https://cea.javeriana.edu.co/w/blog/para-que-sirve-economia
+
+Prokshitha. (s.f.). *House Price Regression Dataset* [Conjunto de datos]. Kaggle. https://www.kaggle.com/datasets/prokshitha/home-value-insights
+
+Rosen, S. (1974). Hedonic prices and implicit markets: Product differentiation in pure competition. *Journal of Political Economy*, *82*(1), 34-55.
+
+Shapiro, S. S., y Wilk, M. B. (1965). An analysis of variance test for normality (complete samples). *Biometrika*, *52*(3/4), 591-611.
+
+Sirmans, G. S., Macpherson, D. A., y Zietz, E. N. (2005). The composition of hedonic pricing models. *Journal of Real Estate Literature*, *13*(1), 3-43.
+
+Venables, W. N., y Ripley, B. D. (2002). *Modern applied statistics with S* (4.ª ed.). Springer.
+
+Zeileis, A., y Hothorn, T. (2002). Diagnostic checking in regression relationships. *R News*, *2*(3), 7-10.
