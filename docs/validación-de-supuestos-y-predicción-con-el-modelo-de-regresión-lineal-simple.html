@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title> 9 Validación de supuestos y predicción con el modelo de regresión lineal simple | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</title>
+  <meta name="description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content=" 9 Validación de supuestos y predicción con el modelo de regresión lineal simple | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="tarea 2do corte de métodos estadísticos" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content=" 9 Validación de supuestos y predicción con el modelo de regresión lineal simple | Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’" />
+  
+  <meta name="twitter:description" content="tarea 2do corte de métodos estadísticos" />
+  
+
+<meta name="author" content="Karina Núñez Sarmiento, Isabella Sandoval Escorcia" />
+
+
+<meta name="date" content="2026-11-23" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"/>
+<link rel="next" href="modelo-de-regresión-lineal-múltiple.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Trabajo de Métodos Estadísticos</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introducción</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#objetivos"><i class="fa fa-check"></i><b>1.1</b> Objetivos</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#marco-te%C3%B3rico"><i class="fa fa-check"></i><b>1.2</b> Marco teórico</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#fuente-de-los-datos"><i class="fa fa-check"></i><b>1.3</b> Fuente de los datos</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#variables-del-conjunto-de-datos"><i class="fa fa-check"></i><b>1.4</b> Variables del conjunto de datos</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html"><i class="fa fa-check"></i><b>2</b> Extracción, transformación y carga de datos (ETL)</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#instalaci%C3%B3n-de-librer%C3%ADas"><i class="fa fa-check"></i><b>2.1</b> Instalación de librerías</a></li>
+<li class="chapter" data-level="2.2" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#carga-del-conjunto-de-datos-house_price_regression_dataset"><i class="fa fa-check"></i><b>2.2</b> Carga del conjunto de datos <code>house_price_regression_dataset</code></a></li>
+<li class="chapter" data-level="2.3" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#visualizaci%C3%B3n-del-conjunto-de-datos-y-su-estructura"><i class="fa fa-check"></i><b>2.3</b> Visualización del conjunto de datos y su estructura</a></li>
+<li class="chapter" data-level="2.4" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-faltantes-na"><i class="fa fa-check"></i><b>2.4</b> Identificación de valores faltantes (NA)</a></li>
+<li class="chapter" data-level="2.5" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#identificaci%C3%B3n-de-valores-duplicados"><i class="fa fa-check"></i><b>2.5</b> Identificación de valores duplicados</a></li>
+<li class="chapter" data-level="2.6" data-path="extracción-transformación-y-carga-de-datos-etl.html"><a href="extracción-transformación-y-carga-de-datos-etl.html#verificaci%C3%B3n-de-rangos"><i class="fa fa-check"></i><b>2.6</b> Verificación de rangos</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html"><i class="fa fa-check"></i><b>3</b> Análisis de la variable objetivo <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#resumen-de-estad%C3%ADsticos-descriptivos"><i class="fa fa-check"></i><b>3.1</b> Resumen de estadísticos descriptivos</a></li>
+<li class="chapter" data-level="3.2" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#distribuci%C3%B3n-de-frecuencias-y-densidad"><i class="fa fa-check"></i><b>3.2</b> Distribución de frecuencias y densidad</a></li>
+<li class="chapter" data-level="3.3" data-path="análisis-de-la-variable-objetivo-house_price.html"><a href="análisis-de-la-variable-objetivo-house_price.html#evaluaci%C3%B3n-de-dispersi%C3%B3n-y-detecci%C3%B3n-de-valores-at%C3%ADpicos"><i class="fa fa-check"></i><b>3.3</b> Evaluación de dispersión y detección de valores atípicos</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html"><i class="fa fa-check"></i><b>4</b> Análisis de las variables características (independientes)</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#resumen-num%C3%A9rico-de-las-variables-predictoras"><i class="fa fa-check"></i><b>4.1</b> Resumen numérico de las variables predictoras</a></li>
+<li class="chapter" data-level="4.2" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-discretas-distribuci%C3%B3n-de-frecuencias"><i class="fa fa-check"></i><b>4.2</b> Variables discretas: distribución de frecuencias</a></li>
+<li class="chapter" data-level="4.3" data-path="análisis-de-las-variables-características-independientes.html"><a href="análisis-de-las-variables-características-independientes.html#variables-continuas-diagramas-de-caja"><i class="fa fa-check"></i><b>4.3</b> Variables continuas: diagramas de caja</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html"><i class="fa fa-check"></i><b>5</b> Análisis Exploratorio Bivariado</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-continuas-vs.-house_price"><i class="fa fa-check"></i><b>5.1</b> Variables continuas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.1.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#lot_size-vs-house_price"><i class="fa fa-check"></i><b>5.1.1</b> <code>Lot_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#square_footage-vs-house_price"><i class="fa fa-check"></i><b>5.1.2</b> <code>Square_Footage</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.1.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#year_built-vs-house_price"><i class="fa fa-check"></i><b>5.1.3</b> <code>Year_Built</code> vs <code>House_Price</code></a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#variables-discretas-y-categ%C3%B3ricas-vs.-house_price"><i class="fa fa-check"></i><b>5.2</b> Variables discretas y categóricas vs. <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="5.2.1" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bedrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.1</b> <code>Num_Bedrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.2" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#num_bathrooms-vs-house_price"><i class="fa fa-check"></i><b>5.2.2</b> <code>Num_Bathrooms</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#garage_size-vs-house_price"><i class="fa fa-check"></i><b>5.2.3</b> <code>Garage_Size</code> vs <code>House_Price</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="análisis-exploratorio-bivariado.html"><a href="análisis-exploratorio-bivariado.html#neighborhood_quality-vs.-house_price"><i class="fa fa-check"></i><b>5.2.4</b> <code>Neighborhood_Quality</code> vs. <code>House_Price</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html"><i class="fa fa-check"></i><b>6</b> Correlación entre variables independientes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#inspecci%C3%B3n-conjunta-de-la-linealidad"><i class="fa fa-check"></i><b>6.1</b> Inspección conjunta de la linealidad</a></li>
+<li class="chapter" data-level="6.2" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#pruebas-de-hip%C3%B3tesis-de-correlaci%C3%B3n-entre-las-7-predictoras"><i class="fa fa-check"></i><b>6.2</b> Pruebas de hipótesis de correlación entre las 7 predictoras</a></li>
+<li class="chapter" data-level="6.3" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#magnitud-del-efecto"><i class="fa fa-check"></i><b>6.3</b> Magnitud del efecto</a></li>
+<li class="chapter" data-level="6.4" data-path="correlación-entre-variables-independientes.html"><a href="correlación-entre-variables-independientes.html#mapa-de-calor-de-correlaciones"><i class="fa fa-check"></i><b>6.4</b> Mapa de calor de correlaciones</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><i class="fa fa-check"></i><b>7</b> Modelo de regresión lineal con <code>Lot_Size</code> como predictor de <code>House_Price</code></a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#diagrama-de-dispersi%C3%B3n-con-la-recta-ajustada"><i class="fa fa-check"></i><b>7.1</b> Diagrama de dispersión con la recta ajustada</a></li>
+<li class="chapter" data-level="7.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#estimaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>7.2</b> Estimación del modelo</a></li>
+<li class="chapter" data-level="7.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#inferencia-sobre-los-par%C3%A1metros-del-modelo"><i class="fa fa-check"></i><b>7.3</b> Inferencia sobre los parámetros del modelo</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#pendiente-beta_1"><i class="fa fa-check"></i><b>7.3.1</b> Pendiente (<span class="math inline">\(\beta_1\)</span>)</a></li>
+<li class="chapter" data-level="7.3.2" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#intercepto-beta_0"><i class="fa fa-check"></i><b>7.3.2</b> Intercepto (<span class="math inline">\(\beta_0\)</span>)</a></li>
+<li class="chapter" data-level="7.3.3" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#varianza-de-los-errores-sigma2"><i class="fa fa-check"></i><b>7.3.3</b> Varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#tabla-anova-del-modelo"><i class="fa fa-check"></i><b>7.4</b> Tabla ANOVA del modelo</a></li>
+<li class="chapter" data-level="7.5" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#capacidad-explicativa-del-modelo"><i class="fa fa-check"></i><b>7.5</b> Capacidad explicativa del modelo</a></li>
+<li class="chapter" data-level="7.6" data-path="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html"><a href="modelo-de-regresión-lineal-con-lot_size-como-predictor-de-house_price.html#transformaciones-para-mejorar-el-ajuste"><i class="fa fa-check"></i><b>7.6</b> Transformaciones para mejorar el ajuste</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><i class="fa fa-check"></i><b>8</b> Comparación de la relación <code>Lot_Size</code>-<code>House_Price</code> según la calidad del vecindario</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-baja-calidad"><i class="fa fa-check"></i><b>8.1</b> Grupo: Baja calidad</a></li>
+<li class="chapter" data-level="8.2" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-media-calidad"><i class="fa fa-check"></i><b>8.2</b> Grupo: Media calidad</a></li>
+<li class="chapter" data-level="8.3" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#grupo-alta-calidad"><i class="fa fa-check"></i><b>8.3</b> Grupo: Alta calidad</a></li>
+<li class="chapter" data-level="8.4" data-path="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html"><a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html#comparaci%C3%B3n-entre-los-tres-grupos"><i class="fa fa-check"></i><b>8.4</b> Comparación entre los tres grupos</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><i class="fa fa-check"></i><b>9</b> Validación de supuestos y predicción con el modelo de regresión lineal simple</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#prueba-de-hip%C3%B3tesis-para-la-varianza-de-los-errores-sigma2"><i class="fa fa-check"></i><b>9.1</b> Prueba de hipótesis para la varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)</a></li>
+<li class="chapter" data-level="9.2" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#an%C3%A1lisis-de-residuales"><i class="fa fa-check"></i><b>9.2</b> Análisis de residuales</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#independencia-de-los-errores"><i class="fa fa-check"></i><b>9.2.1</b> Independencia de los errores</a></li>
+<li class="chapter" data-level="9.2.2" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#normalidad-de-los-errores"><i class="fa fa-check"></i><b>9.2.2</b> Normalidad de los errores</a></li>
+<li class="chapter" data-level="9.2.3" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#media-cero-de-los-errores"><i class="fa fa-check"></i><b>9.2.3</b> Media cero de los errores</a></li>
+<li class="chapter" data-level="9.2.4" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#varianza-constante-de-los-errores-homocedasticidad"><i class="fa fa-check"></i><b>9.2.4</b> Varianza constante de los errores (homocedasticidad)</a></li>
+<li class="chapter" data-level="9.2.5" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#resumen-de-la-validaci%C3%B3n-de-supuestos"><i class="fa fa-check"></i><b>9.2.5</b> Resumen de la validación de supuestos</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#intervalo-de-confianza-para-el-precio-medio-ey-mid-x_0"><i class="fa fa-check"></i><b>9.3</b> Intervalo de confianza para el precio medio <span class="math inline">\(E(y \mid x_0)\)</span></a></li>
+<li class="chapter" data-level="9.4" data-path="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#intervalo-de-predicci%C3%B3n-para-una-vivienda-nueva-y_0"><i class="fa fa-check"></i><b>9.4</b> Intervalo de predicción para una vivienda nueva <span class="math inline">\(y_0\)</span></a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html"><i class="fa fa-check"></i><b>10</b> Modelo de regresión lineal múltiple</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#formulaci%C3%B3n-del-modelo"><i class="fa fa-check"></i><b>10.1</b> Formulación del modelo</a></li>
+<li class="chapter" data-level="10.2" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#estimaci%C3%B3n-de-los-coeficientes"><i class="fa fa-check"></i><b>10.2</b> Estimación de los coeficientes</a></li>
+<li class="chapter" data-level="10.3" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#prueba-de-significancia-global-y-tabla-anova"><i class="fa fa-check"></i><b>10.3</b> Prueba de significancia global y tabla ANOVA</a></li>
+<li class="chapter" data-level="10.4" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#pruebas-individuales-e-intervalos-de-confianza-para-cada-beta_j"><i class="fa fa-check"></i><b>10.4</b> Pruebas individuales e intervalos de confianza para cada <span class="math inline">\(\beta_j\)</span></a></li>
+<li class="chapter" data-level="10.5" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#coeficiente-de-determinaci%C3%B3n-r2-y-r2-ajustado"><i class="fa fa-check"></i><b>10.5</b> Coeficiente de determinación <span class="math inline">\(R^2\)</span> y <span class="math inline">\(R^2\)</span> ajustado</a></li>
+<li class="chapter" data-level="10.6" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#an%C3%A1lisis-de-multicolinealidad"><i class="fa fa-check"></i><b>10.6</b> Análisis de multicolinealidad</a></li>
+<li class="chapter" data-level="10.7" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#selecci%C3%B3n-de-variables"><i class="fa fa-check"></i><b>10.7</b> Selección de variables</a>
+<ul>
+<li class="chapter" data-level="10.7.1" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#m%C3%A9todo-de-todas-las-regresiones-posibles"><i class="fa fa-check"></i><b>10.7.1</b> Método de todas las regresiones posibles</a></li>
+<li class="chapter" data-level="10.7.2" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#selecci%C3%B3n-secuencial-con-stepaic"><i class="fa fa-check"></i><b>10.7.2</b> Selección secuencial con <code>stepAIC()</code></a></li>
+<li class="chapter" data-level="10.7.3" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#modelo-final"><i class="fa fa-check"></i><b>10.7.3</b> Modelo final</a></li>
+</ul></li>
+<li class="chapter" data-level="10.8" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#an%C3%A1lisis-de-residuales-del-modelo-final"><i class="fa fa-check"></i><b>10.8</b> Análisis de residuales del modelo final</a>
+<ul>
+<li class="chapter" data-level="10.8.1" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#identificaci%C3%B3n-de-outliers"><i class="fa fa-check"></i><b>10.8.1</b> Identificación de outliers</a></li>
+<li class="chapter" data-level="10.8.2" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#identificaci%C3%B3n-de-observaciones-influenciales"><i class="fa fa-check"></i><b>10.8.2</b> Identificación de observaciones influenciales</a></li>
+</ul></li>
+<li class="chapter" data-level="10.9" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#modelos-con-variables-cualitativas-variables-dummy"><i class="fa fa-check"></i><b>10.9</b> Modelos con variables cualitativas (variables dummy)</a>
+<ul>
+<li class="chapter" data-level="10.9.1" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#modelo-del-precio-solo-con-la-calidad-del-vecindario"><i class="fa fa-check"></i><b>10.9.1</b> Modelo del precio solo con la calidad del vecindario</a></li>
+<li class="chapter" data-level="10.9.2" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#dummies-dentro-del-modelo-m%C3%BAltiple"><i class="fa fa-check"></i><b>10.9.2</b> Dummies dentro del modelo múltiple</a></li>
+<li class="chapter" data-level="10.9.3" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#cambia-el-efecto-del-terreno-seg%C3%BAn-la-calidad-del-vecindario"><i class="fa fa-check"></i><b>10.9.3</b> ¿Cambia el efecto del terreno según la calidad del vecindario?</a></li>
+</ul></li>
+<li class="chapter" data-level="10.10" data-path="modelo-de-regresión-lineal-múltiple.html"><a href="modelo-de-regresión-lineal-múltiple.html#predicci%C3%B3n-con-el-modelo-final"><i class="fa fa-check"></i><b>10.10</b> Predicción con el modelo final</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="conclusiones.html"><a href="conclusiones.html"><i class="fa fa-check"></i><b>11</b> Conclusiones</a></li>
+<li class="chapter" data-level="12" data-path="referencias.html"><a href="referencias.html"><i class="fa fa-check"></i><b>12</b> Referencias</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Modelo de regresión lineal para la predicción del precio de vivienda: conjunto ‘House Price Regression’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number"> 9</span> Validación de supuestos y predicción con el modelo de regresión lineal simple<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#validaci%C3%B3n-de-supuestos-y-predicci%C3%B3n-con-el-modelo-de-regresi%C3%B3n-lineal-simple" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>En el capítulo del modelo de regresión lineal simple se estimó la recta <span class="math inline">\(\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}\)</span> y se hicieron pruebas de hipótesis e intervalos de confianza sobre sus parámetros. Todas esas conclusiones descansan sobre unos supuestos acerca de los errores <span class="math inline">\(\varepsilon\)</span> que todavía no se han verificado: que son independientes, que siguen una distribución normal, que tienen media cero y que su varianza es constante. Solo después de revisar estos supuestos tiene sentido usar el modelo para predecir.</p>
+<p>Este capítulo completa el análisis del modelo simple en tres partes: primero se hace una prueba de hipótesis sobre la varianza de los errores <span class="math inline">\(\sigma^2\)</span>, luego se hace el análisis de residuales para validar los cuatro supuestos y, por último, se construyen el intervalo de confianza para el precio medio y el intervalo de predicción para el precio de una vivienda nueva.</p>
+<div id="prueba-de-hipótesis-para-la-varianza-de-los-errores-sigma2" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Prueba de hipótesis para la varianza de los errores (<span class="math inline">\(\sigma^2\)</span>)<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#prueba-de-hip%C3%B3tesis-para-la-varianza-de-los-errores-sigma2" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>En el capítulo anterior se construyó el intervalo de confianza para <span class="math inline">\(\sigma^2\)</span> y se encontró que el modelo se equivoca, en promedio, unos USD 250.000 al predecir el precio. Una pregunta natural es si ese error es significativamente mayor que un valor de referencia. Por ejemplo, ¿se puede afirmar que la desviación estándar de los errores supera los USD 200.000? Para responderlo se plantea la siguiente prueba unilateral superior.</p>
+<p><span class="math display">\[H_0: \sigma^2 \le 200.000^2 \qquad \text{vs.} \qquad H_1: \sigma^2 &gt; 200.000^2\]</span></p>
+<p>El estadístico de prueba compara la varianza estimada con el valor de referencia <span class="math inline">\(\sigma_0^2\)</span> y sigue una distribución <span class="math inline">\(\chi^2\)</span> con <span class="math inline">\(n - 2\)</span> grados de libertad.</p>
+<p><span class="math display">\[T = \frac{SSE}{\sigma_0^2} = \frac{(n-2)\,\hat\sigma^2}{\sigma_0^2} \sim \chi^2_{n-2}\]</span></p>
+<p>Se rechaza <span class="math inline">\(H_0\)</span> si <span class="math inline">\(T &gt; \chi^2_{1-\alpha;\,n-2}\)</span>.</p>
+<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-1" tabindex="-1"></a>n_rls      <span class="ot">&lt;-</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb85-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-2" tabindex="-1"></a>gl_rls     <span class="ot">&lt;-</span> n_rls <span class="sc">-</span> <span class="dv">2</span></span>
+<span id="cb85-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-3" tabindex="-1"></a>sigma2_rls <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>sigma<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb85-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-4" tabindex="-1"></a>sigma0     <span class="ot">&lt;-</span> <span class="dv">200000</span></span>
+<span id="cb85-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-5" tabindex="-1"></a></span>
+<span id="cb85-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-6" tabindex="-1"></a>T_sigma    <span class="ot">&lt;-</span> gl_rls <span class="sc">*</span> sigma2_rls <span class="sc">/</span> sigma0<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb85-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-7" tabindex="-1"></a>chi_critico <span class="ot">&lt;-</span> <span class="fu">qchisq</span>(<span class="fl">0.95</span>, gl_rls)</span>
+<span id="cb85-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-8" tabindex="-1"></a>p_sigma    <span class="ot">&lt;-</span> <span class="fu">pchisq</span>(T_sigma, gl_rls, <span class="at">lower.tail =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb85-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-9" tabindex="-1"></a></span>
+<span id="cb85-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-10" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb85-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-11" tabindex="-1"></a>  <span class="at">sigma_hat   =</span> <span class="fu">format</span>(<span class="fu">round</span>(<span class="fu">sqrt</span>(sigma2_rls)), <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>),</span>
+<span id="cb85-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-12" tabindex="-1"></a>  <span class="at">sigma0      =</span> <span class="fu">format</span>(sigma0, <span class="at">big.mark =</span> <span class="st">&quot;,&quot;</span>, <span class="at">scientific =</span> <span class="cn">FALSE</span>),</span>
+<span id="cb85-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-13" tabindex="-1"></a>  <span class="at">T_valor     =</span> <span class="fu">round</span>(T_sigma, <span class="dv">2</span>),</span>
+<span id="cb85-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-14" tabindex="-1"></a>  <span class="at">Chi_critico =</span> <span class="fu">round</span>(chi_critico, <span class="dv">2</span>),</span>
+<span id="cb85-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-15" tabindex="-1"></a>  <span class="at">P_valor     =</span> <span class="fu">format</span>(p_sigma, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb85-16"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-16" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb85-17"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-17" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb85-18"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-18" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;σ estimada (USD)&quot;</span>, <span class="st">&quot;σ₀ (USD)&quot;</span>, <span class="st">&quot;Estadístico T&quot;</span>, <span class="st">&quot;χ² crítico (95%)&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb85-19"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb85-20"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb85-20" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+σ estimada (USD)
+</th>
+<th style="text-align:left;">
+σ₀ (USD)
+</th>
+<th style="text-align:right;">
+Estadístico T
+</th>
+<th style="text-align:right;">
+χ² crítico (95%)
+</th>
+<th style="text-align:left;">
+P-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+250,410
+</td>
+<td style="text-align:left;">
+200,000
+</td>
+<td style="text-align:right;">
+1564.49
+</td>
+<td style="text-align:right;">
+1072.61
+</td>
+<td style="text-align:left;">
+8.08e-28
+</td>
+</tr>
+</tbody>
+</table>
+<p>El estadístico T = 1564.49 es mucho mayor que el valor crítico <span class="math inline">\(\chi^2_{0.95;\,998}\)</span> = 1072.61 (p ≈ 8.08e-28), por lo que se rechaza <span class="math inline">\(H_0\)</span>. Hay evidencia de que la desviación estándar de los errores del modelo simple supera los USD 200.000, lo que confirma que, aunque la pendiente es significativa, las predicciones de este modelo tienen un margen de error muy amplio.</p>
+</div>
+<div id="análisis-de-residuales" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Análisis de residuales<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#an%C3%A1lisis-de-residuales" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Los residuales <span class="math inline">\(e_i = y_i - \hat y_i\)</span> son la diferencia entre el precio real de cada vivienda y el precio que predice la recta. Como los errores <span class="math inline">\(\varepsilon_i\)</span> no se pueden observar, los residuales son su mejor aproximación, y sobre ellos se validan los cuatro supuestos del modelo.</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-1" tabindex="-1"></a>residuos_rls <span class="ot">&lt;-</span> <span class="fu">residuals</span>(modelo_lineal)</span>
+<span id="cb86-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-2" tabindex="-1"></a></span>
+<span id="cb86-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-3" tabindex="-1"></a>diag_rls <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb86-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-4" tabindex="-1"></a>  <span class="at">Orden      =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(residuos_rls),</span>
+<span id="cb86-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-5" tabindex="-1"></a>  <span class="at">Ajustados  =</span> <span class="fu">fitted</span>(modelo_lineal),</span>
+<span id="cb86-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-6" tabindex="-1"></a>  <span class="at">Residuales =</span> residuos_rls</span>
+<span id="cb86-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb86-7" tabindex="-1"></a>)</span></code></pre></div>
+<div id="independencia-de-los-errores" class="section level3 hasAnchor" number="9.2.1">
+<h3><span class="header-section-number">9.2.1</span> Independencia de los errores<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#independencia-de-los-errores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El supuesto de independencia dice que el error de una vivienda no debe dar información sobre el error de la siguiente. Como el conjunto de datos no trae una variable de tiempo, se usa el orden en que aparecen las filas. Si los errores son independientes, al graficarlos en ese orden se debería ver una nube aleatoria alrededor de cero, sin rachas ni tendencias.</p>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-1" tabindex="-1"></a>diag_rls <span class="sc">%&gt;%</span></span>
+<span id="cb87-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Orden, <span class="at">y =</span> Residuales)) <span class="sc">+</span></span>
+<span id="cb87-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
+<span id="cb87-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-4" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb87-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Residuales vs orden de las observaciones&quot;</span>,</span>
+<span id="cb87-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-6" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Orden de la observación&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Residuales (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb87-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb87-7" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<p>La nube no muestra ningún patrón: los residuales suben y bajan sin rachas visibles. Para confirmarlo formalmente se aplica la prueba de Durbin-Watson, que contrasta <span class="math inline">\(H_0\)</span>: los errores no están autocorrelacionados frente a <span class="math inline">\(H_1\)</span>: sí lo están. Un estadístico D-W cercano a 2 indica independencia.</p>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-1" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">123</span>)</span>
+<span id="cb88-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-2" tabindex="-1"></a>dw_rls <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">durbinWatsonTest</span>(modelo_lineal)</span>
+<span id="cb88-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-3" tabindex="-1"></a></span>
+<span id="cb88-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-4" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb88-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-5" tabindex="-1"></a>  <span class="at">Autocorrelacion =</span> <span class="fu">round</span>(dw_rls<span class="sc">$</span>r, <span class="dv">4</span>),</span>
+<span id="cb88-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-6" tabindex="-1"></a>  <span class="at">DW              =</span> <span class="fu">round</span>(dw_rls<span class="sc">$</span>dw, <span class="dv">4</span>),</span>
+<span id="cb88-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-7" tabindex="-1"></a>  <span class="at">P_valor         =</span> <span class="fu">round</span>(dw_rls<span class="sc">$</span>p, <span class="dv">3</span>)</span>
+<span id="cb88-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-8" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb88-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-9" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb88-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-10" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Autocorrelación (lag 1)&quot;</span>, <span class="st">&quot;Estadístico D-W&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb88-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-11" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb88-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb88-12" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Autocorrelación (lag 1)
+</th>
+<th style="text-align:right;">
+Estadístico D-W
+</th>
+<th style="text-align:right;">
+P-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+-0.0263
+</td>
+<td style="text-align:right;">
+2.0511
+</td>
+<td style="text-align:right;">
+0.43
+</td>
+</tr>
+</tbody>
+</table>
+<p>El estadístico D-W = 2.05 es prácticamente igual a 2, y el p-valor (mayor que 0.05) indica que no se rechaza <span class="math inline">\(H_0\)</span>. Como complemento, la función de autocorrelación (ACF) muestra la correlación de los residuales con ellos mismos a distintos rezagos; si ninguna barra se sale de las bandas de confianza, no hay autocorrelación.</p>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-1" tabindex="-1"></a>acf_rls <span class="ot">&lt;-</span> <span class="fu">acf</span>(residuos_rls, <span class="at">plot =</span> <span class="cn">FALSE</span>, <span class="at">lag.max =</span> <span class="dv">20</span>)</span>
+<span id="cb89-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-2" tabindex="-1"></a>banda   <span class="ot">&lt;-</span> <span class="fu">qnorm</span>(<span class="fl">0.975</span>) <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="fu">length</span>(residuos_rls))</span>
+<span id="cb89-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-3" tabindex="-1"></a></span>
+<span id="cb89-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-4" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">Rezago =</span> acf_rls<span class="sc">$</span>lag[<span class="sc">-</span><span class="dv">1</span>], <span class="at">ACF =</span> acf_rls<span class="sc">$</span>acf[<span class="sc">-</span><span class="dv">1</span>]) <span class="sc">%&gt;%</span></span>
+<span id="cb89-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-5" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Rezago, <span class="at">y =</span> ACF)) <span class="sc">+</span></span>
+<span id="cb89-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-6" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb89-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-7" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fu">c</span>(<span class="sc">-</span>banda, banda), <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-8" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">color =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-9" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Función de autocorrelación (ACF) de los residuales&quot;</span>,</span>
+<span id="cb89-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-10" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Rezago (lag)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Autocorrelación&quot;</span>) <span class="sc">+</span></span>
+<span id="cb89-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb89-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p>Prácticamente todas las barras quedan dentro de las bandas, salvo una que se sale levemente en el rezago 5 (−0.081), algo esperable por azar entre 20 rezagos (con un 5% de significancia, se espera que alrededor de 1 de cada 20 se salga). En conjunto, se cumple el supuesto de independencia de los errores.</p>
+</div>
+<div id="normalidad-de-los-errores" class="section level3 hasAnchor" number="9.2.2">
+<h3><span class="header-section-number">9.2.2</span> Normalidad de los errores<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#normalidad-de-los-errores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Para este supuesto se contrasta <span class="math inline">\(H_0\)</span>: los errores siguen una distribución normal frente a <span class="math inline">\(H_1\)</span>: no la siguen. Primero se revisa de forma gráfica con el histograma y el gráfico cuantil-cuantil (Q-Q), en el que los puntos deberían caer sobre la línea diagonal si los residuales son normales.</p>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-1" tabindex="-1"></a>g_hist_rls <span class="ot">&lt;-</span> diag_rls <span class="sc">%&gt;%</span></span>
+<span id="cb90-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Residuales)) <span class="sc">+</span></span>
+<span id="cb90-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-3" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="fu">aes</span>(<span class="at">y =</span> <span class="fu">after_stat</span>(density)), <span class="at">bins =</span> <span class="dv">30</span>, <span class="at">fill =</span> <span class="st">&quot;#8fa8a0&quot;</span>, <span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span></span>
+<span id="cb90-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-4" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb90-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-5" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Histograma de los residuales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Residuales (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Densidad&quot;</span>) <span class="sc">+</span></span>
+<span id="cb90-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-6" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb90-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-7" tabindex="-1"></a></span>
+<span id="cb90-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-8" tabindex="-1"></a>g_qq_rls <span class="ot">&lt;-</span> diag_rls <span class="sc">%&gt;%</span></span>
+<span id="cb90-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-9" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">sample =</span> Residuales)) <span class="sc">+</span></span>
+<span id="cb90-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-10" tabindex="-1"></a>  <span class="fu">stat_qq</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
+<span id="cb90-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-11" tabindex="-1"></a>  <span class="fu">stat_qq_line</span>(<span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb90-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-12" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Gráfico Q-Q de los residuales&quot;</span>, <span class="at">x =</span> <span class="st">&quot;Cuantiles teóricos&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Cuantiles muestrales&quot;</span>) <span class="sc">+</span></span>
+<span id="cb90-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-13" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span>
+<span id="cb90-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-14" tabindex="-1"></a></span>
+<span id="cb90-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb90-15" tabindex="-1"></a>g_hist_rls <span class="sc">+</span> g_qq_rls</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p>El histograma tiene una forma casi plana, más parecida a un rectángulo que a una campana, y en el gráfico Q-Q los puntos se separan de la diagonal en los dos extremos, formando una “S”. Ambas son señales de que los residuales tienen colas más cortas que las de una distribución normal. Se confirma con la prueba de Shapiro-Wilk.</p>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-1" tabindex="-1"></a>sw_rls <span class="ot">&lt;-</span> <span class="fu">shapiro.test</span>(residuos_rls)</span>
+<span id="cb91-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-2" tabindex="-1"></a></span>
+<span id="cb91-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb91-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-4" tabindex="-1"></a>  <span class="at">W       =</span> <span class="fu">round</span>(sw_rls<span class="sc">$</span>statistic, <span class="dv">4</span>),</span>
+<span id="cb91-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-5" tabindex="-1"></a>  <span class="at">P_valor =</span> <span class="fu">format</span>(sw_rls<span class="sc">$</span>p.value, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>)</span>
+<span id="cb91-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-6" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb91-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-7" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb91-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-8" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Estadístico W de Shapiro-Wilk&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb91-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-9" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb91-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb91-10" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Estadístico W de Shapiro-Wilk
+</th>
+<th style="text-align:left;">
+P-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+0.9669
+</td>
+<td style="text-align:left;">
+2.57e-14
+</td>
+</tr>
+</tbody>
+</table>
+<p>Con W = 0.9669 y p ≈ 2.57e-14, se rechaza <span class="math inline">\(H_0\)</span>: los residuales del modelo simple <strong>no</strong> siguen una distribución normal. Esto es coherente con lo observado en el análisis de la variable objetivo, donde <code>House_Price</code> mostró una distribución aproximadamente uniforme. Como <code>Lot_Size</code> explica tan poco del precio (R² = 0.026), los residuales terminan heredando casi la misma forma plana del precio.</p>
+<p>¿Qué tan grave es esto? Con n = 1.000 observaciones, el teorema del límite central hace que los estimadores <span class="math inline">\(\hat\beta_0\)</span> y <span class="math inline">\(\hat\beta_1\)</span> tengan una distribución aproximadamente normal aunque los errores no lo sean, por lo que las pruebas t y F del capítulo anterior siguen siendo razonablemente confiables. Donde sí pesa este incumplimiento es en el intervalo de predicción para una vivienda individual (al final de este capítulo), que depende directamente de la forma de la distribución de los errores.</p>
+</div>
+<div id="media-cero-de-los-errores" class="section level3 hasAnchor" number="9.2.3">
+<h3><span class="header-section-number">9.2.3</span> Media cero de los errores<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#media-cero-de-los-errores" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Este supuesto plantea <span class="math inline">\(H_0: \mu_\varepsilon = 0\)</span> frente a <span class="math inline">\(H_1: \mu_\varepsilon \neq 0\)</span>. Cuando el modelo incluye intercepto, el método de mínimos cuadrados garantiza que la media de los residuales es exactamente cero, así que el supuesto se cumple de forma automática. Aun así, se verifica con una prueba t de una muestra.</p>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-1" tabindex="-1"></a>t_media_rls <span class="ot">&lt;-</span> <span class="fu">t.test</span>(residuos_rls, <span class="at">mu =</span> <span class="dv">0</span>)</span>
+<span id="cb92-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-2" tabindex="-1"></a></span>
+<span id="cb92-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb92-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-4" tabindex="-1"></a>  <span class="at">Media   =</span> <span class="fu">format</span>(<span class="fu">mean</span>(residuos_rls), <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb92-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-5" tabindex="-1"></a>  <span class="at">t       =</span> <span class="fu">round</span>(t_media_rls<span class="sc">$</span>statistic, <span class="dv">4</span>),</span>
+<span id="cb92-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-6" tabindex="-1"></a>  <span class="at">P_valor =</span> <span class="fu">round</span>(t_media_rls<span class="sc">$</span>p.value, <span class="dv">4</span>)</span>
+<span id="cb92-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-7" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb92-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-8" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb92-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-9" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Media de los residuales&quot;</span>, <span class="st">&quot;Estadístico t&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb92-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-10" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb92-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb92-11" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Media de los residuales
+</th>
+<th style="text-align:right;">
+Estadístico t
+</th>
+<th style="text-align:right;">
+P-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+7.86e-12
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>La media de los residuales es prácticamente cero (un número del orden de <span class="math inline">\(10^{-12}\)</span>, que es solo error de redondeo del computador) y el p-valor es 1, así que no se rechaza <span class="math inline">\(H_0\)</span>. Se cumple el supuesto de media cero.</p>
+</div>
+<div id="varianza-constante-de-los-errores-homocedasticidad" class="section level3 hasAnchor" number="9.2.4">
+<h3><span class="header-section-number">9.2.4</span> Varianza constante de los errores (homocedasticidad)<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#varianza-constante-de-los-errores-homocedasticidad" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>El último supuesto plantea <span class="math inline">\(H_0\)</span>: la varianza de los errores es constante frente a <span class="math inline">\(H_1\)</span>: no lo es. Gráficamente se revisa con el diagrama de residuales contra valores ajustados: si la varianza es constante, la nube debe tener el mismo ancho a lo largo de todo el eje horizontal, sin forma de embudo.</p>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-1" tabindex="-1"></a>diag_rls <span class="sc">%&gt;%</span></span>
+<span id="cb93-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> Ajustados, <span class="at">y =</span> Residuales)) <span class="sc">+</span></span>
+<span id="cb93-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-3" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.4</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-4" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">&quot;dashed&quot;</span>, <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-5" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">&quot;loess&quot;</span>, <span class="at">formula =</span> y <span class="sc">~</span> x, <span class="at">se =</span> <span class="cn">FALSE</span>, <span class="at">color =</span> <span class="st">&quot;#c47b6b&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-6" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Residuales vs valores ajustados&quot;</span>,</span>
+<span id="cb93-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-7" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Valores ajustados (USD)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Residuales (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb93-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb93-8" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>La nube mantiene un ancho similar en todo el rango de valores ajustados y la curva suavizada se queda pegada a cero, sin abrirse ni cerrarse. Se confirma con la prueba de Breusch-Pagan, aplicada con <code>bptest()</code> del paquete <code>lmtest</code> y con <code>ncvTest()</code> del paquete <code>car</code>.</p>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-1" tabindex="-1"></a>bp_rls  <span class="ot">&lt;-</span> lmtest<span class="sc">::</span><span class="fu">bptest</span>(modelo_lineal)</span>
+<span id="cb94-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-2" tabindex="-1"></a>ncv_rls <span class="ot">&lt;-</span> car<span class="sc">::</span><span class="fu">ncvTest</span>(modelo_lineal)</span>
+<span id="cb94-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-3" tabindex="-1"></a></span>
+<span id="cb94-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-4" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb94-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-5" tabindex="-1"></a>  <span class="at">Prueba      =</span> <span class="fu">c</span>(<span class="st">&quot;Breusch-Pagan (lmtest::bptest)&quot;</span>, <span class="st">&quot;Score de varianza no constante (car::ncvTest)&quot;</span>),</span>
+<span id="cb94-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-6" tabindex="-1"></a>  <span class="at">Estadistico =</span> <span class="fu">round</span>(<span class="fu">c</span>(bp_rls<span class="sc">$</span>statistic, ncv_rls<span class="sc">$</span>ChiSquare), <span class="dv">4</span>),</span>
+<span id="cb94-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-7" tabindex="-1"></a>  <span class="at">gl          =</span> <span class="fu">c</span>(bp_rls<span class="sc">$</span>parameter, ncv_rls<span class="sc">$</span>Df),</span>
+<span id="cb94-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-8" tabindex="-1"></a>  <span class="at">P_valor     =</span> <span class="fu">round</span>(<span class="fu">c</span>(bp_rls<span class="sc">$</span>p.value, ncv_rls<span class="sc">$</span>p), <span class="dv">4</span>)</span>
+<span id="cb94-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-9" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb94-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-10" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb94-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-11" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Prueba&quot;</span>, <span class="st">&quot;Estadístico&quot;</span>, <span class="st">&quot;gl&quot;</span>, <span class="st">&quot;P-valor&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb94-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-12" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb94-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb94-13" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Prueba
+</th>
+<th style="text-align:right;">
+Estadístico
+</th>
+<th style="text-align:right;">
+gl
+</th>
+<th style="text-align:right;">
+P-valor
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Breusch-Pagan (lmtest::bptest)
+</td>
+<td style="text-align:right;">
+0.0597
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.8070
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Score de varianza no constante (car::ncvTest)
+</td>
+<td style="text-align:right;">
+0.0270
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0.8695
+</td>
+</tr>
+</tbody>
+</table>
+<p>Ambas pruebas dan p-valores muy por encima de 0.05 (0.807 y 0.870), por lo que no se rechaza <span class="math inline">\(H_0\)</span>: la varianza de los errores puede considerarse constante.</p>
+</div>
+<div id="resumen-de-la-validación-de-supuestos" class="section level3 hasAnchor" number="9.2.5">
+<h3><span class="header-section-number">9.2.5</span> Resumen de la validación de supuestos<a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#resumen-de-la-validaci%C3%B3n-de-supuestos" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-1" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb95-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-2" tabindex="-1"></a>  <span class="at">Supuesto =</span> <span class="fu">c</span>(<span class="st">&quot;Independencia&quot;</span>, <span class="st">&quot;Normalidad&quot;</span>, <span class="st">&quot;Media cero&quot;</span>, <span class="st">&quot;Varianza constante&quot;</span>),</span>
+<span id="cb95-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-3" tabindex="-1"></a>  <span class="at">Prueba   =</span> <span class="fu">c</span>(<span class="st">&quot;Durbin-Watson&quot;</span>, <span class="st">&quot;Shapiro-Wilk&quot;</span>, <span class="st">&quot;t de una muestra&quot;</span>, <span class="st">&quot;Breusch-Pagan&quot;</span>),</span>
+<span id="cb95-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-4" tabindex="-1"></a>  <span class="at">P_valor  =</span> <span class="fu">c</span>(<span class="fu">round</span>(dw_rls<span class="sc">$</span>p, <span class="dv">3</span>),</span>
+<span id="cb95-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-5" tabindex="-1"></a>               <span class="fu">format</span>(sw_rls<span class="sc">$</span>p.value, <span class="at">scientific =</span> <span class="cn">TRUE</span>, <span class="at">digits =</span> <span class="dv">3</span>),</span>
+<span id="cb95-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-6" tabindex="-1"></a>               <span class="fu">round</span>(t_media_rls<span class="sc">$</span>p.value, <span class="dv">3</span>),</span>
+<span id="cb95-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-7" tabindex="-1"></a>               <span class="fu">round</span>(bp_rls<span class="sc">$</span>p.value, <span class="dv">3</span>)),</span>
+<span id="cb95-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-8" tabindex="-1"></a>  <span class="at">Cumple   =</span> <span class="fu">c</span>(<span class="fu">ifelse</span>(dw_rls<span class="sc">$</span>p <span class="sc">&gt;</span> <span class="fl">0.05</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>),</span>
+<span id="cb95-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-9" tabindex="-1"></a>               <span class="fu">ifelse</span>(sw_rls<span class="sc">$</span>p.value <span class="sc">&gt;</span> <span class="fl">0.05</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>),</span>
+<span id="cb95-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-10" tabindex="-1"></a>               <span class="fu">ifelse</span>(t_media_rls<span class="sc">$</span>p.value <span class="sc">&gt;</span> <span class="fl">0.05</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>),</span>
+<span id="cb95-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-11" tabindex="-1"></a>               <span class="fu">ifelse</span>(bp_rls<span class="sc">$</span>p.value <span class="sc">&gt;</span> <span class="fl">0.05</span>, <span class="st">&quot;Sí&quot;</span>, <span class="st">&quot;No&quot;</span>))</span>
+<span id="cb95-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-12" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb95-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-13" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb95-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-14" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Supuesto&quot;</span>, <span class="st">&quot;Prueba&quot;</span>, <span class="st">&quot;P-valor&quot;</span>, <span class="st">&quot;¿Se cumple?&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb95-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-15" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb95-16"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb95-16" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Supuesto
+</th>
+<th style="text-align:left;">
+Prueba
+</th>
+<th style="text-align:left;">
+P-valor
+</th>
+<th style="text-align:left;">
+¿Se cumple?
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Independencia
+</td>
+<td style="text-align:left;">
+Durbin-Watson
+</td>
+<td style="text-align:left;">
+0.43
+</td>
+<td style="text-align:left;">
+Sí
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Normalidad
+</td>
+<td style="text-align:left;">
+Shapiro-Wilk
+</td>
+<td style="text-align:left;">
+2.57e-14
+</td>
+<td style="text-align:left;">
+No
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Media cero
+</td>
+<td style="text-align:left;">
+t de una muestra
+</td>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:left;">
+Sí
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Varianza constante
+</td>
+<td style="text-align:left;">
+Breusch-Pagan
+</td>
+<td style="text-align:left;">
+0.807
+</td>
+<td style="text-align:left;">
+Sí
+</td>
+</tr>
+</tbody>
+</table>
+<p>El modelo simple cumple tres de los cuatro supuestos: los errores son independientes, tienen media cero y varianza constante. El que falla es la normalidad, y la razón de fondo es que <code>Lot_Size</code>, por sí solo, deja sin explicar casi toda la variabilidad del precio. Se verá en el capítulo de regresión lineal múltiple que, al incluir las demás características de la vivienda, este problema desaparece.</p>
+</div>
+</div>
+<div id="intervalo-de-confianza-para-el-precio-medio-ey-mid-x_0" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Intervalo de confianza para el precio medio <span class="math inline">\(E(y \mid x_0)\)</span><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#intervalo-de-confianza-para-el-precio-medio-ey-mid-x_0" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Una primera forma de usar el modelo es estimar el precio <strong>promedio</strong> de todas las viviendas que tienen un mismo tamaño de terreno <span class="math inline">\(x_0\)</span>. Por ejemplo, ¿cuál es el precio medio de las viviendas con un terreno de 3 acres, y qué tan precisa es esa estimación?</p>
+<p>La estimación puntual se obtiene reemplazando <span class="math inline">\(x_0\)</span> en la recta ajustada, <span class="math inline">\(\hat y(x_0) = \hat\beta_0 + \hat\beta_1 x_0\)</span>, y el intervalo de confianza del <span class="math inline">\(100(1-\alpha)\%\)</span> es el siguiente.</p>
+<p><span class="math display">\[\hat y(x_0) \pm t_{1-\alpha/2;\,n-2}\;\hat\sigma\sqrt{\frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}\]</span></p>
+<p>Se calcula primero paso a paso para <span class="math inline">\(x_0\)</span> = 3 acres.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-1" tabindex="-1"></a>x_bar_rls <span class="ot">&lt;-</span> <span class="fu">mean</span>(data<span class="sc">$</span>Lot_Size)</span>
+<span id="cb96-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-2" tabindex="-1"></a>Sxx_rls   <span class="ot">&lt;-</span> <span class="fu">sum</span>((data<span class="sc">$</span>Lot_Size <span class="sc">-</span> x_bar_rls)<span class="sc">^</span><span class="dv">2</span>)</span>
+<span id="cb96-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-3" tabindex="-1"></a>sigma_rls <span class="ot">&lt;-</span> <span class="fu">summary</span>(modelo_lineal)<span class="sc">$</span>sigma</span>
+<span id="cb96-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-4" tabindex="-1"></a>b_rls     <span class="ot">&lt;-</span> <span class="fu">coef</span>(modelo_lineal)</span>
+<span id="cb96-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-5" tabindex="-1"></a>t_critico <span class="ot">&lt;-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df =</span> gl_rls)</span>
+<span id="cb96-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-6" tabindex="-1"></a></span>
+<span id="cb96-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-7" tabindex="-1"></a>x0 <span class="ot">&lt;-</span> <span class="dv">3</span></span>
+<span id="cb96-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-8" tabindex="-1"></a></span>
+<span id="cb96-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-9" tabindex="-1"></a>y0_hat  <span class="ot">&lt;-</span> <span class="fu">unname</span>(b_rls[<span class="dv">1</span>] <span class="sc">+</span> b_rls[<span class="dv">2</span>] <span class="sc">*</span> x0)</span>
+<span id="cb96-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-10" tabindex="-1"></a>se_media <span class="ot">&lt;-</span> sigma_rls <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">/</span> n_rls <span class="sc">+</span> (x0 <span class="sc">-</span> x_bar_rls)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> Sxx_rls)</span>
+<span id="cb96-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-11" tabindex="-1"></a></span>
+<span id="cb96-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-12" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb96-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-13" tabindex="-1"></a>  <span class="at">x0      =</span> x0,</span>
+<span id="cb96-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-14" tabindex="-1"></a>  <span class="at">y_hat   =</span> <span class="fu">round</span>(y0_hat, <span class="dv">2</span>),</span>
+<span id="cb96-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-15" tabindex="-1"></a>  <span class="at">EE      =</span> <span class="fu">round</span>(se_media, <span class="dv">2</span>),</span>
+<span id="cb96-16"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-16" tabindex="-1"></a>  <span class="at">LI      =</span> <span class="fu">round</span>(y0_hat <span class="sc">-</span> t_critico <span class="sc">*</span> se_media, <span class="dv">2</span>),</span>
+<span id="cb96-17"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-17" tabindex="-1"></a>  <span class="at">LS      =</span> <span class="fu">round</span>(y0_hat <span class="sc">+</span> t_critico <span class="sc">*</span> se_media, <span class="dv">2</span>)</span>
+<span id="cb96-18"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-18" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb96-19"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-19" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb96-20"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-20" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Lot_Size (acres)&quot;</span>, <span class="st">&quot;Precio medio estimado&quot;</span>, <span class="st">&quot;Error estándar&quot;</span>, <span class="st">&quot;IC 95% inferior&quot;</span>, <span class="st">&quot;IC 95% superior&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb96-21"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-21" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb96-22"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb96-22" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Lot_Size (acres)
+</th>
+<th style="text-align:right;">
+Precio medio estimado
+</th>
+<th style="text-align:right;">
+Error estándar
+</th>
+<th style="text-align:right;">
+IC 95% inferior
+</th>
+<th style="text-align:right;">
+IC 95% superior
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+625815.6
+</td>
+<td style="text-align:right;">
+8033.68
+</td>
+<td style="text-align:right;">
+610050.8
+</td>
+<td style="text-align:right;">
+641580.4
+</td>
+</tr>
+</tbody>
+</table>
+<p>El mismo resultado se obtiene con <code>predict()</code> usando <code>interval = "confidence"</code>. Para ver cómo cambia el ancho del intervalo, se calcula también en la media de <code>Lot_Size</code> (2.78 acres) y cerca del extremo superior del rango (4.9 acres).</p>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-1" tabindex="-1"></a>nuevos_x <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Lot_Size =</span> <span class="fu">c</span>(x_bar_rls, <span class="dv">3</span>, <span class="fl">4.9</span>))</span>
+<span id="cb97-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-2" tabindex="-1"></a></span>
+<span id="cb97-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-3" tabindex="-1"></a>ic_media <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> nuevos_x, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb97-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-4" tabindex="-1"></a></span>
+<span id="cb97-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-5" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb97-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-6" tabindex="-1"></a>  <span class="at">Lot_Size =</span> <span class="fu">round</span>(nuevos_x<span class="sc">$</span>Lot_Size, <span class="dv">2</span>),</span>
+<span id="cb97-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-7" tabindex="-1"></a>  <span class="at">Ajuste   =</span> <span class="fu">round</span>(ic_media[, <span class="st">&quot;fit&quot;</span>], <span class="dv">2</span>),</span>
+<span id="cb97-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-8" tabindex="-1"></a>  <span class="at">LI       =</span> <span class="fu">round</span>(ic_media[, <span class="st">&quot;lwr&quot;</span>], <span class="dv">2</span>),</span>
+<span id="cb97-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-9" tabindex="-1"></a>  <span class="at">LS       =</span> <span class="fu">round</span>(ic_media[, <span class="st">&quot;upr&quot;</span>], <span class="dv">2</span>),</span>
+<span id="cb97-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-10" tabindex="-1"></a>  <span class="at">Ancho    =</span> <span class="fu">round</span>(ic_media[, <span class="st">&quot;upr&quot;</span>] <span class="sc">-</span> ic_media[, <span class="st">&quot;lwr&quot;</span>], <span class="dv">2</span>)</span>
+<span id="cb97-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-11" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb97-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-12" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb97-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-13" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Lot_Size (acres)&quot;</span>, <span class="st">&quot;Precio medio estimado&quot;</span>, <span class="st">&quot;IC 95% inferior&quot;</span>, <span class="st">&quot;IC 95% superior&quot;</span>, <span class="st">&quot;Ancho del intervalo&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb97-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-14" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb97-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb97-15" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Lot_Size (acres)
+</th>
+<th style="text-align:right;">
+Precio medio estimado
+</th>
+<th style="text-align:right;">
+IC 95% inferior
+</th>
+<th style="text-align:right;">
+IC 95% superior
+</th>
+<th style="text-align:right;">
+Ancho del intervalo
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+2.78
+</td>
+<td style="text-align:right;">
+618861.0
+</td>
+<td style="text-align:right;">
+603321.9
+</td>
+<td style="text-align:right;">
+634400.1
+</td>
+<td style="text-align:right;">
+31078.24
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+3.00
+</td>
+<td style="text-align:right;">
+625815.6
+</td>
+<td style="text-align:right;">
+610050.8
+</td>
+<td style="text-align:right;">
+641580.4
+</td>
+<td style="text-align:right;">
+31529.67
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+4.90
+</td>
+<td style="text-align:right;">
+685360.1
+</td>
+<td style="text-align:right;">
+655569.2
+</td>
+<td style="text-align:right;">
+715151.1
+</td>
+<td style="text-align:right;">
+59581.93
+</td>
+</tr>
+</tbody>
+</table>
+<p>El cálculo manual coincide con <code>predict()</code>. Se estima que el precio medio de las viviendas con 3 acres de terreno es de USD 625.816 y, con una confianza del 95%, ese precio medio poblacional está entre USD 610.051 y USD 641.580. El intervalo es más angosto en la media de <code>Lot_Size</code> (ancho de unos USD 31.000) y se va ensanchando a medida que <span class="math inline">\(x_0\)</span> se aleja de ella (casi USD 60.000 en 4.9 acres), porque en los extremos del rango hay menos información para estimar la recta. Esto es justo lo que indica el término <span class="math inline">\((x_0 - \bar x)^2 / S_{xx}\)</span> de la fórmula.</p>
+</div>
+<div id="intervalo-de-predicción-para-una-vivienda-nueva-y_0" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Intervalo de predicción para una vivienda nueva <span class="math inline">\(y_0\)</span><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#intervalo-de-predicci%C3%B3n-para-una-vivienda-nueva-y_0" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>El intervalo anterior responde a una pregunta sobre el <strong>promedio</strong>. Pero si un comprador encuentra <strong>una</strong> vivienda específica con 3 acres de terreno, la pregunta es otra: ¿entre qué valores estará el precio de esa vivienda en particular? Ahí no basta con la incertidumbre de la recta; hay que sumar la variabilidad propia de cada vivienda alrededor de ella, <span class="math inline">\(\sigma^2\)</span>. Por eso el intervalo de predicción tiene un “1 +” dentro de la raíz.</p>
+<p><span class="math display">\[\hat y(x_0) \pm t_{1-\alpha/2;\,n-2}\;\hat\sigma\sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar x)^2}{S_{xx}}}\]</span></p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-1" tabindex="-1"></a>se_pred <span class="ot">&lt;-</span> sigma_rls <span class="sc">*</span> <span class="fu">sqrt</span>(<span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span> <span class="sc">/</span> n_rls <span class="sc">+</span> (x0 <span class="sc">-</span> x_bar_rls)<span class="sc">^</span><span class="dv">2</span> <span class="sc">/</span> Sxx_rls)</span>
+<span id="cb98-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-2" tabindex="-1"></a></span>
+<span id="cb98-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-3" tabindex="-1"></a>ip_vivienda <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Lot_Size =</span> x0), <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)</span>
+<span id="cb98-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-4" tabindex="-1"></a></span>
+<span id="cb98-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-5" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb98-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-6" tabindex="-1"></a>  <span class="at">Calculo =</span> <span class="fu">c</span>(<span class="st">&quot;Manual&quot;</span>, <span class="st">&quot;predict()&quot;</span>),</span>
+<span id="cb98-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-7" tabindex="-1"></a>  <span class="at">Ajuste  =</span> <span class="fu">round</span>(<span class="fu">c</span>(y0_hat, ip_vivienda[, <span class="st">&quot;fit&quot;</span>]), <span class="dv">2</span>),</span>
+<span id="cb98-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-8" tabindex="-1"></a>  <span class="at">LI      =</span> <span class="fu">round</span>(<span class="fu">c</span>(y0_hat <span class="sc">-</span> t_critico <span class="sc">*</span> se_pred, ip_vivienda[, <span class="st">&quot;lwr&quot;</span>]), <span class="dv">2</span>),</span>
+<span id="cb98-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-9" tabindex="-1"></a>  <span class="at">LS      =</span> <span class="fu">round</span>(<span class="fu">c</span>(y0_hat <span class="sc">+</span> t_critico <span class="sc">*</span> se_pred, ip_vivienda[, <span class="st">&quot;upr&quot;</span>]), <span class="dv">2</span>)</span>
+<span id="cb98-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-10" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb98-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-11" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb98-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-12" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Cálculo&quot;</span>, <span class="st">&quot;Precio predicho&quot;</span>, <span class="st">&quot;IP 95% inferior&quot;</span>, <span class="st">&quot;IP 95% superior&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb98-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-13" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb98-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb98-14" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Cálculo
+</th>
+<th style="text-align:right;">
+Precio predicho
+</th>
+<th style="text-align:right;">
+IP 95% inferior
+</th>
+<th style="text-align:right;">
+IP 95% superior
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Manual
+</td>
+<td style="text-align:right;">
+625815.6
+</td>
+<td style="text-align:right;">
+134172.7
+</td>
+<td style="text-align:right;">
+1117458
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+predict()
+</td>
+<td style="text-align:right;">
+625815.6
+</td>
+<td style="text-align:right;">
+134172.7
+</td>
+<td style="text-align:right;">
+1117458
+</td>
+</tr>
+</tbody>
+</table>
+<p>Para una vivienda nueva con 3 acres de terreno, el precio predicho sigue siendo USD 625.816, pero con una confianza del 95% su precio estará entre USD 134.173 y USD 1.117.458. La siguiente tabla pone los dos intervalos lado a lado.</p>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-1" tabindex="-1"></a>ic_3 <span class="ot">&lt;-</span> <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> <span class="fu">data.frame</span>(<span class="at">Lot_Size =</span> x0), <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>)</span>
+<span id="cb99-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-2" tabindex="-1"></a></span>
+<span id="cb99-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-3" tabindex="-1"></a><span class="fu">data.frame</span>(</span>
+<span id="cb99-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-4" tabindex="-1"></a>  <span class="at">Intervalo =</span> <span class="fu">c</span>(<span class="st">&quot;Confianza para el precio medio&quot;</span>, <span class="st">&quot;Predicción para una vivienda nueva&quot;</span>),</span>
+<span id="cb99-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-5" tabindex="-1"></a>  <span class="at">LI        =</span> <span class="fu">round</span>(<span class="fu">c</span>(ic_3[, <span class="st">&quot;lwr&quot;</span>], ip_vivienda[, <span class="st">&quot;lwr&quot;</span>]), <span class="dv">2</span>),</span>
+<span id="cb99-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-6" tabindex="-1"></a>  <span class="at">LS        =</span> <span class="fu">round</span>(<span class="fu">c</span>(ic_3[, <span class="st">&quot;upr&quot;</span>], ip_vivienda[, <span class="st">&quot;upr&quot;</span>]), <span class="dv">2</span>),</span>
+<span id="cb99-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-7" tabindex="-1"></a>  <span class="at">Ancho     =</span> <span class="fu">round</span>(<span class="fu">c</span>(ic_3[, <span class="st">&quot;upr&quot;</span>] <span class="sc">-</span> ic_3[, <span class="st">&quot;lwr&quot;</span>], ip_vivienda[, <span class="st">&quot;upr&quot;</span>] <span class="sc">-</span> ip_vivienda[, <span class="st">&quot;lwr&quot;</span>]), <span class="dv">2</span>)</span>
+<span id="cb99-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-8" tabindex="-1"></a>) <span class="sc">%&gt;%</span></span>
+<span id="cb99-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-9" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kbl</span>(<span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb99-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-10" tabindex="-1"></a>                  <span class="at">col.names =</span> <span class="fu">c</span>(<span class="st">&quot;Tipo de intervalo (x₀ = 3 acres)&quot;</span>, <span class="st">&quot;Límite inferior&quot;</span>, <span class="st">&quot;Límite superior&quot;</span>, <span class="st">&quot;Ancho&quot;</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb99-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-11" tabindex="-1"></a>  kableExtra<span class="sc">::</span><span class="fu">kable_styling</span>(<span class="at">bootstrap_options =</span> <span class="fu">c</span>(<span class="st">&quot;striped&quot;</span>, <span class="st">&quot;hover&quot;</span>, <span class="st">&quot;condensed&quot;</span>, <span class="st">&quot;bordered&quot;</span>),</span>
+<span id="cb99-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb99-12" tabindex="-1"></a>                             <span class="at">full_width =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<table class="table table-striped table-hover table-condensed table-bordered" style="color: black; width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Tipo de intervalo (x₀ = 3 acres)
+</th>
+<th style="text-align:right;">
+Límite inferior
+</th>
+<th style="text-align:right;">
+Límite superior
+</th>
+<th style="text-align:right;">
+Ancho
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Confianza para el precio medio
+</td>
+<td style="text-align:right;">
+610050.8
+</td>
+<td style="text-align:right;">
+641580.4
+</td>
+<td style="text-align:right;">
+31529.67
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Predicción para una vivienda nueva
+</td>
+<td style="text-align:right;">
+134172.7
+</td>
+<td style="text-align:right;">
+1117458.5
+</td>
+<td style="text-align:right;">
+983285.76
+</td>
+</tr>
+</tbody>
+</table>
+<p>El intervalo de predicción es unas 31 veces más ancho que el de confianza (casi USD 1 millón frente a unos USD 31.500). En la práctica, eso significa que el modelo simple sirve para estimar el precio promedio de un grupo de viviendas con buena precisión, pero es casi inútil para predecir el precio de una vivienda individual: el intervalo va desde poco más de USD 130.000 hasta más de USD 1.1 millones, que es prácticamente todo el rango de precios observado en los datos. Hay que recordar, además, que este intervalo supone errores normales, supuesto que no se cumplió.</p>
+<p>El siguiente gráfico muestra las dos bandas sobre la nube de puntos completa.</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-1" tabindex="-1"></a>grilla <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Lot_Size =</span> <span class="fu">seq</span>(<span class="fu">min</span>(data<span class="sc">$</span>Lot_Size), <span class="fu">max</span>(data<span class="sc">$</span>Lot_Size), <span class="at">length.out =</span> <span class="dv">100</span>))</span>
+<span id="cb100-2"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-2" tabindex="-1"></a></span>
+<span id="cb100-3"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-3" tabindex="-1"></a>bandas <span class="ot">&lt;-</span> <span class="fu">cbind</span>(grilla,</span>
+<span id="cb100-4"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-4" tabindex="-1"></a>                <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> grilla, <span class="at">interval =</span> <span class="st">&quot;confidence&quot;</span>),</span>
+<span id="cb100-5"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-5" tabindex="-1"></a>                <span class="at">IP_inf =</span> <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> grilla, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)[, <span class="st">&quot;lwr&quot;</span>],</span>
+<span id="cb100-6"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-6" tabindex="-1"></a>                <span class="at">IP_sup =</span> <span class="fu">predict</span>(modelo_lineal, <span class="at">newdata =</span> grilla, <span class="at">interval =</span> <span class="st">&quot;prediction&quot;</span>)[, <span class="st">&quot;upr&quot;</span>])</span>
+<span id="cb100-7"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-7" tabindex="-1"></a></span>
+<span id="cb100-8"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-8" tabindex="-1"></a><span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb100-9"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-9" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">data =</span> data, <span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> House_Price), <span class="at">alpha =</span> <span class="fl">0.25</span>, <span class="at">color =</span> <span class="st">&quot;#8fa8a0&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-10"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-10" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> bandas, <span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">ymin =</span> IP_inf, <span class="at">ymax =</span> IP_sup), <span class="at">fill =</span> <span class="st">&quot;#c47b6b&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.15</span>) <span class="sc">+</span></span>
+<span id="cb100-11"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-11" tabindex="-1"></a>  <span class="fu">geom_ribbon</span>(<span class="at">data =</span> bandas, <span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">ymin =</span> lwr, <span class="at">ymax =</span> upr), <span class="at">fill =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">alpha =</span> <span class="fl">0.4</span>) <span class="sc">+</span></span>
+<span id="cb100-12"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-12" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">data =</span> bandas, <span class="fu">aes</span>(<span class="at">x =</span> Lot_Size, <span class="at">y =</span> fit), <span class="at">color =</span> <span class="st">&quot;#2c5f6e&quot;</span>, <span class="at">linewidth =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb100-13"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-13" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">&quot;Banda de confianza (oscura) y banda de predicción (clara) al 95%&quot;</span>,</span>
+<span id="cb100-14"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-14" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">&quot;Tamaño del terreno (acres)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Precio de venta (USD)&quot;</span>) <span class="sc">+</span></span>
+<span id="cb100-15"><a href="validación-de-supuestos-y-predicción-con-el-modelo-de-regresión-lineal-simple.html#cb100-15" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="bookdown-demo_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p>La banda de confianza (oscura) es angosta y sigue de cerca a la recta, mientras que la banda de predicción (clara) cubre prácticamente toda la nube de puntos. Esta diferencia resume bien la conclusión del modelo simple: el efecto del tamaño del terreno sobre el precio medio es real y se estima con precisión, pero el terreno, por sí solo, no alcanza para predecir el precio de una vivienda concreta. Para eso hace falta incluir las demás características de la vivienda, que es lo que se hace en el siguiente capítulo.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="comparación-de-la-relación-lot_size-house_price-según-la-calidad-del-vecindario.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="modelo-de-regresión-lineal-múltiple.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/rstudio/bookdown-demo/edit/master/08.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["bookdown-demo.pdf", "bookdown-demo.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
