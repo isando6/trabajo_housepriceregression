@@ -1,12 +1,12 @@
 # Validación de supuestos y predicción con el modelo de regresión lineal simple
 
-En el capítulo del modelo de regresión lineal simple se estimó la recta $\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}$ y se hicieron pruebas de hipótesis e intervalos de confianza sobre sus parámetros. Todas esas conclusiones descansan sobre unos supuestos acerca de los errores $\varepsilon$ que todavía no se han verificado: que son independientes, que siguen una distribución normal, que tienen media cero y que su varianza es constante. Solo después de revisar estos supuestos tiene sentido usar el modelo para predecir.
+En el apartado _Modelo de regresión lineal con 'Lot_Size' como predictor de House_Price_ se estimó la recta $\widehat{\text{House Price}} = 531.798 + 31.339 \cdot \text{Lot Size}$ y se hicieron pruebas de hipótesis e intervalos de confianza sobre sus parámetros. Todas esas conclusiones descansan sobre unos supuestos acerca de los errores $\varepsilon$ que todavía no se han verificado: que son independientes, que siguen una distribución normal, que tienen media cero y que su varianza es constante. Solo después de revisar estos supuestos tiene sentido usar el modelo para predecir.
 
-Este capítulo completa el análisis del modelo simple en tres partes: primero se hace una prueba de hipótesis sobre la varianza de los errores $\sigma^2$, luego se hace el análisis de residuales para validar los cuatro supuestos y, por último, se construyen el intervalo de confianza para el precio medio y el intervalo de predicción para el precio de una vivienda nueva.
+Se completa, a continuación, el análisis del modelo simple en tres partes: primero se hace una prueba de hipótesis sobre la varianza de los errores $\sigma^2$, luego se hace el análisis de residuales para validar los cuatro supuestos y, por último, se construyen el intervalo de confianza para el precio medio y el intervalo de predicción para el precio de una vivienda nueva.
 
 ## Prueba de hipótesis para la varianza de los errores ($\sigma^2$)
 
-En el capítulo anterior se construyó el intervalo de confianza para $\sigma^2$ y se encontró que el modelo se equivoca, en promedio, unos USD 250.000 al predecir el precio. Una pregunta natural es si ese error es significativamente mayor que un valor de referencia. Por ejemplo, ¿se puede afirmar que la desviación estándar de los errores supera los USD 200.000? Para responderlo se plantea la siguiente prueba unilateral superior.
+En el apartado anterior se construyó el intervalo de confianza para $\sigma^2$ y se encontró que el modelo se equivoca, en promedio, unos USD 250.000 al predecir el precio. Una pregunta natural es si ese error es significativamente mayor que un valor de referencia. Por ejemplo, ¿se puede afirmar que la desviación estándar de los errores supera los USD 200.000? Para responderlo se plantea la siguiente prueba unilateral superior.
 
 $$H_0: \sigma^2 \le 200.000^2 \qquad \text{vs.} \qquad H_1: \sigma^2 > 200.000^2$$
 
@@ -143,7 +143,7 @@ data.frame(
 
 Con W = 0.9669 y p ≈ 2.57e-14, se rechaza $H_0$: los residuales del modelo simple **no** siguen una distribución normal. Esto es coherente con lo observado en el análisis de la variable objetivo, donde `House_Price` mostró una distribución aproximadamente uniforme. Como `Lot_Size` explica tan poco del precio (R² = 0.026), los residuales terminan heredando casi la misma forma plana del precio.
 
-¿Qué tan grave es esto? Con n = 1.000 observaciones, el teorema del límite central hace que los estimadores $\hat\beta_0$ y $\hat\beta_1$ tengan una distribución aproximadamente normal aunque los errores no lo sean, por lo que las pruebas t y F del capítulo anterior siguen siendo razonablemente confiables. Donde sí pesa este incumplimiento es en el intervalo de predicción para una vivienda individual (al final de este capítulo), que depende directamente de la forma de la distribución de los errores.
+¿Qué tan grave es esto? Con n = 1.000 observaciones, el teorema del límite central hace que los estimadores $\hat\beta_0$ y $\hat\beta_1$ tengan una distribución aproximadamente normal aunque los errores no lo sean, por lo que las pruebas t y F del apartado anterior siguen siendo razonablemente confiables. Donde sí pesa este incumplimiento es en el intervalo de predicción para una vivienda individual (al final de este apartado), que depende directamente de la forma de la distribución de los errores.
 
 ### Media cero de los errores
 
@@ -221,7 +221,7 @@ data.frame(
                              full_width = FALSE)
 ```
 
-El modelo simple cumple tres de los cuatro supuestos: los errores son independientes, tienen media cero y varianza constante. El que falla es la normalidad, y la razón de fondo es que `Lot_Size`, por sí solo, deja sin explicar casi toda la variabilidad del precio. Se verá en el capítulo de regresión lineal múltiple que, al incluir las demás características de la vivienda, este problema desaparece.
+El modelo simple cumple tres de los cuatro supuestos: los errores son independientes, tienen media cero y varianza constante. El que falla es la normalidad, y la razón de fondo es que `Lot_Size`, por sí solo, deja sin explicar casi toda la variabilidad del precio.
 
 ## Intervalo de confianza para el precio medio $E(y \mid x_0)$
 
@@ -342,4 +342,4 @@ ggplot() +
   theme_bw()
 ```
 
-La banda de confianza (oscura) es angosta y sigue de cerca a la recta, mientras que la banda de predicción (clara) cubre prácticamente toda la nube de puntos. Esta diferencia resume bien la conclusión del modelo simple: el efecto del tamaño del terreno sobre el precio medio es real y se estima con precisión, pero el terreno, por sí solo, no alcanza para predecir el precio de una vivienda concreta. Para eso hace falta incluir las demás características de la vivienda, que es lo que se hace en el siguiente capítulo.
+La banda de confianza (oscura) es angosta y sigue de cerca a la recta, mientras que la banda de predicción (clara) cubre prácticamente toda la nube de puntos. Esta diferencia resume bien la conclusión del modelo simple: el efecto del tamaño del terreno sobre el precio medio es real y se estima con precisión, pero el terreno, por sí solo, no alcanza para predecir el precio de una vivienda concreta.

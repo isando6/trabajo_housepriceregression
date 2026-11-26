@@ -1,6 +1,6 @@
 # Modelo de regresión lineal múltiple
 
-El modelo simple mostró que el tamaño del terreno tiene un efecto real sobre el precio, pero que por sí solo explica apenas el 2.6% de su variabilidad, y que sus residuales no son normales. La conclusión de ese capítulo fue que el resto de la variabilidad depende de otras características de la vivienda. La regresión lineal múltiple (RLM) permite incluirlas todas en un mismo modelo y responder dos preguntas a la vez: cuánto mejora la capacidad explicativa y cuál es el efecto de `Lot_Size` sobre el precio **manteniendo constantes** las demás características, que es justamente la idea de precio implícito de la teoría hedónica planteada en el marco teórico.
+El modelo simple mostró que el tamaño del terreno tiene un efecto real sobre el precio, pero que por sí solo explica apenas el 2.6% de su variabilidad, y que sus residuales no son normales. La conclusión de ese apartado fue que el resto de la variabilidad depende de otras características de la vivienda. La regresión lineal múltiple (RLM) permite incluirlas todas en un mismo modelo y responder dos preguntas a la vez: cuánto mejora la capacidad explicativa y cuál es el efecto de `Lot_Size` sobre el precio manteniendo constantes las demás características, que es justamente la idea de precio implícito de la teoría hedónica planteada en el marco teórico.
 
 ## Formulación del modelo
 
@@ -8,9 +8,9 @@ Con las 7 variables predictoras del conjunto de datos, el modelo propuesto es el
 
 $$\text{House Price} = \beta_0 + \beta_1 \,\text{Square Footage} + \beta_2 \,\text{Num Bedrooms} + \beta_3 \,\text{Num Bathrooms} + \beta_4 \,\text{Year Built} + \beta_5 \,\text{Lot Size} + \beta_6 \,\text{Garage Size} + \beta_7 \,\text{Neighborhood Quality} + \varepsilon$$
 
-En forma matricial se escribe $\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon$, donde $\mathbf{y}$ es el vector de los 1.000 precios, $\mathbf{X}$ es la matriz de diseño (una columna de unos para el intercepto y una columna por cada predictora) y $\boldsymbol\varepsilon \sim N(\mathbf{0}, \sigma^2\mathbf{I})$. Cada coeficiente $\beta_j$ se interpreta como el cambio esperado en el precio cuando la variable $x_j$ aumenta en una unidad y **todas las demás se mantienen constantes**.
+En forma matricial se escribe $\mathbf{y} = \mathbf{X}\boldsymbol\beta + \boldsymbol\varepsilon$, donde $\mathbf{y}$ es el vector de los 1.000 precios, $\mathbf{X}$ es la matriz de diseño (una columna de unos para el intercepto y una columna por cada predictora) y $\boldsymbol\varepsilon \sim N(\mathbf{0}, \sigma^2\mathbf{I})$. Cada coeficiente $\beta_j$ se interpreta como el cambio esperado en el precio cuando la variable $x_j$ aumenta en una unidad y todas las demás se mantienen constantes.
 
-Para no arrastrar la variable `Calidad_Grupo` que se creó en el capítulo anterior, se arma una base solo con las 8 variables originales.
+Para no arrastrar la variable `Calidad_Grupo` que se creó en el apartado anterior, se arma una base solo con las 8 variables originales.
 
 ```{r, message=FALSE, warning=FALSE}
 datos_rlm <- data %>%
@@ -117,7 +117,7 @@ data.frame(
 
 Seis de las siete predictoras son significativas con p-valores prácticamente iguales a cero, y sus intervalos de confianza quedan lejos del cero. La excepción es `Neighborhood_Quality` (t = 0.75; p = 0.454), cuyo intervalo de confianza (−130.6 a 291.8) contiene el cero: una vez se conocen la superficie, las habitaciones, los baños, el año, el terreno y el garaje, la calidad del vecindario no aporta información adicional sobre el precio.
 
-Un resultado clave para la pregunta central de este trabajo es el cambio en el coeficiente de `Lot_Size`. En el modelo simple, cada acre adicional se asociaba con USD 31.339 más en el precio; en el modelo múltiple, ese efecto baja a **USD 14.919** (IC 95%: 14.447 a 15.391). La diferencia se debe a que en el modelo simple el terreno se "llevaba" parte del efecto de otras características con las que comparte una leve asociación (en el capítulo de correlación, `Lot_Size` y `Square_Footage` resultaron correlacionadas, aunque débilmente). El segundo valor es el efecto propio del terreno, ya separado del resto, y además se estima con mucha más precisión: su error estándar pasa de USD 6.104 a USD 241.
+Un resultado clave para la pregunta central de este trabajo es el cambio en el coeficiente de `Lot_Size`. En el modelo simple, cada acre adicional se asociaba con USD 31.339 más en el precio; en el modelo múltiple, ese efecto baja a USD 14.919 (IC 95%: 14.447 a 15.391). La diferencia se debe a que en el modelo simple el terreno se "llevaba" parte del efecto de otras características con las que comparte una leve asociación (en el apartado _Correlación entre variables independientes_, `Lot_Size` y `Square_Footage` resultaron correlacionadas, aunque débilmente). El segundo valor es el efecto propio del terreno, ya separado del resto, y además se estima con mucha más precisión: su error estándar pasa de USD 6.104 a USD 241.
 
 ## Coeficiente de determinación $R^2$ y $R^2$ ajustado
 
@@ -147,7 +147,7 @@ El salto es enorme: el modelo múltiple explica el 99.85% de la variabilidad del
 
 Antes de seleccionar variables conviene revisar si hay multicolinealidad, es decir, si alguna predictora contiene casi la misma información que las demás. Si la hubiera, la matriz $\mathbf{X}'\mathbf{X}$ estaría cerca de ser singular y los $\hat\beta_j$ serían inestables.
 
-Una primera señal ya se tiene: en el capítulo de correlación entre variables independientes, ninguna pareja de predictoras superó un $|r_s|$ de 0.12. Para confirmarlo se usan dos indicadores. El número de condición (ICN), calculado con `kappa()`, sugiere multicolinealidad cuando es mayor que 30. El factor de inflación de varianza, $VIF_j = 1 / (1 - R_j^2)$, donde $R_j^2$ es el $R^2$ de la regresión de $x_j$ contra las demás predictoras, señala a la variable $x_j$ como problemática cuando $VIF_j > 5$.
+En el apartado _Correlación entre variables independientes_, ninguna pareja de predictoras superó un $|r_s|$ de 0.12. Para confirmarlo se usan dos indicadores. El número de condición (ICN), calculado con `kappa()`, sugiere multicolinealidad cuando es mayor que 30. El factor de inflación de varianza, $VIF_j = 1 / (1 - R_j^2)$, donde $R_j^2$ es el $R^2$ de la regresión de $x_j$ contra las demás predictoras, señala a la variable $x_j$ como problemática cuando $VIF_j > 5$.
 
 ```{r, message=FALSE, warning=FALSE}
 datos_estandarizados <- datos_rlm %>%
@@ -166,7 +166,7 @@ data.frame(
                              full_width = FALSE)
 ```
 
-Con las variables en sus unidades originales el ICN da un valor enorme (más de 300.000), pero esto no se debe a multicolinealidad sino a las **escalas**: `Year_Built` toma valores cercanos a 2.000 mientras la columna del intercepto vale 1, y `Square_Footage` llega a miles mientras `Num_Bathrooms` solo va de 1 a 3. Cuando se estandarizan las predictoras (todas con media 0 y desviación 1), el ICN baja a 1.26, muy por debajo de 30. El VIF, que no depende de las escalas, permite ver variable por variable.
+Con las variables en sus unidades originales el ICN da un valor enorme (más de 300.000), pero esto no se debe a multicolinealidad sino a las escalas: `Year_Built` toma valores cercanos a 2.000 mientras la columna del intercepto vale 1, y `Square_Footage` llega a miles mientras `Num_Bathrooms` solo va de 1 a 3. Cuando se estandarizan las predictoras (todas con media 0 y desviación 1), el ICN baja a 1.26, muy por debajo de 30. El VIF, que no depende de las escalas, permite ver variable por variable.
 
 ```{r, message=FALSE, warning=FALSE}
 vif_rlm <- car::vif(modelo_completo)
@@ -231,7 +231,7 @@ El punto resaltado es el modelo de 6 predictoras. Los modelos se agrupan en bloq
 
 ### Selección secuencial con `stepAIC()`
 
-Como complemento se aplican los tres métodos secuenciales con `stepAIC()` del paquete `MASS`: hacia adelante (*forward*, que parte del modelo solo con intercepto y va agregando variables), hacia atrás (*backward*, que parte del modelo completo y va quitando) y en ambas direcciones (*stepwise*). Se usa `MASS::stepAIC()` en lugar de cargar el paquete con `library(MASS)`, porque `MASS` tiene su propia función `select()` que reemplazaría a la de `dplyr` y dañaría el código de los demás capítulos.
+Como complemento se aplican los tres métodos secuenciales con `stepAIC()` del paquete `MASS`: hacia adelante (*forward*, que parte del modelo solo con intercepto y va agregando variables), hacia atrás (*backward*, que parte del modelo completo y va quitando) y en ambas direcciones (*stepwise*). Se usa `MASS::stepAIC()` en lugar de cargar el paquete con `library(MASS)`, porque `MASS` tiene su propia función `select()` que reemplazaría a la de `dplyr` y dañaría el código de los demás apartados.
 
 ```{r, message=FALSE, warning=FALSE}
 modelo_nulo <- lm(House_Price ~ 1, data = datos_rlm)
@@ -446,7 +446,7 @@ Alrededor del 5% de las observaciones supera el umbral, pero la distancia de Coo
 
 ## Modelos con variables cualitativas (variables dummy)
 
-En el capítulo anterior se dividieron las viviendas en tres grupos según la calidad del vecindario (Baja, Media y Alta). Para usar una variable cualitativa como esta dentro de una regresión, hay que convertirla en variables indicadoras (*dummy*). Con 3 categorías se necesitan 2 dummies, y la categoría restante queda como referencia. Tomando Baja como referencia:
+En el apartado anterior se dividieron las viviendas en tres grupos según la calidad del vecindario (Baja, Media y Alta). Para usar una variable cualitativa como esta dentro de una regresión, hay que convertirla en variables indicadoras (*dummy*). Con 3 categorías se necesitan 2 dummies, y la categoría restante queda como referencia. Tomando Baja como referencia:
 
 - **Media** = 1 si la vivienda está en un vecindario de calidad media, 0 en otro caso.
 - **Alta** = 1 si la vivienda está en un vecindario de calidad alta, 0 en otro caso.
@@ -530,7 +530,7 @@ Controlando por las demás características, la dummy de calidad media sale marg
 
 ### ¿Cambia el efecto del terreno según la calidad del vecindario?
 
-El capítulo anterior encontró que, en regresiones simples separadas, la pendiente de `Lot_Size` era nula en vecindarios de baja calidad y significativa en los de media y alta. Las dummies permiten probar esto **formalmente** en un solo modelo, agregando la interacción `Lot_Size × Calidad_Grupo`: si la interacción es significativa, la pendiente del terreno es distinta según el grupo. Se compara, con una prueba F parcial, el modelo con interacción frente al modelo sin ella, primero con `Lot_Size` como única variable numérica (como en el capítulo anterior) y después dentro del modelo múltiple.
+El apartado anterior encontró que, en regresiones simples separadas, la pendiente de `Lot_Size` era nula en vecindarios de baja calidad y significativa en los de media y alta. Las dummies permiten probar esto formalmente en un solo modelo, agregando la interacción `Lot_Size × Calidad_Grupo`: si la interacción es significativa, la pendiente del terreno es distinta según el grupo. Se compara, con una prueba F parcial, el modelo con interacción frente al modelo sin ella, primero con `Lot_Size` como única variable numérica (como en el apartado anterior) y después dentro del modelo múltiple.
 
 ```{r, message=FALSE, warning=FALSE}
 sin_inter_simple <- lm(House_Price ~ Lot_Size + Calidad_Grupo, data = data)
@@ -543,7 +543,7 @@ f_inter_simple   <- anova(sin_inter_simple, con_inter_simple)
 f_inter_multiple <- anova(modelo_final_grupo, con_inter_multiple)
 
 data.frame(
-  Comparacion = c("Solo Lot_Size y grupo (como en el capítulo anterior)",
+  Comparacion = c("Solo Lot_Size y grupo (como en el apartado anterior)",
                   "Modelo múltiple completo"),
   F_valor     = round(c(f_inter_simple$F[2], f_inter_multiple$F[2]), 3),
   P_valor     = round(c(f_inter_simple$`Pr(>F)`[2], f_inter_multiple$`Pr(>F)`[2]), 4),
@@ -555,11 +555,11 @@ data.frame(
                              full_width = FALSE)
 ```
 
-El resultado es muy revelador. Cuando solo se tiene en cuenta el terreno, la interacción sí es significativa (F = 3.63; p = 0.027), lo que confirma formalmente lo que se vio en el capítulo anterior: las pendientes de los tres grupos son distintas. Pero cuando se controla por la superficie, las habitaciones, los baños, el año y el garaje, la interacción deja de ser significativa (F = 0.56; p = 0.571). Es decir, una vez se comparan viviendas con las mismas demás características, cada acre adicional de terreno vale lo mismo (unos USD 14.900) en vecindarios de baja, media o alta calidad. Las diferencias del capítulo anterior se debían a que, en cada grupo, el terreno estaba recogiendo de forma distinta el efecto de otras variables que no estaban en el modelo.
+El resultado es muy revelador. Cuando solo se tiene en cuenta el terreno, la interacción sí es significativa (F = 3.63; p = 0.027), lo que confirma formalmente lo que se vio en el apartado anterior: las pendientes de los tres grupos son distintas. Pero cuando se controla por la superficie, las habitaciones, los baños, el año y el garaje, la interacción deja de ser significativa (F = 0.56; p = 0.571). Es decir, una vez se comparan viviendas con las mismas demás características, cada acre adicional de terreno vale lo mismo (unos USD 14.900) en vecindarios de baja, media o alta calidad. Las diferencias en el apartado anterior se debían a que, en cada grupo, el terreno estaba recogiendo de forma distinta el efecto de otras variables que no estaban en el modelo.
 
 ## Predicción con el modelo final
 
-Validados los supuestos, el modelo final puede usarse para predecir. Se toma como ejemplo una vivienda "típica" del conjunto de datos: la mediana de superficie (2.862,5 pies²), 3 habitaciones, 2 baños, construida en 1986, con 3 acres de terreno y garaje para 1 vehículo. Igual que en el modelo simple, se calcula el intervalo de confianza para el precio **medio** de todas las viviendas con esas características y el intervalo de predicción para **una** vivienda nueva. En forma matricial, con $\mathbf{x}_0$ el vector de características (con un 1 al inicio para el intercepto), los intervalos son los siguientes.
+Validados los supuestos, el modelo final puede usarse para predecir. Se toma como ejemplo una vivienda "típica" del conjunto de datos: la mediana de superficie (2.862,5 pies²), 3 habitaciones, 2 baños, construida en 1986, con 3 acres de terreno y garaje para 1 vehículo. Igual que en el modelo simple, se calcula el intervalo de confianza para el precio medio de todas las viviendas con esas características y el intervalo de predicción para una vivienda nueva. En forma matricial, con $\mathbf{x}_0$ el vector de características (con un 1 al inicio para el intercepto), los intervalos son los siguientes.
 
 $$\text{IC: } \hat y_0 \pm t_{1-\alpha/2;\,n-p}\sqrt{\hat\sigma^2\,\mathbf{x}_0'(\mathbf{X}'\mathbf{X})^{-1}\mathbf{x}_0} \qquad \text{IP: } \hat y_0 \pm t_{1-\alpha/2;\,n-p}\sqrt{\hat\sigma^2\left(1 + \mathbf{x}_0'(\mathbf{X}'\mathbf{X})^{-1}\mathbf{x}_0\right)}$$
 

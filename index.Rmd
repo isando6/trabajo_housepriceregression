@@ -1,7 +1,7 @@
 --- 
-title: "Modelo de regresión lineal para la predicción del precio de vivienda: conjunto 'House Price Regression'"
+title: "Modelos de regresión lineal simple y múltiple para la predicción del precio de vivienda: conjunto 'House Price Regression'"
 author: "Karina Núñez Sarmiento, Isabella Sandoval Escorcia"
-date: "`r Sys.Date()`"
+date: "`2026-11-24"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
@@ -9,8 +9,20 @@ documentclass: book
 #biblio-style: apalike
 link-citations: yes
 github-repo: rstudio/bookdown-demo
-description: "tarea 2do corte de métodos estadísticos"
+description: "proyecto aplicado"
 ---
+
+# Video de presentación
+
+¿Cuánto vale realmente un acre adicional de terreno? A primera vista, unos USD 31.000; pero cuando se tienen en cuenta el resto de características de la vivienda, esa cifra se reduce a menos de la mitad. Y otro hallazgo que podría sorprender: la calidad del vecindario, que suele creerse determinante, terminó sin pesar en el precio dentro de este conjunto de datos.
+
+Este video recorre esa historia de principio a fin: desde la preparación de los datos y la exploración de las variables, pasando por los modelos de regresión lineal simple y múltiple, hasta llegar a las conclusiones. Es una forma ágil de tener el panorama completo antes de entrar en el detalle de cada capítulo.
+
+<div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin:1em 0;">
+  <iframe src="..."
+          style="position:absolute; top:0; left:0; width:100%; height:100%;"
+          frameborder="0" allowfullscreen></iframe>
+</div>
 
 # Introducción
 
@@ -34,6 +46,7 @@ Construir un modelo de regresión lineal que permita predecir el precio de venta
 
 4. Comparar el comportamiento de relación entre `Lot_Size` y `House_Price` en grupos vecindarios de distinta calidad, evaluando si la capacidad predictiva del modelo varía según el nivel del entorno.
 
+5. Estimar un modelo de regresión lineal múltiple que incorpore las demás variables características y comparar su capacidad explicativa con la del modelo simple.
 
 ## Marco teórico
 
