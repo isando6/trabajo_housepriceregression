@@ -1,4 +1,4 @@
-# Extracción, transformación y carga de datos (ETL) 
+# Extracción, transformación y carga de datos (ETL)
 
 Antes de realizar cualquier análisis exploratorio o estadístico, es necesario garantizar que los datos con los que se trabajará sean confiables, estén completos y en un formato adecuado para su manipulación.
 

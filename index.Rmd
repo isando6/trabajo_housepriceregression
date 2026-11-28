@@ -19,7 +19,7 @@ description: "proyecto aplicado"
 Este video recorre esa historia de principio a fin: desde la preparación de los datos y la exploración de las variables, pasando por los modelos de regresión lineal simple y múltiple, hasta llegar a las conclusiones. Es una forma ágil de tener el panorama completo antes de entrar en el detalle de cada capítulo.
 
 <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; margin:1em 0;">
-  <iframe src="..."
+  <iframe src="https://drive.google.com/file/d/1nN5U0JQc-Jvq3jZBLuZU0n867wYUHEnJ/view?usp=sharing"
           style="position:absolute; top:0; left:0; width:100%; height:100%;"
           frameborder="0" allowfullscreen></iframe>
 </div>
